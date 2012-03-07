@@ -1,0 +1,495 @@
+A:link { text-decoration: none; color: #0047AB;}
+A:visited { text-decoration: none; color: #0047AB; }
+A:hover { text-decoration: underline; color: #0047AB; }
+A:active { text-decoration: underline; color: #75B2DD; }
+
+body {
+  color: black; 
+  font-size: 100.01%;
+  font-family: Helvetica,Arial,sans-serif;
+  margin: 0; padding: 1em;
+  background-color:#e6e6e6;
+}
+
+
+
+/* Navigationsleisten */
+
+div#Language {
+	position:absolute;
+	z-index: 100;
+	float:left;
+	margin-left: 90%;
+	text-align: right;
+}
+div#Language a {
+text-decoration: none; 
+	color: #0047AB; 
+	font-size: 0.9em;
+}
+
+div#Language a:hover { 
+	text-decoration: underline; 
+	color: #0047AB; 
+	font-size: 0.9em;
+}
+
+div#Headline {
+	clear: left;
+	margin-bottom:4px;
+}
+
+div#Headline h1 {
+	text-align: center;
+
+}
+
+div#Headline td#Impressum  {
+	font-size: 0.7em;
+	text-align: center;
+}
+
+div#Headline p {
+	font-size: 0.8em;
+	padding-left: 1em;
+	padding-right:1em;
+
+}
+
+div#Headline div#EU {
+	float: right;
+	font-size: 0.8em;
+	padding-left: 1em;
+	padding-right:1em;
+}
+
+
+ 
+ div#Seite {
+  float:left;
+  
+  width: 128px;
+ 
+  }		
+  
+ div#Seite ul#Navigation li {
+    list-style: none;
+  
+     padding: 0;
+  }
+   div#Seite ul#Navigation li#First {
+    list-style: none;
+     padding: 0;
+  }
+
+  div#Seite ul#Navigation a {
+  
+    height:20px;
+    width: 108px;
+    
+
+    padding: 4px;
+    text-decoration: none; font-weight: bold;
+    border: 1px solid black;
+    border-left-color: #EBC1DA; border-top-color: #EBC1DA;
+    color: white; background-color: #522D80;
+  }
+  
+  div#Seite ul#Navigation a:hover  {
+    border-color: white;
+    border-left-color: black; border-top-color: black;
+    color: white; background-color: #E0B0FF;
+  }
+
+  div#Overline {
+   /*	margin-left: 80;
+	width: 47.1em; */
+	clear: both;
+	height: 20px;
+    padding: 0;
+    background-color:  #0047AB;
+  }
+
+  div#Rahmen {
+  margin-left: 140px;
+	 /*	width: 47.1em; */
+    padding: 4px;
+
+  }
+
+
+
+  div#Rahmen div {
+     clear: left;
+  }
+  ul#Navigation {
+    margin: 0; padding: 0;
+    text-align: center;
+  }
+
+  ul#Navigation li {
+    list-style: none;
+    float: left;  /* ohne width - nach CSS 2.1 erlaubt */
+    position: relative;
+    margin: 0.4em; padding: 0;
+  }
+
+  ul#Navigation li ul {
+    margin: 0; padding: 0;
+    position: absolute;
+    top: 24px; left: -0.4em;
+    display: none;  /* Unternavigation ausblenden */
+  }
+
+
+  ul#Navigation li:hover ul {
+    display: block;  /* Unternavigation in modernen Browsern einblenden */
+  }
+  ul#Navigation li ul li {
+    float: none;
+    display: block;
+    margin-bottom: 0.2em;
+	font-size: 0.85em;
+  }
+
+  ul#Navigation a, ul#Navigation span {
+    display: block;
+    /* Breite den in li enthaltenen Elementen zuweisen */
+    min-width: 80px;
+    vertical-align: middle;
+    padding: 0.2em 1em;
+    text-decoration: none; font-weight: bold;
+    border: 1px solid black;
+    border-left-color: #EBC1DA; border-top-color: #EBC1DA;
+    color: white; background-color: #522D80;
+  }
+
+  ul#Navigation a:hover, ul#Navigation span, li a#aktuell   {
+    border-color: white;
+    border-left-color: black; border-top-color: black;
+    color: white; background-color: #E0B0FF;
+  }
+
+
+
+
+
+
+  div#Text {
+	min-width:60%;
+	min-height:85%;
+	margin-bottom: 20px;
+	
+}
+
+div#Text table {
+	height: 100%;
+	width:100%;
+	
+}
+
+div#Text td#links {
+	width:130px;
+vertical-align: top;
+	background-color: #0047AB;
+}
+
+/* Hier ist der Bereich für den variablen Teil des Toolkits */
+
+div#Text td#Inhalt {
+	border: 1px solid #0047AB;
+    padding: 6px;
+    padding-top: 1em;
+    vertical-align: top;
+	background-color: white;
+
+
+}
+
+div#Text td#Inhalt h1 {
+    font-size: 1.2em;
+
+}
+
+div#Text td#Inhalt h2 {
+    font-size: 1em;
+
+}
+div#Text td#Inhalt p {
+    font-size: 0.9em;
+
+
+}
+
+
+/* Allgemeine Textgestalltung */
+
+div#Ueberschrift {	
+  float: center; 
+  margin: 0; padding: 1em;
+ background: white;
+}
+div#Ueberschrift h1 {
+	font-size: 1.2em;
+
+}
+div#Ueberschrift h2 {
+	font-size: 1em;
+
+}
+div#Ueberschrift p {
+	
+	margin-right:1em;
+	font-size: 0.9em;
+
+}
+div#Ueberschrift ul {
+	font-size: 0.9em
+}
+
+div#Ueberschrift * ul {
+	font-size: 1em
+}
+
+div#Eingabe2 {
+ width: 98%; 
+ padding: 1em; 
+ float:left;
+
+}
+
+
+div#Eingabe {
+	float:left;
+	margin: 0; 
+	padding-top: 0em;
+}
+
+div#Eingabe span {
+	font-size: 0.9em;
+}
+
+form {
+	padding: 1em;
+
+}
+
+div#info {
+	
+  background: #e6e6e6;
+  padding: 1em;
+	
+}
+div#info p {
+	font-size: 0.9em;
+
+}
+
+div#info h2 {
+	font-size: 1em;
+
+}
+
+div#info a {
+	font-size: 1em;
+}
+div#info span {
+	margin: 0 0 1em;
+	text-align: justify;
+
+}
+div#info ul {
+	font-size: 0.9em
+}
+
+
+div#Ergebnis {	
+	
+	font-size: 1em;
+  margin-bottom: 1em;	
+  padding: 1em 1em;
+ background: white;
+}
+div#Ergebnis p {
+	margin: 0 0 1em;
+}
+
+div#Ergebnis span {
+	margin: 0 0 1em;
+}
+
+div#Ergebnis li {
+	font-size: 1em
+}
+
+div#Ergebnis table.Leatable {
+	width: 75%;
+}
+
+
+tr#tablehead {
+	text-align: center;  
+	background: #0047AB; 
+	color:white;
+}
+
+
+
+tr#tabellenzeile:hover { 
+
+	background: lightblue; 
+	border:4px solid lightblue; 
+	}
+
+
+div#Legende {
+	margin:1em;
+	margin-left: 20%;
+	float:center;
+	font-size: 1em;
+	padding: 10px;
+	width: 30%;
+	background: white;
+	border: 1px solid #0047AB;
+	text-align:center;
+	
+}
+
+div#Legende span.Legendenelement {
+	padding: 1em;
+}
+
+div#Errormessage {
+  font-size: 1em;
+  padding: 1em;
+	background: #e6e6e6;
+}
+
+div#Errormessage span {
+  text-align:center;
+  font-weight: 600; 
+  font-size:1em;
+  margin: 1em 0;
+}
+
+div#Disclaimer {
+	clear:both;
+	margin-bottom: 1em;
+	padding: 1em 1em;
+	font-size: 0.8em;
+	font-style: italic;
+	
+}
+
+div#Introduction {
+	width: 50%;
+	padding:1em;
+	border: 1px solid #0047AB;
+
+}
+
+/* Spezielle Formate */
+
+/* Für Erklärungseiten */
+div#Description {
+	width: 50%;
+}
+
+div#Lizenz {
+	margin: 1em;
+	padding: 1em;
+	
+	font-size: 0.8em;
+	border: 1px dashed silver;	
+}
+
+
+/* Nur ChangeDetector */
+
+/* scrollbare Tabelle*/
+.innerDiv { 
+	height:30em; 
+	overflow:auto; 
+}
+
+
+/* Change Detector Erweiterte Einstellungen */
+
+div#AdvancedSearch {
+	display: none;
+	float:right; 
+	margin-left: 1em; 
+	padding: 1em;	  	
+	border: 1px dashed silver;
+}
+
+div#AdvancedSearch a {
+	cursor: pointer;
+	font-size: 0.9em;
+	margin-left:1em;
+	color: #0047AB;
+	text-decoration: underline;
+
+}
+
+
+div#AdvancedSearch ul li {
+	font-size: 0.9em;
+	padding-right: 0.5em;
+	padding-top: 0.5em;	
+}
+
+div#AdvancedSearch ul li ul {
+	float: left;
+	list-style: none;
+	font-size: 0.9em;
+	padding-right: 0.5em;
+	list-style-type: none;	
+}
+
+
+div#AdvancedSearch ul li ul li {
+	float: left;
+	list-style: none;
+	position: relative;
+	font-size: 0.9em;
+	padding-right: 0.5em;
+	padding-bottom: 0.25em;
+	list-style-type: none;	
+}
+
+a#AdvancedSetting {
+	cursor: pointer;
+	
+	color: #0047AB;
+	text-decoration: underline;
+}
+
+
+/* NUR LEA */
+/* LEA Piechart */
+
+div#chart {
+	float:right;
+	font-size: 0.7em;
+	padding: 4px;
+	background: white;
+	border: 1px solid #0047AB;
+/*
+	width: 208px;
+	height: 268px;
+*/
+	overflow: hidden;
+
+}
+
+div#chart h3 {
+	text-align:center;
+	
+}
+
+div#chart img {
+	height: 260px;
+
+}
+
