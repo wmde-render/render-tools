@@ -247,10 +247,16 @@ div#Ueberschrift ul {
 	font-size: 0.9em
 }
 
-
+div#Ueberschrift  ol {
+	font-size: 0.9em
+}
 
 div#Ueberschrift * ul {
 	font-size: 1em
+}
+
+div#Ueberschrift table {
+	font-size: 0.9em
 }
 
 div#Eingabe2 {
