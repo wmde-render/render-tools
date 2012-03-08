@@ -8,14 +8,15 @@ include($ts_pw['dir'] . "/public_html/toolkit/Corpex/inc/lang/".$_SESSION["lang"
 echo "<div id=\"Description\">";
  echo "<div id=\"Ueberschrift\">
  <h1>".$Headline."</h1>
- <p>".$Introduction."</p>	
-</div>
-<div id=\"info\">
-<p>".$Text1."</p>
-<p>".$Text2."</p>
-<p>".$Text3."</p>
-<p>".$Text4."</p>
-<p>".$Text5."</p>
+ <p>".$Introduction."</p>
+ <h2>".$Settings["Headline"]."</h2>
+ <p>".$Settings["Text"]."</p>	
+  <h2>".$Results["Headline"]."</h2>
+ <p>".$Results["Text"]."</p>
+  <h2>".$Uses["Headline"]."</h2>
+ <p>".$Uses["Text"]."</p>	
+<h2>".$Languages["Headline"]."</h2>
+<p>".$Languages["Text"]."</p>
 </div>
 ";
 echo "</div>";

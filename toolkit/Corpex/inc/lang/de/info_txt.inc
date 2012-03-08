@@ -1,63 +1,83 @@
 <?php 
+$Headline = "Change Detector";
+$Introduction = "Corpex ermöglicht das schnelle Durchsuchen aller Wörter der Wikipedia. Es zeigt die Umgebung von Buchstabenketten und Wörtern innerhalb des Textes einer Wikipedia Sprachversion. ";
 
-$Headline = "Corpex — Corpora Explorer";
-$Introduction = "Corpex ist ein Korpusanalyse Werkzeug. Als Datenbasis dient die Wikipedia in vielen Sprachen.";
+$Settings["Headline"] = "Einstellungen";
+$Settings["Text"] = "<p>Um Corpex zu nutzen muss zuerst eine Wikipedia-Sprachversion gewählt werden. Danach kann direkt begonnen werden einen Wortanfang einzutippen. Corpex beherrscht derzeit nur klein geschriebene Wörter.
+</p>
+<p>
+Corpex ist auch als RESTful Webservice verfügbar, einfach
+<code>http://km.aifb.kit.edu/sites/corpex/corpex.php?lang=<em>XX</em>&amp;q=<em>Y</em></code> mit <code><em>XX</em></code> als Wikipedia Sprachcode (siehe unten) und
+<code><em>Y</em></code> als Start-Buchstabensequenz aufrufen. Das Ergebnis wird im
+JSON-Format zurückgegeben, mit den selben Daten, die Du auf der Seite siehst.
+<br/>
+Die Bigramm-Statistiken sind ebenfalls verfügbar unter
+<code>http://km.aifb.kit.edu/sites/corpex/corpex.php?lang=<em>XX</em>&amp;q=<em>Y
+</em></code> mit <code><em>XX</em></code> als zwei \"+\"-getrennte Wörter, die das
+angefragte Bigramm darstellen, z.B. \"star+wars\".
 
-$Text1 = "<strong>Corpex</strong> let's you swiftly browse through all the
-	words of Wikipedia. Select your language, and when you start typing, the
-	system shows you two statistics in four graphs. These are from left to
-	right: 1) the ten most frequent words that start with the typed sequence of
-	letters (as a barcharts and a piechart), and 2) the most frequent letter
-	following the already typed sequence of letters (again, as a barchart and a
-	piechart). The three dots (...) mean \"other word\", the dollar sign ($)
-	means \"end of the word\".
-	<br/>
-	In the second row, the ten most frequent following words of any
-	input word are visualized (as a barcharts and a piechart). Here, the three
-	dots (...) mean \"other word\", the dollar sign ($) means \"end of
-	sentence\".";
+</p>";
 
-$Text2 = "<strong>Corpex</strong> is also available as a restful webservice,
-	simply call
-	<tt>http://km.aifb.kit.edu/sites/corpex/corpex.php?lang=<em>XX</em>&amp;q=<em>Y</em></tt>
-	with <tt><em>XX</em></tt> being the Wikipedia language code (see below)
-	and <tt><em>Y</em></tt> being the starting letter sequence. You will get
-	back a JSON result with the same data that you see on the page.
-	<br/>
-	The bigrams statistics are available through
-	<tt>http://km.aifb.kit.edu/sites/corpex/bigrams.php?lang=<em>XX</em>&amp;q=<em>Y</em></tt>
-	with <tt><em>Y</em></tt> being two \"+\"-separated words
-	representing the bigram in question, e.g. \"star+wars\". ";
+$Results["Headline"] = "Ergebnisse";
+$Results["Text"] = "<p>Mit den ersten eingetippten Buchstaben erscheinen drei
+Statistiken in sechs Graphen. Diese sind von links nach rechts in der ersten
+Reihe
+</p>
+<ol>
+<li> die zehn am häufigsten vorkommenden Wörter, die mit der eingegebenen
+Buchstabensequenz anfangen (als Balken- und Kuchendiagramm),
+</li>
+<li> die häufigsten vorkommenden Buchstaben, die der eingegebenen
+Buchstabensequenz folgen und
+</li>
+<li> in der zweiten Reihe die am häufigsten vorkommenden zweiten Wörter aller
+Zwei-Wort-Terme, die mit der eingegebenen Buchstabensequenz als erstes Wort
+starten.
+</li></ol>
 
-$Text3 = "<strong>Corpex</strong> is still very much under development. The
-	currently extracted data is still very noisy, and we are currently working
-	on better extraction and filtering approaches. The source code is fully
-	open source, and all the data is also freely available. Feedback, and
-	especially suggestions for cooperation, is welcome.";
+<p>In allen Fällen bedeuten drei Punkte (...) ein \"anderes Wort/anderen
+Buchstaben\", das Dollarzeichen ($) bedeutet \"Wortende/Satzende\".
+</p>";
 
-$Text4 = "<strong>Corpex</strong> is currently available in the following
-	languages:
-	German (de),
-	English (en), 
-	Spanish (es), 
-	French (fr), 
-	Hungarian (hr), 
-	Romanian (ro), 
-	Albanian (sq), 
-	Bulgarian (bg), 
-	Czech (cs),
-	Italian (it), 
-	Swedish (sv), 
-	Serbian (sr), 
-	Croatian (hr),
-	Serbo-Croatian (sh), 
-	Bosnian (bs), 
-	and simple English (simple).
-	It is further available for the <a href=\"http://khnt.aksis.uib.no/icame/manuals/brown/\">Brown Corpus</a> (brown).
-	Further languages are being prepared.";
+$Uses["Headline"] ="Nutzen";
+$Uses["Text"] = "<p>In der gegenwärtigen Version ist das Corpex Tool vor allem für Wissenschaftler interessant, die Corpora-Analysen oder ähnliches durchführen.
+Perspektivisch werden die Corpex-Ergebnisse besonders interessant bei Betrachtungen und Untersuchungen, die den zeitlichen Verlauf miteinbeziehen.
+Beispielsweise kann untersucht werden, ob eine Sprachversion zu einer bestimmten politschen Ausrichtung tendiert. Diese kann durch die Identifizierung und Bestimmung der Häufigkeit charakteristischer Worte, Wendungen oder Ausdrücke ermittelt werden.
+</p><p>Corpex ist immer noch stark in der Entwicklung. Die aktuell extrahierten Daten sind noch sehr verrauscht und wir arbeiten zurzeit an besseren Extraktions- und Filteransätzen. Der Quellcode ist komplett Open Source und die Daten sind frei verfügbar. Feedback und Anregungen zur Zusammenarbeit sind willkommen. 
+</p>";
 
-$Text5 = "<strong>Corpex</strong> is being developed within the EU FP7 project
-	<a href=\"http://render-project.eu\">RENDER</a>, which aims at understanding
-	diversity on the Web.";
+
+
+
+
+$Languages["Headline"] = "Unterstützte Sprachversionen";
+$Languages["Text"] = "<p>Corpex ist zurzeit in folgenden Sprachen verfügbar:
+</p>
+<table>
+<tbody><tr><td> Bulgarisch (bg)</td></tr>
+
+<tr><td> Bosnisch (bs)</td></tr>
+<tr><td> Tschechisch (cs)</td></tr>
+<tr><td> Deutsch (de)</td></tr>
+<tr><td> Englisch (en)</td></tr>
+<tr><td> Spanisch (es)</td></tr>
+<tr><td> Französisch (fr)</td></tr>
+
+<tr><td> Kroatisch (hr)</td></tr>
+<tr><td> Ungarisch (hu)</td></tr>
+<tr><td> Italienisch (it)</td></tr>
+<tr><td> Rumänisch (ro)</td></tr>
+<tr><td> Serbisch-Kroatisch (sh)</td></tr>
+<tr><td> Albanisch (sq)</td></tr>
+
+<tr><td> Serbisch (sr)</td></tr>
+<tr><td> Schwedisch (sv)</td></tr>
+<tr><td> Einfaches English (simple)</td></tr>
+<tr><td><a href=\"http://khnt.aksis.uib.no/icame/manuals/brown/\">Brown Corpus</a> (brown)
+</td></tr></tbody></table>
+
+<p>Weitere Sprachen werden vorbereitet.
+</p>";
+
 
 ?>
