@@ -81,7 +81,7 @@ function openAdvancedSettings () {
 	$timestamp_since = '1330849800'; // 4.3.2012 8:30 UTC
  	$today = time();
  	$yesterday = $today - ( 1 * 24 * 60 * 60);
- 	if (date('Gi',$today) < 1328) { 
+ 	if (date('Gi',$today) < 830) { 
 	$yesterday = $yesterday - ( 1 * 24 * 60 * 60);
 	} 
 	
