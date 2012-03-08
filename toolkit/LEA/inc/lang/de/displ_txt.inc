@@ -4,7 +4,7 @@ $Description = "LEA filtert Begriffe aus Wikipedia-Artikeln heraus. Dabei wird z
 
 $MoreInfo = "Weitere Informationen";
 
-$FormText = "Bitte einen Artikeltitel und die gewünschte Wikipedia Sprachversion angeben.";
+$FormText = "Bitte einen Artikeltitel und die gewünschte Wikipedia Sprachversion angeben:";
 $FormTitle = "Titel:";
 $FormIn = "in";
 $FormButton = "Übermitteln";
