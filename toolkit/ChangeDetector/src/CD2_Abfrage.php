@@ -102,7 +102,7 @@ function openAdvancedSettings () {
 <ul>
 <li title="<?php echo $Settings["HalfTooltip"] ?>"><?php echo $Settings["Half"] ?>: <input type="checkbox" name="Cuthalf"<?php if (isset($_GET["Cuthalf"]) OR !isset($_GET["submit"])) {echo "checked=\"checked\"";} ?>></li>
 <li title="<?php echo $Settings["SortingTooltip"] ?>"><?php echo $Settings["Sorting"] ?>: <?php echo $Settings["SortingNoChange"] ?> <input type="radio" name="Sorting" value="No_change" checked="checked">  <?php echo $Settings["SortingNews"] ?> <input type="radio" name="Sorting" value="News" <?php if ($_GET["Sorting"] == "News") {echo "checked=\"checked\"";} ?> > </li>
-<li>Filter:
+<li><span>Filter:</span>
 <ul>
 <li><input name="filterMU" type="checkbox"   <?php if (isset($_GET["filterMU"]) OR !isset($_GET["submit"])) {echo "checked=\"checked\"";} ?>> <?php echo "<span title=\"".$Filter["m_uTooltip"]."\">".$Filter["m_u"]."</span>";?></li>
 <li><input name="filterNB" type="checkbox"   <?php if (isset($_GET["filterNB"]) OR !isset($_GET["submit"])) {echo "checked=\"checked\"";} ?>> <?php echo "<span title=\"".$Filter["n_bTooltip"]."\">".$Filter["n_b"]."</span>";?> </li>
