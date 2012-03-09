@@ -16,7 +16,8 @@ $Settings["LanggroupTooltip"] = "";
 
 $Settings["Referenzlang"] = "Reference language";
 $Settings["ReferenzlangTooltip"] = "";
-$Settings["World"] = "World";
+$Settings["World"] = "All languages";
+$Settings["EU"] = "European languages";
 
 $Settings["Half"] = "More than a half changes";
 $Settings["HalfTooltip"] = "";

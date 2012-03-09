@@ -49,7 +49,7 @@
  * 
  */
 
-
+$start = time();
 
 
 include("inc/src/cd2db_query.inc");
@@ -81,6 +81,7 @@ function openAdvancedSettings () {
 	$timestamp_since = '1330849800'; // 4.3.2012 8:30 UTC
  	$today = time();
  	$yesterday = $today - ( 1 * 24 * 60 * 60);
+ 	// no new data till 8:30 am
  	if (date('Gi',$today) < 830) { 
 	$yesterday = $yesterday - ( 1 * 24 * 60 * 60);
 	} 
@@ -131,7 +132,7 @@ function openAdvancedSettings () {
 			}
 	?>
 	</SELECT></p>
-	<p title="<?php echo $Settings["LanggroupTooltip"] ?>"><?php echo $Settings["Langgroup"] ?>: EU <input type="radio" name="Langgroup" value="EU" checked="checked">  <?php echo $Settings["World"] ?> <input type="radio" name="Langgroup" value="All" <?php if ($_GET["Langgroup"] == "All") {echo "checked=\"checked\"";} ?> > </p>
+	<p title="<?php echo $Settings["LanggroupTooltip"] ?>"><?php echo $Settings["Langgroup"] ?>: <?php echo $Settings["EU"] ?> <input type="radio" name="Langgroup" value="EU" checked="checked">  <?php echo $Settings["World"] ?> <input type="radio" name="Langgroup" value="All" <?php if ($_GET["Langgroup"] == "All") {echo "checked=\"checked\"";} ?> > </p>
 	<p title="<?php echo $Settings["ReferenzlangTooltip"] ?>"><?php echo $Settings["Referenzlang"] ?>: <input NAME="Reflang" SIZE="3" value="<?php if (isset($_GET["Reflang"])) {echo $_GET["Reflang"];} else {echo $lang;} ?>"></p>
 	<p><a id="AdvancedSetting" onclick="javascript:openAdvancedSettings()"><?php echo $Settings["Headline"] ?></a></p>
 	<p>
@@ -359,7 +360,10 @@ echo "</div>";
 
 
 }
+$end = time();
 
+
+echo "\n<!--Durch! Von ".date('G:i:s',$start)." bis ".date('G:i:s',$end)."-->\n";
 
 
 ?>

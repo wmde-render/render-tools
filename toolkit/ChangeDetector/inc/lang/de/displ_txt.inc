@@ -12,7 +12,8 @@ $Settings["Headline"] = "Zusätzliche Einstellungen";
 
 $Settings["Langgroup"] = "Sprachgruppe";
 $Settings["LanggroupTooltip"] = "Entweder werden nur europäische Sprachen untersucht oder alle von Change Detector unterstützten Sprachen.";
-$Settings["World"] = "World";
+$Settings["World"] = "Alle Sprachen";
+$Settings["EU"] = "Europäische Sprachen";
 
 $Settings["Referenzlang"] = "Referenzsprache";
 $Settings["ReferenzlangTooltip"] = "Die Referenzsprache ist wichtig für die Sortierung und für die Anzeige der Artikel.";
