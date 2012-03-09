@@ -1,63 +1,65 @@
 <?php 
+$Headline = "Corpex - Corpora Explorer";
+$Introduction = "Corpex let you swiftly browse through all the words of Wikipedia.It displays the context of characters and words within the text of different  language versions of Wikipedia. ";
 
-$Headline = "Corpex — Corpora Explorer";
-$Introduction = "Corpex ist ein Korpusanalyse Werkzeug. Als Datenbasis dient die Wikipedia in vielen Sprachen.";
+$Settings["Headline"] = "Settings";
+$Settings["Text"] = "<p>At first choose the desired language version of Wikipedia. Then you can type the first letters of a word and Corpex shows the first results. At the moment Corpex can handle only lowercase letters. 
+</p>
+<p>
+Corpex is also available as a restful webservice, simply call <code>http://km.aifb.kit.edu/sites/corpex/corpex.php?lang=<em>XX</em>&amp;q=<em>Y</em></code> with <code><em>XX</em></code> being the Wikipedia language code (see below) and <code><em>Y</em></code> being the starting letter sequence. You will get back a JSON result with the same data that you see on the page.<br/>
+The bigrams statistics are available through <code>http://km.aifb.kit.edu/sites/corpex/corpex.php?lang=<em>XX</em>&amp;q=<em>Y
+</em></code> with <code><em>XX</em></code> being two \"+\"-separated words representing the bigram in question, e.g. \"star+wars\". 
+</p>";
 
-$Text1 = "<strong>Corpex</strong> let's you swiftly browse through all the
-	words of Wikipedia. Select your language, and when you start typing, the
-	system shows you two statistics in four graphs. These are from left to
-	right: 1) the ten most frequent words that start with the typed sequence of
-	letters (as a barcharts and a piechart), and 2) the most frequent letter
-	following the already typed sequence of letters (again, as a barchart and a
-	piechart). The three dots (...) mean \"other word\", the dollar sign ($)
-	means \"end of the word\".
-	<br/>
-	In the second row, the ten most frequent following words of any
-	input word are visualized (as a barcharts and a piechart). Here, the three
-	dots (...) mean \"other word\", the dollar sign ($) means \"end of
-	sentence\".";
+$Results["Headline"] = "Results";
+$Results["Text"] = "<p>When you start typing, the system shows you three statistics in six graphs. These are from left to right in the first row 
+</p>
+<ol>
+<li> the ten most frequent words that start with the typed sequence of letters (as a barcharts and a piechart), 
+</li>
+<li> the most frequent letter following the already typed sequence of letters (again, as a barchart and a piechart), and 
+</li>
+<li> both charts in the second row show the most frequend second word of all two-word-terms that start with the typed sequence as first word. 
+</li></ol>
 
-$Text2 = "<strong>Corpex</strong> is also available as a restful webservice,
-	simply call
-	<tt>http://km.aifb.kit.edu/sites/corpex/corpex.php?lang=<em>XX</em>&amp;q=<em>Y</em></tt>
-	with <tt><em>XX</em></tt> being the Wikipedia language code (see below)
-	and <tt><em>Y</em></tt> being the starting letter sequence. You will get
-	back a JSON result with the same data that you see on the page.
-	<br/>
-	The bigrams statistics are available through
-	<tt>http://km.aifb.kit.edu/sites/corpex/bigrams.php?lang=<em>XX</em>&amp;q=<em>Y</em></tt>
-	with <tt><em>Y</em></tt> being two \"+\"-separated words
-	representing the bigram in question, e.g. \"star+wars\". ";
+<p>In any case three dots (...) mean \"other word/letter\", the dollar sign ($) means \"end of the word/end of sentence\". 
+</p>";
 
-$Text3 = "<strong>Corpex</strong> is still very much under development. The
-	currently extracted data is still very noisy, and we are currently working
-	on better extraction and filtering approaches. The source code is fully
-	open source, and all the data is also freely available. Feedback, and
-	especially suggestions for cooperation, is welcome.";
+$Uses["Headline"] ="Uses";
+$Uses["Text"] = "<p>In the current version of the tool Corpex particularly interesting for researchers which  analyze Corpora or do similar things.
+Perspectively, the results get more practical use, if you can involve the temporal course in the observations.
+For example, to investigate whether a language version tends to a certain recent political orientation. That can be done with identifying the frequency of characteristic words, phrases or expressions over time.
+</p><p>Corpex is still very much under development. The currently extracted data is still very noisy, and we are currently working on better extraction and filtering approaches. The source code is fully open source, and all the data is also freely available. Feedback, and especially suggestions for cooperation, is welcome. 
+</p>";
 
-$Text4 = "<strong>Corpex</strong> is currently available in the following
-	languages:
-	German (de),
-	English (en), 
-	Spanish (es), 
-	French (fr), 
-	Hungarian (hr), 
-	Romanian (ro), 
-	Albanian (sq), 
-	Bulgarian (bg), 
-	Czech (cs),
-	Italian (it), 
-	Swedish (sv), 
-	Serbian (sr), 
-	Croatian (hr),
-	Serbo-Croatian (sh), 
-	Bosnian (bs), 
-	and simple English (simple).
-	It is further available for the <a href=\"http://khnt.aksis.uib.no/icame/manuals/brown/\">Brown Corpus</a> (brown).
-	Further languages are being prepared.";
 
-$Text5 = "<strong>Corpex</strong> is being developed within the EU FP7 project
-	<a href=\"http://render-project.eu\">RENDER</a>, which aims at understanding
-	diversity on the Web.";
 
+$Languages["Headline"] = "Supported languages";
+$Languages["Text"] = "<p>Corpex is currently available in the following languages: 
+</p>
+<table>
+<tbody><tr><td> Bulgarian (bg)</td></tr>
+
+<tr><td> Bosnian (bs)</td></tr>
+<tr><td> Czech (cs)</td></tr>
+<tr><td> German (de)</td></tr>
+<tr><td> English (en)</td></tr>
+<tr><td> Spanish (es)</td></tr>
+<tr><td> French (fr)</td></tr>
+
+<tr><td> Croatian (hr)</td></tr>
+<tr><td> Hungarian (hu)</td></tr>
+<tr><td> Italian (it)</td></tr>
+<tr><td> Romanian (ro)</td></tr>
+<tr><td> Serbo-Croatian (sh)</td></tr>
+<tr><td> Albanian (sq)</td></tr>
+
+<tr><td> Serbian (sr)</td></tr>
+<tr><td> Swedish (sv)</td></tr>
+<tr><td> Simple Englisch (simple)</td></tr>
+<tr><td><a href=\"http://khnt.aksis.uib.no/icame/manuals/brown/\">Brown Corpus</a> (brown)
+</td></tr></tbody></table>
+
+<p>More languages are being prepared.
+</p>";
 ?>

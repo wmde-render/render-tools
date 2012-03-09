@@ -1,5 +1,5 @@
 <?php 
-$Headline = "Change Detector";
+$Headline = "Corpex - Corpora Explorer";
 $Introduction = "Corpex ermöglicht das schnelle Durchsuchen aller Wörter der Wikipedia. Es zeigt die Umgebung von Buchstabenketten und Wörtern innerhalb des Textes einer Wikipedia Sprachversion. ";
 
 $Settings["Headline"] = "Einstellungen";
