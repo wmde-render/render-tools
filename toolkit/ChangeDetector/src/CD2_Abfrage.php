@@ -132,7 +132,7 @@ function openAdvancedSettings () {
 			}
 	?>
 	</SELECT></p>
-	<p title="<?php echo $Settings["LanggroupTooltip"] ?>"><?php echo $Settings["Langgroup"] ?>: <?php echo $Settings["EU"] ?> <input type="radio" name="Langgroup" value="EU" checked="checked">  <?php echo $Settings["World"] ?> <input type="radio" name="Langgroup" value="All" <?php if ($_GET["Langgroup"] == "All") {echo "checked=\"checked\"";} ?> > </p>
+	<p title="<?php echo $Settings["LanggroupTooltip"] ?>"><?php echo $Settings["Langgroup"] ?>: <input type="radio" name="Langgroup" value="EU" checked="checked"> <?php echo $Settings["EU"] ?>  <input type="radio" name="Langgroup" value="All" <?php if ($_GET["Langgroup"] == "All") {echo "checked=\"checked\"";} ?> > <?php echo $Settings["World"] ?>  </p>
 	<p title="<?php echo $Settings["ReferenzlangTooltip"] ?>"><?php echo $Settings["Referenzlang"] ?>: <input NAME="Reflang" SIZE="3" value="<?php if (isset($_GET["Reflang"])) {echo $_GET["Reflang"];} else {echo $lang;} ?>"></p>
 	<p><a id="AdvancedSetting" onclick="javascript:openAdvancedSettings()"><?php echo $Settings["Headline"] ?></a></p>
 	<p>
