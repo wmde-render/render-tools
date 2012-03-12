@@ -96,7 +96,7 @@ function openAdvancedSettings () {
 <p id="Description"><?php echo $Description; ?></p>
 <p><a href="info.php"><?php echo $MoreInfo; ?></a></p>
 </div>
-<FORM ACTION="" METHOD=GET>	
+<FORM ACTION="<?php echo $_SERVER['PHP_SELF']; ?>#result_table" METHOD=GET>	
 <p id="Description"><?php echo $Formtext; ?></p>
   <div id="Eingabe">
   
@@ -305,6 +305,7 @@ $count = sizeof($LangGroup);
 <div id="Ergebnis" style="width: <?php echo $overallWidth; ?>;">
   <table border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
+	<a name="result_table"/>	
       <tr>
         <th style="width: 190px; height: 40px; background-color:#0047AB; color: white;"><span><?php echo $Articlename; ?></span></th>
 <?php
@@ -360,6 +361,7 @@ echo "</div>";
 
 
 }
+
 $end = time();
 
 

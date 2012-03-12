@@ -90,10 +90,10 @@ if(isset($_GET["submit"]))
 // Get $_GET- parameters	
 
 if(!$_GET["title"] || empty($_GET["title"])){
-$artcletitle = "Jerry_Siegel";
+$articletitle = "Jerry_Siegel";
 
 } else {
-$artcletitle = $_GET["title"];	
+$articletitle = $_GET["title"];	
 }
 
 if(!$_GET["lg"] || empty($_GET["lg"])){
@@ -119,7 +119,7 @@ if (!$db) {
 
 mysql_select_db($LanguageVersion_wiki, $db);
 
-$article_id = artikel_id_abfragen($artcletitle);	
+$article_id = artikel_id_abfragen($articletitle);	
 
 $Disclaim = "<div id=\"Disclaimer\" style=\"clear:both\">
 <span><p>Copyright: Wikimedia Deutschland, 2012 (written by Anselm Metzger)</p></span>
@@ -130,7 +130,7 @@ $Disclaim = "<div id=\"Disclaimer\" style=\"clear:both\">
 
 if ($article_id == 0) {
 	echo "<div id=\"Errormessage\"><span>";
-	printf($Error["Notexists"], $artcletitle, $LanguageVersion);
+	printf($Error["Notexists"], htmlentities($articletitle), $LanguageVersion);
 	echo "</span></div>".$Disclaim;
 	break;
 }
@@ -139,7 +139,7 @@ $orig_langlinks = abfragen_langlinks($article_id, $LanguageVersion);
 
 if ($orig_langlinks == 0) {
 	echo "<div id=\"Errormessage\"><span>";
-	printf($Error["NoTrans"], $artcletitle);
+	printf($Error["NoTrans"], $articletitle);
 	echo "</span></div>".$Disclaim;
 	break;
 }
@@ -366,7 +366,7 @@ echo "<div id=\"info\" >";
 
 echo "<span>";
 echo "<p>";
-printf($Info["Introduction"], $LanguageVersion, $artcletitle, $artcletitle, count($orig_langlinks), $LangCount);
+printf($Info["Introduction"], $LanguageVersion, $articletitle, $articletitle, count($orig_langlinks), $LangCount);
 echo "</p><ul>";
 foreach ($biggest_lang as $k => $v){
 	echo "<li>";

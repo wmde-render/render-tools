@@ -84,14 +84,15 @@ while($row = mysql_fetch_object($result)){
 
 
 
-$threshold = 2;
+$threshold = 3;
+//$threshold = floor(count($LangGroup)/3);
 if ($cut) $threshold = floor(count($LangGroup)/2);
 
 // Adding information for unchanged articles and removing entries with low change rates
 
 foreach($Final_Result as $id => $v_array) {
 	
-	if (count($v_array["Changed"]) > $threshold) {
+	if (count($v_array["Changed"]) >= $threshold) {
 	
 	$result_noticed = mysql_query('SELECT * FROM noticed_article WHERE day='.$date.' AND identifier='.$id.' AND language in ('.$LangList.')' );
 	
