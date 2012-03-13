@@ -49,7 +49,7 @@
  * 
  */ 
 
-
+require_once('inc/src/SVGGraph/SVGGraph.php');
 include("inc/src/toolserver_sql_abfragen.inc");
 include("inc/src/Languagecodes.inc");
 include("inc/src/piechart3p.php");
@@ -345,9 +345,11 @@ foreach ($ergebnis_linkliste as $link => $Code){
 		}	
 	 
 }
+/*
 $Result_Link_Classes[] =  count($Result_No_article);
 $Result_Link_Classes[] =  count($Result_Not_Linked);
 $Result_Link_Classes[] =  count($Result_article_linked);
+*/
 
 
 
@@ -356,9 +358,13 @@ $Result_Link_Classes[] =  count($Result_article_linked);
 
 echo "<div id=\"chart\" >"; 
 echo "<h3 >".$Charttitle."</h3>";
+$Chart_Label = str_replace(" ","_",$Legend["red"])."*".str_replace(" ","_",$Legend["yellow"])."*".str_replace(" ","_",$Legend["green"]);
+$Result_Link_Classes = count($Result_No_article)."*".count($Result_Not_Linked)."*".count($Result_article_linked);
+echo "<embed src=\"./inc/src/piechart3pGET.php?labels=".$Chart_Label."&values=".$Result_Link_Classes."\" type=\"image/svg+xml\" width=\"250\" height=\"250\" pluginspage=\"http://www.adobe.com/svg/viewer/install/\" />";
+/*
 $Chart_Label = array ($Legend["red"], $Legend["yellow"], $Legend["green"]);
-//echo "<span title=\"".$Tooltip["chart"]."\">";
 make_piechart($Result_Link_Classes, $Chart_Label);
+*/
 echo "</span>";
 echo "</div>";
 
