@@ -24,6 +24,11 @@ $tsAccount = substr($_SERVER['REQUEST_URI'], 1, strpos($_SERVER['REQUEST_URI'], 
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="description"     content="Hier beschreiben Sie mit ein, zwei Sätzen den Inhalt dieser Datei.">
+<meta name="keywords"        content="RENDER, RenderToolkit, WikipediaToolkit">
+<meta name="author"         content="render@wikimedia.de">
+<meta name="DC.Publisher"   content="www.wikimedia.de">
+<meta name="DC.Date"        content="2012-03-20T00:00:00+01:00">
 <title>RENDER-Toolkit</title>
 <link rel="stylesheet" href="/<?php echo $tsAccount; ?>/toolkit/formate.css" type="text/css">
 </head>
