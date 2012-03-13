@@ -56,20 +56,45 @@ include("inc/src/cd2db_query.inc");
 include("inc/src/Languagecodes.inc");
 
 ?>
-
+<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.js"></script>
+<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.fixedtable.js"></script>
 <script type="text/javascript">
+	/*$(window).resize(function() {
+		drawTable();
+	});*/
 
-function openAdvancedSettings () {
-	if (document.getElementById("AdvancedSearch").style.display == "block") {
-		document.getElementById("AdvancedSearch").style.display = "none";
-		}
-	else {
-		document.getElementById("AdvancedSearch").style.display = "block";
+	$(document).ready(function() {
+		drawTable();
+	});
+
+	function drawTable() {
+		$(".resultDiv").each(function() {
+			var Id = $(this).get(0).id;
+			var maintbheight = 360;
+			var maintbwidth = $(window).width() - 240;
+			
+			$("#" + Id + " .resultTable").fixedTable({
+				width: maintbwidth,
+				height: maintbheight,
+				fixedColumns: 1,
+				classHeader: "fixedHead",
+				classFooter: "fixedFoot",
+				classColumn: "fixedColumn",
+				fixedColumnWidth: 250,
+				outerId: Id,
+				backcolor: "blue"/*,
+				hovercolor: "#99CCFF"*/
+			});
+		});
+	}
+
+	function openAdvancedSettings () {
+		if (document.getElementById("AdvancedSearch").style.display == "block") {
+			document.getElementById("AdvancedSearch").style.display = "none";
+		} else {
+			document.getElementById("AdvancedSearch").style.display = "block";
 		}	
-
-}
-
-
+	}
 </script>
 
 <body>
@@ -295,38 +320,27 @@ foreach ($Final_Result as $k => $Entry){
 
 
 // Contruction of the result table
-
-$overallWidth = "1396px";
-if (sizeof($LangGroup) != 12) {
-	$overallWidth = "1200px";
-}
 $count = sizeof($LangGroup);
 ?>
-<div id="Ergebnis" style="width: <?php echo $overallWidth; ?>;">
-  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+<a name="result_table"></a>
+<div id="Ergebnis" class="resultDiv">
+  <table id="tableResult" class="resultTable">
     <thead>
-	<a name="result_table"/>	
       <tr>
-        <th style="width: 190px; height: 40px; background-color:#0047AB; color: white;"><span><?php echo $Articlename; ?></span></th>
+        <th><span><?php echo $Articlename; ?></span></th>
 <?php
 foreach ($LangGroup as $key => $Language){
-	$cellWidth = 90;
-	if ($count == 1) {
-		$cellWidth += 16;
-	}
-	echo "<th style='width: ".$cellWidth."px; height:40px; background-color:#0047AB; color: white; '><span title=\"".langcode_in_en($Language)."\" >".langcode_in_local($Language)."</span></th>";
+	echo "<th><span title=\"".langcode_in_en($Language)."\" >".langcode_in_local($Language)."</span></th>\n";
 	$count --;
 }
-echo "</tr>";
-echo "</thead>";
-echo "<tbody>\n<tr><td colspan='".(sizeof($LangGroup) + 1)."'><div class='innerDiv'><table>";
+echo "</thead></tr><tbody>\n";
 
 foreach ( $Final_Result as $k => $v) {
-	echo "<tr id=\"tabellenzeile\"  >";
-	echo "<td style=\"width: 190px; height:50px; text-align: right;\">";
+	echo "<tr>\n";
+	echo "<td style=\"text-align: right;\">\n";
 	
-	echo "<a href=\"http://".$v["titlelang"].".wikipedia.org/wiki/".$v["article"]."\" target=\"_blank\">".str_replace("_"," ",$v["article"])."</a>";	
-	echo "</td>";
+	echo "<a href=\"http://".$v["titlelang"].".wikipedia.org/wiki/".$v["article"]."\" target=\"_blank\">".str_replace("_"," ",$v["article"])."</a>\n";
+	echo "</td>\n";
 	foreach ($LangGroup as $key => $Language){
 		$result_cell_color = "white"; $result_cell_fontcolor = "#ccc"; $result_cell_text = "no article"; $existent = false;
 		$result_cell_class = "";
@@ -338,23 +352,22 @@ foreach ( $Final_Result as $k => $v) {
 		if (array_key_exists($Language, $v["Unchanged"])) {$result_cell_class = "unch"; $result_cell_color = "white"; $result_cell_fontcolor = "red"; $result_cell_text = "no change"; $existent=true;}
 		
 		
-		echo "<td class=\"".$result_cell_class."\" style=\"width: 90px; height: 50px; background: ".$result_cell_color.";  text-align: center \">";
+		echo "<td class=\"".$result_cell_class."\" style=\"background: ".$result_cell_color.";  text-align: center \">\n";
 
 		if ($existent) {
-		echo "<a  style=\"text-decoration: none; color: ".$result_cell_fontcolor."; \"   href=\"http://".$Language.".wikipedia.org/wiki/".$v[$Language]["title"]."\" target=\"_blank\"><span title=\"".str_replace("_", " ",$v[$Language]["title"])."\" >".$result_cell_text."</span></a> ";
+		echo "<a  style=\"text-decoration: none; color: ".$result_cell_fontcolor."; \"   href=\"http://".$Language.".wikipedia.org/wiki/".$v[$Language]["title"]."\" target=\"_blank\"><span title=\"".str_replace("_", " ",$v[$Language]["title"])."\" >".$result_cell_text."</span></a>\n";
 		
 		} else {
-		echo "<span style=\"text-decoration: none;  color: ".$result_cell_fontcolor."\"><span >no article</span></span>";	
+		echo "<span style=\"text-decoration: none;  color: ".$result_cell_fontcolor."\"><span >no article</span></span>\n";
 		}	
-		echo "</td>";
+		echo "</td>\n";
 		}
-	echo "</tr>";
+	echo "</tr>\n";
 }
 
 
 
-echo "</table></div></td></tr></tbody>";
-echo "</table>";
+echo "</tbody></table>";
 
 
 echo "</div>";
@@ -375,6 +388,5 @@ echo "\n<!--Durch! Von ".date('G:i:s',$start)." bis ".date('G:i:s',$end)."-->\n"
 <div id="Disclaimer" style="clear:both">
 <span><p>Copyright: Wikimedia Deutschland, 2012 (written by Philipp Zedler)</p></span>
 </div>
-
 </body>
 </html>
