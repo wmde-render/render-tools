@@ -10,7 +10,7 @@ $FormIn = "in";
 $FormButton = "Übermitteln";
 
 // printf ( $_ , $language, $title, $title, $countTrans , $countbiggestTrans)
-$Info["Introduction"] = "Der Artikel <a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> existiert in %d Sprachversionen.</p><p>Die folgenden %d Sprachversionen enthalten die meisten Wikipedia internen Verweise:";
+$Info["Introduction"] = "Der Artikel <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> existiert in %d Sprachversionen.</p><p>Die folgenden %d Sprachversionen enthalten die meisten Wikipedia internen Verweise:";
 
 // printf ( $_ , $language, $title, $title, $language, $countLinks)
 $Info["LIlanguages"] = "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) mit insgesamt %d verwendeten Verweisen.";

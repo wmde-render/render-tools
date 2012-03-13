@@ -52,7 +52,7 @@
 require_once('inc/src/SVGGraph/SVGGraph.php');
 include("inc/src/toolserver_sql_abfragen.inc");
 include("inc/src/Languagecodes.inc");
-include("inc/src/piechart3p.php");
+include("inc/src/api_normalize_redirect.inc");
 
 ?>
 
@@ -118,6 +118,17 @@ if (!$db) {
 
 
 mysql_select_db($LanguageVersion_wiki, $db);
+
+
+$new_title = api_normalize_redirect($articletitle, $LanguageVersion);
+	
+	echo "<!-- Title:".$new_title."-->";
+	
+	if ($new_title != NULL) { 
+		$articletitle = str_replace(" ","_",$new_title);	
+}
+
+
 
 $article_id = artikel_id_abfragen($articletitle);	
 
@@ -372,7 +383,7 @@ echo "<div id=\"info\" >";
 
 echo "<span>";
 echo "<p>";
-printf($Info["Introduction"], $LanguageVersion, $articletitle, $articletitle, count($orig_langlinks), $LangCount);
+printf($Info["Introduction"], $LanguageVersion, $articletitle, str_replace("_"," ",$articletitle), count($orig_langlinks), $LangCount);
 echo "</p><ul>";
 foreach ($biggest_lang as $k => $v){
 	echo "<li>";
@@ -390,7 +401,7 @@ echo "<div id=\"Legende\"><span class=\"Legendenelement\"><span style=\"border: 
 echo "<div id=\"Ergebnis\"><span>";
 
 echo "<table class=\"Leatable\" border=\"0\"  >";
-echo "<tr  align=\"center\"  style=\"background: #0047AB; color:white; \">";
+echo "\n<tr  align=\"center\"  style=\"background: #0047AB; color:white; \">";
 
 echo "<th style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px;\"><span title=\"".langcode_in_en($LanguageVersion)."\">".langcode_in_local($LanguageVersion)."</span></th>";
 
@@ -407,14 +418,14 @@ echo "</tr>";
 
 if (isset($Result_No_article)){
 foreach ($Result_No_article as $k => $v){ 
-	echo "<tr id=\"tabellenzeile\">";
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: red; text-align: center;\"><a title=\"".$Legend["red"]."\">-</a></td>";
+	echo "\n<tr id=\"tabellenzeile\">";
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: red; text-align: center;\"><a title=\"".$Legend["red"]."\">-</a></td>";
 	
 	
 	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
 foreach ($biggest_lang as $key => $value){
 	if ($value != $RefLanguage){
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
 		}
 	}
 
@@ -426,15 +437,15 @@ foreach ($biggest_lang as $key => $value){
 if (isset($Result_Not_Linked)){
 
 foreach ($Result_Not_Linked as $k => $v){
-echo "<tr id=\"tabellenzeile\">";
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: yellow; text-align: center;\"><a href=\"http://".$LanguageVersion.".wikipedia.org/wiki/".$Existing_Art[$v]."\" target=\"_blank\">".$Existing_Art[$v]."</a></td>";
+echo "\n<tr id=\"tabellenzeile\">";
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: yellow; text-align: center;\"><a href=\"http://".$LanguageVersion.".wikipedia.org/wiki/".$Existing_Art[$v]."\" target=\"_blank\">".$Existing_Art[$v]."</a></td>";
 	
 	
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
 	
 	foreach ($biggest_lang as $key => $value){
 	if ($value != $RefLanguage){
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
 		
 	}
 	}
@@ -446,15 +457,15 @@ echo "</tr>";
 if (isset($Result_article_linked)){
 
 foreach ($Result_article_linked as $k => $v){
-echo "<tr id=\"tabellenzeile\">";
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: green; text-align: center;\"><a style=\"color: white;\" href=\"http://".$LanguageVersion.".wikipedia.org/wiki/".$Used_Art[$v]."\" target=\"_blank\">".$Used_Art[$v]."</a></td>";
+echo "\n<tr id=\"tabellenzeile\">";
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: green; text-align: center;\"><a style=\"color: white;\" href=\"http://".$LanguageVersion.".wikipedia.org/wiki/".$Used_Art[$v]."\" target=\"_blank\">".$Used_Art[$v]."</a></td>";
 	
 	
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
 	
 	foreach ($biggest_lang as $key => $value){
 	if ($value != $RefLanguage){
-	echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
+	echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
 		
 		}
 	}
