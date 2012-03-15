@@ -106,8 +106,8 @@ include("inc/src/Languagecodes.inc");
 	$timestamp_since = '1330849800'; // 4.3.2012 8:30 UTC
  	$today = time();
  	$yesterday = $today - ( 1 * 24 * 60 * 60);
- 	// no new data till 8:30 am
- 	if (date('Gi',$today) < 830) { 
+ 	// no new data till 10:00 am
+ 	if (date('Gi',$today) < 1000) { 
 	$yesterday = $yesterday - ( 1 * 24 * 60 * 60);
 	} 
 	
