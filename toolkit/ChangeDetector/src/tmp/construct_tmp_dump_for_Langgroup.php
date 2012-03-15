@@ -1,5 +1,5 @@
 #! /usr/bin/php
-#$ -l h_rt=0:60:00
+#$ -l h_rt=1:30:00
 #$ -l virtual_free=20M
 #$ -j y
 #$ -N RenderCDtmpConstructor
