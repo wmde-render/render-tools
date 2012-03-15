@@ -3,7 +3,7 @@
 #$ -l virtual_free=20M
 #$ -j y
 #$ -N RenderCDtmpConstructor
-#$ -wd /home/heimdall/public_html/toolkit/ChangeDetector/src/tmp/
+#$ -wd /home/project/r/e/n/render/public_html/toolkit/ChangeDetector/src/tmp/
 <?php
 
 include("../../inc/src/cd2db_query.inc");
