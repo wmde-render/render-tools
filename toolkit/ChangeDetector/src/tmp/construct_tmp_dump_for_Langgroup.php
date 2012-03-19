@@ -1,8 +1,7 @@
 #! /usr/bin/php
-#$ -l h_rt=1:30:00
+#$ -l h_rt=2:00:00
 #$ -l virtual_free=20M
 #$ -j y
-#$ -N RenderCDtmpConstructor
 #$ -wd /home/project/r/e/n/render/public_html/toolkit/ChangeDetector/src/tmp/
 <?php
 
