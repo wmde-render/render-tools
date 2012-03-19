@@ -79,6 +79,7 @@ import ConfigParser
 import xml.dom.minidom
 import itertools
 import oursql
+from datetime import datetime
 
 #Settings = None
 #SQL_Cursors = None
@@ -1825,8 +1826,10 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
             self._explain(3, operation)
             self._explain(3, parameters)
         if parameters is None:
-            super(MyOursqlCursor, self).execute(
-                  operation, plain_query=True)
+			start = datetime.now()
+			super(MyOursqlCursor, self).execute(
+				operation, plain_query=True)
+			self._explain(2, "Execution duration: " + (datetime.now - start))
         else:
             super(MyOursqlCursor, self).execute(operation, parameters)
     
