@@ -21,8 +21,7 @@ include("../../inc/src/cd2db_query.inc");
 // to run the Program with qsub change the -wd (working-directory-PATH) 
 //
 
-if (!isset($argv[1])) die ("Not the right LanguageGroup parameter given aus argument (EU or All).");	
-
+if (!isset($argv[1])) die ("Not the right LanguageGroup parameter given as argument (EU or All).");	
 if ($argv[1] == "EU") {
 	$LangGroup = array("de","en", "fr", "pt","it","pl","ru","nl","sv","es");
 	$LangGroupname = "EU";
@@ -31,7 +30,20 @@ if ($argv[1] == "All") {
 	$LangGroup = array("de","en","fr", "pt","it","pl","ru","nl", "sv","es", "ja","zh");
 	$LangGroupname = "All";
 	} 
-if (!isset($LangGroup)) die ("Not the right LanguageGroup parameter given aus argument (EU or All).");	
+if (!isset($LangGroup)) die ("Not the right LanguageGroup parameter given as argument (EU or All).");	
+
+
+if (!isset($argv[2])) die ("Not the right FilterMU parameter given as argument (on or off).");	
+if ($argv[1] == "on") {
+				$MU = "on";
+				$No_Filter["m_u"] = TRUE;
+	} 
+if ($argv[1] == "off") {
+				$MU = "";
+				$No_Filter["m_u"] = FALSE;
+	} 
+if (!isset($argv[2])) die ("Not the right FilterMU parameter given as argument (on or off).");	
+
 
 $now = time();
 $yesterday = $now - ( 1 * 24 * 60 * 60);
@@ -51,23 +63,10 @@ $FilterOM[] = "";
 
 				
 
-for ($i = 1; $i <= 2; $i++) {
-		    if ($i == 1) {
-				$MU = "on";
-				$No_Filter["m_u"] = TRUE;
-			}
-            if ($i == 2) {
-				$MU = "";
-				$No_Filter["m_u"] = FALSE;
-			}
-			
-        
-        $pid = pcntl_fork();
-        if (!$pid) {
-			print "Begin in child $i\n";
-			foreach ($CutHalv as $k => $CutHlf){
-				foreach ($FilterNB as $j => $NB){
-					foreach ($FilterOM as $i => $OM){
+
+foreach ($CutHalv as $k => $CutHlf){
+	foreach ($FilterNB as $j => $NB){
+		foreach ($FilterOM as $i => $OM){
 						
 				
 			
@@ -89,22 +88,12 @@ for ($i = 1; $i <= 2; $i++) {
 			file_put_contents($uniqueID , serialize($db_result));
 			rename($uniqueID , $file_name);
 
-			echo "\n Child number:".$i." Filename:".$file_name."\n";	
-						}
-					}	
-				}
-			
-			print "End in child $i\n";
-			exit($i);
+			echo "\n Filename:".$file_name."\n";	
 		}
-		
-	
+	}	
 }
-		
-while (pcntl_waitpid(0, $status) != -1) {
-	$status = pcntl_wexitstatus($status);
-	echo "Child $status completed\n";
-}
+			
+
 		
 
 ?>
