@@ -10,6 +10,11 @@ echo "<div id=\"Description\">";
  echo "<div id=\"Ueberschrift\"><h1>".$Headline."</h1>
  <p>".$Introduction."</p>
  </div>	
+  <div id=\"info\">	
+ <p>".$Text1."</p>
+ <p>".$Text2."</p>
+ <p>".$Text3."</p>
+</div>
 ";
 echo "</div>";
 
