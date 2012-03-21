@@ -7,4 +7,3 @@
 # deletes tmp*.dump files older than 4 days
 find /home/project/r/e/n/render/public_html/toolkit/ChangeDetector/src/tmp/tmp*.dump -mtime +4 -exec rm {} \;
 
-

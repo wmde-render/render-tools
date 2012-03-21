@@ -34,11 +34,11 @@ if (!isset($LangGroup)) die ("Not the right LanguageGroup parameter given as arg
 
 
 if (!isset($argv[2])) die ("Not the right FilterMU parameter given as argument (on or off).");	
-if ($argv[1] == "on") {
+if ($argv[2] == "on") {
 				$MU = "on";
 				$No_Filter["m_u"] = TRUE;
 	} 
-if ($argv[1] == "off") {
+if ($argv[2] == "off") {
 				$MU = "";
 				$No_Filter["m_u"] = FALSE;
 	} 
