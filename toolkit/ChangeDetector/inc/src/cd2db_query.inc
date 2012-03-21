@@ -18,7 +18,7 @@
 function query_change_db($date, $LangGroup, $cut = TRUE , $No_Filter, $database_name ='p_render_change_detector_p' ){
 
 // Only usual
-	$Query_filter = "AND only_usual=1 ";
+	$Query_filter = "AND only_usual=0 ";
 // Only_major
 if ($No_Filter["o_m"]) {
 	$Query_filter .= "AND only_major=1 ";

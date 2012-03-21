@@ -5,10 +5,10 @@
 # written to the database.
 
 # Do not detect date articles
-active only_usual WHERE page.page_namespace = 0
+#active only_usual WHERE page.page_namespace = 0
 
 # Do not detect category articles
-active no_category WHERE page.page_title NOT IN {categories}
+#active no_category WHERE page.page_title NOT IN {categories}
 
 # Ignore minor edits.
 active only_major WHERE revision.rev_minor_edit = 0

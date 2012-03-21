@@ -256,7 +256,10 @@ class EditCount(DatabaseInterface):
               SELECT /* SLOW_OK */
               rev_page, COUNT(rev_page)
               FROM revision
+              LEFT JOIN page
+              ON page.page_id = revision.page_id
               WHERE rev_timestamp
+              AND page_namespace = 0
               BETWEEN '%(day)s000000' AND '%(day)s999999'
               GROUP BY rev_page
               HAVING COUNT(rev_page) > 1
@@ -568,7 +571,7 @@ class ChangedArticle(DatabaseInterface):
             elif filter in self._filters['active']['HAVING']:
                 self._filter_management.add_having_clause(filter, self._filters['active']['HAVING'][filter])
             elif filter in self._filters['active']['SELECT']:
-                self._filter_management.add_having_clause(filter, self._filters['active']['SELECT'][filter])
+                self._filter_management.add_select_clause(filter, self._filters['active']['SELECT'][filter])
             else:
                 continue
             self.__current_filter = filter
