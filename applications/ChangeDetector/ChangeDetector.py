@@ -1305,9 +1305,10 @@ class FilterManagement(MyObject):
         if FilterManagement.__Bots is None:
             self.__create_bot_list()
         self.__bot_string = "('%s')" % "','".join(self.__Bots)
-        if FilterManagement.__Categories is None:
-            self.__create_category_list()
-        self.__category_string = "('%s')" % "','".join(FilterManagement.__Categories)
+        #if FilterManagement.__Categories is None:
+            #self.__create_category_list()
+        #self.__category_string = "('%s')" % "','".join(FilterManagement.__Categories)
+        self.__category_string = ""
         
     
     def set_reference_days(self, days):
