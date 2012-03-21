@@ -2362,5 +2362,5 @@ if __name__ == '__main__':
     SQL_Cursors = Toolserver_SQL_Cursors
     #NoticedArticle(day)
 	cProfile.run('ChangedArticle(day)', '/home/project/r/e/n/render/Programme/ChangeDetector/cdProfile')
-    ChangedArticle(day)
+    #ChangedArticle(day)
 
