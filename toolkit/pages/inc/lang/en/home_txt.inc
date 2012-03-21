@@ -1,14 +1,13 @@
 <?php
 
 $Headline = "RENDER-Toolkit";
-$Introduction = "Hi and welcome on the RENDER Toolkit Page.";
+$Introduction = "Hi and welcome on the RENDER Toolkit Page!";
 
-$Text1 = "Here you can try the tools that are developed within the <a href=\"http://render-project.eu/\">RENDER project</a>. An encyclopedic, neutral text is requested in Wikipedia Articles. The purpose of the RENDER Toolkit is to detect articles with a lack of diversity. That means the tools search for articles missing facts or being biased due to an unbalanced representation of viewpoints.";
+$Text1 = "Here you can test and play with different tools. These are developed as part of the RENDER (Reflecting Knowledge Diversity) research project, in that Wikimedia Deutschland takes part as a use case partner. The tools provide an insight into the different kinds of analyses of diversity, as they will be implemented in the project. For more Information about the project, please visit <a href=http://de.wikipedia.org/wiki/Wikipedia:RENDER>RENDER in Wikipedia</a> or <a href=http://render-project.eu>the project website</a>.";
 
- 
-$Text2 = "The tools cannot give a final answer to the question whether an article is incomplete or biased. There will be hints given that an analyzed text should be checked by human assessment. Thanks to computed checks of content it is possible to save time and to find out about issues of diversity which could not have been identified manually.  Now you as an editor can use your time for adding information or applying corrections to Wikipedia, instead of manually searching for diversity issues.";
+$Text2 = "All of the tools as the toolkit itself are in a continuous process of development. We are happy to receive suggestions, feedback or ideas on the <a href=http://de.wikipedia.org/wiki/Wikipedia_Diskussion:RENDER>discussion concerning RENDER in Wikipedia</a> or by <a href=mailto:render@wikimedia.de>email</a>.";
 
-$Text3 = "The tools are partly still at a development state. Therefore we are happy to receive comments by email (<a href=\"mailto:render@wikimedia.de\">render@wikimedia.de</a>) that help us improving the tools.";
+$Text3 = "";
 
 
 ?>
