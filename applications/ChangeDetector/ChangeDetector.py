@@ -79,6 +79,7 @@ import ConfigParser
 import xml.dom.minidom
 import itertools
 import oursql
+import cProfile
 from datetime import datetime
 
 #Settings = None
@@ -2360,4 +2361,6 @@ if __name__ == '__main__':
     Settings = Toolserver_Settings
     SQL_Cursors = Toolserver_SQL_Cursors
     #NoticedArticle(day)
+	cProfile.run('ChangedArticle(day)', '/home/project/r/e/n/render/Programme/ChangeDetector/cdProfile')
     ChangedArticle(day)
+
