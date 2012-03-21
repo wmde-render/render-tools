@@ -1,7 +1,7 @@
 <?php
 
 $Headline = "Über uns";
-$Introduction = "Wikimedia Deutschland ist Anwendungspartner im Forschungsprojekts RENDER (Reflecting Knowledge Diversity). Wir untersuchen gemeinsam mit unserern Projektpartnern (Link) Diversität in Wikipedia. Diversität ist wichtig, da sie Ergebnis einer vollständigen Faktenlage und einer angemessenen Darstellung aller Standpunkte ist. Diversität ermöglicht eine enzyklopädische, neutrale Darstellung.";
+$Introduction = "Wikimedia Deutschland ist Anwendungspartner im Forschungsprojekts RENDER (Reflecting Knowledge Diversity). Wir untersuchen gemeinsam mit unserern Projektpartnern Diversität in Wikipedia. Diversität ist wichtig, da sie Ergebnis einer vollständigen Faktenlage und einer angemessenen Darstellung aller Standpunkte ist. Diversität ermöglicht eine enzyklopädische, neutrale Darstellung.";
 
 
 $Text1 = "<p>Bei unseren Untersuchungen orientieren wir uns an den Maßstäben für Qualität, die in Wikipedia gelten. 
