@@ -105,6 +105,7 @@ include("inc/src/Languagecodes.inc");
 	setlocale(LC_TIME, 'de_DE');
 	$timestamp_since = '1330849800'; // 4.3.2012 8:30 UTC
  	$today = time();
+ 	$timestamp_since = $today - ( 7 * 24 * 60 * 60);
  	$yesterday = $today - ( 1 * 24 * 60 * 60);
  	// no new data till 10:00 am
  	if (date('Gi',$today) < 1000) { 
