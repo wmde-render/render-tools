@@ -1,5 +1,6 @@
 #!/opt/ts/python/2.7/bin/python
 #$ -l h_rt=10:00:00
+#$ -l virtual_free=500M
 #$ -j y
 #$ -o $HOME/20111029.out
 #$ -m ae
@@ -260,8 +261,8 @@ class EditCount(DatabaseInterface):
               LEFT JOIN page
               ON page.page_id = revision.page_id
               WHERE rev_timestamp
-              AND page_namespace = 0
               BETWEEN '%(day)s000000' AND '%(day)s999999'
+              AND page_namespace = 0
               GROUP BY rev_page
               HAVING COUNT(rev_page) > 1
               """ % {'day':day}
@@ -2362,6 +2363,6 @@ if __name__ == '__main__':
     Settings = Toolserver_Settings
     SQL_Cursors = Toolserver_SQL_Cursors
     #NoticedArticle(day)
-	cProfile.run('ChangedArticle(day)', '/home/project/r/e/n/render/Programme/ChangeDetector/cdProfile')
-    #ChangedArticle(day)
+	#cProfile.run('ChangedArticle(day)', '/home/project/r/e/n/render/Programme/ChangeDetector/cdProfile')
+    ChangedArticle(day)
 
