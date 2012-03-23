@@ -80,10 +80,13 @@ import xml.dom.minidom
 import itertools
 import oursql
 
+from datetime import date, timedelta
+
 #Settings = None
 #SQL_Cursors = None
 
 PATH_TO_THIS_FILE = '/home/project/r/e/n/render/Programme/ChangeDetector/'
+#PATH_TO_THIS_FILE = '/home/knissen/ChangeDetector/'
 #PATH_TO_THIS_FILE = '/home/philipp/Projekte/11-10-03-UpToDatenessCheck/change/'
 #PATH_TO_THIS_FILE = '/home/philipp/Projekte/11-10-UpToDatenessCheck/change/'
 
@@ -567,7 +570,7 @@ class ChangedArticle(DatabaseInterface):
             elif filter in self._filters['active']['HAVING']:
                 self._filter_management.add_having_clause(filter, self._filters['active']['HAVING'][filter])
             elif filter in self._filters['active']['SELECT']:
-                self._filter_management.add_having_clause(filter, self._filters['active']['SELECT'][filter])
+                self._filter_management.add_select_clause(filter, self._filters['active']['SELECT'][filter])
             else:
                 continue
             self.__current_filter = filter
@@ -2342,6 +2345,22 @@ def pass_sql_cursors(sql_cursors):
     SQL_Cursors = sql_cursors
 
 
+def skipLanguageByReplicationLag():
+    yesterday = date.today() - timedelta(1)
+    lang_dict = Settings()['languages'][:]
+
+    for language in lang_dict:
+        sql_statement = "SELECT UNIX_TIMESTAMP() - UNIX_TIMESTAMP(MAX(rc_timestamp)) FROM recentchanges;"
+        SQL_Cursors()[language].execute(sql_statement)
+        result = SQL_Cursors()[language].fetchall()
+        
+        # set update flag if the replication lag isn't too high
+        # otherwise remove from languages to be processed
+        if result[0][0] < 7200:
+            sql_statement = "INSERT INTO lang_update (lang, day) VALUES ('%s', %s) ON DUPLICATE KEY UPDATE day = %s;" % (language, yesterday.strftime('%Y%m%d'), yesterday.strftime('%Y%m%d'))
+            SQL_Cursors()['auxiliary'].execute(sql_statement)
+        else:
+            Settings()['languages'].remove(language)
 
 if __name__ == '__main__':
     try:
@@ -2353,5 +2372,8 @@ if __name__ == '__main__':
     #Settings = Settings()
     Settings = Toolserver_Settings
     SQL_Cursors = Toolserver_SQL_Cursors
+    skipLanguageByReplicationLag()
+    
     #NoticedArticle(day)
     ChangedArticle(day)
+    print "processing complete"
