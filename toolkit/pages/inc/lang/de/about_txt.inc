@@ -26,7 +26,7 @@ $Text2 = "<p>Im weiteren Verlauf des Projekts intergrieren wir die Ergebnisse in
 <p>Die Werkzeuge können keine abschließende Antwort auf die Frage geben, ob ein Artikel unvollständig ist oder durch eine bestimmte Weltanschauung geprägt ist. Dazu bedarf es weiterhin menschlicher Urteilskraft. Die Werkzeuge können lediglich Hinweise auf problematische Artikel liefern. Diese Artikel können dann von Menschen überprüft und korrigiert werden. Dank der automatisierten Überprüfung von Artikeltexten lässt sich Zeit sparen, die dann für die Ergänzung oder Verbesserung verwendet werden kann. Außerdem wird so technisch Mangel an Diversität sichtbar gemacht, der manuell nicht in vertretbarer Zeit aufzudecken wäre.
 </p>";
 
-$Text3 = "<p>Das Toolkit und auch die einzelnen Werkzeuge befinden sich in einem kontinuierlichen Entwicklungsprozess. Wir freuen uns über Anregungen, Rückmeldungen und Ideen auf <a href=\"http://de.wikipedia.org/wiki/Wikipedia_Diskussion:RENDER\">Wikipedia_Diskussion:RENDER</a> oder per Mail an <a href=\"mailto:render@wikimedia.de\">render@wikimedia.de</a>.
+$Text3 = "<p>Das Toolkit und auch die einzelnen Werkzeuge befinden sich in einem kontinuierlichen Entwicklungsprozess. Wir freuen uns über Anregungen, Rückmeldungen und Ideen auf <a href=\"http://de.wikipedia.org/wiki/Wikipedia_Diskussion:RENDER\">Wikipedia_Diskussion:RENDER</a> oder per E-Mail an <a href=\"mailto:render@wikimedia.de\">render@wikimedia.de</a>.
 </p>";
 
 
