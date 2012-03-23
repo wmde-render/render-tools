@@ -1,6 +1,5 @@
 #!/opt/ts/python/2.7/bin/python
 #$ -l h_rt=10:00:00
-#$ -l virtual_free=500M
 #$ -j y
 #$ -o $HOME/20111029.out
 #$ -m ae
@@ -80,8 +79,6 @@ import ConfigParser
 import xml.dom.minidom
 import itertools
 import oursql
-import cProfile
-from datetime import datetime
 
 #Settings = None
 #SQL_Cursors = None
@@ -96,7 +93,7 @@ class MyObject(object):
     
     """
     
-    __DebugLevel = 0
+    __DebugLevel = 2
     
     def get_debug_level(self):
         return MyObject.__DebugLevel
@@ -258,11 +255,8 @@ class EditCount(DatabaseInterface):
               SELECT /* SLOW_OK */
               rev_page, COUNT(rev_page)
               FROM revision
-              LEFT JOIN page
-              ON page.page_id = revision.page_id
               WHERE rev_timestamp
               BETWEEN '%(day)s000000' AND '%(day)s999999'
-              AND page_namespace = 0
               GROUP BY rev_page
               HAVING COUNT(rev_page) > 1
               """ % {'day':day}
@@ -573,7 +567,7 @@ class ChangedArticle(DatabaseInterface):
             elif filter in self._filters['active']['HAVING']:
                 self._filter_management.add_having_clause(filter, self._filters['active']['HAVING'][filter])
             elif filter in self._filters['active']['SELECT']:
-                self._filter_management.add_select_clause(filter, self._filters['active']['SELECT'][filter])
+                self._filter_management.add_having_clause(filter, self._filters['active']['SELECT'][filter])
             else:
                 continue
             self.__current_filter = filter
@@ -1306,10 +1300,9 @@ class FilterManagement(MyObject):
         if FilterManagement.__Bots is None:
             self.__create_bot_list()
         self.__bot_string = "('%s')" % "','".join(self.__Bots)
-        #if FilterManagement.__Categories is None:
-            #self.__create_category_list()
-        #self.__category_string = "('%s')" % "','".join(FilterManagement.__Categories)
-        self.__category_string = ""
+        if FilterManagement.__Categories is None:
+            self.__create_category_list()
+        self.__category_string = "('%s')" % "','".join(FilterManagement.__Categories)
         
     
     def set_reference_days(self, days):
@@ -1832,10 +1825,8 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
             self._explain(3, operation)
             self._explain(3, parameters)
         if parameters is None:
-			start = datetime.now()
-			super(MyOursqlCursor, self).execute(
-				operation, plain_query=True)
-			self._explain(2, "Execution duration: " + (datetime.now - start))
+            super(MyOursqlCursor, self).execute(
+                  operation, plain_query=True)
         else:
             super(MyOursqlCursor, self).execute(operation, parameters)
     
@@ -2363,6 +2354,4 @@ if __name__ == '__main__':
     Settings = Toolserver_Settings
     SQL_Cursors = Toolserver_SQL_Cursors
     #NoticedArticle(day)
-	#cProfile.run('ChangedArticle(day)', '/home/project/r/e/n/render/Programme/ChangeDetector/cdProfile')
     ChangedArticle(day)
-
