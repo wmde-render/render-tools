@@ -1,9 +1,9 @@
 <?php
 
 $Headline = "About Us";
-$Introduction = "Wikimedia Deutschland is use case partner in the RENDER project (Reflecting Knowledge Diversity). In cooperation with our project partners we analyze and evaluate diversity in Wikipedia.";
+$Introduction = "Wikimedia Deutschland is use case partner in the RENDER project (Reflecting Knowledge Diversity). In cooperation with our partners we analyze and evaluate Wikipedia as regards diversity.";
 
-$Text1 = "Diversity is important as a result of a complete coverage of facts and an adequate representation of all viewpoints. Diversity is essential for an encyclopedic and neutral description. Our analyses focus upon metrics for quality the same way they are applied to Wikipedia by editors. We take the following criteria into account:
+$Text1 = "Diversity matters because it is on the one hand a result of a complete fact coverage. On the other hand, diversity implies an adequate representation of all viewpoints. Diversity is essential for an encyclopedic and neutral description. Our analyses focus upon metrics for quality in the same way they are applied to Wikipedia by human editors. We take the following criteria into account:
 <ul> 
 <li>Completeness</li>
 <li>Timeliness</li>
@@ -11,7 +11,7 @@ $Text1 = "Diversity is important as a result of a complete coverage of facts and
 </ul>";
 
 $Text2 = "In addition we investigate the characteristics of editor interaction. For more information about the project as a whole, please visit <a href=http://de.wikipedia.org/wiki/Wikipedia:RENDER>RENDER in Wikipedia</a> or <a href=http://render-project.eu>the project website</a>.
-The tools on this page provide a first insight into different ways of diversity analysis, as they will be implemented in the RENDER project. In the course of the project we integrate the results in different supporting applications. Using these tools the user will be enabled to discover articles in Wikipedia that need improvement.
+The tools on this page provide a first insight into different ways of diversity analysis, as they will be implemented in the RENDER project. In the course of the project we integrate the results in different supporting applications. Using these tools the user will be enabled to discover articles in Wikipedia needing improvement.
 At the moment there are plans for two of these supporting tools:
 <ul>
 <li>Quality Overview Tool: this application displays analysis for every article. This tool will include the possibility to check for different metrics and provide a quick overview of an article's quality and overall condition.</li>
