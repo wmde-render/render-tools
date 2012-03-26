@@ -15,7 +15,7 @@ Die Kriterien, die wir berücksichtigen, sind:
 Weitere Informationen zum Projekt finden sich unter <a href=\"http://de.wikipedia.org/wiki/Wikipedia:RENDER\">Wikipedia:RENDER</a> bzw. <a href=\"http://render-project.eu\">http://render-project.eu</a>.
 </p><p>
 Die hier bereitgestellten Werkzeuge geben einen Einblick in die verschiedenen Diversitätsanalysen, die im Rahmen des RENDER-Projekts durchgeführt werden. 
-</p";
+</p>";
 
 $Text2 = "<p>Im weiteren Verlauf des Projekts intergrieren wir die Ergebnisse in zwei verschiedene Anwendungen. Diese führen Nutzer gezielt zu Stellen in der Wikipedia, die verbesserungswürdig sind.
 </p><p>Derzeit sind zwei dieser weiterführenden Werkzeuge geplant:
