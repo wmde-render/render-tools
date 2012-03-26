@@ -17,6 +17,8 @@
 
 function query_change_db($date, $LangGroup, $cut = TRUE , $No_Filter, $database_name ='p_render_change_detector_p' ){
 
+
+
 // Only usual
 	$Query_filter = "AND only_usual=0 ";
 // Only_major
@@ -77,10 +79,6 @@ foreach ($LangGroup as $k => $language){
 
 
 
-echo "<!--";
-print($LangList);
-echo "-->";
-
 
 // Query for all relvant entries from p_render_change_detector_p.changed_article
 
@@ -109,28 +107,30 @@ while($row = mysql_fetch_object($result)){
 }				  	
 
 
-echo "<!--";
-print_r($Final_Result[0]);
-echo "-->";
+
 
 $threshold = 3;
 //$threshold = floor(count($LangGroup)/3);
 if ($cut) $threshold = floor(count($LangGroup)/2);
 
 // Adding information for unchanged articles and removing entries with low change rates
+$query_noticed = mysql_query ('SELECT * FROM noticed_article WHERE day='.$date.' AND language in ('.$LangList.')');
+
+while ($row = mysql_fetch_object($query_noticed) ){
+	$noticed_result[$row->identifier][$row->language] = $row->page_id; 		
+}
 
 foreach($Final_Result as $id => $v_array) {
 	
 	if (count($v_array["Changed"]) >= $threshold) {
 	
-	$result_noticed = mysql_query('SELECT * FROM noticed_article WHERE day='.$date.' AND identifier='.$id.' AND language in ('.$LangList.')' );
+
 	
-	while($row = mysql_fetch_object($result_noticed)){
-		$temp_lang = $row->language;
-		if (!array_key_exists($temp_lang, $v_array["Changed"])){
-			
+	foreach ($noticed_result[$id] as $noticed_language => $noticed_page_id){
 	
-			$v_array["Unchanged"][$temp_lang] = $row->page_id;
+		if (!isset($v_array["Changed"][$noticed_language]) ){
+	
+			$v_array["Unchanged"][$noticed_language] = $noticed_page_id;
 				
 			
 		}
@@ -142,6 +142,12 @@ foreach($Final_Result as $id => $v_array) {
 
 
 mysql_close($db);
+
+$between_time = time();
+
+$temp_time = $between_time - $start_time;
+
+
 
 
 // Adding titles for Unchanged articles
@@ -181,6 +187,8 @@ foreach ($LangGroup as $k => $language) {
 	mysql_close($db2);
 
 }
+
+
 
 unset($ts_mycnf, $ts_pw);
 
