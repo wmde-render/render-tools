@@ -32,17 +32,7 @@ if ($No_Filter["m_u"]) {
 	$Query_filter .= "AND many_user=1 ";
 	}
 
-// Transform the LanguageGroup array
 
-$LangList = "";
-foreach ($LangGroup as $k => $language){
-	if ($k != 0) $LangList .= ",";
-	$LangList .= " '".$language."' ";
-		
-	}
-echo "<!--";
-echo $LangList;
-echo "-->";
 
 // Open database
 
@@ -55,6 +45,42 @@ if (!$db) {
 }
 
 mysql_select_db($database_name, $db);
+
+
+
+
+//$res_lang_query = mysql_query ("SELECT * FROM ts_replag_day WHERE day = ".$date);
+$res_lang_query = mysql_query ("SELECT * FROM lang_update WHERE day = ".$date);
+
+
+while($lang_row = mysql_fetch_object($res_lang_query)){
+	$LangGroupreal[] = $lang_row->lang; 	
+	}
+
+
+$LangGroup = array_intersect($LangGroup, $LangGroupreal);
+
+
+// Transform the LanguageGroup array
+$LangList = " '".implode("' , '", $LangGroup)."' ";
+
+
+
+/*
+foreach ($LangGroup as $k => $language){
+	if ($k != 0) $LangList .= ",";
+	$LangList .= " '".$language."' ";
+		
+	}
+*/
+
+
+
+
+echo "<!--";
+print($LangList);
+echo "-->";
+
 
 // Query for all relvant entries from p_render_change_detector_p.changed_article
 
@@ -83,6 +109,9 @@ while($row = mysql_fetch_object($result)){
 }				  	
 
 
+echo "<!--";
+print_r($Final_Result[0]);
+echo "-->";
 
 $threshold = 3;
 //$threshold = floor(count($LangGroup)/3);
@@ -144,9 +173,6 @@ foreach ($LangGroup as $k => $language) {
 			$temp_title = mysql_fetch_object($exist);
 			$temp_title = $temp_title->page_title;
 		
-			
-		
-			
 			$v_array[$language]["title"] = $temp_title;
 		
 			}
@@ -156,8 +182,9 @@ foreach ($LangGroup as $k => $language) {
 
 }
 
-
 unset($ts_mycnf, $ts_pw);
+
+$Final_Result2['real_LangGroup'] = $LangGroup;
 
 return $Final_Result2;
 /* The resulting array contains for every Indentifier the information for

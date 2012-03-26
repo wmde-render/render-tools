@@ -253,9 +253,13 @@ else {
 }
 
 
+$LangGroup = $db_result['real_LangGroup'];  
+
+
 // Enriching the database result
 
 foreach ($db_result as $id => $db_Entry){
+	if ($id == "real_LangGroup") continue;
 	$result_Entry = $db_Entry;
 	
 	
@@ -307,6 +311,7 @@ if ( $SortingOption == 1 ){
 // Adding Entrys for 'no article'
 
 foreach ($Final_Result as $k => $Entry){
+	
 	foreach ($LangGroup as $key => $Language){
 		
 		if (!array_key_exists($Language, $Entry)){
@@ -323,6 +328,7 @@ foreach ($Final_Result as $k => $Entry){
 // Contruction of the result table
 $count = sizeof($LangGroup);
 ?>
+
 <a name="result_table"></a>
 <div id="Ergebnis" class="resultDiv">
   <table id="tableResult" class="resultTable">
