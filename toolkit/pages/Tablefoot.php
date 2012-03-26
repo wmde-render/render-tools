@@ -12,7 +12,7 @@ if ($lang == "en"){
 	<table border="0" cellspacing="0" cellpadding="0" width="100%">
 	<tr>
 	<td>
-		<div id="EU">RENDER is founded by <img width="55px" src="/~RENDER/toolkit/img/eu.jpg"/><img width="55px" src="/~RENDER/toolkit/img/FP7.png"/></div>
+		<div id="EU">RENDER is funded by <img width="55px" src="/~RENDER/toolkit/img/eu.jpg"/><img width="55px" src="/~RENDER/toolkit/img/FP7.png"/></div>
 		<p> All data used on this page  originate from the Wikipedia project of the Wikimedia Foundation. <br/>
 			Unless otherwise stated, all data on this page is licensed under  <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en">Creative Commons Attribution-Share-Alike License 3.0</a> </p>
 	</td>

@@ -26,7 +26,7 @@ We are going to develop two supporting tools:
 An automatic review of articles could save time. Saved time could be used for completion and improvement of Wikipedia. Furthermore it is possible to detect a lack of diversity with technical aid, that cannot manually done within justifiable time.
 </p>";
 
-$Text3 = "<p>The whole toolkit as well as the tools are in a continuous process of development. We are looking forward to receiving suggestions, feedback or ideas on  <a href=http://de.wikipedia.org/wiki/Wikipedia_Diskussion:RENDER>discussion concerning RENDER in Wikipedia</a> or by <a href=mailto:render@wikimedia.de>email</a>.
+$Text3 = "<p>The whole toolkit as well as the tools are in a continuous process of development. We are looking forward to receiving suggestions, feedback or ideas on  <a href=http://de.wikipedia.org/wiki/Wikipedia_Diskussion:RENDER>discussion page concerning RENDER in Wikipedia</a> or by <a href=mailto:render@wikimedia.de>email</a>.
 </p>";
 
 ?>
