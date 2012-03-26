@@ -29,6 +29,7 @@ $Settings["SortingNews"] = "News";
 
 // printf( $_ , $reflang, $Langgroup)
 $Error["NotinGrp"] = "Die Referenzsprache %s ist nicht in der gewählten Sprachgruppe %s.";
+$Error["NotinDay"] = "Aufgrund technischer Probleme gibt es keine Daten für die Referenzsprache '%s' am gewünschten Datum";
 
 
 

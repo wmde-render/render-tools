@@ -29,6 +29,7 @@ $Settings["SortingNews"] = "News";
 
 // printf( $_ , $reflang, $Langgroup)
 $Error["NotinGrp"] = "The reference language %s is not in the language group %s.";
+$Error["NotinDay"] = "Due to technical issues, there is no data for the reference language '%s' on this day.";
 
 $Statistik["Day"] = "Chosen date";
 $Statistik["Langgroup"] = "Chosen language group";

@@ -324,7 +324,6 @@ foreach ($Final_Result as $k => $Entry){
 
 
 
-
 // Contruction of the result table
 $count = sizeof($LangGroup);
 ?>
@@ -377,7 +376,17 @@ foreach ( $Final_Result as $k => $v) {
 echo "</tbody></table>";
 
 
+
+
 echo "</div>";
+
+echo "<div  style=\"width: 98%; padding: 1em; clear:both;\"></div>";
+
+if (!array_key_exists($reflang, array_flip($LangGroup))) {
+	echo "<div id=\"Errormessage\"><span>";
+	printf($Error["NotinDay"], $reflang);
+	echo "</span></div>";
+}
 
 
 }
