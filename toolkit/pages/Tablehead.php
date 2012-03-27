@@ -17,6 +17,9 @@ if (isset($_GET["lang"])){ $lang = $_GET["lang"];
 // parse toolserver account out of request uri 
 // to make sure the toolkit can run under different accounts
 $tsAccount = substr($_SERVER['REQUEST_URI'], 1, strpos($_SERVER['REQUEST_URI'], '/', 1) - 1);
+
+$pathtoself = $_SERVER['PHP_SELF'];
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -43,7 +46,7 @@ if ($lang == "en"){
 
 ?>
 
-<div id="Language"><a href="/<?php echo $tsAccount; ?>/toolkit/index.php?lang=de"><small>Deutsch: </small><img 
+<div id="Language"><a href="<?php echo $pathtoself; ?>?lang=de"><small>Deutsch: </small><img 
 src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_ratio).svg.png" border="0" width="24px"  alt=""></a></div>
 	
   <div id="Headline">	
@@ -108,7 +111,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 if($lang == "de"){
 ?>
 
-<div id="Language"><a href="/<?php echo $tsAccount; ?>/toolkit/index.php?lang=en"><small>Englisch: </small><img src="/<?php echo $tsAccount; ?>/toolkit/img/128px-Flag_of_the_United_Kingdom.svg.png" border="0" width="24px"  alt=""></a></div>
+<div id="Language"><a href="<?php echo $pathtoself; ?>?lang=en"><small>Englisch: </small><img src="/<?php echo $tsAccount; ?>/toolkit/img/128px-Flag_of_the_United_Kingdom.svg.png" border="0" width="24px"  alt=""></a></div>
 	
   <div id="Headline">	
 	<table border="0" cellspacing="0" cellpadding="0">
