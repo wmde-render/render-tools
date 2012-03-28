@@ -9,9 +9,14 @@ if (isset($_GET["lang"])){ $lang = $_GET["lang"];
 	
 		$lang = $_SESSION["lang"];		
 	} else {
-		$lang = "en";
-		$_SESSION["lang"] = "en";
+		if (strncmp($_SERVER["HTTP_ACCEPT_LANGUAGE"],"de",2) == 0){
+			$lang = "de";
+			$_SESSION["lang"] = "de";
+		} else {
+			$lang = "en";
+			$_SESSION["lang"] = "en";
 		}
+	}	
 }
 
 // parse toolserver account out of request uri 
