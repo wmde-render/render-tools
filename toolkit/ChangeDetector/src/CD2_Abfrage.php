@@ -107,13 +107,13 @@ include("inc/src/Languagecodes.inc");
  	$today = time();
  	$timestamp_since = $today - ( 7 * 24 * 60 * 60);
  	$yesterday = $today - ( 1 * 24 * 60 * 60);
- 	// no new data till 10:00 am
- 	if (date('Gi',$today) < 1000) { 
+ 	// check for newest data
+ 	$check_yesterday_file = "src/tmp/tmp_".date('Ymd', $yesterday).".ok.dump";
+ 	if (!file_exists($check_yesterday_file)) { 
 	$yesterday = $yesterday - ( 1 * 24 * 60 * 60);
 	} 
 	
 ?>
-
 
 
 <div id="Ueberschrift" style="float:left; vertical-align:middle;">
