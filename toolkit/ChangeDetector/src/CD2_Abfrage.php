@@ -123,7 +123,7 @@ include("inc/src/Languagecodes.inc");
 <p><a href="info.php"><?php echo $MoreInfo; ?></a></p>
 </div>
 <FORM ACTION="<?php echo $_SERVER['PHP_SELF']; ?>#result_table" METHOD=GET>	
-<p id="Description"><?php echo $errorMessage; ?></p>
+<p id="Description"><?php echo ""; ?></p>
 <p id="Description"><?php echo $Formtext; ?></p>
   <div id="Eingabe">
   

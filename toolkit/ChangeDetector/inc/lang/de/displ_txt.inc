@@ -4,7 +4,7 @@ $Description = "Change Detector zeigt hohe Autorenaktivität in Wikipedia an ein
 
 $MoreInfo = "Weitere Informationen";
 
-$errorMessage = "Aus technischen Gründen sind keine Daten zu Änderungen seit dem 30. März vorhanden. Wir arbeiten an einer Lösung und stellen die Daten so schnell wie möglich zur Verfügung."
+$errorMessage = "Aus technischen Gründen sind keine Daten zu Änderungen seit dem 30. März vorhanden. Wir arbeiten an einer Lösung und stellen die Daten so schnell wie möglich zur Verfügung.";
 
 $Formtext = "Bitte wählen Sie einen Tag für den der Change Detector suchen soll.";
 
