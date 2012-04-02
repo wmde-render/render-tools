@@ -5,6 +5,8 @@ $Description = "Change Detector shows high editing activity in Wikipedia on a ce
 
 $MoreInfo = "More Information";
 
+$errorMessage = "Due to technical reasons there is currently no data available for changes since March 30th. We are working on this issue and will provide the latest data as soon as possible."
+
 $Formtext = "Please choose a day for the Change Detector search.";
 $Formbutton = "Submit";
 
