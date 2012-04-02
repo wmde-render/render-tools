@@ -980,7 +980,10 @@ class ArticleMerger(MyObject):
                     (self.__string_of_all_languages, self.__latest_ids)
         SQL_Cursors()[language].execute(sql_command)
         for other_language, id, title in SQL_Cursors()[language]:
-            self.__titles[language][id][other_language] = title
+            try:
+                self.__titles[language][id][other_language] = title
+            except KeyError:
+                self._explain(2, "Problem with page id %s of language %s/%s." % (str(id), language, other_language))
         
     def __merge_two(self, article, other_article):
         this_algorithms = article.rating.keys()
