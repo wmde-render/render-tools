@@ -96,7 +96,7 @@ class MyObject(object):
     
     """
     
-    __DebugLevel = 2
+    __DebugLevel = 1
     
     def get_debug_level(self):
         return MyObject.__DebugLevel
@@ -1204,9 +1204,8 @@ class RevisionFetcher(MyObject):
             self.__write_revision_properties()
     
     def __read_page_properties(self):
-        sql_command = """SELECT * FROM page
-              WHERE page_id = ?
-              """
+        sql_command = """SELECT *
+            FROM page WHERE page_id = ?"""
         SQL_Cursors()[self.__language].execute(
               sql_command, [self.__page_id])
         sql_result = SQL_Cursors()[self.__language].fetchall()
@@ -1254,7 +1253,9 @@ class RevisionFetcher(MyObject):
         SQL_Cursors()['auxiliary'].execute(sql_command, self.__page)
     
     def __read_revision_properties(self):
-        sql_command = """SELECT * FROM revision
+        sql_command = """SELECT rev_id, rev_page, rev_text_id, rev_comment, rev_user, rev_user_text, 
+              rev_timestamp, rev_minor_edit, rev_deleted, rev_len, rev_parent_id 
+              FROM revision
               WHERE rev_page = ?
               AND rev_timestamp 
               BETWEEN '%(start)s000000' AND '%(stop)s999999' 
