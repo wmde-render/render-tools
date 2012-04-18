@@ -163,7 +163,7 @@ foreach ($LangGroup as $k => $language) {
 	$db2 = mysql_connect($LangVers_wiki_db, $ts_mycnf['user'], $ts_mycnf['password']);
 
 	if (!$db2) {
-		die('Connection error (db - Titel holen): ' . mysql_error());
+		die('Connection error (db - Titel holen '.$LangVers_wiki_db.'): ' . mysql_error());
 	}
 
 	mysql_select_db($LangVers_wiki, $db2);
