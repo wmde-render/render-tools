@@ -411,6 +411,18 @@ div#Lizenz {
 	border: 1px dashed silver;	
 }
 
+/* Feedback Form */
+#dialog-feedback label { display: block; font-size: 0.8em; }
+#dialog-feedback input, textarea { width: 300px; margin-bottom: 5px; font-size: 0.8em !important; }
+#dialog-feedback textarea { height: 140px; }
+
+/* Downloads */
+.downloads { font-size: 0.9em; margin: 1em; }
+.downloads td, th { background-color: #E6E6E6; padding: 4px; margin: 4px; }
+.dl-name { width: 200px; }
+.dl-size { width: 70px; text-align: center; }
+.dl-desc { width: 400px; }
+
 
 /* Nur ChangeDetector */
 

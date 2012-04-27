@@ -10,7 +10,7 @@ $FormIn = "in";
 $FormButton = "Submit";
 
 // printf ( $_ , $language, $title, $title, $countTrans , $countbiggestTrans)
-$Info["Introduction"] = "The article <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> exists in %d language versions.</p><p>The following %d language versions contain the most internal Wikipedia links:";
+$Info["Introduction"] = "The article <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> exists in %d further language versions.</p><p>The following %d language versions contain the most internal Wikipedia links:";
 
 // printf ( $_ , $language, $title, $title, $language, $countLinks)
 $Info["LIlanguages"] = "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) contains %d internal links.";

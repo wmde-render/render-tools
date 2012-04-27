@@ -39,6 +39,83 @@ $pathtoself = $_SERVER['PHP_SELF'];
 <meta name="DC.Date"        content="2012-03-20T00:00:00+01:00">
 <title>RENDER-Toolkit</title>
 <link rel="stylesheet" href="/<?php echo $tsAccount; ?>/toolkit/formate.css" type="text/css">
+<link rel="stylesheet" href="/<?php echo $tsAccount; ?>/toolkit/jquery-ui-1.8.19.custom.css"" type="text/css">
+<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.js"></script>
+<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.fixedtable.js"></script>
+<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery-ui-1.8.19.custom.min.js"></script>
+<script type="text/javascript">
+<?php
+if ($lang == "en") {
+	$btnSend = "Send";
+	$btnCancel = "Cancel";
+} else {
+	$btnSend = "Senden";
+	$btnCancel = "Abbrechen";
+}
+?>
+	function openFeedbackDialog() {
+		$("#imgCaptcha").attr("src", "pages/inc/captcha.php?id=" + Math.floor(Math.random() * 10001));
+		$("#dialog-feedback").dialog('open');
+	}
+	
+	$(function() {
+		$( "#dialog-feedback" ).dialog({
+			height: 410,
+			width: 780,
+			modal: true,
+			autoOpen: false,
+			buttons: {
+				"<?php echo $btnSend; ?>":
+					function() { 
+						var $form = $( '#feedbackForm' ),
+							name    = $form.find( 'input[name="name"]' ).val(),
+							email   = $form.find( 'input[name="email"]' ).val(),
+							page    = $form.find( 'input[name="url"]' ).val(),
+							lang    = $form.find( 'input[name="lang"]' ).val(),
+							captcha = $form.find( 'input[name="captcha"]' ).val(),
+							comment = $form.find( 'textarea[name="comment"]' ).val(),
+							url     = $form.attr( 'action' );
+							
+						$.post( url, { name: name, email: email, page: page, lang: lang, comment: comment, captcha: captcha },
+							function(response) {
+								if (response.indexOf("(ERR)") == -1) {
+									$form.find('input[name="name"]').val("");
+									$form.find('input[name="email"]').val("");
+									$form.find('input[name="captcha"]').val("");
+									$form.find('textarea[name="comment"]').val("");
+								
+									$('#dialog-feedback').dialog('close');
+								} else {
+									response = response.replace("(ERR)", "");
+								}
+								
+								$('#dialog-feedback-submit').empty().append(response);
+								$('#dialog-feedback-submit').dialog('open');
+							}
+						);
+					},
+				"<?php echo $btnCancel; ?>": 
+					function() {
+						var $form = $( '#feedbackForm' );
+						$form.find('input[name="name"]').val("");
+						$form.find('input[name="email"]').val("");
+						$form.find('input[name="captcha"]').val("");
+						$form.find('textarea[name="comment"]').val("");
+						$(this).dialog("close");
+					}
+			}
+ 		});
+		
+		$( "#dialog-feedback-submit" ).dialog({
+			height: 220,
+			width: 370,
+			modal: true,
+			autoOpen: false
+		});
+		
+		$('input[name=url]').val(document.location.href);
+	});
+</script>
 </head>
 
 <body >
@@ -70,17 +147,9 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
  	
   <div id="Rahmen"><ul id="Navigation">
 
-    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a>
-      <ul>
-        <li><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/info.php">Description</a></li>
-      </ul>
-    </li>
+    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a></li>
 
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a>
-	<ul>
-        <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/info.php">Description</a></li>
-      </ul>
-     </li> 
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/">Wikipedia Map</a>
       <ul>
 
@@ -104,11 +173,33 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 
    <li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">About us</a></li>
-  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/Contact.php">Contact</a></li>
+  <!--li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li-->
+  <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 </td>
 	 <td id="Inhalt">
+		<div id="dialog-feedback" title="Feedback">
+			<form name="feedbackForm" id="feedbackForm" method="post" action="/<?php echo $tsAccount; ?>/toolkit/pages/feedback.php">
+				<div style="float: left; border: 1px solid green;">
+					<label for="name">Name</label>
+					<input type="text" name="name" value="" />
+					<label for="email">E-Mail</label>
+					<input type="text" name="email" value="" /><br />
+					<img src="" id="imgCaptcha" alt="Visual CAPTCHA" />
+					<label for="captcha">Captcha</label>
+					<input type="text" name="captcha" />
+				</div>
+				<div style="float: left; border: 1px solid blue;">
+					<label for="comment">Comment</label>
+					<textarea name="comment"></textarea>
+				</div>
+				<input type="hidden" name="url" value="" />
+				<input type="hidden" name="lang" value="<?php echo $_SESSION['lang']; ?>" />
+			</form>
+		</div>
+
+		<div id="dialog-feedback-submit" title="Feedback"></div>
 
 
 <?php
@@ -134,17 +225,9 @@ if($lang == "de"){
  	
   <div id="Rahmen"><ul id="Navigation">
 
-    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a>
-      <ul>
-        <li><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/info.php">Erklärung</a></li>
-      </ul>
-    </li>
+    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a></li>
 
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a>
-	<ul>
-        <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/info.php">Erklärung</a></li>
-      </ul>
-     </li> 
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/">Wikipedia Map</a>
       <ul>
         <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/info.php">Erklärung</a></li>
@@ -167,13 +250,35 @@ if($lang == "de"){
 
    <li ><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Start</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Über uns</a></li>
-  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/Contact.php">Kontakt</a></li>
+  <!--li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li-->
+  <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 
 	 
 	 </td>
 	 <td id="Inhalt">
+		<div id="dialog-feedback" title="Feedback">
+			<form name="feedbackForm" id="feedbackForm" method="post" action="/<?php echo $tsAccount; ?>/toolkit/pages/feedback.php">
+				<div style="width: 50%; float: left;">
+					<label for="name">Name</label>
+					<input type="text" name="name" value="" />
+					<label for="email">E-Mail</label>
+					<input type="text" name="email" value="" /><br />
+					<img src="" id="imgCaptcha" alt="Visual CAPTCHA" />
+					<label for="captcha">Captcha</label>
+					<input type="text" name="captcha" />
+				</div>
+				<div style="width: 50%; float: left;">
+					<label for="comment">Kommentar</label>
+					<textarea name="comment"></textarea>
+				</div>
+				<input type="hidden" name="url" value="" />
+				<input type="hidden" name="lang" value="<?php echo $_SESSION['lang']; ?>" />
+			</form>
+		</div>
+
+		<div id="dialog-feedback-submit" title="Feedback"></div>
 
 <?php
 }
