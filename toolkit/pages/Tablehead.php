@@ -181,7 +181,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 	 <td id="Inhalt">
 		<div id="dialog-feedback" title="Feedback">
 			<form name="feedbackForm" id="feedbackForm" method="post" action="/<?php echo $tsAccount; ?>/toolkit/pages/feedback.php">
-				<div style="float: left; border: 1px solid green;">
+				<div style="float: left;">
 					<label for="name">Name</label>
 					<input type="text" name="name" value="" />
 					<label for="email">E-Mail</label>
@@ -190,7 +190,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 					<label for="captcha">Captcha</label>
 					<input type="text" name="captcha" />
 				</div>
-				<div style="float: left; border: 1px solid blue;">
+				<div style="float: left;">
 					<label for="comment">Comment</label>
 					<textarea name="comment"></textarea>
 				</div>
