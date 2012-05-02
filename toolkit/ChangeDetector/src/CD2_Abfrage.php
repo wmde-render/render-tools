@@ -56,7 +56,7 @@ include("inc/src/cd2db_query.inc");
 include("inc/src/Languagecodes.inc");
 
 ?>
-<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.js"></script>
+<!--script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.js"></script-->
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.fixedtable.js"></script>
 <script type="text/javascript">
 	/*$(window).resize(function() {
