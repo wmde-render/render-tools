@@ -54,7 +54,7 @@ if ($lang == "en") {
 }
 ?>
 	function openFeedbackDialog() {
-		$("#imgCaptcha").attr("src", "pages/inc/captcha.php?id=" + Math.floor(Math.random() * 10001));
+		$("#imgCaptcha").attr("src", "/<?php echo $tsAccount; ?>/toolkit/pages/inc/captcha.php?id=" + Math.floor(Math.random() * 10001));
 		$("#dialog-feedback").dialog('open');
 	}
 	
@@ -173,7 +173,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 
    <li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">About us</a></li>
-  <!--li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li-->
+  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
   <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
@@ -250,7 +250,7 @@ if($lang == "de"){
 
    <li ><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Start</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Über uns</a></li>
-  <!--li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li-->
+  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
   <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
