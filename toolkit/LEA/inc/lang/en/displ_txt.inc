@@ -1,25 +1,36 @@
 <?php
-$Headline = "LEA - Link ExtrActor";
-$Description = "LEA extracts concepts in Wikipedia articles. It presents concepts that are linked to the corresponding article, concepts which are not linked yet and concepts that do not have a corresponding article. Therefore, LEA is useful to find out which concept should be linked and which concept should be added by creating a new article. LEA helps to find out about knowledge diversity and could help improving the fact coverage by pointing to imbalance.";
-
-$MoreInfo = "More Information";
-
-$FormText = "Please enter an article title and choose a language version.";
-$FormTitle = "title:";
-$FormIn = "in";
-$FormButton = "Submit";
+$leaLang = array(
+	"headline" => "LEA - Link ExtrActor",
+	"description" => "LEA helps discovering missing links in Wikipedia articles. 
+		It compares different language versions, and shows missing link coverage.<br />
+		The intersection of links from the three link-richest language 
+		versions is compared to the requested language version.<br /><br />
+		In this example the english article about 
+		the city of Flensburg was requested. An article about the city's 
+		district of Mørvig is not available yet. The article does not 
+		contain a link to the article about 'Twin towns and sister cities'.",
+	"form_text" => "Please enter an article title and choose a language version.",
+	"more_info" => "More Information",
+	"form_title" => "Title:",
+	"form_in" => "in",
+	"form_button" => "Submit",
+);
 
 // printf ( $_ , $language, $title, $title, $countTrans , $countbiggestTrans)
-$Info["Introduction"] = "The article <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> exists in %d further language versions.</p><p>The following %d language versions contain the most internal Wikipedia links:";
+$Info["langVersions1"] = "The article <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> exists in %d further language versions.";
+$Info["langVersions2"] = "The following %d language versions contain the most links to other Wikipedia articles:";
 
 // printf ( $_ , $language, $title, $title, $language, $countLinks)
 $Info["LIlanguages"] = "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) contains %d internal links.";
+$Info["lang_link_count"] = "%d links";
+$Info["intersection"] = "Intersection";
+$Info["requested_lang"] = "Requested language version";
 
 // printf ( $_, $language, $countLinks )
 $Info["LIsourcelang"] = "('%s' contains %d internal links)";
 
 // printf ($_, $articletitle $language)
-$Error["Notexists"] = "There is no article %s in Wikipedia (%s)";
+$Error["Notexists"] = "There is no article '%s' in Wikipedia (%s)";
 
 // printf ($_, $articletile)
 $Error["NoTrans"] = "There aren't any languages linked with the article %s.";
@@ -32,4 +43,5 @@ $Legend["red"] = "no article";
 $Legend["yellow"] = "not linked";
 $Legend["green"] = "linked";
 
-?>
+$analysisLink1 = "Link to this";
+$analysisLink2 = "analysis";

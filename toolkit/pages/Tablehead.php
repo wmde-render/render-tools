@@ -27,7 +27,7 @@ $pathtoself = $_SERVER['PHP_SELF'];
 
 ?>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
  "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -39,7 +39,7 @@ $pathtoself = $_SERVER['PHP_SELF'];
 <meta name="DC.Date"        content="2012-03-20T00:00:00+01:00">
 <title>RENDER-Toolkit</title>
 <link rel="stylesheet" href="/<?php echo $tsAccount; ?>/toolkit/formate.css" type="text/css">
-<link rel="stylesheet" href="/<?php echo $tsAccount; ?>/toolkit/jquery-ui-1.8.19.custom.css"" type="text/css">
+<link rel="stylesheet" href="/<?php echo $tsAccount; ?>/toolkit/jquery-ui-1.8.19.custom.css" type="text/css">
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.js"></script>
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.fixedtable.js"></script>
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery-ui-1.8.19.custom.min.js"></script>
@@ -135,7 +135,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 	<td width="80"><a href="http://wikimedia.de/wiki/Hauptseite" target="_blank"><img src="/<?php echo $tsAccount; ?>/toolkit/img/180px-Wikimedia_Deutschland_Logo.png" width="60px" border="0" alt=""></a></td>
-	<td width="95%"><h1>RENDER-Toolkit</h1></td>
+	<td width="95%"><h1>RENDER Toolkit for Knowledge Diversity in Wikipedia</h1></td>
 	<td width="80"><a href="http://render-project.eu/" target="_blank"><img src="/<?php echo $tsAccount; ?>/toolkit/img/Logo_trans.PNG" width="60px" border="0" alt=""></a></td>
 	</tr>
 	</table>
@@ -170,11 +170,10 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 	 <td id="links">&nbsp;
 	 <div id="Seite">
   <ul id="Navigation">
-
-   <li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
-  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">About us</a></li>
-  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
-  <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
+	<li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
+	<li><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
+	<li><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
+	<li><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 </td>
@@ -214,7 +213,7 @@ if($lang == "de"){
 	
 		<tr>
 	<td width="80"><a href="http://wikimedia.de/wiki/Hauptseite" target="_blank"><img src="/<?php echo $tsAccount; ?>/toolkit/img/180px-Wikimedia_Deutschland_Logo.png" width="60px" border="0" alt=""></a></td>
-	<td width="95%"><h1>RENDER-Toolkit</h1></td>
+	<td width="95%"><h1>RENDER Toolkit f&uuml;r Diversität in Wikipedia</h1></td>
 	<td width="80"><a href="http://render-project.eu/" target="_blank"><img src="/<?php echo $tsAccount; ?>/toolkit/img/Logo_trans.PNG" width="60px" border="0" alt=""></a></td>	</tr>
 	</table>
 	</div>	
@@ -249,7 +248,7 @@ if($lang == "de"){
   <ul id="Navigation">
 
    <li ><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Start</a></li>
-  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Über uns</a></li>
+  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
   <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>

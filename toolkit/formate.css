@@ -4,11 +4,11 @@ A:hover { text-decoration: underline; color: #0047AB; }
 A:active { text-decoration: underline; color: #75B2DD; }
 
 body {
-  color: black; 
-  font-size: 100.01%;
-  font-family: Helvetica,Arial,sans-serif;
-  margin: 0; padding: 1em;
-  background-color:#e6e6e6;
+	color: black; 
+	font-family: Helvetica,Arial,sans-serif;
+	margin: 0;
+	padding: 1em;
+	background-color:#e6e6e6;
 }
 
 
@@ -198,36 +198,36 @@ vertical-align: top;
 
 div#Text td#Inhalt {
 	border: 1px solid #0047AB;
-    padding: 6px;
-    padding-top: 1em;
-    vertical-align: top;
+    /*vertical-align: top;*/
 	background-color: white;
-	/*font-family: serif;*/
-
 }
 
+/* removed for clarity reasons */
 div#Text td#Inhalt h1 {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
 
 }
 
 div#Text td#Inhalt h2 {
-    font-size: 1em;
+    /*font-size: 1em;*/
 
 }
 div#Text td#Inhalt p {
-    font-size: 0.9em;
-
-
+    /*font-size: 0.9em;*/
 }
 
 
 /* Allgemeine Textgestalltung */
 
+.description {
+	font-size: 0.9em;
+	padding: 1em;
+}
+
 div#Ueberschrift {	
-  float: center; 
-  margin: 0; padding: 1em;
- background: white;
+  /*margin: 0;*/
+  padding: 1em;
+  background: white;
 }
 div#Ueberschrift h1 {
 	font-size: 1.2em;
@@ -251,9 +251,9 @@ div#Ueberschrift  ol {
 	font-size: 0.9em
 }
 
-div#Ueberschrift * ul {
+/*div#Ueberschrift * ul {
 	font-size: 1em
-}
+}*/
 
 div#Ueberschrift table {
 	font-size: 0.9em
@@ -269,23 +269,30 @@ div#Eingabe2 {
 
 div#Eingabe {
 	float:left;
-	margin: 0; 
-	padding-top: 0em;
-}
-
-div#Eingabe span {
 	font-size: 0.9em;
+	background-color: lightgrey;
+	padding: 1em;
 }
 
 form {
-	padding: 1em;
+	padding-top: 1em;
+}
 
+.formDiv {
+	clear: both;
+	/*width: 100%;*/
+	padding: 1em;
+	margin: 0 1em 1em 0;
+	font-size: 0.9em;
+	background-color: lightgrey;
 }
 
 div#info {
-	
+  float: left;
+  width: 620px;
   background: #e6e6e6;
   padding: 1em;
+  margin: 0 1em;
 	
 }
 div#info p {
@@ -310,13 +317,22 @@ div#info ul {
 	font-size: 0.9em
 }
 
+table#resultSummary {
+	/*border: 1px solid black;*/
+	width: 620px;
+	font-size: 0.9em;
+}
+
+table#resultSummary tr:hover {
+	background-color: lightblue;
+}
 
 div#Ergebnis {	
-	
-	font-size: 1em;
+  clear: left;
+  font-size: 1em;
   margin-bottom: 1em;	
   padding: 1em 1em;
- background: white;
+  background: white;
 }
 div#Ergebnis p {
 	margin: 0 0 1em;
@@ -389,11 +405,15 @@ div#Disclaimer {
 	
 }
 
-div#Introduction {
-	width: 50%;
-	padding:1em;
-	border: 1px solid #0047AB;
+.image {
+	border: 1px solid #CCC;
+	padding: 2px;
+	text-align: center;
+}
 
+.imageDescription {
+	text-align: center;
+	font-size: 0.8em !important;
 }
 
 /* Spezielle Formate */
@@ -425,13 +445,6 @@ table.downloads td, table.downloads th { background-color: #E6E6E6; padding: 4px
 
 
 /* Nur ChangeDetector */
-
-/* scrollbare Tabelle*/
-.innerDiv { 
-	height:30em; 
-	overflow:auto; 
-}
-
 
 /* Change Detector Erweiterte Einstellungen */
 
@@ -485,14 +498,30 @@ a#AdvancedSetting {
 	text-decoration: underline;
 }
 
+.cdResult {
+	font-size: 0.9em;
+}
+
+.cdDetailedResult {
+
+}
+
 
 /* NUR LEA */
+
+/* Example of result output */
+.leaDescription {
+	width: 50%;
+	float: left;
+}
+
 /* LEA Piechart */
 
 div#chart {
-	float:right;
+	float: left;
 	font-size: 0.7em;
 	padding: 4px;
+	margin-left: 1em;
 	background: white;
 	border: 1px solid #0047AB;
 /*
@@ -537,4 +566,21 @@ table.resultTable td {
 	background-color: #0047AB;
 	color: #FFFFFF;
 	text-align: center;
+}
+
+table#resultSummary {
+	border-collapse: collapse;
+}
+
+tr.underline td {
+	border-bottom: 1px solid black;
+}
+
+tr.doubleline td {
+	border-top: 1px solid black !important;
+	border-bottom: 3px double black !important;
+}
+
+td.align-right {
+	text-align: right;
 }
