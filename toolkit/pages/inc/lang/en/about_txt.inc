@@ -52,7 +52,7 @@ $Text2 = "
 			quick overview of the quality and the state of an article.
 		</li>
 		<li>
-			Working List Generator: This application enables a Wikipedia 
+			Task List Generator: This application enables a Wikipedia 
 			author to generate lists of articles related to a specific 
 			topic or preferred category, which need to be improved.
 		</li>
