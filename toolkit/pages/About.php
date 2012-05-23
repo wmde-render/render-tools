@@ -1,25 +1,18 @@
-
 <?php
 $ts_pw = posix_getpwuid(posix_getuid());
-
 include($ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php");
-
 include($ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/".$_SESSION["lang"]."/about_txt.inc");
-
-echo "<div id=\"Description\">";
- echo "<div id=\"Ueberschrift\"><h1>".$Headline."</h1>
- <p>".$Introduction."</p>
- </div>	
-  <div id=\"info\">	
- <p>".$Text1."</p>
- <p>".$Text2."</p>
- <p>".$Text3."</p>
-</div>
-";
-echo "</div>";
-
-
-include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");
 ?>
+<div class="description">
+	<h2><?php echo $Headline; ?></h2>
+	<?php echo $Introduction; ?>
+	<h3><?php echo $heading1; ?></h3>
+	<?php echo $Text1; ?>
+	<h3><?php echo $heading2; ?></h3>
+	<?php echo $Text2; ?>
+	<h3><?php echo $heading3; ?></h3>
+	<?php echo $Text3; ?>
+</div>
 
-
+<?php
+include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");
