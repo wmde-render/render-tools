@@ -107,6 +107,7 @@ class MyObject(object):
         if int(MyObject.__DebugLevel) >= int(debug_level) \
               and int(debug_level) > 0:
             print message
+            sys.stdout.flush()
 
 class MyOursqlException(Exception):
     def __init__(self, message):
@@ -654,8 +655,7 @@ class ChangedArticle(DatabaseInterface):
         #self._filter_management.set_language(language)
         self._filter_management.set_algorithm(algorithm)
         parameters = self._filter_management.get_articles()
-        #self._explain(3, '    write %d articles in language %s' % \
-        #      (len(parameters), language))
+        self._explain(1, '    writing %d changed articles to database' % len(parameters))
         sql_statement = """
               INSERT INTO changed_article
               (identifier, language, page_id, day, page_title, %(filter)s, detected_by)
