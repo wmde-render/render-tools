@@ -1,7 +1,6 @@
 #!/opt/ts/python/2.7/bin/python
 #$ -l h_rt=10:00:00
 #$ -j y
-#$ -o $HOME/20111029.out
 #$ -m ae
 #$ -m bae
 
