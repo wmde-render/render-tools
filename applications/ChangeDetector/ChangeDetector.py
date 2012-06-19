@@ -666,8 +666,10 @@ class ChangedArticle(DatabaseInterface):
                'day':self.__day,
                'algorithm':algorithm}
         self._explain(2, sql_statement)
+        SQL_Cursors()['auxiliary'].execute("START TRANSACTION")
         SQL_Cursors()['auxiliary'].executemany(
               sql_statement, parameters)
+        SQL_Cursors()['auxiliary'].execute("COMMIT")
     
     def __tidy_up_database(self):
         sql_statement = """
