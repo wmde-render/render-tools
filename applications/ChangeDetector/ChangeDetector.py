@@ -2362,8 +2362,14 @@ def skipLanguageByReplicationLag():
         # set update flag if the replication lag isn't too high
         # otherwise remove from languages to be processed
         if result[0][0] < 7200:
-            sql_statement = "INSERT INTO lang_update (lang, day) VALUES ('%s', %s) ON DUPLICATE KEY UPDATE day = %s;" % (language, yesterday.strftime('%Y%m%d'), yesterday.strftime('%Y%m%d'))
-            SQL_Cursors()['auxiliary'].execute(sql_statement)
+            try:
+                sql_statement = "INSERT INTO lang_update (lang, day) VALUES ('%s', %s) ON DUPLICATE KEY UPDATE day = %s;" % (language, yesterday.strftime('%Y%m%d'), yesterday.strftime('%Y%m%d'))
+                SQL_Cursors()['auxiliary'].execute(sql_statement)
+            except(oursql.ProgrammingError as e):
+                #if(e.errno==1146)
+                #_explain(
+                print e
+                raise
         else:
             Settings()['languages'].remove(language)
 
