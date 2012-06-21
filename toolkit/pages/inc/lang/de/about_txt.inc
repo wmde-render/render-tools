@@ -40,6 +40,10 @@ $Text1 = "
 
 $heading2 = "Geplante Supporting-Tools";
 $Text2 = "
+	<div class=\"imgBorder\" style=\"width: 205px;\">
+		<img width=\"205px\" src=\"/" . $tsAccount . "/toolkit/img/asqm_draft.png\" 
+		onclick=\"$('#thumb-asqm').dialog('open');\" /><br />
+	</div>
 	<p>
 		Im weiteren Verlauf des Projekts intergrieren wir die Ergebnisse 
 		in zwei verschiedene Anwendungen. Diese führen Nutzer gezielt zu 
@@ -62,6 +66,10 @@ $Text2 = "
 			Kategorie Listen verbesserungswürdiger Artikel generieren.
 		</li>
 	</ul>
+	<div class=\"imgBorder\" style=\"float: left; width: 205px;\">
+		<img width=\"205px\" src=\"/" . $tsAccount . "/toolkit/img/tlg_draft.png\" 
+		onclick=\"$('#thumb-tlg').dialog('open');\" /><br />
+	</div>
 	<p>
 		Die Werkzeuge können keine abschließende Antwort auf die Frage 
 		geben, ob ein Artikel unvollständig ist oder durch eine bestimmte 
@@ -88,4 +96,13 @@ $Text3 = "
 		oder per E-Mail an 
 		<a href=\"mailto:render@wikimedia.de\">render@wikimedia.de</a>.
 	</p>
+";
+$imgCaptionTlg = "
+	Mockup of the Task List Generator displaying the form <br />
+	for narrowing
+	down results and the result list itself.
+";
+$imgCaptionAsqm = "
+	Mockup of the Article Statistics and Quality Monitor<br />
+	displaying exemplary data of the city of Potsdam.
 ";

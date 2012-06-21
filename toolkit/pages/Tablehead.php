@@ -165,14 +165,14 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
   </ul><div></div></div>
   
   <div id="Text">
-	 <table cellspacing="0">
+	 <table cellspacing="0" style="width: 100%">
 	 <tr>
 	 <td id="links">&nbsp;
 	 <div id="Seite">
   <ul id="Navigation">
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
-	<li><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
+	<li><a href="/<?php echo $tsAccount; ?>/toolkit/downloads">Downloads</a></li>
 	<li><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
@@ -241,7 +241,7 @@ if($lang == "de"){
   </ul><div></div></div>
   
   <div id="Text" >
-	 <table cellspacing="0">
+	 <table cellspacing="0" style="width: 100%">
 	 <tr>
 	 <td id="links">&nbsp;
 	 <div id="Seite">
@@ -249,7 +249,7 @@ if($lang == "de"){
 
    <li ><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Start</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
-  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/downloads.php">Downloads</a></li>
+  <li ><a href="/<?php echo $tsAccount; ?>/toolkit/downloads">Downloads</a></li>
   <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>

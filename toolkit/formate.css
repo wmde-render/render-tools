@@ -9,6 +9,7 @@ body {
 	margin: 0;
 	padding: 1em;
 	background-color:#e6e6e6;
+	width: 1200px;
 }
 
 
@@ -16,11 +17,7 @@ body {
 /* Navigationsleisten */
 
 div#Language {
-	position:absolute;
-	z-index: 100;
-	float:left;
-	margin-left: 90%;
-	text-align: right;
+	float: right;
 }
 div#Language a {
 text-decoration: none; 
@@ -184,7 +181,7 @@ div#Headline div#EU {
 
 div#Text table {
 	height: 100%;
-	width:100%;
+	/*width:100%;*/
 	
 }
 
@@ -216,6 +213,15 @@ div#Text td#Inhalt p {
     /*font-size: 0.9em;*/
 }
 
+.imgBorder {
+	border: 1px solid silver;
+	float: right;
+	margin: 0 12px;
+	padding: 8px;
+	text-align: center;
+	font-size: 0.9em;
+	cursor: pointer;
+}
 
 /* Allgemeine Textgestalltung */
 
@@ -293,7 +299,7 @@ div#info {
   background: #e6e6e6;
   padding: 1em;
   margin: 0 1em;
-	
+  clear: both;	
 }
 div#info p {
 	font-size: 0.9em;
@@ -439,9 +445,9 @@ div#Lizenz {
 /* Downloads */
 .downloads { font-size: 0.9em; margin: 1em; }
 table.downloads td, table.downloads th { background-color: #E6E6E6; padding: 4px; margin: 4px; }
-.dl-name { width: 200px; }
-.dl-size { width: 70px; text-align: center; }
-.dl-desc { width: 400px; }
+.dl-name { min-width: 200px; }
+.dl-size { min-width: 70px; text-align: center; }
+.dl-desc { min-width: 400px; }
 
 
 /* Nur ChangeDetector */

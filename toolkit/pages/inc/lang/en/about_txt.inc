@@ -38,6 +38,10 @@ $Text1 = "
 
 $heading2 = "Planned Supporting Tools";
 $Text2 = "
+	<div class=\"imgBorder\" style=\"width: 205px;\">
+        	<img width=\"205px\" src=\"/" . $tsAccount . "/toolkit/img/asqm_draft.png\" 
+	        onclick=\"$('#thumb-asqm').dialog('open');\" /><br />
+	</div>
 	<p>
 		At a later stage of the project we are going to integrate the 
 		results in different supporting applications. These tools will 
@@ -57,6 +61,10 @@ $Text2 = "
 			topic or preferred category, which need to be improved.
 		</li>
 	</ul>
+	<div class=\"imgBorder\" style=\"float: left; width: 205px;\">
+        	<img width=\"205px\" src=\"/" . $tsAccount . "/toolkit/img/tlg_draft.png\" 
+	        onclick=\"$('#thumb-tlg').dialog('open');\" /><br />
+	</div>
 	<p>
 		These supporting tools cannot and should not give an answer to 
 		the question whether an article is incomplete or biased by 
@@ -85,3 +93,12 @@ $Text3 = "
 		<a href=\"mailto:render@wikimedia.de\">email</a>.
 	</p>
 ";
+$imgCaptionTlg = "
+	Mockup of the Task List Generator displaying the form <br />
+	for narrowing down results and the result list itself.
+";
+$imgCaptionAsqm = "
+	Mockup of the Article Statistics and Quality Monitor<br />
+	displaying exemplary data of the city of Potsdam.
+";
+
