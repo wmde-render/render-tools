@@ -71,7 +71,7 @@ include("inc/src/Languagecodes.inc");
 		$(".resultDiv").each(function() {
 			var Id = $(this).get(0).id;
 			var maintbheight = 360;
-			var maintbwidth = $(window).width() - 240;
+			var maintbwidth = $(window).width() - 870; /* temporary 'quick fix' for broken table (jk) */
 			
 			$("#" + Id + " .resultTable").fixedTable({
 				width: maintbwidth,
@@ -97,7 +97,7 @@ include("inc/src/Languagecodes.inc");
 	}
 </script>
 
-<body>
+<body> 
 
 <?php
 // Defining the Entryform

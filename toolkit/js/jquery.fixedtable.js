@@ -276,8 +276,10 @@ $(document).ready(function() {
             totall += (cwidth + 2);
         });
 
-        $("#" + Id + " .fixedContainer ." + options.classHeader + " table").width(totall + 100);
-        $("#" + Id + " .fixedContainer .fixedTable table").width(totall + 100);
+        //was: $("#" + Id + " .fixedContainer ." + options.classHeader + " table").width(totall + 100);
+        //was: $("#" + Id + " .fixedContainer .fixedTable table").width(totall + 100);
+        $("#" + Id + " .fixedContainer ." + options.classHeader + " table").width("100%");   /* temporary 'quick fix' for broken table (jk) */
+        $("#" + Id + " .fixedContainer .fixedTable table").width("100%");                    /* temporary 'quick fix' for broken table (jk) */
         $("#" + Id + " .fixedContainer ." + options.classFooter + " table").width(totall + 100);
         for (i = 0; i < widthArray.length; i++) {
             $("#" + Id + " .fixedContainer ." + options.classHeader + " table tr td").each(function(j) {
