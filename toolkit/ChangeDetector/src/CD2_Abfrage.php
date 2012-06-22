@@ -111,7 +111,7 @@ include("inc/src/Languagecodes.inc");
  	$check_yesterday_file = "src/tmp/tmp_".date('Ymd', $yesterday).".ok.dump";
  	if (!file_exists($check_yesterday_file)) { 
 	$yesterday = $yesterday - ( 1 * 24 * 60 * 60);
-	} 
+	}
 	
 ?>
 
