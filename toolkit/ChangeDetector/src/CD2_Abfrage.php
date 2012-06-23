@@ -71,7 +71,7 @@ include("inc/src/Languagecodes.inc");
 		$(".resultDiv").each(function() {
 			var Id = $(this).get(0).id;
 			var maintbheight = 360;
-			var maintbwidth = $(window).width() - 870; /* temporary 'quick fix' for broken table (jk) */
+			var maintbwidth = 1000; /* another fix for the fix. why would anyone use the *window* width here in the first place?! */
 			
 			$("#" + Id + " .resultTable").fixedTable({
 				width: maintbwidth,
