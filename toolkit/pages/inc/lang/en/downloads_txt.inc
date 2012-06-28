@@ -8,7 +8,7 @@ $dlHeadSize = "Size";
 $dlHeadDesc = "Description";
 
 $files = array(
-	/*array(
+	array(
 		"name" => "20120323-en-updates.json.gz",
 		"link" => "http://ortelius.toolserver.org:83/~render/toolkit/downloads/20120323-en-updates.json.gz",
 		"size" => "5.5 GB",
@@ -25,7 +25,7 @@ $files = array(
 			the data can be used in line with the Creative Commons Zero 
 			(CC0) license waiver. However, we suggest that one should 
 			consider attributing the dataset as follows: Title, URL.</p>",
-	),*/
+	),
 	array(
 		"name" => "neutrality-extractions-enwiki.7z",
 		"link" => "http://ortelius.toolserver.org:83/~render/toolkit/downloads/neutrality-extractions-enwiki.7z",

@@ -8,7 +8,7 @@ $dlHeadSize = "Größe";
 $dlHeadDesc = "Beschreibung";
 
 $files = array(
-	/*array(
+	array(
 		"name" => "20120323-en-updates.json.gz",
 		"link" => "http://ortelius.toolserver.org:83/~render/toolkit/downloads/20120323-en-updates.json.gz",
 		"size" => "5,5 GB",
@@ -26,7 +26,7 @@ $files = array(
 			an den Inhalt und schlägt die Nutzung unter der Lizenz Creative 
 			Commons Zero (CC0) vor. Wir empfehlen eine Kennzeichnung nach 
 			folgendem Schema: Titel, URL.</p>",
-	),*/
+	),
 	array(
 		"name" => "neutrality-extractions-enwiki.7z",
 		"link" => "http://ortelius.toolserver.org:83/~render/toolkit/downloads/neutrality-extractions-enwiki.7z",
