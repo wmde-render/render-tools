@@ -78,12 +78,16 @@ import ConfigParser
 import xml.dom.minidom
 import itertools
 import oursql
+import csv
 
 from datetime import date, timedelta
 
 #Settings = None
 #SQL_Cursors = None
 
+# forgetting to change this after copying the script leads to annoying errors. why don't we use sys.path[0]? 
+#       http://docs.python.org/library/sys.html#sys.path
+#PATH_TO_THIS_FILE = '/home/jkroll/ChangeDetector/'
 PATH_TO_THIS_FILE = '/home/project/r/e/n/render/Programme/ChangeDetector/'
 #PATH_TO_THIS_FILE = '/home/knissen/ChangeDetector/'
 #PATH_TO_THIS_FILE = '/home/philipp/Projekte/11-10-03-UpToDatenessCheck/change/'
@@ -561,6 +565,7 @@ class ChangedArticle(DatabaseInterface):
         # make the corresponding change in the class variable
         # table_layout (which is used if the table does not yet exist),
         # and change any existing sql tables by hand.
+        articles_updated = 0
         for filter in standard_filters:
             self._filter_management = FilterManagement(day)
             self._filter_management.set_reference_days(
@@ -577,7 +582,8 @@ class ChangedArticle(DatabaseInterface):
             for algorithm in algorithms:
                 self._explain(1, 'applying filter %s with algorithm %s.' %
                       (filter, algorithm))
-                self.__write_articles(algorithm)
+                articles_updated= articles_updated + self.__write_articles_test(algorithm)
+        self._explain(1, "updated %d articles total." % articles_updated)
     
     def _read_filters_from_file(self):
         self._explain(1,'read filters')
@@ -651,6 +657,7 @@ class ChangedArticle(DatabaseInterface):
         xml = XMLDisplay(self.__day)
         xml.write_results()
     
+    #original write_articles method
     def __write_articles(self, algorithm):
         #self._filter_management.set_language(language)
         self._filter_management.set_algorithm(algorithm)
@@ -666,10 +673,72 @@ class ChangedArticle(DatabaseInterface):
                'day':self.__day,
                'algorithm':algorithm}
         self._explain(2, sql_statement)
-        SQL_Cursors()['auxiliary'].execute("START TRANSACTION")
-        SQL_Cursors()['auxiliary'].executemany(
-              sql_statement, parameters)
-        SQL_Cursors()['auxiliary'].execute("COMMIT")
+        SQL_Cursors()['auxiliary'].executemany(sql_statement, parameters)
+    
+    # testing --
+    # returns number of updated articles
+    def __write_articles_test(self, algorithm):
+        use_start_transaction= 1    # if true, use START TRANSACTION instead of executemany()
+        
+        self._filter_management.set_algorithm(algorithm)
+        parameters = self._filter_management.get_articles()
+        self._explain(1, '    writing %d changed articles to database' % len(parameters))
+        
+        cur= SQL_Cursors()['auxiliary']
+        sql_statement = """
+              INSERT INTO changed_article
+              (identifier, language, page_id, day, page_title, %(filter)s, detected_by)
+              VALUES (?, ?, ?, '%(day)s', ?, 1, '%(algorithm)s')
+              ON DUPLICATE KEY
+              UPDATE %(filter)s = 1""" % \
+              {'filter':self.__current_filter,
+               'day':self.__day,
+               'algorithm':algorithm}
+        self._explain(2, sql_statement)
+        
+        cur.execute("SET PROFILING=1")
+
+        if use_start_transaction:
+            self._explain(1, "    using START TRANSACTION")
+            cur.execute("START TRANSACTION")
+            for p in parameters:
+                cur.execute(sql_statement, p)
+                print p;
+            cur.execute("COMMIT")
+        else:
+            self._explain(1, "    using executemany()")
+            cur.executemany(sql_statement, parameters)
+        
+        cur.execute("SET PROFILING=0")
+        
+        # get profiling information and write to "tmp.csv"
+        cur.execute("""
+              SELECT 
+              query_id, 
+              seq, 
+              state, 
+              duration, 
+              cpu_user, 
+              cpu_system,
+              CONTEXT_VOLUNTARY,
+              CONTEXT_INVOLUNTARY,
+              BLOCK_OPS_IN,
+              BLOCK_OPS_OUT,
+              MESSAGES_SENT,
+              MESSAGES_RECEIVED,
+              PAGE_FAULTS_MAJOR,
+              PAGE_FAULTS_MINOR,
+              SWAPS,
+              SOURCE_FUNCTION,
+              SOURCE_FILE,
+              SOURCE_LINE
+              FROM INFORMATION_SCHEMA.PROFILING ORDER BY query_id""")
+        profresult= cur.fetchall()
+        writer= csv.writer(open("sql-profiling-lastrun.csv", "wb"))
+        for row in profresult:
+            writer.writerow(row)
+
+        return len(parameters)
     
     def __tidy_up_database(self):
         sql_statement = """
@@ -2365,11 +2434,12 @@ def skipLanguageByReplicationLag():
             try:
                 sql_statement = "INSERT INTO lang_update (lang, day) VALUES ('%s', %s) ON DUPLICATE KEY UPDATE day = %s;" % (language, yesterday.strftime('%Y%m%d'), yesterday.strftime('%Y%m%d'))
                 SQL_Cursors()['auxiliary'].execute(sql_statement)
-            except(oursql.ProgrammingError as e):
-                #if(e.errno==1146)
-                #_explain(
-                print e
-                raise
+            except oursql.ProgrammingError as e:
+                if(e.errno==1146):  # table lang_update does not exist. create it.
+                    MyObject()._explain(1, "creating missing table lang_update")
+                    SQL_Cursors()['auxiliary'].execute("CREATE TABLE `lang_update` (`day` int(8) unsigned NOT NULL, `lang` varchar(8) NOT NULL, KEY `day` (`day`,`lang`))")
+                else:
+                    raise
         else:
             Settings()['languages'].remove(language)
 
