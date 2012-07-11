@@ -87,8 +87,9 @@ from datetime import date, timedelta
 
 # forgetting to change this after copying the script leads to annoying errors. why don't we use sys.path[0]? 
 #       http://docs.python.org/library/sys.html#sys.path
+PATH_TO_THIS_FILE = sys.path[0] + '/'
 #PATH_TO_THIS_FILE = '/home/jkroll/ChangeDetector/'
-PATH_TO_THIS_FILE = '/home/project/r/e/n/render/Programme/ChangeDetector/'
+#PATH_TO_THIS_FILE = '/home/project/r/e/n/render/Programme/ChangeDetector/'
 #PATH_TO_THIS_FILE = '/home/knissen/ChangeDetector/'
 #PATH_TO_THIS_FILE = '/home/philipp/Projekte/11-10-03-UpToDatenessCheck/change/'
 #PATH_TO_THIS_FILE = '/home/philipp/Projekte/11-10-UpToDatenessCheck/change/'
@@ -517,6 +518,14 @@ class PageAndRevision(DatabaseInterface):
         reference_days = self.__edit_counter.get_reference_days()
         first_day = reference_days[-1]
         for article in self.__articles:
+            #print article
+            #sys.exit(0)
+
+#            SQL_Cursors()['auxiliary'].execute("select max(day) from revision where lang = ?", article[1])
+                #row= SQL_Cursors()['auxiliary'].fetch()
+                #print row
+                #article_last_update= langs_last_update[article[1]]= 
+                
             self._explain(3, article)
             RevisionFetcher(article[0], article[1], article[2],
                             first_day, self.__day_to_check,
@@ -703,7 +712,6 @@ class ChangedArticle(DatabaseInterface):
             cur.execute("START TRANSACTION")
             for p in parameters:
                 cur.execute(sql_statement, p)
-                print p;
             cur.execute("COMMIT")
         else:
             self._explain(1, "    using executemany()")
@@ -1323,13 +1331,20 @@ class RevisionFetcher(MyObject):
         SQL_Cursors()['auxiliary'].execute(sql_command, self.__page)
     
     def __read_revision_properties(self):
+        SQL_Cursors()['auxiliary'].execute("select max(day) from revision")
+        lastrevday= SQL_Cursors()['auxiliary'].fetchone()
+        print("max(day) for page_id %d: %s" % (self.__page_id, lastrevday))
+        sys.stdout.flush()
+        if lastrevday == None: lastrevday= self.__first_day
+        else: lastrevday= lastrevday[0]
+        
         sql_command = """SELECT rev_id, rev_page, rev_text_id, rev_comment, rev_user, rev_user_text, 
               rev_timestamp, rev_minor_edit, rev_deleted, rev_len, rev_parent_id 
               FROM revision
               WHERE rev_page = ?
               AND rev_timestamp 
               BETWEEN '%(start)s000000' AND '%(stop)s999999' 
-              """ % {'start':self.__first_day,'stop':self.__last_day}
+              """ % {'start':lastrevday,'stop':self.__last_day}
         SQL_Cursors()[self.__language].execute(
               sql_command, [self.__page_id])
         sql_result = SQL_Cursors()[self.__language].fetchall()
