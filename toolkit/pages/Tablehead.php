@@ -23,9 +23,7 @@ if ( isset( $_GET["lang"] ) ) {
 $tsAccount = substr( $_SERVER['REQUEST_URI'], 1, strpos( $_SERVER['REQUEST_URI'], '/', 1 ) - 1 );
 $pathtoself = $_SERVER['PHP_SELF'];
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
- "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -269,11 +267,11 @@ $pathtoself = $_SERVER['PHP_SELF'];
 			</ul>
 		</li> 
 	</ul>
-<div>
+</div>
 	
 <div></div>
   
-<div id="Text" >
+<div id="Text">
 	<table cellspacing="0" style="width: 100%">
 		<tr>
 			<td id="links">
@@ -300,16 +298,16 @@ $pathtoself = $_SERVER['PHP_SELF'];
 					<form name="feedbackForm" id="feedbackForm" method="post" action="/<?php echo $tsAccount; ?>/toolkit/pages/feedback.php">
 						<div style="width: 50%; float: left;">
 							<label for="name">Name</label>
-							<input type="text" name="name" value="" />
+							<input type="text" id="name" name="name" value="" />
 							<label for="email">E-Mail</label>
-							<input type="text" name="email" value="" /><br />
+							<input type="text" id="email" name="email" value="" /><br />
 							<img src="" id="imgCaptcha" alt="Visual CAPTCHA" />
 							<label for="captcha">Captcha</label>
-							<input type="text" name="captcha" />
+							<input type="text" id="captcha" name="captcha" />
 						</div>
 						<div style="width: 50%; float: left;">
 							<label for="comment">Kommentar</label>
-							<textarea name="comment"></textarea>
+							<textarea id="comment" name="comment"></textarea>
 						</div>
 						<input type="hidden" name="url" value="" />
 						<input type="hidden" name="lang" value="<?php echo $_SESSION['lang']; ?>" />
