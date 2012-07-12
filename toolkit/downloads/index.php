@@ -1,7 +1,7 @@
 <?php
-$ts_pw = posix_getpwuid(posix_getuid());
-include($ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php");
-include($ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/".$_SESSION["lang"]."/downloads_txt.inc");
+$ts_pw = posix_getpwuid( posix_getuid() );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php" );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/" . $_SESSION["lang"] . "/downloads_txt.inc" );
 ?>
 
 <div id="Description" style="width: 98%">
@@ -20,8 +20,8 @@ include($ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/".$_SESSION["lang"]
 		</thead>
 		<tbody>
 <?php
-foreach ($files as $file) {
-	if (!empty($file['link'])) {
+foreach ( $files as $file ) {
+	if ( !empty($file['link'] ) ) {
 		$fileLink = $file['link'];
 	} else {
 		$fileLink = "/" . $tsAccount . "/toolkit/downloads/" . $file['name'];
@@ -42,5 +42,4 @@ foreach ($files as $file) {
 </div>
 
 <?php
-include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");
-?>
+include( $ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php" );

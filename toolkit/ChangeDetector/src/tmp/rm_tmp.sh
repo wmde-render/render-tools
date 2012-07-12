@@ -18,4 +18,3 @@ result_file=tmp_$day.ok.dump
 if [ -f $filestring ]
  then echo "$filestring ist da"  | cat > $result_file
 fi
-

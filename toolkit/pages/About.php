@@ -1,7 +1,7 @@
 <?php
-$ts_pw = posix_getpwuid(posix_getuid());
-include($ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php");
-include($ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/".$_SESSION["lang"]."/about_txt.inc");
+$ts_pw = posix_getpwuid( posix_getuid() );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php" );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/".$_SESSION["lang"]."/about_txt.inc" );
 ?>
 <script type="text/javascript">
 $(function() {
@@ -41,4 +41,4 @@ $(function() {
 	<p><?php echo $imgCaptionAsqm; ?></p>
 </div>
 <?php
-include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");
+include( $ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php" );

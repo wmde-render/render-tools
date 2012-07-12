@@ -43,23 +43,25 @@
  supporting this software. There is no guarantee any new versions or even fixes
  for security issues will be released.
  */
-require_once('inc/src/SVGGraph/SVGGraph.php');
-include("inc/src/toolserver_sql_abfragen.inc");
-include("inc/src/Languagecodes.inc");
-include("inc/src/api_normalize_redirect.inc");
+require_once( 'inc/src/SVGGraph/SVGGraph.php' );
+include( "inc/src/toolserver_sql_abfragen.inc" );
+include( "inc/src/Languagecodes.inc" );
+include( "inc/src/api_normalize_redirect.inc" );
 ?>
 <div id="Ueberschrift">
 	<h2><?php echo $leaLang["headline"]; ?></h2>
 	<div class="leaDescription">
 		<p id="Description"><?php echo $leaLang["description"]; ?></p>
-		<p><a href="info.php"><?php echo $leaLang["more_info"]; ?></a></p>
+		<p>
+			<a href="info.php"><?php echo $leaLang["more_info"]; ?></a>
+		</p>
 		<div class="formDiv">
 			<?php echo $leaLang["form_text"]; ?>
 			<form action="" method="post">
 				<span><?php echo $leaLang["form_title"]; ?></span>
-				<input name="title" size="20" value="<?php echo isset($_REQUEST["title"]) ? htmlspecialchars($_REQUEST["title"], ENT_QUOTES, "UTF-8") : ""; ?>" />
+				<input name="title" size="20" value="<?php echo isset( $_REQUEST["title"] ) ? htmlspecialchars( $_REQUEST["title"], ENT_QUOTES, "UTF-8" ) : ""; ?>" />
 				<span><?php echo $leaLang["form_in"]; ?></span>
-				<input name="lg" size="2" maxlength="5" value="<?php echo isset($_REQUEST["lg"]) ? htmlspecialchars($_REQUEST["lg"], ENT_QUOTES, "UTF-8") : ""; ?>" />
+				<input name="lg" size="2" maxlength="5" value="<?php echo isset( $_REQUEST["lg"] ) ? htmlspecialchars( $_REQUEST["lg"], ENT_QUOTES, "UTF-8" ) : ""; ?>" />
 				<span>.wikipedia.org</span>
 				<input name="submit" type="submit" value="<?php echo $leaLang["form_button"]; ?>" />
 			</form>
@@ -70,22 +72,20 @@ include("inc/src/api_normalize_redirect.inc");
 	</div>
 </div>
 
-<!--div style="width: 98%; padding: 1em; clear:both;"></div-->
-
 <?php
-if( isset($_REQUEST["submit"]) ) {
+if( isset( $_REQUEST["submit"] ) ) {
 	$Result_No_article = array();
 	$Result_article_linked = array();
 	$Result_not_linked = array();
 
 	// Get $_REQUEST- parameters
-	if( !$_REQUEST["title"] || empty($_REQUEST["title"]) ) {
+	if( !$_REQUEST["title"] || empty( $_REQUEST["title"] ) ) {
 		$articletitle = "Jerry_Siegel";
 	} else {
 		$articletitle = $_REQUEST["title"];
 	}
 
-	if( !$_REQUEST["lg"] || empty($_REQUEST["lg"]) ) {
+	if( !$_REQUEST["lg"] || empty( $_REQUEST["lg"] ) ) {
 		$LanguageVersion = "de";
 	} else {
 		$LanguageVersion = $_REQUEST["lg"];
@@ -95,266 +95,217 @@ if( isset($_REQUEST["submit"]) ) {
 	$LanguageVersion_wiki_db = $LanguageVersion . "wiki-p.rrdb.toolserver.org";
 
 	// Open Database for the original article
-	$ts_pwd = posix_getpwuid(posix_getuid());
-	$ts_mycnf = parse_ini_file($ts_pwd['dir'] . "/.my.cnf");
-	$db = mysql_connect($LanguageVersion_wiki_db, $ts_mycnf['user'], $ts_mycnf['password']);
+	$ts_pwd = posix_getpwuid( posix_getuid() );
+	$ts_mycnf = parse_ini_file( $ts_pwd['dir'] . "/.my.cnf" );
+	$db = mysql_connect( $LanguageVersion_wiki_db, $ts_mycnf['user'], $ts_mycnf['password'] );
 
 	if( !$db ) {
 		die( 'Connection error (db1): ' . mysql_error() );
 	}
-	mysql_select_db($LanguageVersion_wiki, $db);
+	mysql_select_db( $LanguageVersion_wiki, $db );
 
 	$new_title = api_normalize_redirect( $articletitle, $LanguageVersion );
-	
-	echo "<!-- Title:".$new_title."-->";
 	
 	if( $new_title != NULL ) {
 		$articletitle = str_replace( " ", "_", $new_title );
 	}
 
-	$article_id = artikel_id_abfragen($articletitle);	
-	$orig_langlinks = abfragen_langlinks($article_id, $LanguageVersion);
+	$article_id = artikel_id_abfragen( $articletitle );
+	$orig_langlinks = abfragen_langlinks( $article_id, $LanguageVersion );
 
-	if ($article_id != 0 && $orig_langlinks != 0) {
+	if ( $article_id != 0 && $orig_langlinks != 0 ) {
 		// Collect LangLinks and internal WikiLinks
-
-		$orig_links = abfragen_links($article_id, $LanguageVersion);
-
-		$orig_links = array_flip($orig_links);
-
+		$orig_links = abfragen_links( $article_id, $LanguageVersion );
+		$orig_links = array_flip( $orig_links );
 
 		// Save result for LEA1 ( Intersection with all languages )
 		$result_links_lea1 = $orig_links;
-
-		foreach ( $result_links_lea1 as $k=>$v){
+		foreach ( $result_links_lea1 as $k=>$v ) {
 			$result_links_lea1[$k] = 0;
 		}
 
-		foreach ($orig_links as $link => $value){
-			$link_id_tmp = artikel_id_abfragen($link);
-			 $orig_links[$link] = abfragen_langlinks($link_id_tmp, $LanguageVersion);	
+		foreach ( $orig_links as $link => $value ) {
+			$link_id_tmp = artikel_id_abfragen( $link );
+			$orig_links[$link] = abfragen_langlinks( $link_id_tmp, $LanguageVersion );
 		}
-
-
-		mysql_close($db);
-
-
-
+		mysql_close( $db );
 
 		// Collect Links for all LanguageLinks
-		foreach ($orig_langlinks as $Language => $transtitle){
-			
-			$db2 = mysql_connect($Language . "wiki-p.rrdb.toolserver.org", $ts_mycnf['user'], $ts_mycnf['password']);
-			
-			if (!$db2) {
-				die('Connection error (db2 - '.$Language.'): ' . mysql_error());
+		foreach ( $orig_langlinks as $Language => $transtitle ) {
+			$db2 = mysql_connect( $Language . "wiki-p.rrdb.toolserver.org", $ts_mycnf['user'], $ts_mycnf['password'] );
+			if ( !$db2 ) {
+				die( 'Connection error (db2 - ' . $Language . '): ' . mysql_error() );
 			}
-			
-			
-			$test = mysql_select_db($Language . "wiki_p", $db2);
-			
-			if (!$test) {
-				mysql_close($db2);
+
+			$test = mysql_select_db( $Language . "wiki_p", $db2 );
+			if ( !$test ) {
+				mysql_close( $db2 );
 				continue;
 			}
-				
 
-			$langlink_id = artikel_id_abfragen($transtitle);	
-
-			$link_list_key_lang[$Language] = abfragen_links($langlink_id,$Language);
-			
-			mysql_close($db2);
+			$langlink_id = artikel_id_abfragen( $transtitle );
+			$link_list_key_lang[$Language] = abfragen_links( $langlink_id, $Language );
+			mysql_close( $db2 );
 		}
 
-
-
-		foreach ($link_list_key_lang as $k => $v){
-			if (is_array($v)) {
-				$link_list_key_lang[$k] = array_flip($v);
+		foreach ( $link_list_key_lang as $k => $v ) {
+			if ( is_array( $v ) ) {
+				$link_list_key_lang[$k] = array_flip( $v );
 			}
 		}
 
 
 		//LEA1 ( Intersection with of the original wikilinks with all language versions )
 		//LEA1 functionality is not used at the moment
-
-		foreach ($orig_links as $link => $link_trans_array){
-			
-			if (!$link_trans_array == 0){
-				foreach ($link_trans_array as $Language => $title){
-				
-					if (array_key_exists($Language, $link_list_key_lang)){
-				
-						if (is_array($link_list_key_lang[$Language]) && array_key_exists(str_replace(" ", "_", $title), $link_list_key_lang[$Language])){
+		foreach ( $orig_links as $link => $link_trans_array ) {
+			if ( !$link_trans_array == 0 ) {
+				foreach ( $link_trans_array as $Language => $title ) {
+					if ( array_key_exists( $Language, $link_list_key_lang ) ) {
+						if ( is_array( $link_list_key_lang[$Language]) && 
+								array_key_exists( str_replace( " ", "_", $title ), $link_list_key_lang[$Language] ) ) {
 							$result_links_lea1[$link] ++;
 						}
 					}
-			
 				}
-			
 			}
-			
 		}
-		arsort($result_links_lea1);
+		arsort( $result_links_lea1 );
 
 		//LEA1 get the top 5 Links over all Languages
 		$result_top5_lea1 = NULL;
 		$i = 0;
-		foreach ($result_links_lea1 as $link => $Anzahl)
-		{	
-			if ($Anzahl == 0) break;
+		foreach ( $result_links_lea1 as $link => $Anzahl ) {	
+			if ( $Anzahl == 0 ) {
+				break;
+			}
+			
 			$result_top5_lea1[$link] = $Anzahl;	
 			$i++;
-			if ($i >= 5) break;
+			if ( $i >= 5 ) {
+				break;
+			}
 		}
-
-		echo "<!-- The TOP5 of the links in this article intersectet with all language versions\n ";
-		print_r($result_top5_lea1);
-		echo "-->";
-
-
 		// End LEA1
 
 		// Sort language versions by link count
-		foreach ($link_list_key_lang as $Language => $link_array ){
-			$greatest_trans[$Language] = count($link_array);
+		foreach ( $link_list_key_lang as $Language => $link_array ) {
+			$greatest_trans[$Language] = count( $link_array );
 		}
-		
-		arsort($greatest_trans);
-
+		arsort( $greatest_trans );
 
 		// Find the three or less biggest versions
 		$i = 0;
-		foreach ($greatest_trans as $Language => $link_Anzahl){
+		foreach ( $greatest_trans as $Language => $link_Anzahl ) {
 			$biggest_lang[$i] = $Language;
 			$i++; 
-			if ($i > 2) break;
+			if ( $i > 2 ) {
+				break;
+			}
 		}
 
-		$LangCount = count($biggest_lang);
-
-		$noticed_languages = array_flip($biggest_lang);
+		$LangCount = count( $biggest_lang );
+		$noticed_languages = array_flip( $biggest_lang );
 		$noticed_languages[$LanguageVersion] = "3";
 
-
-
 		$RefLanguage = "";
-
 		$RefLanguage = $biggest_lang[$LangCount-1];
-		
-		$db3 = mysql_connect($RefLanguage . "wiki-p.rrdb.toolserver.org", $ts_mycnf['user'], $ts_mycnf['password']);
-		
-		if (!$db3) {
-			die('Connection Error (db3): ' . mysql_error());
+		$db3 = mysql_connect( $RefLanguage . "wiki-p.rrdb.toolserver.org", $ts_mycnf['user'], $ts_mycnf['password'] );
+		if ( !$db3 ) {
+			die( 'Connection Error (db3): ' . mysql_error() );
 		}
-		
-		
-		$test = mysql_select_db($RefLanguage . "wiki_p", $db3);
 
-		if (!$test) {
-			mysql_close($db3);
+		$test = mysql_select_db( $RefLanguage . "wiki_p", $db3 );
+		if ( !$test ) {
+			mysql_close( $db3 );
 			continue;
 		}
 
-		
 		$transtitle = $orig_langlinks[$RefLanguage];
+		$trans_id = artikel_id_abfragen( $transtitle );
+		$trans_link_liste = abfragen_links( $trans_id );
+		$trans_link_liste = array_flip( $trans_link_liste );
 
-		$trans_id = artikel_id_abfragen($transtitle);
-
-		$trans_link_liste = abfragen_links($trans_id);
-		$trans_link_liste = array_flip($trans_link_liste);
-		
-		
-		foreach ($trans_link_liste as $link => $value){
-			$link_id_tmp = artikel_id_abfragen($link);
-			$greatest_link_liste_mit_translation[$link] = abfragen_langlinks_fuer_mit($link_id_tmp, $noticed_languages);	
+		foreach ( $trans_link_liste as $link => $value ) {
+			$link_id_tmp = artikel_id_abfragen( $link );
+			$greatest_link_liste_mit_translation[$link] = abfragen_langlinks_fuer_mit( $link_id_tmp, $noticed_languages );
 		}
-
-		
-		mysql_close($db3);
-
-
-
-		unset($ts_mycnf, $ts_pwd);
+		mysql_close( $db3 );
+		unset( $ts_mycnf, $ts_pwd );
 
 		// The Intersection and Sorting 
-
-		foreach ($greatest_link_liste_mit_translation as $link => $translink_array){
-			if (!$translink_array == 0){
+		foreach ( $greatest_link_liste_mit_translation as $link => $translink_array ) {
+			if ( !$translink_array == 0 ) {
 				$ergebnis_linkliste[$link] = 0;
-				foreach($translink_array as $Language => $link_trans){
-					if ($Language == $LanguageVersion){
-						if(array_key_exists(str_replace(" ", "_", $link_trans), $orig_links)){
-							$ergebnis_linkliste[$link] = $ergebnis_linkliste[$link]+10;
+				foreach( $translink_array as $Language => $link_trans ) {
+					if ( $Language == $LanguageVersion ) {
+						if( array_key_exists( str_replace( " ", "_", $link_trans ), $orig_links ) ) {
+							$ergebnis_linkliste[$link] = $ergebnis_linkliste[$link] + 10;
 							$Used_Art[$link] = $link_trans;
 						} else {
-							$ergebnis_linkliste[$link] = $ergebnis_linkliste[$link]+100;	
+							$ergebnis_linkliste[$link] = $ergebnis_linkliste[$link] + 100;
 							$Existing_Art[$link] = $link_trans;
 						}
 					} else {
-						if (array_key_exists(str_replace(" ", "_", $link_trans), $link_list_key_lang[$Language]))
-							$ergebnis_linkliste[$link]++;
-				
+						if ( array_key_exists( str_replace( " ", "_", $link_trans ), $link_list_key_lang[$Language] ) ) {
+							$ergebnis_linkliste[$link] ++;
+						}
 					}
 				}
-		
 			}
 		}
 
 		//Only three kinds of link-classes are relevant
-
-		foreach ($ergebnis_linkliste as $link => $Code){
-			switch ($Code) {
-				case $LangCount-1: 
+		foreach ( $ergebnis_linkliste as $link => $Code ) {
+			switch ( $Code ) {
+				case $LangCount - 1:
 					$Result_No_article[] = $link;
 					break;
-				case $LangCount+9: 
+				case $LangCount + 9:
 					$Result_article_linked[] = $link;
 					break;		
-				case $LangCount+99:
-					$Result_not_linked[] = $link;	
-			}	
-		 
+				case $LangCount + 99:
+					$Result_not_linked[] = $link;
+			}
 		}
-		/*
-		$Result_Link_Classes[] =  count($Result_No_article);
-		$Result_Link_Classes[] =  count($Result_not_linked);
-		$Result_Link_Classes[] =  count($Result_article_linked);
-		*/
-
-
-
 
 		// OUTPUT
-		$Chart_Label = str_replace(" ","_",$Legend["red"])."*".str_replace(" ","_",$Legend["yellow"])."*".str_replace(" ","_",$Legend["green"]);
-		$Result_Link_Classes = count($Result_No_article)."*".count($Result_not_linked)."*".count($Result_article_linked);
-
-		$totalIntersection = count($Result_No_article) + count($Result_not_linked) + count($Result_article_linked);
+		$Chart_Label = str_replace( " ", "_", $Legend["red"] ) .
+			"*" . str_replace( " ", "_", $Legend["yellow"] ) .
+			"*" . str_replace( " ", "_", $Legend["green"] );
+		$Result_Link_Classes = count( $Result_No_article ) . 
+			"*" . count( $Result_not_linked ) .
+			"*" . count( $Result_article_linked );
+		$totalIntersection = count( $Result_No_article ) + count( $Result_not_linked ) + count( $Result_article_linked );
 ?>
 <div id="info">
 	<span>
 		<p>
-			<?php printf($Info["langVersions1"], $LanguageVersion, $articletitle, str_replace("_"," ",$articletitle), count($orig_langlinks)); ?>
+			<?php printf( $Info["langVersions1"], $LanguageVersion, $articletitle, str_replace( "_", " ", $articletitle ), count( $orig_langlinks ) ); ?>
 		</p>
 		<table id="resultSummary">
 			<tr class="underline">
 				<td><?php echo $Info["requested_lang"] . " (" . $LanguageVersion . ")"; ?></td>
-				<td class="align-right"><?php printf($Info["lang_link_count"], count($orig_links)); ?></td>
+				<td class="align-right"><?php printf( $Info["lang_link_count"], count( $orig_links ) ); ?></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<?php printf($Info["langVersions2"], $LangCount); ?>
+					<?php printf( $Info["langVersions2"], $LangCount ); ?>
 				</td>
 			</tr>
-			<?php foreach ($biggest_lang as $k => $v): ?>
+			<?php foreach ( $biggest_lang as $k => $v ): ?>
 			<tr>
-				<td><a href="http://<?php echo $v; ?>.wikipedia.org/wiki/<?php echo $orig_langlinks[$v]; ?>"><?php echo $orig_langlinks[$v]; ?></a> (<?php echo $v; ?>)</td>
-				<td class="align-right"><?php printf($Info["lang_link_count"], $greatest_trans[$v]); ?></td>
+				<td>
+					<a href="http://<?php echo $v; ?>.wikipedia.org/wiki/<?php echo $orig_langlinks[$v]; ?>">
+						<?php echo $orig_langlinks[$v]; ?>
+					</a> 
+					(<?php echo $v; ?>)
+				</td>
+				<td class="align-right"><?php printf( $Info["lang_link_count"], $greatest_trans[$v] ); ?></td>
 			</tr>
 			<?php endforeach; ?>
 			<tr class="doubleline">
 				<td><?php echo $Info['intersection']; ?></td>
-				<td class="align-right"><?php printf($Info["lang_link_count"], $totalIntersection); ?></td>
+				<td class="align-right"><?php printf( $Info["lang_link_count"], $totalIntersection ); ?></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
@@ -365,26 +316,26 @@ if( isset($_REQUEST["submit"]) ) {
 					<span style="border: 1px solid black; background: red;">&nbsp;&nbsp;</span>
 					&nbsp;<?php echo $Legend["red"]; ?>
 				</td>
-				<td class="align-right"><?php printf($Info["lang_link_count"], count($Result_No_article)); ?></td>
+				<td class="align-right"><?php printf( $Info["lang_link_count"], count( $Result_No_article ) ); ?></td>
 			</tr>
 			<tr>
 				<td class="Legendenelement">
 					<span style="border: 1px solid black; background: yellow;">&nbsp;&nbsp;</span>
 					&nbsp;<?php echo $Legend["yellow"]; ?>
 				</td>
-				<td class="align-right"><?php printf($Info["lang_link_count"], count($Result_not_linked)); ?></td>
+				<td class="align-right"><?php printf( $Info["lang_link_count"], count( $Result_not_linked ) ); ?></td>
 			</tr>
 			<tr>
 				<td class="Legendenelement">
 					<span style="border: 1px solid black; background: green;">&nbsp;&nbsp;</span>
 					&nbsp;<?php echo $Legend["green"]; ?>
 				</td>
-				<td class="align-right"><?php printf($Info["lang_link_count"], count($Result_article_linked)); ?></td>
+				<td class="align-right"><?php printf( $Info["lang_link_count"], count( $Result_article_linked ) ); ?></td>
 			</tr>
 		</table>
 		<p>
 			<?php echo $analysisLink1; ?> 
-			<a href="http://<?php echo $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?submit=1&title=" . htmlspecialchars($_REQUEST['title']) . "&lg=" . htmlspecialchars($_REQUEST['lg']) . "&lang=" . $_SESSION['lang']; ?>">
+			<a href="http://<?php echo $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?submit=1&title=" . htmlspecialchars( $_REQUEST['title'] ) . "&lg=" . htmlspecialchars( $_REQUEST['lg'] ) . "&lang=" . $_SESSION['lang']; ?>">
 				<?php echo $analysisLink2; ?>
 			</a>
 		</p>
@@ -402,20 +353,20 @@ if( isset($_REQUEST["submit"]) ) {
 			<tr align="center" style="background: #0047AB; color:white;">
 				<th style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px;">
 					<span title="<?php echo langcode_in_en($LanguageVersion); ?>">
-						<?php echo langcode_in_local($LanguageVersion); ?>
+						<?php echo langcode_in_local( $LanguageVersion ); ?>
 					</span>
 				</th>
 				<th style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px;">
-					<span title="<?php echo langcode_in_en($RefLanguage); ?>">
-						<?php echo langcode_in_local($RefLanguage); ?>
+					<span title="<?php echo langcode_in_en( $RefLanguage ); ?>">
+						<?php echo langcode_in_local( $RefLanguage ); ?>
 					</span>
 				</th>
 
-<?php foreach ($biggest_lang as $k => $v): ?>
-	<?php if ($v != $RefLanguage): ?>
+<?php foreach ( $biggest_lang as $k => $v ): ?>
+	<?php if ( $v != $RefLanguage ): ?>
 				<th style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px;">
-					<span title="<?php echo langcode_in_en($v); ?>">
-						<?php echo langcode_in_local($v); ?>
+					<span title="<?php echo langcode_in_en( $v ); ?>">
+						<?php echo langcode_in_local( $v ); ?>
 					</span>
 				</th>
 	<?php endif; ?>
@@ -423,82 +374,98 @@ if( isset($_REQUEST["submit"]) ) {
 	
 			</tr>
 
-<?
-		if (isset($Result_No_article)){
-			foreach ($Result_No_article as $k => $v){ 
-				echo "\n<tr id=\"tabellenzeile\">";
-				echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: red; text-align: center;\"><a title=\"".$Legend["red"]."\">-</a></td>";
-	
-	
-				echo "<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
-				foreach ($biggest_lang as $key => $value){
-					if ($value != $RefLanguage){
-						echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
-					}
-				}
-
-				echo "</tr>";
-			}
-		}
-
-
-		if (isset($Result_not_linked)){
-
-			foreach ($Result_not_linked as $k => $v){
-				echo "\n<tr id=\"tabellenzeile\">";
-				echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: yellow; text-align: center;\"><a href=\"http://".$LanguageVersion.".wikipedia.org/wiki/".$Existing_Art[$v]."\" target=\"_blank\">".$Existing_Art[$v]."</a></td>";
-	
-	
-				echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
-	
-				foreach ($biggest_lang as $key => $value){
-					if ($value != $RefLanguage){
-						echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
-		
-					}
-				}
-	
-				echo "</tr>";
-			}
-		}
-
-		if (isset($Result_article_linked)){
-
-			foreach ($Result_article_linked as $k => $v){
-				echo "\n<tr id=\"tabellenzeile\">";
-				echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: green; text-align: center;\"><a style=\"color: white;\" href=\"http://".$LanguageVersion.".wikipedia.org/wiki/".$Used_Art[$v]."\" target=\"_blank\">".$Used_Art[$v]."</a></td>";
-	
-	
-				echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$RefLanguage.".wikipedia.org/wiki/".$v."\" target=\"_blank\">".str_replace("_", " ", $v)."</a></td>";
-	
-				foreach ($biggest_lang as $key => $value){
-					if ($value != $RefLanguage){
-						echo "\n<td style=\"height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;\"><a href=\"http://".$value.".wikipedia.org/wiki/".str_replace(" ","_",$greatest_link_liste_mit_translation[$v][$value])."\" target=\"_blank\">".$greatest_link_liste_mit_translation[$v][$value]."</a></td>";	
-		
-					}
-				}
-	
-				echo "</tr>";
-			}
-		}
+<?php if( isset( $Result_No_article ) ): ?>
+	<?php foreach ( $Result_No_article as $k => $v ): ?>
+			<tr id="tabellenzeile">
+				<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: red; text-align: center;">
+					<a title="<?php echo $Legend["red"]; ?>">-</a>
+				</td>
+				<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
+					<a href="http://<?php echo $RefLanguage;?>.wikipedia.org/wiki/<?php echo $v; ?>" target="_blank">
+						<?php echo str_replace( "_", " ", $v ); ?>
+					</a>
+				</td>
+				<?php foreach ( $biggest_lang as $key => $value ): ?>
+					<?php if ( $value != $RefLanguage ): ?>
+						<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
+							<a href="http://<?php echo $value; ?>.wikipedia.org/wiki/<?php echo str_replace( " ", "_", $greatest_link_liste_mit_translation[$v][$value] ); ?>" target="_blank">
+								<?php echo $greatest_link_liste_mit_translation[$v][$value]; ?>
+							</a>
+						</td>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			</tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
 
 
-		echo "</table>";
+		<?php if ( isset( $Result_not_linked ) ): ?>
+			<?php foreach ( $Result_not_linked as $k => $v ): ?>
+				<tr id="tabellenzeile">
+					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: yellow; text-align: center;">
+						<a href="http://<?php echo $LanguageVersion; ?>.wikipedia.org/wiki/<?php echo $Existing_Art[$v]; ?>" target="_blank">
+							<?php echo $Existing_Art[$v]; ?>
+						</a>
+					</td>
+					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
+						<a href="http://<?php echo $RefLanguage; ?>.wikipedia.org/wiki/<?php echo $v; ?>" target="_blank">
+							<?php str_replace("_", " ", $v); ?>
+						</a>
+					</td>
+				<?php foreach ( $biggest_lang as $key => $value ): ?>
+					<?php if ( $value != $RefLanguage ): ?>
+						<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
+							<a href="http://<?php echo $value; ?>.wikipedia.org/wiki/<?php echo str_replace( " ", "_", $greatest_link_liste_mit_translation[$v][$value] ); ?>" target="_blank">
+								<?php echo $greatest_link_liste_mit_translation[$v][$value]; ?>
+							</a>
+						</td>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				</tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
 
-
-
-		echo "</span></div>";
-
-	} else {
-		if ($article_id == 0) {
-			echo "<div id=\"Errormessage\"><span>";
-			printf($Error["Notexists"], htmlspecialchars($articletitle), $LanguageVersion);
-			echo "</span></div>";
-		} elseif ($orig_langlinks == 0) {
-			echo "<div id=\"Errormessage\"><span>";
-			printf($Error["NoTrans"], $articletitle);
-			echo "</span></div>";
-		}
-	}
-}
-?>
+		<?php if ( isset( $Result_article_linked ) ): ?>
+			<?php foreach ( $Result_article_linked as $k => $v ): ?>
+				<tr id="tabellenzeile">
+					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background: green; text-align: center;">
+						<a style="color: white;" href="http://<?php echo $LanguageVersion; ?>.wikipedia.org/wiki/<?php echo $Used_Art[$v]; ?>" target="_blank">
+							<?php echo $Used_Art[$v]; ?>
+						</a>
+					</td>
+					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
+						<a href="http://<?php echo $RefLanguage; ?>.wikipedia.org/wiki/<?php echo $v; ?>" target="_blank">
+							<?php echo str_replace( "_", " ", $v ); ?>
+						</a>
+					</td>
+				<?php foreach ( $biggest_lang as $key => $value ): ?>
+					<?php if ( $value != $RefLanguage ): ?>
+						<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
+							<a href="http://<?php echo $value; ?>.wikipedia.org/wiki/<?php echo str_replace( " ", "_", $greatest_link_liste_mit_translation[$v][$value] ); ?>" target="_blank">
+								<?php echo $greatest_link_liste_mit_translation[$v][$value]; ?>
+							</a>
+						</td>
+					<?php endif; ?>
+				<?php endforeach; ?>
+				</tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
+			</table>
+		</span>
+	</div>
+<?php } else { ?>
+	<?php if ($article_id == 0): ?>
+	<div id="Errormessage">
+		<span>
+			<?php printf( $Error["Notexists"], htmlspecialchars( $articletitle ), $LanguageVersion); ?>
+		</span>
+	</div>
+	<?php elseif ($orig_langlinks == 0): ?>
+		<div id="Errormessage">
+			<span>
+				<?php echo printf( $Error["NoTrans"], $articletitle ); ?>
+			</span>
+		</div>
+		<?php endif; ?>
+	<?php } ?>
+<?php } ?>

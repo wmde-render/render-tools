@@ -1,7 +1,7 @@
 <?php
-$ts_pw = posix_getpwuid(posix_getuid());
-include($ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php");
-include($ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/".$_SESSION["lang"]."/downloads_txt.inc");
+$ts_pw = posix_getpwuid( posix_getuid() );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php" );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/inc/lang/" . $_SESSION["lang"] . "/downloads_txt.inc" );
 ?>
 
 <div id="Description" style="width: 75%">
@@ -41,6 +41,4 @@ foreach ($files as $file) {
 	</table>
 </div>
 
-<?php
-include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");
-?>
+<?php include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php"); ?>

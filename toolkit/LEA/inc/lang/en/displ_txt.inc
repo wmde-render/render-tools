@@ -16,32 +16,33 @@ $leaLang = array(
 	"form_button" => "Submit",
 );
 
-// printf ( $_ , $language, $title, $title, $countTrans , $countbiggestTrans)
-$Info["langVersions1"] = "The article <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> exists in %d further language versions.";
-$Info["langVersions2"] = "The following %d language versions contain the most links to other Wikipedia articles:";
+$Info = array(
+	"langVersions1" => "The article <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> 
+		exists in %d further language versions.",
+	"langVersions2" => "The following %d language versions contain the most links 
+		to other Wikipedia articles:",
+	"LIlanguages" => "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) 
+		contains %d internal links.",
+	"lang_link_count" => "%d links",
+	"intersection" => "Intersection",
+	"requested_lang" => "Requested language version",
+	"LIsourcelang" => "('%s' contains %d internal links)"
+);
 
-// printf ( $_ , $language, $title, $title, $language, $countLinks)
-$Info["LIlanguages"] = "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) contains %d internal links.";
-$Info["lang_link_count"] = "%d links";
-$Info["intersection"] = "Intersection";
-$Info["requested_lang"] = "Requested language version";
-
-// printf ( $_, $language, $countLinks )
-$Info["LIsourcelang"] = "('%s' contains %d internal links)";
-
-// printf ($_, $articletitle $language)
-$Error["Notexists"] = "There is no article '%s' in Wikipedia (%s)";
-
-// printf ($_, $articletile)
-$Error["NoTrans"] = "There aren't any languages linked with the article %s.";
+$Error = array(
+	"Notexists" => "There is no article '%s' in Wikipedia (%s)",
+	"NoTrans" => "There aren't any languages linked with the article %s."
+);
 
 $Charttitle = "distribution of common link usage";
-$Tooltip["chart"] = "This chart displays the percentile distribution of the usage of wikilinks in the chosen language.";
+$Tooltip["chart"] = "This chart displays the percentile distribution of the 
+	usage of wikilinks in the chosen language.";
 
-
-$Legend["red"] = "no article";
-$Legend["yellow"] = "not linked";
-$Legend["green"] = "linked";
+$Legend = array(
+	"red" => "no article",
+	"yellow" => "not linked",
+	"green" => "linked"
+);
 
 $analysisLink1 = "Link to this";
 $analysisLink2 = "analysis";

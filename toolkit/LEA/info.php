@@ -1,7 +1,7 @@
 <?php
-$ts_pw = posix_getpwuid(posix_getuid());
-include($ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php");
-include($ts_pw['dir'] . "/public_html/toolkit/LEA/inc/lang/".$_SESSION["lang"]."/info_txt.inc");
+$ts_pw = posix_getpwuid( posix_getuid() );
+include( $ts_pw['dir'] . "/public_html/toolkit/pages/Tablehead.php" );
+include( $ts_pw['dir'] . "/public_html/toolkit/LEA/inc/lang/" . $_SESSION["lang"] . "/info_txt.inc" );
 ?>
 <div class="description">
 	<h2><?php echo $Headline; ?></h2>
@@ -15,5 +15,4 @@ include($ts_pw['dir'] . "/public_html/toolkit/LEA/inc/lang/".$_SESSION["lang"]."
 	<div id="Lizenz"><?php echo $Lizenz; ?></div>
 </div>
 
-<?php
-include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");
+<?php include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");

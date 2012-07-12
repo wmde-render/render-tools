@@ -23,32 +23,35 @@ $FormTitle = "Titel:";
 $FormIn = "in";
 $FormButton = "Übermitteln";
 
-// printf ( $_ , $language, $title, $title, $countTrans , $countbiggestTrans)
-$Info["langVersions1"] = "Der Artikel <a href=\"http://%s.wikipedia.org/wiki/%s\" target=\"_blank\" >%s</a> existiert in %d weiteren Sprachversionen.";
-$Info["langVersions2"] = "Die folgenden %d Sprachversionen enthalten die meisten Verweise zu anderen Wikipedia-Artikeln:";
+$Info = array(
+	"langVersions1" => "Der Artikel <a href=\"http://%s.wikipedia.org/wiki/%s\" 
+		target=\"_blank\" >%s</a> existiert in %d weiteren Sprachversionen.",
+	"langVersions2" => "Die folgenden %d Sprachversionen enthalten die meisten 
+		Verweise zu anderen Wikipedia-Artikeln:",
+	"LIlanguages" => "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) 
+		mit insgesamt %d verwendeten Verweisen.",
+	"lang_link_count" => "%d Verweise",
+	"intersection" => "Schnittmenge",
+	"requested_lang" => "Angefragte Sprachversion",
+	"LIsourcelang" => "('%s' verwendet %d Verweise)"
+);
 
-// printf ( $_ , $language, $title, $title, $language, $countLinks)
-$Info["LIlanguages"] = "<a href=\"http://%s.wikipedia.org/wiki/%s\" >%s</a> ( %s ) mit insgesamt %d verwendeten Verweisen.";
-$Info["lang_link_count"] = "%d Verweise";
-$Info["intersection"] = "Schnittmenge";
-$Info["requested_lang"] = "Angefragte Sprachversion";
-
-// printf ( $_, $language, $countLinks )
-$Info["LIsourcelang"] = "('%s' verwendet %d Verweise)";
-
-// printf ($_, $articletitle $language)
-$Error["Notexists"] = "Ein Artikel mit dem Titel '%s' existiert nicht in Wikipedia (%s)";
-
-// printf ($_, $articletile)
-$Error["NoTrans"] = "Der Artikel %s ist mit keiner anderen Sprache verlinkt.";
+$Error = array(
+	"Notexists" => "Ein Artikel mit dem Titel '%s' existiert nicht in Wikipedia (%s)",
+	"NoTrans" => "Der Artikel %s ist mit keiner anderen Sprache verlinkt."
+);
 
 $Charttitle = "Verwendung relevanter Links";
-$Tooltip["chart"] = "Hier wird die prozentuale Verteilung der Verweise nach ihrer Verwendung in der angegebenen Sprache angezeigt.";
+$Tooltip["chart"] = "
+	Hier wird die prozentuale Verteilung der Verweise nach ihrer Verwendung in 
+	der angegebenen Sprache angezeigt.
+";
 
-
-$Legend["red"] = "Kein Artikel";
-$Legend["yellow"] = "Nicht verlinkt";
-$Legend["green"] = "Artikel verlinkt";
+$Legend = array(
+	"red" => "Kein Artikel",
+	"yellow" => "Nicht verlinkt",
+	"green" => "Artikel verlinkt"
+);
 
 $analysisLink1 = "Link zu dieser";
 $analysisLink2 = "Analyse";

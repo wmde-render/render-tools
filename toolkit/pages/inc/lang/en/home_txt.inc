@@ -1,5 +1,4 @@
 <?php
-
 $Headline = "RENDER-Toolkit";
 $Introduction = "Hi and welcome to the RENDER Toolkit Page!";
 
@@ -27,6 +26,3 @@ $Text2 = "
 ";
 
 $Text3 = "";
-
-
-?>
