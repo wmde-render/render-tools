@@ -100,7 +100,7 @@ class MyObject(object):
     
     """
     
-    __DebugLevel = 1
+    __DebugLevel = 2
     
     def get_debug_level(self):
         return MyObject.__DebugLevel
@@ -111,7 +111,7 @@ class MyObject(object):
     def _explain(self, debug_level, message):
         if int(MyObject.__DebugLevel) >= int(debug_level) \
               and int(debug_level) > 0:
-            sys.stdout.write("[%s] " % time.strftime("%H:%I:%M", time.localtime(time.time())) )
+            sys.stdout.write("[%s] " % time.strftime("%H:%M:%S", time.localtime(time.time())) )
             print message
             sys.stdout.flush()
 
