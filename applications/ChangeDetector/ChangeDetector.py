@@ -111,6 +111,7 @@ class MyObject(object):
     def _explain(self, debug_level, message):
         if int(MyObject.__DebugLevel) >= int(debug_level) \
               and int(debug_level) > 0:
+            sys.stdout.write("[%s] " % time.strftime("%H:%I:%M", time.localtime(time.time())) )
             print message
             sys.stdout.flush()
 
@@ -125,7 +126,7 @@ class DatabaseInterface(MyObject):
     """Manage database access.
     
     Sorry. This class must be placed at the beginning of the file,
-    because a few important classes extend ist. In order to read
+    because a few important classes extend it. In order to read
     more important code, please continue with the class CountFetcher."""
     
     table_layout = {}  # Change this for subclasses!
@@ -491,14 +492,12 @@ class PageAndRevision(DatabaseInterface):
     
     @staticmethod
     def tidy_up_page_table():
-        sql_command = """
-              DELETE FROM page"""
+        sql_command = "DELETE /* SLOW_OK */ FROM page WHERE day < %s" % (Day() - 54)
         SQL_Cursors()['auxiliary'].execute(sql_command)
     
     @staticmethod
     def tidy_up_revision_table():
-        sql_command = """
-              DELETE FROM revision"""
+        sql_command = "DELETE /* SLOW_OK */ FROM revision WHERE day < %s" % (Day() - 54)
         SQL_Cursors()['auxiliary'].execute(sql_command)
     
     def __read_articles(self):
