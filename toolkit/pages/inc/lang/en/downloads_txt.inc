@@ -24,7 +24,14 @@ $files = array(
 			copyright or other rights on this dataset and suggests that 
 			the data can be used in line with the Creative Commons Zero 
 			(CC0) license waiver. However, we suggest that one should 
-			consider attributing the dataset as follows: Title, URL.</p>",
+			consider attributing the dataset as follows:<br />
+			Guillermo Garrido, Enrique Alfonseca, Jean-Yves Delort and Anselmo 
+			Peñas: Extracting Wikipedia Historical Attributes Data, in 
+			Proceedings of Wikipedia Academy, Berlin, 2012<br />
+			<a href=\"http://alfonseca.org/eng/research/whad.html\" target=\"_blank\">
+				http://alfonseca.org/eng/research/whad.html
+			</a>
+			</p>",
 	),
 	array(
 		"name" => "neutrality-extractions-enwiki.7z",

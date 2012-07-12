@@ -25,7 +25,11 @@ $files = array(
 			keinerlei urheberrechtliche oder andere rechtliche Ansprüche
 			an den Inhalt und schlägt die Nutzung unter der Lizenz Creative 
 			Commons Zero (CC0) vor. Wir empfehlen eine Kennzeichnung nach 
-			folgendem Schema: Titel, URL.</p>",
+			folgendem Schema:<br />
+			Guillermo Garrido, Enrique Alfonseca, Jean-Yves Delort and Anselmo 
+			Peñas: Extracting Wikipedia Historical Attributes Data, in 
+			Proceedings of Wikipedia Academy, Berlin, 2012<br />
+			<a href=\"http://alfonseca.org/eng/research/whad.html\" target=\"_blank\">http://alfonseca.org/eng/research/whad.html</a></p>",
 	),
 	array(
 		"name" => "neutrality-extractions-enwiki.7z",
