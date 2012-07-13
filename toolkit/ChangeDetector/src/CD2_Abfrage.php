@@ -270,7 +270,11 @@ if( isset( $_GET["submit"] ) ) {
 		}
 		$result_Entry = $db_Entry;
 		$result_Entry["ChangedSum"] = count( $db_Entry["Changed"] );
-		$result_Entry["UnchangedSum"] = count( $db_Entry["Unchanged"] );
+		if ( array_key_exists( "Unchanged", $db_Entry ) ) {
+			$result_Entry["UnchangedSum"] = count( $db_Entry["Unchanged"] );
+		} else {
+			$result_Entry["UnchangedSum"] = 0;
+		}
 		$result_Entry["Reflang"] = $reflang;
 
 		if( array_key_exists( $reflang, $db_Entry["Changed"] ) ) {
@@ -281,7 +285,7 @@ if( isset( $_GET["submit"] ) ) {
 		if( array_key_exists( $reflang, $db_Entry["Changed"] ) ) {
 			$result_Entry["article"] = $db_Entry[$reflang]["title"];
 			$result_Entry["Refchanged"] = "1";
-		} else if( array_key_exists( $reflang, $db_Entry["Unchanged"] ) ) {
+		} else if( array_key_exists( "Unchanged", $db_Entry ) && array_key_exists( $reflang, $db_Entry["Unchanged"] ) ) {
 			$result_Entry["article"] = $db_Entry[$reflang]["title"];
 			$result_Entry["Refchanged"] = "-1";
 		} else {
@@ -363,12 +367,12 @@ if( isset( $_GET["submit"] ) ) {
 						$existent = true;
 					}
 
-					if( array_key_exists( $Language, $v["Unchanged"] ) ) {
+					if( array_key_exists( "Unchanged", $v ) && array_key_exists( $Language, $v["Unchanged"] ) ) {
 						$result_cell_class = "unch";
 						$result_cell_color = "white";
 						$result_cell_fontcolor = "red";
 						$result_cell_text = "no change";
-						$existent=true;
+						$existent = true;
 					}
 					?>
 					<td class="<?php echo $result_cell_class; ?>" style="background: <?php echo $result_cell_color; ?>; text-align: center;">
