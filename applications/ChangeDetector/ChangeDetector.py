@@ -553,10 +553,13 @@ class ChangedArticle(DatabaseInterface):
           'changed_article': {
                 ('UNIQUE', 'identifier_day_language_algorithm'):
                       ('identifier', 'day', 'language', 'detected_by')}}
-    
-    def __init__(self, day):
-        DatabaseInterface.__init__(self)
+                      
+    # fetch page and revision data. 
+    def fetchRevisions(self, day):
         self.__page_and_revision = PageAndRevision(day)
+    
+    # run the filter and algorithm stuff. this is the final step. needs to be run after fetchRevisions().
+    def runFiltersAndAlgorithms(self, day):
         self.__day = day
         self.__filters_applied = False
         self._filter_management = FilterManagement(day)  #TODO: Can we remove this?
@@ -592,6 +595,11 @@ class ChangedArticle(DatabaseInterface):
                       (filter, algorithm))
                 articles_updated= articles_updated + self.__write_articles_test(algorithm)
         self._explain(1, "updated %d articles total." % articles_updated)
+
+    def __init__(self, day):
+        DatabaseInterface.__init__(self)
+        self.fetchRevisions(day)
+        self.runFiltersAndAlgorithms(day)
     
     def _read_filters_from_file(self):
         self._explain(1,'read filters')
@@ -1332,7 +1340,7 @@ class RevisionFetcher(MyObject):
     def __read_revision_properties(self):
         SQL_Cursors()['auxiliary'].execute("select max(day) from revision")
         lastrevday= SQL_Cursors()['auxiliary'].fetchone()
-        print("max(day) for page_id %d: %s" % (self.__page_id, lastrevday))
+        self._explain(1, "max(day) for page_id %d: %s" % (self.__page_id, lastrevday))
         sys.stdout.flush()
         if lastrevday == None: lastrevday= self.__first_day
         else: lastrevday= lastrevday[0]
@@ -1907,8 +1915,8 @@ class RemoveFilteredArticleCollection(MyObject, set):
 
 
 class MyOursqlCursor(oursql.Cursor, MyObject):
-    """When choosing a hight enough DebugLevel in change.ini, this class
-    will display all SQL commands."""
+    """When choosing a high enough DebugLevel in change.ini, this class
+    will display all SQL commands executed"""
     def execute(self, operation, parameters=None):
         if operation.rfind('INSERT') == -1:
             self._explain(2, operation)
@@ -1920,6 +1928,10 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
                   operation, plain_query=True)
         else:
             super(MyOursqlCursor, self).execute(operation, parameters)
+    
+    def executemany(self, operation, parameters=None):
+        self._explain(2, "executemany: %s" % operation)
+        super(MyOursqlCursor, self).executemany(operation, parameters)
     
     def fetchall(self):
         results = super(MyOursqlCursor, self).fetchall()
