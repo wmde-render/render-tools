@@ -267,10 +267,9 @@ $pathtoself = $_SERVER['PHP_SELF'];
 			</ul>
 		</li> 
 	</ul>
+	<div></div>
 </div>
-	
-<div></div>
-  
+
 <div id="Text">
 	<table cellspacing="0" style="width: 100%">
 		<tr>
