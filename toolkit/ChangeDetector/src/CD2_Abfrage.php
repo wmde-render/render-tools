@@ -81,7 +81,6 @@ include("inc/src/Languagecodes.inc");
 	}
 </script>
 
-<body> 
 <?php
 // Defining the Entryform
 setlocale(LC_TIME, 'de_DE');
@@ -416,6 +415,3 @@ $end = time();
 		</p>
 	</span>
 </div>
-
-</body>
-</html>
