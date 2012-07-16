@@ -58,7 +58,7 @@ function query_change_db( $date, $LangGroup, $cut = TRUE ,
 			' AND language in (' . $LangList . ')' . $Query_filter );
 
 	while( $row = mysql_fetch_object( $result ) ) {
-		if( !$Final_Result[$row->indentifier][$row->language] == NULL ) {
+		if( !$Final_Result[$row->identifier][$row->language] == NULL ) {
 			continue;
 		}
 
