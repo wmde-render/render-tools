@@ -79,6 +79,7 @@ import xml.dom.minidom
 import itertools
 import oursql
 import csv
+import threading
 
 from datetime import date, timedelta
 
@@ -111,7 +112,7 @@ class MyObject(object):
     def _explain(self, debug_level, message):
         if int(MyObject.__DebugLevel) >= int(debug_level) \
               and int(debug_level) > 0:
-            sys.stdout.write("[%s] " % time.strftime("%H:%M:%S", time.localtime(time.time())) )
+            sys.stdout.write("[%s] [%s] " % (time.strftime("%H:%M:%S", time.localtime(time.time())), threading.currentThread().getName()) )
             print message
             sys.stdout.flush()
 
@@ -988,6 +989,9 @@ class ArticleMerger(MyObject):
         self.__merged = False
     
     def __merge_articles(self):
+        if threading.currentThread().getName()!='MainThread':
+            self._explain(1, 'Not in main thread -- not merging articles.')
+            return
         self._explain(1, 'Merge articles in different language versions.')
         self.__determine_languages_and_ids()
         self.__find_titles()
