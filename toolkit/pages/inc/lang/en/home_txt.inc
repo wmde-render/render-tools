@@ -6,7 +6,7 @@ $Text1 = "
 	Here you can test and play with different tools. These are developed 
 	in the context of the research project RENDER (Reflecting Knowledge 
 	Diversity). In this project, Wikimedia Deutschland is a use case 
-	partner.</br>
+	partner.<br />
 	The tools provide an insight into the different analyses of diversity 
 	in Wikipedia, which are implemented within the project. For more 
 	Information about the project, please visit 
