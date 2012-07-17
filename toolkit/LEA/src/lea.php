@@ -409,7 +409,7 @@ if( isset( $_REQUEST["submit"] ) ) {
 					</td>
 					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; text-align: center;">
 						<a href="http://<?php echo $RefLanguage; ?>.wikipedia.org/wiki/<?php echo $v; ?>" target="_blank">
-							<?php str_replace("_", " ", $v); ?>
+							<?php echo str_replace("_", " ", $v); ?>
 						</a>
 					</td>
 				<?php foreach ( $biggest_lang as $key => $value ): ?>
