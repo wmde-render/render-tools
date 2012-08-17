@@ -7,4 +7,4 @@ if (!$db) {
 	die('Connection error (db-sql): ' . mysql_error());
 }
 
-mysql_select_db('u_knissen_wikigini', $db);
+mysql_select_db('p_render_wikigini_p', $db);
