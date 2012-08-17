@@ -15,6 +15,8 @@ echo "<div id=\"Description\">";
  <p>".$Results["Text"]."</p>
   <h2>".$Uses["Headline"]."</h2>
  <p>".$Uses["Text"]."</p>
+   <h2>".$Maps["Headline"]."</h2>
+ <p>".$Maps["Text"]."</p>
 </div>
 ";
 echo "</div>";
