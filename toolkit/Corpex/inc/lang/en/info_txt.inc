@@ -35,31 +35,26 @@ For example, to investigate whether a language version tends to a certain recent
 
 
 $Languages["Headline"] = "Supported languages";
-$Languages["Text"] = "<p>Corpex is currently available in the following languages: 
-</p>
-<table>
-<tbody><tr><td> Bulgarian (bg)</td></tr>
-
-<tr><td> Bosnian (bs)</td></tr>
-<tr><td> Czech (cs)</td></tr>
-<tr><td> German (de)</td></tr>
-<tr><td> English (en)</td></tr>
-<tr><td> Spanish (es)</td></tr>
-<tr><td> French (fr)</td></tr>
-
-<tr><td> Croatian (hr)</td></tr>
-<tr><td> Hungarian (hu)</td></tr>
-<tr><td> Italian (it)</td></tr>
-<tr><td> Romanian (ro)</td></tr>
-<tr><td> Serbo-Croatian (sh)</td></tr>
-<tr><td> Albanian (sq)</td></tr>
-
-<tr><td> Serbian (sr)</td></tr>
-<tr><td> Swedish (sv)</td></tr>
-<tr><td> Simple Englisch (simple)</td></tr>
-<tr><td><a href=\"http://khnt.aksis.uib.no/icame/manuals/brown/\">Brown Corpus</a> (brown)
-</td></tr></tbody></table>
-
-<p>More languages are being prepared.
-</p>";
+$Languages["Text"] = "<strong>Corpex</strong> as well as the extracted n-grams are currently available in the following languages:
+<table class=\"languages\">
+<tr><th>Code</th><th>Country</th><th>1-grams</th><th>2-grams</th></tr>
+<tr><td>bg</td><td>Bulgarian</td><td><a href=\"downloads/bg_1-grams.csv.zip\">bg_1-grams.csv.zip</a></td><td><a href=\"downloads/bg_2-grams.csv.zip\">bg_2-grams.csv.zip</a></td></tr>
+<tr><td>bs</td><td>Bosnian</td><td><a href=\"downloads/bs_1-grams.csv.zip\">bs_1-grams.csv.zip</a></td><td><a href=\"downloads/bs_2-grams.csv.zip\">bs_2-grams.csv.zip</a></td></tr>
+<tr><td>cs</td><td>Czech</td><td><a href=\"downloads/cs_1-grams.csv.zip\">cs_1-grams.csv.zip</a></td><td><a href=\"downloads/cs_2-grams.csv.zip\">cs_2-grams.csv.zip</a></td></tr>
+<tr><td>de</td><td>German</td><td><a href=\"downloads/de_1-grams.csv.zip\">de_1-grams.csv.zip</a></td><td><a href=\"downloads/de_2-grams.csv.zip\">de_2-grams.csv.zip</a></td></tr>
+<tr><td>en</td><td>English</td><td><a href=\"downloads/en_1-grams.csv.zip\">en_1-grams.csv.zip</a></td><td><a href=\"downloads/en_2-grams.csv.zip\">en_2-grams.csv.zip</a></td></tr>
+<tr><td>es</td><td>Spanish</td><td><a href=\"downloads/es_1-grams.csv.zip\">es_1-grams.csv.zip</a></td><td><a href=\"downloads/es_2-grams.csv.zip\">es_2-grams.csv.zip</a></td></tr>
+<tr><td>fr</td><td>French</td><td><a href=\"downloads/fr_1-grams.csv.zip\">fr_1-grams.csv.zip</a></td><td><a href=\"downloads/fr_2-grams.csv.zip\">fr_2-grams.csv.zip</a></td></tr>
+<tr><td>hr</td><td>Croatian</td><td><a href=\"downloads/hr_1-grams.csv.zip\">hr_1-grams.csv.zip</a></td><td><a href=\"downloads/hr_2-grams.csv.zip\">hr_2-grams.csv.zip</a></td></tr>
+<tr><td>hu</td><td>Hungarian</td><td><a href=\"downloads/hu_1-grams.csv.zip\">hu_1-grams.csv.zip</a></td><td><a href=\"downloads/hu_2-grams.csv.zip\">hu_2-grams.csv.zip</a></td></tr>
+<tr><td>it</td><td>Italian</td><td><a href=\"downloads/it_1-grams.csv.zip\">it_1-grams.csv.zip</a></td><td><a href=\"downloads/it_2-grams.csv.zip\">it_2-grams.csv.zip</a></td></tr>
+<tr><td>ro</td><td>Romanian</td><td><a href=\"downloads/ro_1-grams.csv.zip\">ro_1-grams.csv.zip</a></td><td><a href=\"downloads/ro_2-grams.csv.zip\">ro_2-grams.csv.zip</a></td></tr>
+<tr><td>sh</td><td>Serbo-Croatian</td><td><a href=\"downloads/sh_1-grams.csv.zip\">sh_1-grams.csv.zip</a></td><td><a href=\"downloads/sh_2-grams.csv.zip\">sh_2-grams.csv.zip</a></td></tr>
+<tr><td>sq</td><td>Albanian</td><td><a href=\"downloads/sq_1-grams.csv.zip\">sq_1-grams.csv.zip</a></td><td><a href=\"downloads/sq_2-grams.csv.zip\">sq_2-grams.csv.zip</a></td></tr>
+<tr><td>sr</td><td>Serbian</td><td><a href=\"downloads/sr_1-grams.csv.zip\">sr_1-grams.csv.zip</a></td><td><a href=\"downloads/sr_2-grams.csv.zip\">sr_2-grams.csv.zip</a></td></tr>
+<tr><td>sv</td><td>Swedish</td><td><a href=\"downloads/sv_1-grams.csv.zip\">sv_1-grams.csv.zip</a></td><td><a href=\"downloads/sv_2-grams.csv.zip\">sv_2-grams.csv.zip</a></td></tr></td></tr>
+<tr><td>simple</td><td>Simple English</td><td><a href=\"downloads/simple_1-grams.csv.zip\">simple_1-grams.csv.zip</a></td><td><a href=\"downloads/simple_2-grams.csv.zip\">simple_2-grams.csv.zip</a></td></tr>
+<tr><td>brown</td><td><a href=\"http://khnt.aksis.uib.no/icame/manuals/brown/\">Brown Corpus</a></td><td></td><td></td>
+</table>
+More languages are being prepared.";
 ?>

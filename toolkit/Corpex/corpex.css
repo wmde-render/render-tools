@@ -1,0 +1,71 @@
+@CHARSET "UTF-8";
+
+
+div#words, div#wordpie, div#chars, div#charpie, div#bigrams, div#bigrampie {
+	float:left;
+	margin-right:10px;
+	width:22%;
+	margin-top:1.5em;
+}
+
+div#words, div#bigrams {
+	clear:left;
+}
+
+
+
+/* OLD */
+
+/* #spinner { */
+/* 	position : absolute; */
+/* 	left : 12em; */
+/* 	top: 2em; */
+/* } */
+
+a {
+	text-decoration : none;
+}
+
+/* form { */
+/* 	font-size:xx-large; */
+/* } */
+/* select { */
+/* 	font-size:xx-large; */
+/* } */
+/* input[type="text"] { */
+/* 	font-size:xx-large; */
+/* 	margin-bottom:0.5em; */
+/* 	width:40%; */
+/* } */
+
+/* div.credits { */
+/* 	color:gray; */
+/* 	font-size:x-small; */
+/* } */
+/* div.credits a { */
+/* 	color:gray; */
+/* } */
+
+
+#wordpie {
+	color:lightgray;
+}
+#charpie {
+	color:lightgray;
+}
+#bigrampie {
+	color:lightgray;
+}
+
+
+table.languages {
+	width:20%;
+	border-collapse:collapse;
+}
+
+
+table.languages th, table.languages td{
+	line-height:1em;
+	border:1px solid;
+	padding:2px;
+}
