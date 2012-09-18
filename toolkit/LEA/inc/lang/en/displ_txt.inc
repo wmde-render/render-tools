@@ -31,7 +31,8 @@ $Info = array(
 
 $Error = array(
 	"Notexists" => "There is no article '%s' in Wikipedia (%s)",
-	"NoTrans" => "There aren't any languages linked with the article %s."
+	"NoTrans" => "There aren't any languages linked with the article %s.",
+	"dbError" => "The connection to the database server '%s' could not be established."
 );
 
 $Charttitle = "distribution of common link usage";

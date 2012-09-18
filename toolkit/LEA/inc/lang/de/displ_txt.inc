@@ -38,7 +38,8 @@ $Info = array(
 
 $Error = array(
 	"Notexists" => "Ein Artikel mit dem Titel '%s' existiert nicht in Wikipedia (%s)",
-	"NoTrans" => "Der Artikel %s ist mit keiner anderen Sprache verlinkt."
+	"NoTrans" => "Der Artikel %s ist mit keiner anderen Sprache verlinkt.",
+	"dbError" => "Die Verbindung zum Datenbankserver '%s' kann nicht hergestellt werden."
 );
 
 $Charttitle = "Verwendung relevanter Links";

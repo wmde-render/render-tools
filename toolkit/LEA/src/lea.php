@@ -33,13 +33,35 @@ include( "inc/src/api_normalize_redirect.inc" );
 <?php
 if( isset( $_REQUEST["submit"] ) ) {
 $dbLink = array();
+$dbError = "";
 include( "dbArray.php" );
 
-$ts_pwd = posix_getpwuid( posix_getuid() );
-$ts_mycnf = parse_ini_file( $ts_pwd['dir'] . "/.my.cnf" );
+function createDatabaseLinks() {
+	global $dbLink, $dbError;
+	
+	$ts_pwd = posix_getpwuid( posix_getuid() );
+	$ts_mycnf = parse_ini_file( $ts_pwd['dir'] . "/.my.cnf" );
 
-for( $i = 1; $i < 8; $i ++ ) {
-	$dbLink[$i] = mysql_connect( "sql-s" . $i, $ts_mycnf['user'], $ts_mycnf['password'] );
+	for( $i = 1; $i < 8; $i ++ ) {
+		$dbLink[$i] = @mysql_connect( "sql-s" . $i, $ts_mycnf['user'], $ts_mycnf['password'] );
+		if (!$dbLink[$i]) {
+			closeDbLinks();
+			$dbError = "sql-s" . $i;
+			return false;
+		}
+	}
+	
+	return true;
+}
+
+function closeDbLinks() {
+	global $dbLink;
+	
+	foreach ( $dbLink as $link ) {
+		if ( $link ) {
+			mysql_close( $link );
+		}
+	}
 }
 
 function getTime() {
@@ -159,6 +181,24 @@ $languages = array();
 
 $startTotal = getTime();
 
+$tries = 0;
+$maxTries = 10;
+while( !createDatabaseLinks() && $tries < $maxTries) {
+	sleep(1);
+	$tries ++;
+	
+	if ($tries == $maxTries) {
+		?>
+	<div id="Errormessage" style="clear:both;">
+		<span>
+			<?php printf( $Error["dbError"], $dbError ); ?>
+		</span>
+	</div>
+		<?php
+		exit();
+	}
+}
+
 // get page id
 mysql_select_db( $reqLang . "wiki_p", $dbLink[$dbArray[$reqLang . "wiki_p"]] );
 $id = getPageId( $reqTitle, $reqLang );
@@ -268,9 +308,7 @@ if ($id) {
 		}
 
 		// close all database connections
-		foreach ( $dbLink as $link ) {
-			mysql_close( $link );
-		}
+		closeDbLinks();
 
 		// preparing output
 		$intersection = count($arrResult['red']) + count($arrResult['yellow']) + count($arrResult['green']);
