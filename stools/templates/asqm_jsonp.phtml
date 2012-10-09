@@ -1,0 +1,56 @@
+<?php SingletonFactory::getInstance( 'Asqm_Model' )->logRequest(); ?>
+<?php $callback = SingletonFactory::getInstance('Request')->getVar('callback'); ?>
+<?php echo $callback; ?>({
+	"asqmResponse": {
+		"general": {
+			"title": "<?php echo $this->translate( array( "groupStats", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupStats", "pageTitle" ) ); ?>": "<?php echo str_replace( '_', ' ', $this->getTitle() ); ?>",
+				"<?php echo $this->translate( array( "groupStats", "status" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getFeaturedArticle( $this->getTitle() ); ?>",
+<?php $revInfo = $this->getRevisionInfo( true ); ?>
+				"<?php echo $this->translate( array( "groupStats", "firstEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "groupStats", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
+<?php $revInfo = $this->getRevisionInfo( false ); ?>
+				"<?php echo $this->translate( array( "groupStats", "recentEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "groupStats", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
+<?php $editorCount = $this->getUniqueEditorCount(); ?>
+				"<?php echo $this->translate( array( "groupStats", "totalEditors" ) ); ?>": "<?php echo $editorCount["loggedin"]; ?> (IP: <?php echo $editorCount["anonymous"]; ?>)",
+				"<?php echo $this->translate( array( "groupStats", "references" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getCurrentRevision(); ?>",
+				"<?php echo $this->translate( array( "groupStats", "images" ) ); ?>": "<?php echo $this->getImageCount(); ?>",
+				"<?php echo $this->translate( array( "groupStats", "visitorsToday" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'StatsGrok_Model' )->getTodayStats( $this->getTitle() ); ?>",
+				"<?php echo $this->translate( array( "groupStats", "visitors30days" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'StatsGrok_Model' )->getStats( $this->getTitle() ); ?>"
+			}
+		},
+		
+		"render": {
+			"title": "<?php echo $this->translate( array( "groupRender", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupRender", "factCoverage" ) ); ?>": [ "<?php echo $this->translate( array( "groupRender", "askLea" ) ); ?>", "http://toolserver.org/~render/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ],
+				"<?php echo $this->translate( array( "groupRender", "neutrality" ) ); ?>": "",
+				"<?php echo $this->translate( array( "groupRender", "currentness" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~render/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"],
+				"<?php echo $this->translate( array( "groupRender", "editorInteraction" ) ); ?>": ""
+			}
+		},
+		
+<?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'de' ): ?>
+		"other": {
+			"title": "<?php echo $this->translate( array( "groupOther", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupOther", "wikibuch" ) ); ?>": [ "<?php echo $this->translate( array( "groupOther", "lookupAssessment" ) ); ?>", "http://wikibu.ch/search.php?search=<?php echo $this->getTitle(); ?>" ]
+			}
+		}
+<?php endif; ?>
+<?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'en' ): ?>
+<?php $ratings = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback(); ?>
+<?php if ( !empty( $ratings ) ): ?>
+		"aft-v4": {
+			"title": "<?php echo $this->translate( array( "groupAftV4", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupAftV4", "trustworthy" ) ); ?>": "<?php echo number_format( $ratings[0], 1 ); ?>",
+				"<?php echo $this->translate( array( "groupAftV4", "objective" ) ); ?>": "<?php echo number_format( $ratings[1], 1 ); ?>",
+				"<?php echo $this->translate( array( "groupAftV4", "complete" ) ); ?>": "<?php echo number_format( $ratings[2], 1 ); ?>",
+				"<?php echo $this->translate( array( "groupAftV4", "wellWritten" ) ); ?>": "<?php echo number_format( $ratings[3], 1 ); ?>"
+			}
+		}
+<?php endif; ?>
+<?php endif; ?>
+	}
+})

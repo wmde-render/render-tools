@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title><?php echo $this->translate( "pageHeading", "common" ); ?></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-1.8.0.min.js"></script>
+	</head>
+
+	<body>
+		<div class="tlg-container box-shadow">
+<?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
+			<div style="padding-top: 10px;">
+				<h2><?php echo $this->translate( "overviewHeading", "common" ); ?></h2>
+				<p><?php echo $this->translate( "overviewDesc", "common" ); ?></p>
+				<p>
+					<h3><?php echo $this->translate( "asqmHeading", "common" ); ?></h3>
+					<p><?php echo $this->translate( "asqmDesc", "common" ); ?></p>
+					<p>
+						<a href="<?php echo BASE_PATH . "asqm"; ?>"><?php echo $this->translate( "asqmNotice", "common" ); ?></a> <?php echo $this->translate( "asqmNotice2", "common" ); ?>
+					</p>
+					<h3><?php echo $this->translate( "tlgHeading", "common" ); ?></h3>
+					<p><?php echo $this->translate( "tlgDesc", "common" ); ?></p>
+					<p>
+						<?php echo $this->translate( "tlgNotice", "common" ); ?> <a href="<?php echo BASE_PATH . "tlg"; ?>"><?php echo $this->translate( "tlgNotice2", "common" ); ?></a>
+					</p>
+				</p>
+				<p>
+					
+				</p>
+			</div>
+<?php require( 'disclaimer.phtml' ); ?>
+		</div>
+	</body>
+</html>

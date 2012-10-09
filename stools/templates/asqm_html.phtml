@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Supporting Tools für Wikipedia - Article Statistics and Quality Monitor</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
+		
+		<style>
+#resultTable {
+	margin: 20px 0;
+	border: 1px solid #EEE;
+	padding: 20px 0;
+	width: 100%;
+}
+
+tr:nth-child(even) {
+	background-color: silver;
+}
+
+tr:nth-child(odd) {
+	background-color: white;
+}
+
+td {
+	padding: 4px;
+}
+
+/*			th.data-heading {
+				background-color: lightgrey;
+			}
+			
+			td.data-label {
+				padding: 4px;
+			}
+			
+			td.data-value {
+				padding: 4px;
+			}
+			
+			td.data-done {
+				background-color: lightgreen;
+			}
+			
+			td.data-todo {
+				background-color: lightpink;
+			}
+			*/
+			td.separator {
+				height: 12px;
+				background-color: white;
+			}
+
+		</style>
+	</head>
+
+	<body>
+<?php SingletonFactory::getInstance( 'Asqm_Model' )->logRequest(); ?>
+		<div class="tlg-container box-shadow">
+<?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
+			
+			<div>
+				<h2>Article Statistics and Quality Monitor</h2>
+				<table class="asqm-result" style="margin: 20px auto;">
+					<tbody>
+						<tr>
+							<th class="data-heading" colspan="2">Statistiken</th>
+						</tr>
+						<tr>
+							<td class="data-label">Seitentitel</td>
+							<td class="data-value data-done">
+								<?php echo str_replace( '_', ' ', $this->getTitle() ); ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="data-label">Status</td>
+							<td class="data-value data-done">
+								<?php echo SingletonFactory::getInstance( 'Api_Model' )->getFeaturedArticle( $this->getTitle() ); ?>
+								<!--Featured Article Since 2007-01-19-->
+							</td>
+							<!--td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="data-label">Angelegt am</td>
+							<td class="data-value data-done">
+								<?php $revInfo = $this->getRevisionInfo( true ); ?>
+								<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->getRevisionUserName(); ?>)
+							</td>
+							<!--td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="data-label">Letzte Änderung</td>
+							<td class="data-value data-done">
+								<?php $revInfo = $this->getRevisionInfo( false ); ?>
+								<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->getRevisionUserName(); ?>)
+							</td>
+							<!--td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="data-label">Anzahl der Quellenangaben</td>
+							<td class="data-value data-done">
+								<?php #$linkInfo = $this->getLinkCount(); ?>
+								<?php #echo $linkInfo[0][0]; ?>
+								<?php echo SingletonFactory::getInstance( 'Api_Model' )->getCurrentRevision(); ?>
+								<?php #echo $linkInfo[0][0]; ?>
+							</td>
+							<!--td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="data-label">Anzahl der Bilder</td>
+							<td class="data-value data-done">
+								<?php $imageInfo = $this->getImageCount(); ?>
+								<?php echo $imageInfo[0][0]; ?>
+							</td>
+							<!--td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="data-label">Besucher heute</td>
+							<td class="data-value data-done">
+								<?php echo SingletonFactory::getInstance( 'StatsGrok_Model' )->getTodayStats( $this->getTitle() ); ?>
+							</td>
+							<!--td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="data-label">Besucher der letzten 30 Tage</td>
+							<td class="data-value data-done">
+								<?php echo SingletonFactory::getInstance( 'StatsGrok_Model' )->getStats( $this->getTitle() ); ?>
+							</td>
+							<!-- td class="data-value">
+								<?php echo $this->getExecutionTime(); ?>
+							</td-->
+						</tr>
+						<tr>
+							<td class="separator"></td>
+						</tr>
+						<tr>
+							<th class="data-heading" colspan="2">RENDER Analysen</th>
+						</tr>
+						<tr>
+							<td class="data-label">Faktenabdeckung</td>
+							<td class="data-value data-done"><a href="http://toolserver.org/~render/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>">Link Extractor</a></td>
+						</tr>
+						<tr>
+							<td class="data-label">Neutralität</td>
+							<td class="data-value data-todo"></td>
+						</tr>
+						<tr>
+							<td class="data-label">Aktualität</td>
+							<td class="data-value data-todo">
+								<?php $newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->getTitle() ); ?>
+								<?php if ( $newsCount == -1 ): ?>
+								<?php echo "Keine Nachrichtenartikel gefunden"; ?>
+								<?php else: ?>
+								<?php echo $newsCount . " Nachrichtenartikel gefunden"; ?>
+								<?php endif; ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="data-label">Autoreninteraktion</td>
+							<td class="data-value data-todo"></td>
+						</tr>
+						<tr>
+							<td class="separator"></td>
+						</tr>
+						<tr>
+							<th class="data-heading" colspan="2">Weitere Bewertungen</th>
+						</tr>
+						<tr>
+							<td class="data-label">Wikibu.ch</td>
+							<?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'de' ): ?>
+							<td class="data-value data-done"><a href="http://wikibu.ch/search.php?search=<?php echo $this->getTitle(); ?>">Bewertung ansehen</a></td>
+							<?php else: ?>
+							<td class="data-value data-done">Keine Daten verfügbar</td>
+							<?php endif; ?>
+						</tr>
+						<!--tr>
+							<td class="data-label">WikiTrust</td>
+							<td class="data-value data-todo">View page ratings</td>
+						</tr-->
+						<?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'en' ): ?>
+							<?php $ratings = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback(); ?>
+							<?php if ( !empty( $ratings ) ): ?>
+						<tr>
+							<td colspan="2">Article Feedback Score</td>
+						</tr>
+						<tr>
+							<td class="data-label">Trustworthy</td>
+							<td class="data-value data-done"><?php echo number_format( $ratings[0], 1 ); ?></td>
+						</tr>
+						<tr>
+							<td class="data-label">Objective</td>
+							<td class="data-value data-done"><?php echo number_format( $ratings[1], 1 ); ?></td>
+						</tr>
+						<tr>
+							<td class="data-label">Complete</td>
+							<td class="data-value data-done"><?php echo number_format( $ratings[2], 1 ); ?></td>
+						</tr>
+						<tr>
+							<td class="data-label">Well-written</td>
+							<td class="data-value data-done"><?php echo number_format( $ratings[3], 1 ); ?></td>
+						</tr>
+							<?php endif; ?>
+						<?php endif; ?>
+					</tbody>
+				</table>
+			</div>
+<?php require( 'disclaimer.phtml' ); ?>
+		</div>
+	</body>
+</html>

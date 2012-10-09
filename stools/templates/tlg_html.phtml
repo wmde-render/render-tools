@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>TLG - Task List Generator</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/jquery-ui-1.8.23.custom.css" />
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-1.8.0.min.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-ui-1.8.23.custom.min.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/XMLHttpRequest.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/tlg_html.js"></script>
+	</head>
+
+	<body>
+		<div class="tlg-container box-shadow">
+<?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
+<div id="requestState" style="position:absolute; top:0;left:0;">requestState: uninitialized</div>			
+			<form id="tlg-form" action="">
+				<div>
+					<h2><?php echo $this->translate( "topHeading" ); ?></h2>
+					<div style="float: left; width: 50%;">
+						<div><?php echo $this->translate("tlgDesc", "common"); ?></div><br />
+						<h3 style="margin-top: 0;"><?php echo $this->translate( "descHeading" ); ?></h3>
+						<label class="fieldLabel" for="language">
+							<?php echo $this->translate( "descLanguage" ); ?>
+						</label>
+						<input type="text" id="language" name="lang" value="de" />
+						<img class="fldHelp" id="helpLanguage" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
+						<div class="clear"></div>
+
+						<label class="fieldLabel" for="categories">
+							<?php echo $this->translate( "descCategories" ); ?>
+						</label>
+						<input type="text" id="categories" name="query" value="" />
+						<img class="fldHelp" id="helpCategories" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
+						<div class="clear"></div>
+
+						<label class="fieldLabel" for="depth">
+							<?php echo $this->translate( "descDepth" ); ?>
+						</label>
+						<input type="text" id="depth" name="querydepth" value="2" />
+						<img class="fldHelp" id="helpDepth" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
+						<div class="clear"></div>
+
+						<label class="fieldLabel" for="outputFormat">
+							<?php echo $this->translate( "descFormat" ); ?>
+						</label>
+						<select id="outputFormat" name="format">
+							<option value="html">HTML</option>
+							<option value="wikitext">WikiText</option>
+						</select>
+						<!--div class="clear"></div-->
+
+						<input type="checkbox" id="bymail" name="bymail" onclick="javascript:toggleAddressField();" value="on" />
+						<label style="width: 100px;" for="bymail">
+							<?php echo $this->translate( "labelAddressCb" ); ?>
+						</label>
+						<img class="fldHelp" id="helpOutput" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
+						<div class="clear"></div>
+
+						<div id="divAddress" style="visibility: hidden;">
+							<label class="fieldLabel" for="address">
+								<?php echo $this->translate( "labelAddress" ); ?>
+							</label>
+							<input type="text" id="address" name="mailto" value="" />
+						</div>
+						<div class="clear"></div>
+
+						<button id="btnSearch"><?php echo $this->translate( "labelSearch" ); ?></button>
+						<div class="clear"></div>
+					</div>
+					<div style="margin-left: 60%">
+						<h3><?php echo $this->translate( "formHeading" ); ?></h3>
+<?php foreach ($this->getFlaws() as $group => $flaws): ?>
+	<?php if ( !empty( $group ) ): ?>
+						<h4><input type="checkbox" class="cbGroup" id="<?php echo $group; ?>" /><?php echo $group; ?></h4>
+	<?php else: ?>
+						<h4><?php echo $this->translate( "filterGeneral" ); ?></h4>
+	<?php endif; ?>
+	<?php foreach ($flaws as $name => $info): ?>
+		<?php $name = str_replace( ":", "-", $name); ?>
+						<input type="checkbox" class="<?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" />
+						<label class="cbLabel" title="<?php echo $info["description"]; ?>" for="<?php echo $name; ?>"><?php echo $info["label"]; ?></label><br />
+	<?php endforeach; ?>
+<?php endforeach; ?>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</form>
+			<div id="resultContainer" class="box-shadow box-hidden"></div>
+<?php require( 'disclaimer.phtml' ); ?>
+		</div>
+		
+		<div id="statusDialog" title="Anfrage wird bearbeitet">
+			<p>
+				<span id="status"> </span>
+				<div id="tlgProgress"></div>
+			</p>
+		</div>
+
+		<div id="dlg-helpLanguage" title="<?php echo $this->translate( "descLanguage" ); ?>">
+			<p>
+				<?php echo $this->translate( "descLanguageDesc" ); ?>
+			</p>
+		</div>
+
+		<div id="dlg-helpCategories" title="<?php echo $this->translate( "descCategories" ); ?>">
+			<p>
+				<?php echo $this->translate( "descCategoriesDesc" ); ?>
+			</p>
+		</div>
+
+		<div id="dlg-helpDepth" title="<?php echo $this->translate( "descDepth" ); ?>">
+			<p>
+				<?php echo $this->translate( "descDepthDesc" ); ?>
+			</p>
+		</div>
+
+		<div id="dlg-helpOutput" title="<?php echo $this->translate( "descOutput" ); ?>">
+			<p>
+				<?php echo $this->translate( "descOutputDesc" ); ?>
+			</p>
+		</div>
+
+		<div id="dlgError" title="<?php echo $this->translate( "dlgErrorTitle" ); ?>">
+			<strong><?php echo $this->translate( "dlgErrorHeading" ); ?></strong>
+			<p id="errMsg"></p>
+			<!--p><?php echo $this->translate( "dlgErrorReport" ); ?></p-->
+		</div>
+	</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>ASQM - Article Statistics and Quality Monitor</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-1.8.0.min.js"></script>
+	</head>
+
+	<body>
+		<div class="tlg-container box-shadow">
+<?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
+
+			<div style="padding-top: 10px;">
+				<h2><?php echo $this->translate( "asqmHeading" ); ?></h2>
+				<p><?php echo $this->translate( "asqmDesc" ); ?></p>
+				<h4><?php echo $this->translate( "instHeading" ); ?></h4>
+				<p><?php echo $this->translate( "instDesc" ); ?></p>
+				<div class="box-shadow" style="padding-left: 20px;">
+					<pre><code><?php
+echo htmlentities("
+var asqmReq = false;
+if (wgNamespaceNumber == 0) {
+  $('<li id=\"ca-asqm\" style=\"position: relative;\"><span><a onclick=\"javascript:asqm()\">ASQM</a></span>' + 
+  '<div id=\"asqmContainer\" style=\"visibility: hidden; position:absolute; right: 0; ' +
+  'font-size: 0.8em; border: 1px solid silver; margin: -5px 0 0 -1px; padding: 10px; ' +
+  'z-index: 1000; background: white;\"></div></li>').insertAfter(\"#ca-history\");
+}
+ 
+function asqm() {
+  if ($('#asqmContainer').css('visibility') == 'hidden') {
+    $('#asqmContainer').css('visibility', 'visible');
+    if (!asqmReq) {
+      $('#asqmContainer').html('<img src=\"http://toolserver.org/~render/stools/res/img/load.gif\" style=\"padding: 20px;\" />');
+      $.getJSON(\"http://toolserver.org/~render/stools/asqm/query/json/id/\" + 
+          wgArticleId + \"/lang/\" + wgPageContentLanguage + \"/asqmid/" . $this->getUniqueId() . "?callback=?\", function(data) {
+        var output = \"<table>\";
+        $.each(data.asqmResponse, function(key, groupObj) {
+          output += \"<tr><td colspan='2' style='text-align: center; font-weight: bold;'>\" + groupObj.title + \"</td></tr>\";
+          $.each(groupObj.items, function(itemTitle, value) {
+            var link = \"\";
+            if ($.isArray(value)) {
+              link = value[1];
+              value = value[0];
+            }
+            if (link && link != \"\") {
+              value = \"<a href='\" + link + \"' target='_blank'>\" + value + \"</a>\";
+            }
+            output += \"<tr><td>\" + itemTitle + \"</td><td>\" + value.replace(\"|\", \"<br />\") + \"</td></tr>\";
+          });
+        });
+        output += \"</table>\";
+        asqmReq = true;
+        $('#asqmContainer').html(output);
+      });
+    }
+  } else {
+    $('#asqmContainer').css('visibility', 'hidden');
+  }
+}
+");
+?></code></pre>
+				</div>
+				<h4><?php echo $this->translate( "noticeHeading" ); ?></h4>
+				<p><?php echo $this->translate( "notice" ); ?></p>
+			</div>
+<?php require( 'disclaimer.phtml' ); ?>
+		</div>
+	</body>
+</html>

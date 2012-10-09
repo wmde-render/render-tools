@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title><?php echo $this->translate( "pageHeading", "common" ); ?></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-1.8.0.min.js"></script>
+	</head>
+
+	<body>
+		<div class="tlg-container box-shadow">
+<?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
+
+			<div style="padding-top: 10px;">
+<?php if ($this->getMessages()): ?>
+				<div class="box-shadow system-messages system-success">
+					<img src="<?php echo BASE_PATH; ?>res/img/dialog-clean.png" />
+					<div>
+	<?php foreach ($this->getMessages() as $msg): ?>
+	<?php echo $this->translate( $msg, "common" ) . "<br />"; ?>
+	<?php endforeach; ?>
+					</div>
+				</div>
+<?php endif; ?>
+<?php if ($this->hasErrors()): ?>
+				<div class="box-shadow system-messages system-error">
+					<img src="<?php echo BASE_PATH; ?>res/img/dialog-error-4.png" />
+					<div>
+	<?php foreach ($this->getErrorMessages() as $msg): ?>
+	<?php echo $this->translate( $msg, "common" ) . "<br />"; ?>
+	<?php endforeach; ?>
+					</div>
+				</div>
+<?php endif; ?>
+				<h2><?php echo $this->translate( "pageHeading", "common" ); ?></h2>
+				<p>					
+				<form name="stools-feedback" action="<?php echo BASE_PATH; ?>feedback/form/send" method="post">
+					<div style="float: left; width: 50%;">
+						<label class="fieldLabel" for="name"><?php echo $this->translate( "formName" ); ?></label>
+						<input class="" type="text" id="name" name="name" value="<?php echo $this->hasErrors() ? SingletonFactory::getInstance( 'Request' )->getVar( 'name' ) : ""; ?>" />
+						<div class="clear"></div>
+
+						<label class="fieldLabel" for="address"><?php echo $this->translate( "formAddress" ); ?></label>
+						<input type="text" id="address" name="address" value="<?php echo $this->hasErrors() ? SingletonFactory::getInstance( 'Request' )->getVar( 'address' ) : ""; ?>" />
+						<div class="clear"></div>
+
+						<img src="<?php echo BASE_PATH; ?>feedback/form/captcha" style="margin-left: 140px;" />
+						<div class="clear"></div>
+
+						<label class="fieldLabel" for="captcha"><?php echo $this->translate( "formCaptcha" ); ?></label>
+						<input type="text" id="captcha" name="captcha" />
+						<div class="clear"></div>
+					</div>
+
+					<div style="margin-left: 54%">
+						<label for="comment"><?php echo $this->translate( "formComment" ); ?></label>
+						<textarea style="width: 362px; height: 130px;" id="comment" name="comment"><?php echo $this->hasErrors() ? SingletonFactory::getInstance( 'Request' )->getVar( 'comment' ) : ""; ?></textarea>
+					</div>
+					<div class="clear"></div>
+
+					<button id="btnSearch"><?php echo $this->translate( "formSend" ); ?></button>
+					<div class="clear"></div>
+				</form>
+				</p>
+			</div>
+<?php require( 'disclaimer.phtml' ); ?>
+		</div>
+	</body>
+</html>
