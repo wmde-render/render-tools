@@ -590,3 +590,19 @@ tr.doubleline td {
 td.align-right {
 	text-align: right;
 }
+
+.nfResult th, td {
+	padding: 3px 6px;
+}
+
+.nfResult td {
+	vertical-align: top;
+}
+
+.nfResult tr:nth-child(odd) {
+	background-color: #DDD;
+}
+
+.nfResult tr:nth-child(even) {
+	background-color: white;
+}
