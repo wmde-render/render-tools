@@ -349,7 +349,7 @@ if( isset( $_GET["submit"] ) ) {
 			<?php foreach( $Final_Result as $k => $v ): ?>
 			<tr>
 				<td style="text-align: right;">
-					<a href="http://"<?php echo $v["titlelang"]; ?>.wikipedia.org/wiki/<?php echo $v["article"]; ?>" target="blank"><?php echo str_replace( "_", " ", $v["article"] ); ?></a>
+					<a href="http://<?php echo $v["titlelang"]; ?>.wikipedia.org/wiki/<?php echo $v["article"]; ?>" target="blank"><?php echo str_replace( "_", " ", $v["article"] ); ?></a>
 				</td>
 				<?php 
 				foreach( $LangGroup as $key => $Language ) {
