@@ -191,7 +191,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
     <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a></li>
 
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a></li>
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">Newsfeed</a></li>
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">Newsfinder</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/">WIKIGINI</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/">Wikipedia Map</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/Corpex/">Corpex</a></li>
@@ -260,7 +260,7 @@ if($lang == "de"){
     <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a></li>
 
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a></li>
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">Newsfeed</a></li>
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">Newsfinder</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/">WIKIGINI</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/">Wikipedia Map</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/Corpex/">Corpex</a></li>
