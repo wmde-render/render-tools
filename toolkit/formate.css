@@ -9,7 +9,7 @@ body {
 	margin: 0;
 	padding: 1em;
 	background-color:#e6e6e6;
-	width: 1200px;
+	/* width: 1200px; */
 }
 
 
@@ -426,7 +426,7 @@ div#Disclaimer {
 
 /* Für Erklärungseiten */
 div#Description {
-	width: 50%;
+	width: 100%;
 }
 
 div#Lizenz {
