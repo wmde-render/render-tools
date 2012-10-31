@@ -60,7 +60,7 @@
 					angezeigten Daten unter 
 					<a href="http://creativecommons.org/licenses/by-sa/3.0/deed.de">
 						Creative Commons Attribution-Share-Alike License 3.0
-					</a> lizensiert.
+					</a> lizenziert.
 				</p>
 			</td>
 		</tr>
