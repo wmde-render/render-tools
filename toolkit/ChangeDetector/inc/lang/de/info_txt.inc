@@ -5,7 +5,7 @@ $Introduction = "Change Detector zeigt hohe Autorenaktivität in Wikipedia an ei
 $Settings["Headline"] = "Einstellungen";
 $Settings["Text"] = "
 	<p>
-		Für eine Anwendung des Change Detectors können unterschiedliche Angaben 
+		Für die Anwendung des Change Detectors können unterschiedliche Angaben 
 		gemacht werden.
 	</p>
 	<ul>
@@ -72,7 +72,7 @@ $Settings["Text"] = "
 $Results["Headline"] = "Ergebnisse";
 $Results["Text"] = "
 	<p>
-		Die dargestellte Tabelle zeigt untereinander alle Artikel, die der 
+		Die Tabelle zeigt untereinander alle Artikel, die der 
 		Algorithmus des Change Detectors entdeckt hat. In den Spalten sind die 
 		einzelnen Sprachen der Sprachgruppe aufgelistet, angeführt von der 
 		gewählten Referenzsprache.
@@ -126,7 +126,7 @@ $Languages["Text"] = "
 $Lizenz = "
 	<h2>Lizenz</h2>
 	<p>
-		ChangeDetector wird unter der <a href=\"http://de.wikipedia.org/wiki/BSD-Lizenz\">BSD-Lizenz</a> 
+		Change Detector wird unter der <a href=\"http://de.wikipedia.org/wiki/BSD-Lizenz\">BSD-Lizenz</a> 
 		veröffentlicht.
 	</p>
 	<code>
@@ -170,6 +170,7 @@ $Lizenz = "
 			EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 		</p>
 	</code>
+
 	<h2>Disclaimer</h2>
 	<code>
 		<p>

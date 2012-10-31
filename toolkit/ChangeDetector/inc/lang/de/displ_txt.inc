@@ -23,7 +23,7 @@ $Settings = array(
 	"Langgroup" => "Sprachgruppe",
 	"LanggroupTooltip" => "Entweder werden nur europäische Sprachen untersucht 
 		oder alle von Change Detector unterstützten Sprachen.",
-	"World" => "Alle Sprachen",
+	"World" => "Alle unterstützten Sprachen",
 	"EU" => "Europäische Sprachen",
 	"Referenzlang" => "Referenzsprache",
 	"ReferenzlangTooltip" => "Die Referenzsprache ist wichtig für die Sortierung 

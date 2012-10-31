@@ -115,7 +115,7 @@ $Languages["Text"] = "
 ";
 
 $Lizenz = "
-	<h2>Lizenz</h2>
+	<h2>License</h2>
 	<p>ChangeDetector is distributed under 
 		<a href=\"http://en.wikipedia.org/wiki/BSD_licenses\">BSD license</a>.
 	</p>
