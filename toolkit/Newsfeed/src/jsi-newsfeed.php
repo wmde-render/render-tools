@@ -98,13 +98,13 @@ function getEnglishTitle( $title, $lang ) {
 							<th style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px;"><?php echo $txtNewsfeed["resultColLink"]; ?></th>
 						</tr>
 			<?php foreach( $result as $item ): ?>
-			<?php $date = date( $txtNewsfeed["dateFormat"], strtotime( $item->date ) ); ?>
+			<?php $date = date( $txtNewsfeed["dateFormat"], strtotime( $item->DateTime ) ); ?>
 						<tr>
 							<td><?php echo $date; ?></td>
-							<td><?php echo $item->title; ?></td>
+							<td><?php echo $item->Title; ?></td>
 							<td style="vertical-align: top;">
-								<a href="<?php echo $item->uri; ?>" target="_blank">
-									<?php echo shortenUrl( $item->uri ); ?>
+								<a href="<?php echo $item->URI; ?>" target="_blank">
+									<?php echo shortenUrl( $item->URI ); ?>
 								</a>
 							</td>
 						</tr>
