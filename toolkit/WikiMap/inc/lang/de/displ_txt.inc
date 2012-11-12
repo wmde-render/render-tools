@@ -19,11 +19,7 @@ $Languages["Chinese"] = "Chinesisch";
 
 $DynamicMap["Headline"] = "Dynamische Karte";
 $DynamicMap["Text"] = "
-Die dynamische wird komplett im Browser erstellt. Dies hat den Vorteil, 
-dass die Karte interaktiv ist, es kann z.B. in die Karte gezoomt werden, 
-die Farben geändert werden und für jeden Punkt der entsprechende Artikel anzeigt werden.
-Der Nachteil liegt im Resourcenverbraucht. <strong>Dieser Link kann den Browser abstürzen lassen!</strong>
-Ein vergleichbar schneller Computer, eine aktuelle Version von Chrome und Gedult beim Laden sind nötig; 
-der Browser läd mehr als 50MB Daten und verarbeitet diese mittels JavaScript in HTML5-Canvas. 
-Die Karte kann lokal abgespeichert werden und kann dann ohne das Nachladen der Daten gestartet werden.";
+Die interaktive Karte wird dynamisch im Browser erstellt. So kann z. B. in die Karte gezoomt werden, die Farben geändert und für jeden Punkt der entsprechende Artikel anzeigt werden.
+Ein Nachteil liegt im Resourcenverbrauch. <strong>Dieser Link kann den Browser abstürzen lassen!</strong>
+Ein vergleichsweise schneller Computer, eine aktuelle Version von Chrome und Geduld beim Laden sind nötig. Der Browser lädt mehr als 50MB und verarbeitet diese mittels JavaScript in HTML5-Canvas. Die Karte kann lokal abgespeichert werden und dann ohne das Nachladen der Daten gestartet werden.";
 ?>
