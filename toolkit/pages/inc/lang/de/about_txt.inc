@@ -4,7 +4,7 @@ $Headline = "Info";
 $Introduction = "
 	Wikimedia Deutschland ist Anwendungspartner im Forschungsprojekts 
 	RENDER (Reflecting Knowledge Diversity). Wir untersuchen gemeinsam 
-	mit unserern Projektpartnern Diversität in Wikipedia. Diversität ist 
+	mit unseren Projektpartnern Wissensdiversität in Wikipedia. Diversität ist 
 	wichtig, da sie Ergebnis einer vollständigen Faktenlage und einer 
 	angemessenen Darstellung aller Standpunkte ist. Diversität ermöglicht 
 	eine enzyklopädische, neutrale Darstellung.
@@ -24,7 +24,7 @@ $Text1 = "
 	</ul>
 	<p>
 		Darüber hinaus untersuchen wir auch Besonderheiten in der 
-		Interaktion der Nutzer. Weitere Informationen zum Projekt finden 
+		Interaktion der Nutzer. Weitere Informationen zum Projekt befinden 
 		sich unter 
 		<a href=\"http://de.wikipedia.org/wiki/Wikipedia:RENDER\">
 			Wikipedia:RENDER
@@ -32,7 +32,7 @@ $Text1 = "
 		<a href=\"http://render-project.eu\">http://render-project.eu</a>.
 	</p>
 	<p>
-		Die hier bereitgestellten Werkzeuge geben einen Einblick in die 
+		Die hier bereitgestellten Werkzeuge geben einen Überblick über die 
 		verschiedenen Diversitätsanalysen, die im Rahmen des RENDER-Projekts 
 		durchgeführt werden. 
 	</p>
@@ -45,9 +45,8 @@ $Text2 = "
 		onclick=\"$('#thumb-asqm').dialog('open');\" /><br />
 	</div>
 	<p>
-		Im weiteren Verlauf des Projekts intergrieren wir die Ergebnisse 
-		in zwei verschiedene Anwendungen. Diese führen Nutzer gezielt zu 
-		Stellen in der Wikipedia, die verbesserungswürdig sind.
+		Im weiteren Verlauf des Projekts integrieren wir die Ergebnisse 
+		in zwei Anwendungen. Diese führen Nutzer gezielt zu verbesserungswürdigen Stellen in Wikipedia.
 	</p>
 	<p>
 		Derzeit sind zwei dieser weiterführenden Werkzeuge geplant:
