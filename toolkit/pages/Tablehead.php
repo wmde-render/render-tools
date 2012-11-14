@@ -32,7 +32,7 @@ $pathtoself = $_SERVER['PHP_SELF'];
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="description"     content="Hier beschreiben Sie mit ein, zwei Sätzen den Inhalt dieser Datei.">
+<meta name="description"     content="This is the RENDER Toolkit, a collection of RENDER-related Tools on the Toolserver.">
 <meta name="keywords"        content="RENDER, RenderToolkit, WikipediaToolkit">
 <meta name="author"         content="render@wikimedia.de">
 <meta name="DC.Publisher"   content="www.wikimedia.de">
@@ -206,7 +206,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/downloads">Downloads</a></li>
-	<li><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
+	<li><a href="javascript:void(0)" style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 </td>
@@ -276,7 +276,7 @@ if($lang == "de"){
    <li ><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Start</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/downloads">Downloads</a></li>
-  <li ><a style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
+  <li ><a href="javascript:void(0)" style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 
