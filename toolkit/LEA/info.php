@@ -12,7 +12,6 @@ include( $ts_pw['dir'] . "/public_html/toolkit/LEA/inc/lang/" . $_SESSION["lang"
 	<p><?php echo $Results["Text"]; ?></p>
 	<h3><?php echo $Uses["Headline"]; ?></h3>
 	<p><?php echo $Uses["Text"]; ?></p>
-	<div id="Lizenz"><?php echo $Lizenz; ?></div>
 </div>
 
 <?php include($ts_pw['dir'] ."/public_html/toolkit/pages/Tablefoot.php");

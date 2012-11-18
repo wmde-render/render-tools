@@ -22,6 +22,13 @@
 						Creative Commons Attribution-Share-Alike License 3.0
 					</a>
 				</p>
+				<p>
+					The source code of these tools are, unless stated otherwise, 
+					licensed under
+					<a href="http://www.gnu.org/licenses/gpl.html">
+						GNU General Public License v3
+					</a>
+				</p>
 			</td>
 		</tr>
 		<tr>
@@ -60,6 +67,13 @@
 					angezeigten Daten unter 
 					<a href="http://creativecommons.org/licenses/by-sa/3.0/deed.de">
 						Creative Commons Attribution-Share-Alike License 3.0
+					</a> lizenziert.
+				</p>
+				<p>
+					Der Quellcode der Tools ist, soweit nicht anders angegeben,
+					unter 
+					<a href="http://www.gnu.org/licenses/gpl.html">
+						GNU General Public License v3
 					</a> lizenziert.
 				</p>
 			</td>

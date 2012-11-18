@@ -16,6 +16,5 @@ include( $ts_pw['dir'] . "/public_html/toolkit/ChangeDetector/inc/lang/" . $_SES
 		<p><?php echo $Uses["Text"]; ?></p>
 	</div>
 	<!-- <div id="info">&nbsp;</div> -->
-	<div id="Lizenz"><?php echo $Lizenz; ?></div>
 </div>
 <?php include( $ts_pw['dir'] . "/public_html/toolkit/pages/Tablefoot.php" );
