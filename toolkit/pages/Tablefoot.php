@@ -23,7 +23,7 @@
 					</a>
 				</p>
 				<p>
-					The source code of these tools are, unless stated otherwise, 
+					The source code of these tools is, unless stated otherwise, 
 					licensed under
 					<a href="http://www.gnu.org/licenses/gpl.html">
 						GNU General Public License v3
