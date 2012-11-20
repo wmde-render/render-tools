@@ -17,7 +17,7 @@ $Text1 = "
 
 $Text2 = "
 	The whole toolkit as well as the tools are in a continuous process 
-	of development. We are looking forward to receiving suggestions, 
+	of development. We are looking forward to suggestions, 
 	<a style=\"cursor: pointer; color: #0047AB;\" onclick=\"javascript:openFeedbackDialog();\">feedback</a> 
 	or ideas on the 
 	<a href=\"http://meta.wikimedia.org/wiki/Talk:RENDER\">discussion page concerning RENDER on Meta-Wiki</a> 
