@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+
+$ts_pw = posix_getpwuid(posix_getuid());
+
+
 if (isset($_GET["lang"])){ $lang = $_GET["lang"];
 			$_SESSION["lang"] = $_GET["lang"];
 			
@@ -45,18 +49,15 @@ $pathtoself = $_SERVER['PHP_SELF'];
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery-ui-1.8.19.custom.min.js"></script>
 
 <!-- WIKIGINI START -->
-<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/js/highcharts.js"></script>
-<?php 
-if(isset($_POST['article_id']) && isset($_POST['haxis']) && isset($_POST['page'])) {
-?>
-<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/js/wikigini.js.php?article_id=<?php echo $_POST['article_id']; ?>&haxis=<?php echo $_POST['haxis']; ?>"></script>
-<?php 
-} elseif(isset($_POST['article_id']) && isset($_POST['haxis'])) {
-?>
-<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/js/wikigini.js.php?article_id=<?php echo $_POST['article_id']; ?>&haxis=<?php echo $_POST['haxis']; ?>&page=<?php echo $_POST['page']; ?>"></script>
-<?php 
+
+<?php
+if (isset($load_wikigini) && $load_wikigini) {
+	require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/js.inc.php");
 }
 ?>
+
+
+
 <!-- WIKIGINI END -->
 
 <!-- WikiMap START -->
