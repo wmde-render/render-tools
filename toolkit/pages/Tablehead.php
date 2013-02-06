@@ -157,6 +157,11 @@ if ($lang == "en") {
 		
 		$('input[name=url]').val(document.location.href);
 	});
+
+	$("#btnFeedback").click(function(evt) {
+		evt.preventDefault();
+	});
+
 </script>
 </head>
 
@@ -207,7 +212,7 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Home</a></li>
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
 	<li><a href="/<?php echo $tsAccount; ?>/toolkit/downloads">Downloads</a></li>
-	<li><a href="javascript:void(0)" style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
+	<li><a id="btnFeedback" style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 </td>
@@ -277,7 +282,7 @@ if($lang == "de"){
    <li ><a href="/<?php echo $tsAccount; ?>/toolkit/index.php">Start</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/pages/About.php">Info</a></li>
   <li ><a href="/<?php echo $tsAccount; ?>/toolkit/downloads">Downloads</a></li>
-  <li ><a href="javascript:void(0)" style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
+  <li ><a id="btnFeedback" style="cursor: pointer;" onclick="javascript:openFeedbackDialog();">Feedback</a></li>
   </ul>
   </div>
 	 
