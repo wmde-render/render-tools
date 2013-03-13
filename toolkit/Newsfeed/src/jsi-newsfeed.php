@@ -1,10 +1,9 @@
 <?php
 function getNewsArticles( $title ) {
 	$title = urlencode( $title );
-	$url = "http://newsfeed.ijs.si/query/news-search?cu=http://en.wikipedia.org/wiki/" . $title;
+	$url = "http://newsfeed.ijs.si/render/search?cu=http://en.wikipedia.org/wiki/" . $title;
 	$result = file_get_contents( $url );
 	$news = json_decode( $result );
-
 	if ( isset( $news->error ) ) {
 		return -1;
 	}
