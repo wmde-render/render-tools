@@ -117,8 +117,8 @@ td {
 						<tr>
 							<td class="data-label">Anzahl der Bilder</td>
 							<td class="data-value data-done">
-								<?php $imageInfo = $this->getImageCount(); ?>
-								<?php echo $imageInfo[0][0]; ?>
+								<?php #$imageInfo = $this->getImageCount(); ?>
+								<?php #echo $imageInfo[0][0]; ?>
 							</td>
 							<!--td class="data-value">
 								<?php echo $this->getExecutionTime(); ?>
@@ -165,6 +165,12 @@ td {
 								<?php else: ?>
 								<?php echo $newsCount . " Nachrichtenartikel gefunden"; ?>
 								<?php endif; ?>
+							</td>
+						</tr>
+						<tr>
+							<td class="data-label">ChangeDetector</td>
+							<td class="data-value">
+								<?php echo SingletonFactory::getInstance('ChangeDetector_Model')->checkDetected($this->getId(), $this->getLang()); ?>
 							</td>
 						</tr>
 						<tr>

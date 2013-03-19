@@ -1,5 +1,6 @@
 <?php
 $strLang = array(
+	"dateFormat" => "d.m.Y H:i",
 	"asqmHeading" => "Qualitätsübersichtswerkzeug",
 	"asqmDesc" => " Der ASQM (Article Statistics and Quality Monitor) bietet 
 		einen schnellen Überblick über die Qualität und den Zustand eines 
@@ -33,6 +34,7 @@ $strLang = array(
 		Das Institut ist ein Partner des RENDER-Projekts.",
 	"newsfeedTableTitle" => "Titel",
 	"newsfeedTableUrl" => "URL",
+	"newsfeedTableDate" => "Datum",
 	
 	# asqm output
 	"groupStats" => array(
@@ -43,20 +45,32 @@ $strLang = array(
 		"recentEdit" => "Letzte Änderung",
 		"editedBy" => "von",
 		"totalEditors" => "Autoren",
-		"references" => "Quellenangaben",
-		"images" => "Bilder",
+		"references" => "Einzelnachweise",
+		"images" => "Mediendateien",
 		"visitorsToday" => "Besucher heute",
 		"visitors30days" => "Letzte 30 Tage"
 	),
-	"groupRender" => array(
-		"title" => "RENDER-Analysen",
-		"factCoverage" => "Faktenabdeckung",
-		"askLea" => "LEA fragen",
-		"neutrality" => "Neutralität",
-		"currentness" => "Aktualität",
-		"editorInteraction" => "Autoreninteraktion",
+	"groupCoverage" => array(
+		"title" => "Faktenabdeckung",
+		"lea" => "LEA (Link Extractor)",
+		"showAnalysis" => "Analyse anzeigen",
+	),
+	"groupCurrentness" => array(
+		"title" => "Aktualität",
+		"titleNewsFinder" => "NewsFinder",
 		"noNews" => "Keine Nachrichtenartikel gefunden",
 		"newsFound" => " Nachrichtenartikel gefunden",
+		"showResults" => "Ergebnisse anzeigen",
+		"titleChangeDetector" => "Change Detector",
+		"cdHit" => "Hohe Aktivität in anderen Sprachen",
+	),
+/*
+		"neutrality" => "Neutralität",
+		"editorInteraction" => "Autoreninteraktion",
+*/
+	"groupEditorInteraction" => array(
+		"title" => "Autoreninteraktion",
+		"giniScore" => "WikiGini-Score",
 	),
 	"groupOther" => array(
 		"title" => "Weitere Bewertungen",
@@ -69,5 +83,9 @@ $strLang = array(
 		"objective" => "Objektiv",
 		"complete" => "Vollständig",
 		"wellWritten" => "Gut geschrieben",
+	),
+	"groupAftV5" => array(
+		"title" => "Article Feedback Score",
+		"negRating" => "Negative Bewertungen",
 	),
 );

@@ -9,7 +9,7 @@ class CatScan_Model extends Model {
 		$timeStart = $this->getTime();
 		$request = SingletonFactory::getInstance( 'Request' );
 		
-		$url = "http://toolserver.org/~jkroll/CatGraphApi/CatGraphApi.php";
+		$url = "http://toolserver.org/~render/CatGraphApi/CatGraphApi.php";
 		$url .= "?format=json";
 		$url .= "&template=" . $request->getVar( 'flaw' );
 		$url .= "&wiki=dewiki";

@@ -3,8 +3,7 @@ $strLang = array(
 	"topHeading" => "Task List Generator",
 	"descHeading" => "Language, Categories and Search Depth",
 	"descLanguage" => "Language",
-	"descLanguageDesc" => "Two character language code (currently only articles
-		in the German language version can be searched.)",
+	"descLanguageDesc" => "Two character language code",
 	"descCategories" => "Categories",
 	"descCategoriesDesc" => "A list of category names separated by semicolons. 
 		Prepending a plus sign generates an intersection, prefixing the minus sign 
@@ -49,5 +48,17 @@ $strLang = array(
 	"tblHeadTitle" => "Page Title",
 	"dlgErrorTitle" => "Error",
 	"dlgErrorHeading" => "An error occurred while executing this request.",
-	"dlgErrorReport" => "Do you want to report this error?"
+	"dlgErrorReport" => "Do you want to report this error?",
+	"statusTitle" => "Processing request",
+	"reqSuccess" => "Request successful",
+	"reqSuccessMsg" => "The list will be sent after processing is done.",
+	"tableHeadFlaw" => "Filter",
+	"tableHeadPage" => "Page Title",
+	"errNoFilter" => "No filter selected",
+	"markedAsHidden" => "The revision will not be displayed in future requests.",
+	"unmarkedAsHidden" => "The revision will be displayed again in future requests.",
+	"descHide" => "Click to hide this result in future requests.",
+	"descUnhide" => "Click to show this result in future requests.",
+	"alsoShowHidden" => "also show hidden results",
+	"linkToRequest" => "Link to this request",
 );

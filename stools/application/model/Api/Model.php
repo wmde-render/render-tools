@@ -9,7 +9,6 @@ class Api_Model extends Model {
 
 		$revisions = unserialize( file_get_contents( "http://" . SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . ".wikipedia.org/w/api.php?action=query&prop=revisions&titles=" . $title . "&rvprop=content&format=php" ) );
 		$revision = $revisions["query"]["pages"][$articleId]["revisions"][0]["*"];
-		//var_dump($test);
 		
 		if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'de' ) {
 			preg_match( "/\{\{([E|e]xzellent)\|([0-9a-zA-ZÄÖÜäöüß\.\s].*)\|[0-9]+\}\}/", $revision, $regResult );
@@ -67,13 +66,48 @@ class Api_Model extends Model {
 		$aId = SingletonFactory::getInstance( 'Request' )->getVar( 'id' );
 		$lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' );
 		ini_set( 'user_agent', 'RENDER-Bot' );
-		
+						
 		$result = unserialize( file_get_contents( "http://" . $lang . ".wikipedia.org/w/api.php?format=php&action=query&prop=revisions&rvprop=content&pageids=" . $aId ) );
 		$revision = $result["query"]["pages"][$aId]["revisions"][0]["*"];
-		preg_match_all( "/<ref[ |>]/", $revision, $regResult );
-		
-		ini_set( 'user_agent', '' );
+		$revision = preg_replace( '<!--([\s\S]*?)-->', '', $revision );
+		preg_match_all( '/<ref( name="([^"]+)"|>|\/>| \/>)/', $revision, $regResult );
 
-		return sizeof($regResult[0]);
+		$refNames = array();
+		$refCount = 0;
+		foreach ( $regResult[2] as $match ) {
+			if ( $match !== "" ) {
+				if ( !in_array($match, $refNames) ) {
+					$refNames[] = $match;
+					$refCount ++;
+				}
+			} else {
+				$refCount ++;
+			}
+		}
+		ini_set( 'user_agent', '' );
+		return $refCount;
+	}
+
+	public function getArticleFeedback5() {
+		$aId = SingletonFactory::getInstance( 'Request' )->getVar( 'id' );
+		$lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' );
+		ini_set( 'user_agent', 'RENDER-Bot' );
+
+		$result = unserialize( file_get_contents( "http://" . $lang . ".wikipedia.org/w/api.php?action=query&format=php&list=articlefeedbackv5-view-ratings&afpageid=" . $aId ) );
+		$found = 0;
+		$total = 0;
+		if ( isset( $result["query"]["articlefeedbackv5-view-ratings"]["rollup"]["found"]["total"] ) ) {
+			$found = $result["query"]["articlefeedbackv5-view-ratings"]["rollup"]["found"]["total"];
+		}
+		if ( isset( $result["query"]["articlefeedbackv5-view-ratings"]["rollup"]["found"]["count"] ) ) {
+			$total = $result["query"]["articlefeedbackv5-view-ratings"]["rollup"]["found"]["count"];
+		}
+
+		if ( $total > 0 ) {
+			return ( 100 - number_format( ( $found * 100 / $total ), 0 ) );
+		}
+
+		return false;
 	}
 }
+

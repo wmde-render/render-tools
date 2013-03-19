@@ -6,7 +6,10 @@
 			"title": "<?php echo $this->translate( array( "groupStats", "title" ) ); ?>",
 			"items": {
 				"<?php echo $this->translate( array( "groupStats", "pageTitle" ) ); ?>": "<?php echo str_replace( '_', ' ', $this->getTitle() ); ?>",
-				"<?php echo $this->translate( array( "groupStats", "status" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getFeaturedArticle( $this->getTitle() ); ?>",
+<?php $articleStatus = SingletonFactory::getInstance( 'Api_Model' )->getFeaturedArticle( $this->getTitle() ); ?>
+<?php if ( $articleStatus ): ?>
+				"<?php echo $this->translate( array( "groupStats", "status" ) ); ?>": "<?php echo $articleStatus; ?>",
+<?php endif; ?>
 <?php $revInfo = $this->getRevisionInfo( true ); ?>
 				"<?php echo $this->translate( array( "groupStats", "firstEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "groupStats", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
 <?php $revInfo = $this->getRevisionInfo( false ); ?>
@@ -20,15 +23,31 @@
 			}
 		},
 		
-		"render": {
-			"title": "<?php echo $this->translate( array( "groupRender", "title" ) ); ?>",
+		"factCoverage": {
+			"title": "<?php echo $this->translate( array( "groupCoverage", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupRender", "factCoverage" ) ); ?>": [ "<?php echo $this->translate( array( "groupRender", "askLea" ) ); ?>", "http://toolserver.org/~render/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ],
-				"<?php echo $this->translate( array( "groupRender", "neutrality" ) ); ?>": "",
-				"<?php echo $this->translate( array( "groupRender", "currentness" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~render/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"],
-				"<?php echo $this->translate( array( "groupRender", "editorInteraction" ) ); ?>": ""
+				"<?php echo $this->translate( array( "groupCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "groupCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~render/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
 			}
 		},
+		
+		"currentness": {
+			"title": "<?php echo $this->translate( array( "groupCurrentness", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~render/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"]
+<?php if ( SingletonFactory::getInstance( 'ChangeDetector_Model' )->checkDetected( $this->getId(), $this->getLang() ) ): ?>,
+	"<?php echo $this->translate( array( "groupCurrentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "groupCurrentness", "cdHit" ) ); ?>", "http://toolserver.org/~render/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
+<?php endif; ?>
+			}
+		},
+<?php $giniScore = SingletonFactory::getInstance( 'Asqm_Model' )->getGiniScore( $this->getId(), $this->getLang() ); ?>
+<?php if ( $giniScore ): ?>
+		"editorInteraction": {
+			"title": "<?php echo $this->translate( array( "groupEditorInteraction", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupEditorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://toolserver.org/~render/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
+			}
+		},
+<?php endif; ?>
 		
 <?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'de' ): ?>
 		"other": {
@@ -36,9 +55,18 @@
 			"items": {
 				"<?php echo $this->translate( array( "groupOther", "wikibuch" ) ); ?>": [ "<?php echo $this->translate( array( "groupOther", "lookupAssessment" ) ); ?>", "http://wikibu.ch/search.php?search=<?php echo $this->getTitle(); ?>" ]
 			}
-		}
+		},
 <?php endif; ?>
-<?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'en' ): ?>
+<?php #if ( $this->_lang /*SingletonFactory::getInstance( 'Request' )->getVar( 'lang' )*/ == 'en' ): ?>
+<?php $percent = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback5(); ?>
+<?php if ( !empty( $percent ) ): ?>
+		"aft-v5": {
+			"title": "<?php echo $this->translate( array( "groupAftV5", "title" ) ); ?>",
+			"items": {
+				"<?php echo $this->translate( array( "groupAftV5", "negRating" ) ); ?>": [ "<?php echo $percent; ?> %", "http://en.wikipedia.org/wiki/Special:ArticleFeedbackv5/<?php echo $this->getTitle(); ?>" ]
+			}
+		},
+<?php else: ?>
 <?php $ratings = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback(); ?>
 <?php if ( !empty( $ratings ) ): ?>
 		"aft-v4": {
@@ -50,7 +78,9 @@
 				"<?php echo $this->translate( array( "groupAftV4", "wellWritten" ) ); ?>": "<?php echo number_format( $ratings[3], 1 ); ?>"
 			}
 		}
-<?php endif; ?>
-<?php endif; ?>
+<?php endif; # v4 is not available ?>
+<?php endif; # get v4, because v5 is not available ?>
+<?php #endif; # only english lang version ?>
 	}
 })
+

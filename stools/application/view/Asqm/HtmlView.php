@@ -27,10 +27,8 @@ class Asqm_HtmlView extends View {
 	}
 
 	public function getRevisionInfo( $first ) {
-		//if( !$this->_revisionInfo ) {
-			$this->_revisionInfo = SingletonFactory::getInstance( 'Asqm_Model' )
-				->getRevision( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ), $first );
-		//}
+		$this->_revisionInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+			->getRevision( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ), $first );
 		
 		return $this->_revisionInfo;
 	}
@@ -85,9 +83,9 @@ class Asqm_HtmlView extends View {
 	public function getNewsItems() {
 		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->getTitle() );
 		if ( $newsCount == -1 ) {
-			return $this->translate( array( "groupRender", "noNews" ) );
+			return $this->translate( array( "groupCurrentness", "noNews" ) );
 		} else {
-			return $newsCount . $this->translate( array( "groupRender", "newsFound" ) );
+			return $newsCount . $this->translate( array( "groupCurrentness", "newsFound" ) );
 		}
 	}
 	

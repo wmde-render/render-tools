@@ -1,4 +1,6 @@
 <?php
+require_once( APP_PATH . 'gpClient.php' );
+
 class Tlg_Model extends Model {
 	private $_serviceUrl;
 	
@@ -8,7 +10,7 @@ class Tlg_Model extends Model {
 	
 	public function getFlawList() {
 		$url = $this->_serviceUrl;
-		$url .= "?action=listflaws&i18n=" . $_SESSION['lang'];
+		$url .= "?action=listflaws&i18n=" . $_SESSION['uilang'];
 		$result = @file_get_contents( $url );
 		
 		if ( $result ) {
@@ -28,28 +30,43 @@ class Tlg_Model extends Model {
 		return array();
 	}
 	
-	/*public function query() {
-		$req = SingletonFactory::getInstance( 'Request' );
-		$url = $this->_serviceUrl;
-		
-		$url .= "?action=query";
-		$url .= "&lang=" . urlencode($req->getVar( 'lang' ) );
-		$url .= "&query=" . urlencode($req->getVar( 'query' ) );
-		$url .= "&querydepth=" . urlencode($req->getVar( 'querydepth' ) );
-		$url .= "&flaws=" . implode('%20', $req->getVar( 'flaw' ) );
-		
-		$response = @file_get_contents( $url );
-		$response = str_replace("}{", "}\n{", $response);
-		$retVal = array();
-		
-		if ( $response ) {
-			$results = explode( '\u000a', $response );
-			foreach( $results as $result ) {
-				$retVal[] = json_decode( $result, true );
+	public function getGraphList() {
+		$result = array();
+		try {
+			$connInfo = $this->_getConnectionInfo(); var_dump($connInfo);
+			$gp = gpConnection::new_client_connection( 
+					null, 
+					$connInfo["graphserv-host"] . ".toolserver.org", 
+					$connInfo["graphserv-port"] );
+			$gp->connect();
+			$runningGraphs = $gp->capture_list_graphs();
+			if ( is_array( $runningGraphs ) ) {
+				foreach( $runningGraphs as $graph ) {
+					$result[] = str_replace( "wiki", "", $graph[0] );
+				}
 			}
+			return $result;
+		} catch(gpException $ex) {
+			return false;
+		}
+	}
+	
+	private function _getConnectionInfo() {
+		$defaultConnInfo = array(
+			"graphserv-host" => "ortelius",
+			"graphserv-port" => 6666
+		);
+		
+		$result = @file_get_contents( "http://toolserver.org/~jkroll/tlgbe/tlgrc" );
+		if ( !$result ) {
+			return $defaultConnInfo;
 		}
 		
-		var_dump( $retVal );
-		return $retVal;
-	}*/
+		$connInfo = json_decode( $result, true );
+		if ( !$connInfo ) {
+			return $defaultConnInfo;
+		}
+
+		return $connInfo;
+	}
 }

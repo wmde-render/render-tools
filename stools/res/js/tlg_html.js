@@ -6,9 +6,7 @@ var outputFormat;
 $(document).ready(function() {
 	// set click function for group heading checkbox
 	$( '.cbGroup' ).click( function() {
-		$.each( $( '.' + this.id ), function() {
-			$( this ).attr( "checked", !$( this ).attr( "checked" ) );
-		});
+		$( '.' + this.id ).attr( "checked", $( this ).attr( "checked" ) == "checked" ? "checked" : false );
 	});
 	
 	// open dialog on info icon click
@@ -64,42 +62,108 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#actionDialog').dialog({
+		autoOpen: false,
+		closeOnEscape: true,
+		modal: true,
+		resizable: false,
+		width: 500,
+		height: 140
+	});
+	
 	$( "#tlgProgress" ).progressbar({
 		value: 0
 	});
 
 	$('#btnSearch').click(function() {
-		$('#statusDialog').dialog('open');
-
-		var $inputs = $('form :input');
-		var qryStr = "";
-		var flaws = [];
-		var flawCount = -1;
-		$inputs.each(function() {
-			if (this.name == "flaw") {
-				if ($(this).attr('checked')) {
-					flaws[++flawCount] = $(this).val().replace("-", ":");
-				}
-			} else if (this.name == "format") {
-				if ($('#bymail').attr('checked')) {
-					qryStr += "&" + this.name + "=" + $(this).val();
-				} else {
-					outputFormat = $(this).find(":selected").val();
-				}
-			} else if (this.name == "mailto") {
-				if ($('#bymail').attr('checked')) {
-					qryStr += "&" + this.name + "=" + encodeURIComponent($(this).val());
-				}
-			} else if (this.name != "") {
-				qryStr += "&" + this.name + "=" + $(this).val();
-			}
-		});
-		qryStr += "&flaws=" + flaws.join("%20");
-
-		queryTlg(qryStr);
+		var qString = getQueryString();
+		if( qString ) {
+			$('#statusDialog').dialog('open');
+			queryTlg(qString);
+		} else {
+			$( "#dlgError > #errMsg" ).html( errNoFilter );
+			$('#dlgError').dialog('open');
+		}
 		return false;
 	});
 });
+
+var getQueryString = function() {
+	var $inputs = $('form :input');
+	var qryStr = "";
+	var filters = [];
+	var filterCount = -1;
+	$inputs.each(function() {
+		if (this.name == "flaw") {
+			if ($(this).attr('checked')) {
+				filters[++filterCount] = $(this).val().replace("-", ":");
+			}
+		} else if (this.name == "format") {
+			if ($('#bymail').attr('checked')) {
+				qryStr += "&" + this.name + "=" + $(this).val();
+			} else {
+				outputFormat = $(this).find(":selected").val();
+			}
+		} else if (this.name == "bymail") {
+			if( $('#bymail').attr('checked') ) {
+				qryStr += "&bymail=on";
+			}
+		} else if (this.name == "include_hidden") {
+			if( $('#include_hidden').attr('checked') ) {
+				qryStr += "&include_hidden=on";
+			}
+		} else if (this.name == "mailto") {
+			if ($('#bymail').attr('checked')) {
+				qryStr += "&" + this.name + "=" + encodeURIComponent($(this).val());
+			}
+		} else if (this.name == "lang") {
+			qryStr += "&" + this.name + "=" + $(this).find(":selected").val();
+		} else if (this.name != "") {
+			qryStr += "&" + this.name + "=" + $(this).val();
+		}
+	});
+
+	if ( filters.length > 0 ) {
+		qryStr += "&flaws=" + filters.join("%20");
+	} else {
+		return false;
+	}
+	
+	return qryStr;
+}
+
+function markAsDone(eId, pageId, pageTitle, revision, filter) {
+	$(eId).attr("src", basePath + "res/img/tlg-load.gif");
+	var req = new XMLHttpRequest();
+	var url = "http://toolserver.org/~render/tlgbackend/tlgwsgi.py?action=markasdone";
+	url += "&page_id=" + pageId + "&page_latest=" + revision + "&filter_name=" + filter + "&page_title=" + pageTitle;
+	if ( $(eId).attr("class") == "hidden" ) {
+		url += "&unmark=true";
+	}
+	req.open('GET', url, true);
+	req.onreadystatechange = function() {
+		if (req.readyState == XMLHttpRequest.DONE) {
+			var respObj = jQuery.parseJSON(req.responseText);
+			if ( respObj ) {
+				if ( respObj.status ) {
+					if( $(eId).attr("class") == "hidden" ) {
+						$(eId).attr("src", basePath + "res/img/bulb-show.png");
+						$(eId).attr("title", descHide);
+						$(eId).attr("class", "");
+					} else {
+						$(eId).attr("src", basePath + "res/img/bulb-hidden.png");
+						$(eId).attr("title", descUnhide);
+						$(eId).attr("class", "hidden");
+					}
+				} else if( respObj.exception ) {
+					$( "#dlgError > #errMsg" ).html( "<pre>" + respObj.exception + "</pre>");
+					$( "#dlgError" ).dialog( "open" );
+				}
+			}
+		}
+	}
+	req.send(null);
+}
 
 function queryTlg(qryStr) {
 	$('#resultContainer').empty();
@@ -107,12 +171,10 @@ function queryTlg(qryStr) {
 	var respText = "";
 	var error = false;
 
-	xhr.open('GET', 'http://toolserver.org/~jkroll/tlgbe/tlgwsgi.py?action=query&format=json&chunked=true' + qryStr, true);
+	xhr.open('POST', 'http://toolserver.org/~render/tlgbackend/tlgwsgi.py?action=query&format=json&chunked=true' + qryStr, true);
 	xhr.send(null);
 
 	timer = window.setInterval(function() {
-		$('div#requestState').text('Request State: ' + xhr.readyState + ', Response length: ' + xhr.responseText.length);
-
 		if (xhr.readyState == XMLHttpRequest.DONE) {
 			$('#statusDialog').dialog('close');
 
@@ -120,7 +182,7 @@ function queryTlg(qryStr) {
 			var lastStatusSet = false;
 
 			if (outputFormat == 'html') {
-				arrResults.push("<table><tr><th>Mangel</th><th>Seitentitel</th></tr>");
+				arrResults.push("<table><tr><th>" + tableHeadFlaw + "</th><th>" + tableHeadPage + "</th></tr>");
 			} else if(outputFormat == 'wikitext' || $('#address').val() != "") {
 				arrResults.push("<div>");
 			}
@@ -134,7 +196,7 @@ function queryTlg(qryStr) {
 							lastStatus = respObj.status;
 
 							if ($('#address').val() != "") {
-								arrResults.push("<strong>Anfrage erfolgreich</strong><br />Die Liste wird nach Fertigstellung an die angegebene E-Mail-Adresse versendet.");
+								arrResults.push("<strong>" + reqSuccess + "</strong><br />" + reqSuccessMsg);
 							}
 						} else if (respObj.flaws) {
 							if (!lastStatusSet) {
@@ -164,6 +226,7 @@ function queryTlg(qryStr) {
 				var container = $( "#resultContainer" );
 				container.html(arrResults.join(""));
 				$( "#resultContainer" ).toggleClass( "box-hidden", false );
+				$( "#resultLink" ).html( '<a href="?submit=true' + getQueryString() + '">' + descLinkToRequest + '</a>' );
 			} else {
 				$( "#dlgError" ).dialog( "open" );
 			}
@@ -192,24 +255,45 @@ function queryTlg(qryStr) {
 var lastFlaws = "";
 function pushResultRow(flaws, page) {
 	var row = "";
-	var flawList = flaws.join(", ");
-	
+	var flawList = "";
+	var articleFeedbackFilter = false;
+
 	if (outputFormat == 'html') {
-		row = "<tr><td>" + flawList + "</td>";
-		row += "</td><td><a href=\"//" + 
-			$('#language').val() + 
-			".wikipedia.org/wiki/" + 
+		row = "<tr><td>";
+		$.each(flaws, function(index, flawObj) {
+			row += '<img src="' + basePath + 'res/img/bulb-' + (flawObj.hidden ? "hidden" : "show") + '.png" class="' + (flawObj.hidden ? "hidden" : "") + '" style="cursor: pointer; color: blue;" onclick="markAsDone(this, ' + page.page_id + ', \'' + page.page_title + '\', ' + page.page_latest + ', \'' + flawObj.name + '\')" title="' + (flawObj.hidden ? descUnhide : descHide) + '" />'
+			row += "&nbsp;" + flawObj.name;
+			if( flawObj.infotext ) {
+				row += " (" + flawObj.infotext + ") " 
+			}
+			row += "<br />";
+
+			if (flawObj.name == 'ArticleFeedbackRatings') {
+				articleFeedbackFilter = true;
+			}
+		});
+		row += "</td>";
+		row += "</td><td><a href=\"//" +
+			$('#language').find(":selected").val() +
+			".wikipedia.org/wiki/" +
 			page.page_title + 
-			"\" target\"_blank\">" +
-			page.page_title + 
-			"</a>" + 
-			"</td></tr>";
+			"\" target=\"_blank\">" +
+			page.page_title +
+			"</a>";
+		if (articleFeedbackFilter) {
+			row += "<br /><a href=\"//" +
+			$('#language').find(":selected").val() +
+			".wikipedia.org/wiki/Special:ArticleFeedbackv5/" +
+			page.page_title +
+			"\" target=\"_blank\">Feedback</a>";
+		}
+		row += "</td></tr>";
 	} else if (outputFormat == 'wikitext') {
 		if (flawList != lastFlaws) {
 			row = "<br />== " + flawList + " ==<br />";
 			lastFlaws = flawList;
 		}
-		
+
 		row += "* [[" + page.page_title + "]]<br />";
 	}
 
@@ -230,5 +314,6 @@ function toggleAddressField() {
 		$('#divAddress').css('visibility', 'visible');
 	} else {
 		$('#divAddress').css('visibility', 'hidden');
+		$('#address').val("");
 	}
 }

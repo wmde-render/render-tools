@@ -8,10 +8,12 @@ class Request extends SingletonFactory {
 
 
 	public function __construct() {
-		$uriParts = explode('?', $_SERVER['REQUEST_URI']);
+		$request = urldecode( $_SERVER['REQUEST_URI'] );
+		$uriParts = explode( '?', $request );
 		$reqUri = $uriParts[0];
 		# TODO: hack
-		if ($reqUri == '/~knissen/stools') $reqUri .= '/';
+		$uInfo = posix_getpwuid( posix_getuid() );
+		if ($reqUri == '/~' + $uInfo["name"] + '/stools') $reqUri .= '/';
 		$requestUri = str_ireplace( BASE_PATH, '', $reqUri );
 		$requestUri = array_filter( explode( '/', $requestUri ) );
 

@@ -6,7 +6,7 @@ class Asqm_Model extends Model {
 	public function getArticle( $id ) {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
-				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki_p' );
+				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 		
 			$sql = "SELECT * FROM page WHERE page_id = ?";
 			$statement = $dbConn->prepare( $sql );
@@ -23,7 +23,7 @@ class Asqm_Model extends Model {
 	public function getRevision( $id, $first = true ) {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
-				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki_p' );
+				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 
 			$sql = "SELECT * FROM revision ".
 					"WHERE rev_page = ? " .
@@ -47,7 +47,7 @@ class Asqm_Model extends Model {
 	public function getLinkCount( $id ) {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
-				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki_p' );
+				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 
 			$sql = "SELECT COUNT(*) FROM pagelinks ".
 					"WHERE pl_from = ? ";
@@ -65,10 +65,17 @@ class Asqm_Model extends Model {
 	public function getImageCount( $id ) {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
-				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki_p' );
+				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 
-			$sql = "SELECT COUNT(*) FROM imagelinks ".
-					"WHERE il_from = ? ";
+			/*$sql = "SELECT COUNT(*) FROM imagelinks ".
+					"WHERE il_from = ? AND NOT EXISTS (".
+					"SELECT 1 FROM imagelinks WHERE il_to = src.il_to ".
+						"AND il_from IN (".
+						"SELECT page_id FROM page WHERE page_namespace=10)));";*/
+			$sql = "SELECT COUNT(il_from) FROM imagelinks AS src ".
+					"WHERE il_from = ? AND NOT EXISTS (".
+					"SELECT 1 FROM imagelinks WHERE il_to = src.il_to AND il_from IN (".
+					"SELECT page_id FROM page WHERE page_namespace = 10))";
 			
 			$statement = $dbConn->prepare( $sql );
 			$statement->execute( array( $id ) );
@@ -83,7 +90,7 @@ class Asqm_Model extends Model {
 	public function getRealImageCount( $id ) {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
-				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki_p' );
+				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 
 			$sql = "SELECT * FROM imagelinks ".
 					"WHERE il_from = ? ";
@@ -133,7 +140,7 @@ class Asqm_Model extends Model {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
 				->getDbConnection( SingletonFactory::getInstance( 'Request' )
-				->getVar( 'lang' ) . 'wiki_p' );
+				->getVar( 'lang' ) . 'wiki' );
 
 			$sql = "SELECT COUNT(DISTINCT rev_user) FROM revision WHERE rev_user > 0 AND rev_page = ?";
 			$statement = $dbConn->prepare( $sql );
@@ -158,7 +165,7 @@ class Asqm_Model extends Model {
 	public function getArticleRating( $id ) {
 		if ( $id ) {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
-				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki_p' );
+				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 
 			$sql = "SELECT AVG(aa_rating_value), aa_rating_id ".
 					"FROM article_feedback ".
@@ -177,6 +184,30 @@ class Asqm_Model extends Model {
 		}
 	}
 	
+	public function getGiniScore( $id, $lang ) {
+		if ( $id ) {
+			// HACK
+			$lang = SingletonFactory::getInstance('Request')->getVar('lang');
+			$dbConn = SingletonFactory::getInstance( 'Database' )
+				->getDbConnection( 'wikigini' );
+
+			$sql = "SELECT gini_index ".
+				"FROM revisions ".
+				"WHERE page_id = ? ".
+				"AND language_code = ? ".
+				"AND method_id = 1 ".
+				"ORDER BY id DESC ".
+				"LIMIT 1";
+			$statement = $dbConn->prepare( $sql );
+			$statement->execute( array( $id, $lang ) );
+			$result = $statement->fetchAll();
+			if ( $result ) {
+				return number_format( $result[0][0], 2 );
+			}
+		}
+		return false;
+	}
+
 	public function logRequest() {
 		$asqmId = SingletonFactory::getInstance( 'Request' )->getVar( 'asqmid' );
 		$title = SingletonFactory::getInstance( 'Request' )->getVar( 'id' );
@@ -186,7 +217,7 @@ class Asqm_Model extends Model {
 				$asqmId = "none";
 			}
 			
-			$dbConn = SingletonFactory::getInstance( 'Database' )->getDbConnection( 'ts' );
+			$dbConn = SingletonFactory::getInstance( 'Database' )->getDbConnection( 'asqmRequestLog' );
 			#$sql = "INSERT INTO asqm_request_log (asqm_id) VALUES (?) ON DUPLICATE KEY UPDATE requests = (requests + 1)";
 			$sql = "INSERT INTO asqm_request_log (asqm_id, title, lang) VALUES (?, ?, ?)";
 			try {

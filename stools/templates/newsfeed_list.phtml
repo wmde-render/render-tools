@@ -21,13 +21,15 @@
 <?php if ( is_array( $items ) ): ?>
 					<table>
 						<tr>
+							<th><?php echo $this->translate( "newsfeedTableDate" ); ?></th>
 							<th><?php echo $this->translate( "newsfeedTableTitle" ); ?></th>
 							<th><?php echo $this->translate( "newsfeedTableUrl" ); ?></th>
 						</tr>
 	<?php foreach ($items as $item): ?>
 						<tr>
-							<td><?php echo $item->title; ?></td>
-							<td><a href="<?php echo $item->uri; ?>" target="_blank"><?php echo $this->shortenUrl( $item->uri ); ?></a></td>
+							<td><?php echo date( $this->translate( "dateFormat" ), strtotime( $item->DateTime ) ); ?></td>
+							<td><?php echo $item->Title; ?></td>
+							<td><a href="<?php echo $item->URI; ?>" target="_blank"><?php echo $this->shortenUrl( $item->URI ); ?></a></td>
 						</tr>
 	<?php endforeach; ?>
 					</table>

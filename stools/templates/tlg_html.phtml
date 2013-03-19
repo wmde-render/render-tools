@@ -10,12 +10,24 @@
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-ui-1.8.23.custom.min.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/XMLHttpRequest.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/tlg_html.js"></script>
+		<script type="text/javascript">
+			var basePath = '<?php echo BASE_PATH; ?>';
+			var reqSuccess = '<?php echo $this->translate("reqSuccess"); ?>';
+			var reqSuccessMsg = '<?php echo $this->translate("reqSuccessMsg"); ?>';
+			var tableHeadFlaw = '<?php echo $this->translate("tableHeadFlaw"); ?>';
+			var tableHeadPage = '<?php echo $this->translate("tableHeadPage"); ?>';
+			var errNoFilter = '<?php echo $this->translate("errNoFilter"); ?>';
+			var statusMarkedHidden = '<?php echo $this->translate("markedAsHidden"); ?>';
+			var statusUnmarkedHidden = '<?php echo $this->translate("unmarkedAsHidden"); ?>';
+			var descHide = '<?php echo $this->translate("descHide"); ?>';
+			var descUnhide = '<?php echo $this->translate("descUnhide"); ?>';
+			var descLinkToRequest = '<?php echo $this->translate("linkToRequest"); ?>';
+		</script>
 	</head>
 
 	<body>
 		<div class="tlg-container box-shadow">
 <?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
-<div id="requestState" style="position:absolute; top:0;left:0;">requestState: uninitialized</div>			
 			<form id="tlg-form" action="">
 				<div>
 					<h2><?php echo $this->translate( "topHeading" ); ?></h2>
@@ -25,45 +37,58 @@
 						<label class="fieldLabel" for="language">
 							<?php echo $this->translate( "descLanguage" ); ?>
 						</label>
-						<input type="text" id="language" name="lang" value="de" />
+						<select name="lang" id="language">
+<?php $graphs = SingletonFactory::getInstance( 'Tlg_Model' )->getGraphList(); ?>
+<?php if( is_array( $graphs ) ): ?>
+<?php foreach( $graphs as $graph ): ?>
+							<option value="<?php echo $graph; ?>" <?php echo ( isset( $_GET['lang'] ) && $_GET['lang'] == $graph ) ? "selected" : ""; ?>><?php echo $graph; ?></option>
+<?php endforeach; ?>
+<?php endif; ?>
+						</select>
 						<img class="fldHelp" id="helpLanguage" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
 
 						<label class="fieldLabel" for="categories">
 							<?php echo $this->translate( "descCategories" ); ?>
 						</label>
-						<input type="text" id="categories" name="query" value="" />
+						<input type="text" id="categories" name="query" value="<?php echo isset( $_GET['query'] ) ? $_GET['query'] : ""; ?>" />
 						<img class="fldHelp" id="helpCategories" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
 
 						<label class="fieldLabel" for="depth">
 							<?php echo $this->translate( "descDepth" ); ?>
 						</label>
-						<input type="text" id="depth" name="querydepth" value="2" />
+						<input type="text" id="depth" name="querydepth" value="<?php echo isset( $_GET['querydepth'] ) ? htmlentities( $_GET['querydepth'] ) : "2"; ?>" />
 						<img class="fldHelp" id="helpDepth" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
+						<div class="clear"></div>
+
+						<input style="margin-left: 110px;" type="checkbox" id="include_hidden" name="include_hidden" value="true" <?php echo isset( $_GET['include_hidden'] ) ? "checked" : ""; ?> />
+						<label style="width: 100px;" for="include_hidden">
+							<?php echo $this->translate( "alsoShowHidden" ); ?>
+						</label>
 						<div class="clear"></div>
 
 						<label class="fieldLabel" for="outputFormat">
 							<?php echo $this->translate( "descFormat" ); ?>
 						</label>
 						<select id="outputFormat" name="format">
-							<option value="html">HTML</option>
-							<option value="wikitext">WikiText</option>
+							<option value="html" <?php echo $_GET['format'] == "html" ? "checked" : ""; ?>>HTML</option>
+							<option value="wikitext" <?php echo $_GET['format'] == "wikitext" ? "checked" : ""; ?>>WikiText</option>
 						</select>
 						<!--div class="clear"></div-->
 
-						<input type="checkbox" id="bymail" name="bymail" onclick="javascript:toggleAddressField();" value="on" />
+						<input type="checkbox" id="bymail" name="bymail" <?php echo $_GET['bymail'] == "on" ? "checked" : ""; ?> onclick="javascript:toggleAddressField();" value="on" />
 						<label style="width: 100px;" for="bymail">
 							<?php echo $this->translate( "labelAddressCb" ); ?>
 						</label>
 						<img class="fldHelp" id="helpOutput" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
 
-						<div id="divAddress" style="visibility: hidden;">
+						<div id="divAddress" style="visibility: <?php echo isset( $_GET['bymail'] ) ? "visible" : "hidden"; ?>;">
 							<label class="fieldLabel" for="address">
 								<?php echo $this->translate( "labelAddress" ); ?>
 							</label>
-							<input type="text" id="address" name="mailto" value="" />
+							<input type="text" id="address" name="mailto" value="<?php echo isset( $_GET['mailto'] ) ? htmlentities( $_GET['mailto'] ) : ""; ?>" />
 						</div>
 						<div class="clear"></div>
 
@@ -80,22 +105,30 @@
 	<?php endif; ?>
 	<?php foreach ($flaws as $name => $info): ?>
 		<?php $name = str_replace( ":", "-", $name); ?>
-						<input type="checkbox" class="<?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" />
+						<input type="checkbox" class="<?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" style="margin-left: 18px;" <?php echo ( isset( $_GET['flaws'] ) && strstr( $_GET['flaws'], $name ) ) ? "checked" : ""; ?> />
 						<label class="cbLabel" title="<?php echo $info["description"]; ?>" for="<?php echo $name; ?>"><?php echo $info["label"]; ?></label><br />
 	<?php endforeach; ?>
 <?php endforeach; ?>
 						<div class="clear"></div>
 					</div>
 				</div>
+				<input type="hidden" name="i18n" value="<?php echo $this->getLang(); ?>" />
 			</form>
+			<div id="resultLink"></div>
 			<div id="resultContainer" class="box-shadow box-hidden"></div>
 <?php require( 'disclaimer.phtml' ); ?>
 		</div>
 		
-		<div id="statusDialog" title="Anfrage wird bearbeitet">
+		<div id="statusDialog" title="<?php echo $this->translate( "statusTitle" ); ?>">
 			<p>
 				<span id="status"> </span>
 				<div id="tlgProgress"></div>
+			</p>
+		</div>
+
+		<div id="actionDialog" title="<?php echo $this->translate( "statusTitle" ); ?>">
+			<p>
+				<span id="action"> </span>
 			</p>
 		</div>
 
@@ -128,5 +161,12 @@
 			<p id="errMsg"></p>
 			<!--p><?php echo $this->translate( "dlgErrorReport" ); ?></p-->
 		</div>
+<?php if( isset( $_GET['submit'] ) && $_GET['submit'] == 'true' ): ?>
+		<script>
+			$( document ).ready( function() {
+				$( "#btnSearch" ).click();
+			});
+		</script>
+<?php endif; ?>
 	</body>
 </html>

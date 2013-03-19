@@ -2,24 +2,15 @@
 class Database extends SingletonFactory {
 	
 	private $_dbConn = array();
-	private $_dbHost;
-	private $_dbUser;
-	private $_dbPass;
-	private $_dbName;
 	
 	public function __construct() { }
 	
-	public function setDbConnection( $dbHost, $dbUser, $dbPass, $dbName ) {
-		$this->_dbHost = $dbHost;
-		$this->_dbUser = $dbUser;
-		$this->_dbPass = $dbPass;
-		$this->_dbName = $dbName;
-
+	public function setDbConnection( $dbHost, $dbUser, $dbPass, $dbName, $port = "3306" ) {
 		try {
 			$this->_dbConn[$dbName] = new PDO(
-				'mysql:host=' . $this->_dbHost . ';dbname=' . $this->_dbName,
-				$this->_dbUser,
-				$this->_dbPass
+				'mysql:host=' . $dbHost . ';dbname=' . $dbName . ";port=" . $port,
+				$dbUser,
+				$dbPass
 			);
 			
 			return $this->_dbConn[$dbName];
@@ -30,17 +21,19 @@ class Database extends SingletonFactory {
 	}
 	
 	public function getDbConnection( $dbName ) {
+		global $dbLinks;
+		
 		if ( isset( $this->_dbConn[$dbName] ) ) {
 			return $this->_dbConn[$dbName];
 		} else {
 			$userInfo = $this->_getUserCredentials();
-			if ( $dbName == 'dewiki_p') {
-				return $this->setDbConnection( 'sql-s2', $userInfo["user"], $userInfo["password"], 'dewiki_p' );
-			} elseif ( $dbName == 'enwiki_p' ) {
-				return $this->setDbConnection( 'sql-s1', $userInfo["user"], $userInfo["password"], 'enwiki_p' );
-			} elseif ( $dbName == 'ts' ) {
-				return $this->setDbConnection( 'sql-user-k', $userInfo["user"], $userInfo["password"], 'u_knissen_asqm_u' );
+			if (array_key_exists( $dbName, $dbLinks ) ) {
+				$serverName = $dbLinks[$dbName]["serverName"];
+			} else {
+				$serverName = $dbLinks["user"]["serverName"];
 			}
+
+			return $this->setDbConnection( $serverName, $userInfo["user"], $userInfo["password"], $dbLinks[$dbName]["dbName"] );
 		}
 
 		return false;
@@ -51,7 +44,7 @@ class Database extends SingletonFactory {
 		$dbConf = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
 		return $dbConf;
 	}
-
+	
 	public function __destruct() {
 		$this->_dbConn = null;
 	}

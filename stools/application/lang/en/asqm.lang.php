@@ -1,5 +1,6 @@
 <?php
 $strLang = array(
+	"dateFormat" => "Y-m-d H:i",
 	"asqmHeading" => "Article Statistics and Quality Monitor",
 	"asqmDesc" => "The ASQM (Article Statistics and Quality Monitor) offers a 
 		brief overview about the quality and the current status of any Wikipedia 
@@ -31,6 +32,7 @@ $strLang = array(
 		The institute is participating the RENDER Project.",
 	"newsfeedTableTitle" => "Title",
 	"newsfeedTableUrl" => "URL",
+	"newsfeedTableDate" => "Date",
 	
 	# asqm output
 	"groupStats" => array(
@@ -38,14 +40,33 @@ $strLang = array(
 		"pageTitle" => "Page Title",
 		"status" => "Status",
 		"firstEdit" => "Created",
-		"recentEdit" => "Recent edit",
+		"recentEdit" => "Recent Edit",
 		"editedBy" => "by",
 		"totalEditors" => "Editors",
 		"references" => "References",
-		"images" => "Images",
+		"images" => "Media Files",
 		"visitorsToday" => "Visitors today",
 		"visitors30days" => "Last 30 days"
 	),
+	"groupCoverage" => array(
+		"title" => "Fact coverage",
+		"lea" => "LEA (Link Extractor)",
+		"showAnalysis" => "Show Analysis",
+	),
+	"groupCurrentness" => array(
+		"title" => "Currentness",
+		"titleNewsFinder" => "NewsFinder",
+		"noNews" => "No news articles found",
+		"newsFound" => " news articles found",
+		"showResults" => "Show Results",
+		"titleChangeDetector" => "Change Detector",
+		"cdHit" => "Detected as possibly outdated"
+	),
+	"groupEditorInteraction" => array(
+		"title" => "Editor Interaction",
+		"giniScore" => "WikiGini Score",
+	),
+/*
 	"groupRender" => array(
 		"title" => "RENDER-Analysis",
 		"factCoverage" => "Fact Coverage",
@@ -56,6 +77,7 @@ $strLang = array(
 		"noNews" => "No news articles found",
 		"newsFound" => " news articles found",
 	),
+*/
 	"groupOther" => array(
 		"title" => "Further Assessment",
 		"wikibuch" => "Wikibu.ch",
@@ -67,5 +89,9 @@ $strLang = array(
 		"objective" => "Objective",
 		"complete" => "Complete",
 		"wellWritten" => "Well-written",
+	),
+	"groupAftV5" => array(
+		"title" => "Article Feedback Score",
+		"negRating" => "Negative Ratings",
 	),
 );

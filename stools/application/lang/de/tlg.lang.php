@@ -1,10 +1,9 @@
 <?php
 $strLang = array(
-	"topHeading" => "Arbeitslistengenerator",
+	"topHeading" => "Artikellisten-Generator",
 	"descHeading" => "Sprache, Kategorien und Suchtiefe",
 	"descLanguage" => "Sprache",
-	"descLanguageDesc" => "Kürzel der Sprachversion (momentan können nur Artikel 
-		in der deutschsprachigen Wikipedia gesucht werden)",
+	"descLanguageDesc" => "Kürzel der Sprachversion",
 	"descCategories" => "Kategorien",
 	"descCategoriesDesc" => "Eine mit Semikola getrennte Liste von Kategorienamen. 
 		Ein vorangestelltes Plus-Zeichen bildet eine Schnittmenge, ein Minus-Zeichen 
@@ -36,9 +35,10 @@ $strLang = array(
 		Die Ergebnisse können entweder als HTML-Tabelle oder als WikiText 
 		ausgegeben werden.<br /><br />
 		<strong>per E-Mail</strong><br />
-		Die Ergebnisse können auch per E-Mail gesendet werden. Diese Option erfordert die
-		Angabe einer E-Mail-Adresse, ein Formularfeld für die E-Mail-Adresse wird
-		zusätzlich angezeigt, wenn diese Option ausgewählt wird.",
+		Die Ergebnisse können auch per E-Mail gesendet werden. Diese Option 
+		erfordert die Angabe einer E-Mail-Adresse. Ein Formularfeld für die 
+		E-Mail-Adresse wird zusätzlich angezeigt, wenn diese Option ausgewählt 
+		wird.",
 	"labelAddressCb" => "per E-Mail",
 	"labelAddress" => "E-Mail-Adresse",
 	"labelSearch" => "Suchen",
@@ -48,5 +48,17 @@ $strLang = array(
 	"tblHeadTitle" => "Seitentitel",
 	"dlgErrorTitle" => "Fehler",
 	"dlgErrorHeading" => "Während der Verarbeitung der Anfrage ist ein Fehler aufgetreten.",
-	"dlgErrorReport" => "Soll diese Fehlermeldung gesendet werden?"
+	"dlgErrorReport" => "Soll diese Fehlermeldung gesendet werden?",
+	"statusTitle" => "Anfrage wird verarbeitet",
+	"reqSuccess" => "Anfrage erfolgreich",
+	"reqSuccessMsg" => "Die Liste wird nach Fertigstellung an die angegebene E-Mail-Adresse versendet.",
+	"tableHeadFlaw" => "Filter",
+	"tableHeadPage" => "Seitentitel",
+	"errNoFilter" => "Kein Filter ausgewählt",
+	"markedAsHidden" => "Die Artikelrevision wird bei künftigen Anfragen nicht mehr angezeigt.",
+	"unmarkedAsHidden" => "Die Artikelrevision wird bei künftigen Anfragen wieder angezeigt.",
+	"descHide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen auszublenden",
+	"descUnhide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen wieder einzublenden.",
+	"alsoShowHidden" => "auch ausgeblendete Ergebnisse anzeigen",
+	"linkToRequest" => "Link zu dieser Anfrage",
 );

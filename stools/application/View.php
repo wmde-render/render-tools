@@ -14,16 +14,22 @@ class View {
 		$this->_errorMessages = array();
 
 		# determine which language to use (1. get, 2. session, 3. browser language)
-		$reqLang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' );
+		$reqLang = SingletonFactory::getInstance( 'Request' )->getVar( 'uilang' );
 		if ( $reqLang ) {
 			$this->_lang = $reqLang;
-		} elseif ( @$_SESSION['lang'] ) {
-			$this->_lang = $_SESSION['lang'];
+		} elseif ( @$_SESSION['uilang'] ) {
+			$this->_lang = $_SESSION['uilang'];
+		} elseif( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) ) {
+			$this->_lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' );
 		} else {
 			$this->_lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 		}
+
+		// HACK
+		$objReq = SingletonFactory::getInstance('Request');
+		if ($objReq->getVar('lang') && $objReq->getVar('id')) $this->_lang = $objReq->getVar('lang');
 		
-		$_SESSION['lang'] = $this->_lang;
+		$_SESSION['uilang'] = $this->_lang;
 	}
 	
 
@@ -102,5 +108,9 @@ class View {
 		}
 		
 		return is_array( $key ) ? $key[0] : $key;
+	}
+
+	public function getLang() {
+		return isset($this->_lang) ? $this->_lang : 'de';
 	}
 }
