@@ -171,7 +171,7 @@ function queryTlg(qryStr) {
 	var respText = "";
 	var error = false;
 
-	xhr.open('POST', 'http://toolserver.org/~render/tlgbackend/tlgwsgi.py?action=query&format=json&chunked=true' + qryStr, true);
+	xhr.open('POST', tlgServiceUrl + '?action=query&format=json&chunked=true' + qryStr, true);
 	xhr.send(null);
 
 	timer = window.setInterval(function() {
