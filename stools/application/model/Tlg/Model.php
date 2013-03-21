@@ -5,7 +5,7 @@ class Tlg_Model extends Model {
 	private $_serviceUrl;
 	
 	public function __construct() {
-		$this->_serviceUrl = "http://toolserver.org/~jkroll/tlgbe/tlgwsgi.py";
+		$this->_serviceUrl = TLG_SERVICE_URL;
 	}
 	
 	public function getFlawList() {
@@ -33,7 +33,7 @@ class Tlg_Model extends Model {
 	public function getGraphList() {
 		$result = array();
 		try {
-			$connInfo = $this->_getConnectionInfo(); var_dump($connInfo);
+			$connInfo = $this->_getConnectionInfo();
 			$gp = gpConnection::new_client_connection( 
 					null, 
 					$connInfo["graphserv-host"] . ".toolserver.org", 

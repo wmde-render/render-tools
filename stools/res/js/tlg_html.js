@@ -135,7 +135,7 @@ var getQueryString = function() {
 function markAsDone(eId, pageId, pageTitle, revision, filter) {
 	$(eId).attr("src", basePath + "res/img/tlg-load.gif");
 	var req = new XMLHttpRequest();
-	var url = "http://toolserver.org/~render/tlgbackend/tlgwsgi.py?action=markasdone";
+	var url = tlgServiceUrl + "?action=markasdone";
 	url += "&page_id=" + pageId + "&page_latest=" + revision + "&filter_name=" + filter + "&page_title=" + pageTitle;
 	if ( $(eId).attr("class") == "hidden" ) {
 		url += "&unmark=true";

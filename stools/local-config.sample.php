@@ -12,6 +12,9 @@ define( 'TEMPLATE_PATH', '' );
 # relative path to index.php
 define( 'BASE_PATH', '' );
 
+# task list generator backend service url
+define( 'TLG_SERVICE_URL', '' );
+
 # database names and server names
 $dbLinks = array(
 	"dbName" => "serverName",
