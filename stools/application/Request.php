@@ -8,14 +8,14 @@ class Request extends SingletonFactory {
 
 
 	public function __construct() {
-		$request = urldecode( $_SERVER['REQUEST_URI'] );
-		$uriParts = explode( '?', $request );
-		$reqUri = $uriParts[0];
-		# TODO: hack
-		$uInfo = posix_getpwuid( posix_getuid() );
-		if ($reqUri == '/~' + $uInfo["name"] + '/stools') $reqUri .= '/';
-		$requestUri = str_ireplace( BASE_PATH, '', $reqUri );
-		$requestUri = array_filter( explode( '/', $requestUri ) );
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
+			$uriParts = explode('?', $_SERVER['REQUEST_URI']);
+			$reqUri = $uriParts[0];
+			$requestUri = str_ireplace( BASE_PATH, '', $reqUri );
+			$requestUri = array_filter( explode( '/', $requestUri ) );
+		} else {
+			$requestUri = array_keys( $_GET );
+		}
 
 		if( isset($requestUri[0]) ) {
 			$this->_module = $requestUri[0];
