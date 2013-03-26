@@ -407,19 +407,21 @@ if( isset( $_GET["submit"] ) ) {
 }
 $end = time();
 
-// log request
-$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
+if( isset( $_GET["submit"] ) ) {
+	// log request
+	$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
 
-$userInfo = posix_getpwuid( posix_getuid() );
-$dbCred = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
-mysql_connect( 'sql.toolserver.org', $dbCred['user'], $dbCred['password'] );
-mysql_select_db( 'u_knissen_asqm_u' );
+	$userInfo = posix_getpwuid( posix_getuid() );
+	$dbCred = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
+	mysql_connect( 'sql.toolserver.org', $dbCred['user'], $dbCred['password'] );
+	mysql_select_db( 'u_knissen_asqm_u' );
 
-$serializedResult = base64_encode( serialize( $arrResult ) );
-$sql = "INSERT INTO asqm_request_log ".
-		"(asqm_id, title, lang, action_type, result, request_time) ".
-		"VALUES ('" . $asqmId . "', '', '" . $reflang . "', 'changedetector', '', NOW())";
-mysql_query( $sql );
-$mysqlError = mysql_error();
-echo $mysqlError;
-mysql_close();
+	$serializedResult = base64_encode( serialize( $arrResult ) );
+	$sql = "INSERT INTO asqm_request_log ".
+			"(asqm_id, title, lang, action_type, result, request_time) ".
+			"VALUES ('" . $asqmId . "', '', '" . $reflang . "', 'changedetector', '', NOW())";
+	mysql_query( $sql );
+	$mysqlError = mysql_error();
+	echo $mysqlError;
+	mysql_close();
+}
