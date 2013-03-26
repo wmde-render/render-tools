@@ -9,13 +9,13 @@ class Monitor_CheckController /*extends Controller*/ {
 	public function tlgAction() {
 		$graphs = SingletonFactory::getInstance( "Tlg_Model" )->getGraphList();
 		if ( !in_array( "de", $graphs ) ) {
-			$this->_messages = "GraphServ: instance 'dewiki' not running\n";
+			$this->_messages[] = "GraphServ: instance 'dewiki' not running\n";
 		}
 		if ( !in_array( "en", $graphs ) ) {
-			$this->_messages = "GraphServ: instance 'enwiki' not running\n";
+			$this->_messages[] = "GraphServ: instance 'enwiki' not running\n";
 		}
 		if ( !in_array( "fr", $graphs ) ) {
-			$this->_messages = "GraphServ: instance 'frwiki' not running\n";
+			$this->_messages[] = "GraphServ: instance 'frwiki' not running\n";
 		}
 
 		$testRequest = @file_get_contents( TLG_SERVICE_URL . "?action=query&format=json&chunked=true&lang=de&query=Astronomie&querydepth=2&i18n=de&flaws=Large" );
@@ -26,15 +26,15 @@ class Monitor_CheckController /*extends Controller*/ {
 					if ( $line !== '' ) {
 						$resultRow = json_decode( $line );
 						if ( $resultRow === null ) {
-							$this->_messages = "TLG backend: json response could not be parsed\n";
+							$this->_messages[] = "TLG backend: json response could not be parsed\n";
 						}
 					}
 				}
 			} else {
-				$this->_messages = "TLG backend: response is not multiline\n";
+				$this->_messages[] = "TLG backend: response is not multiline\n";
 			}
 		} else {
-			$this->_messages = "TLG backend: no response\n";
+			$this->_messages[] = "TLG backend: no response\n";
 		}
 		
 		$this->_sendMessages();
@@ -45,10 +45,10 @@ class Monitor_CheckController /*extends Controller*/ {
 		if ( $test !== false ) {
 			$result = json_decode( $test );
 			if ( $result === null ) {
-				$this->_messages = "Article Monitor: error parsing json response\n";
+				$this->_messages[] = "Article Monitor: error parsing json response\n";
 			}
 		} else {
-			$this->_messages = "Article Monitor: no response\n";
+			$this->_messages[] = "Article Monitor: no response\n";
 		}
 	}
 	
