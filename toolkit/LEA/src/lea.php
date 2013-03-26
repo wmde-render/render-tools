@@ -310,6 +310,20 @@ if ($id) {
 		// close all database connections
 		closeDbLinks();
 
+		// log request
+		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
+		
+		$userInfo = posix_getpwuid( posix_getuid() );
+		$dbCred = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
+		mysql_connect( 'sql.toolserver.org', $dbCred['user'], $dbCred['password'] );
+		mysql_select_db( 'u_knissen_asqm_u' );
+
+		$serializedResult = base64_encode( serialize( $arrResult ) );
+		$sql = "INSERT INTO asqm_request_log ".
+				"(asqm_id, title, lang, action_type, result, request_time) ".
+				"VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'lea', '" . $serializedResult . "', NOW())";
+		mysql_query( $sql );
+
 		// preparing output
 		$intersection = count($arrResult['red']) + count($arrResult['yellow']) + count($arrResult['green']);
 		$Chart_Label = str_replace( " ", "%20", $Legend["red"] ) .
