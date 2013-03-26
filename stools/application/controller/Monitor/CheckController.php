@@ -1,9 +1,14 @@
 <?php
 class Monitor_CheckController /*extends Controller*/ {
 	private $_messages;
+	private $_streamContext;
 
 	public function __construct() {
 		$this->_messages = array();
+		$this->_streamContext = stream_context_create( array(
+			'http' => array( 'timeout' => 300 ),
+			'https' => array( 'timeout' => 300 )
+		));
 	}
 
 	public function tlgAction() {
@@ -18,7 +23,12 @@ class Monitor_CheckController /*extends Controller*/ {
 			$this->_messages[] = "GraphServ: instance 'frwiki' not running\n";
 		}
 
-		$testRequest = @file_get_contents( TLG_SERVICE_URL . "?action=query&format=json&chunked=true&lang=de&query=Astronomie&querydepth=2&i18n=de&flaws=Large" );
+		$testRequest = @file_get_contents( 
+			TLG_SERVICE_URL .
+			"?action=query&format=json&chunked=true&lang=de&query=Astronomie&querydepth=2&i18n=de&flaws=Large",
+			false,
+			$this->_streamContext
+		);
 		if ( $testRequest !== false ) {
 			$testRequest = explode( "\n", $testRequest );
 			if ( is_array( $testRequest ) ) {
@@ -41,7 +51,11 @@ class Monitor_CheckController /*extends Controller*/ {
 	}
 
 	public function asqmAction() {
-		$test = @file_get_contents( "http://toolserver.org/~render/stools/asqm/query/json/id/297666/lang/de/asqmid/monitor" );
+		$test = @file_get_contents(
+			"http://toolserver.org/~render/stools/asqm/query/json/id/297666/lang/de/asqmid/monitor",
+			false,
+			$this->_streamContext
+		);
 		if ( $test !== false ) {
 			$result = json_decode( $test );
 			if ( $result === null ) {
