@@ -1,4 +1,4 @@
-<?php SingletonFactory::getInstance( 'Asqm_Model' )->logRequest(); ?>
+<?php SingletonFactory::getInstance( 'Asqm_Model' )->logRequest( $this->getTitle(), $this->getLanguage() ); ?>
 <?php $callback = SingletonFactory::getInstance('Request')->getVar('callback'); ?>
 <?php echo $callback; ?>({
 	"asqmResponse": {

@@ -208,24 +208,21 @@ class Asqm_Model extends Model {
 		return false;
 	}
 
-	public function logRequest() {
+	public function logRequest( $pageTitle, $lang, $asqmId = "none", $actionType = "asqm", $result = "" ) {
 		$asqmId = SingletonFactory::getInstance( 'Request' )->getVar( 'asqmid' );
-		$title = SingletonFactory::getInstance( 'Request' )->getVar( 'id' );
-		$lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' );
-		if ( isset($asqmId) ) {
-			if ( empty( $asqmId ) ) {
-				$asqmId = "none";
-			}
-			
-			$dbConn = SingletonFactory::getInstance( 'Database' )->getDbConnection( 'asqmRequestLog' );
-			#$sql = "INSERT INTO asqm_request_log (asqm_id) VALUES (?) ON DUPLICATE KEY UPDATE requests = (requests + 1)";
-			$sql = "INSERT INTO asqm_request_log (asqm_id, title, lang) VALUES (?, ?, ?)";
-			try {
-				$statement = $dbConn->prepare( $sql );
-				$statement->execute( array( $asqmId, $title, $lang ) );
-			} catch (Exception $e) {
-				var_dump($e);
-			}
+		if ( !isset( $asqmId ) || empty( $asqmId ) ) {
+			$asqmId = $_SESSION['asqmId'];
+		}
+
+		$dbConn = SingletonFactory::getInstance( 'Database' )->getDbConnection( 'asqmRequestLog' );
+		$sql = "INSERT INTO asqm_request_log ".
+				"(asqm_id, title, lang, action_type, result, request_time) ".
+				"VALUES (?, ?, ?, ?, ?, NOW())";
+		try {
+			$statement = $dbConn->prepare( $sql );
+			$statement->execute( array( $asqmId, $pageTitle, $lang, $actionType, $result ) );
+		} catch (Exception $e) {
+			var_dump($e);
 		}
 	}
 }

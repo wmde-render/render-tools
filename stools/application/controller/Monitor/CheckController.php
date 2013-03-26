@@ -6,8 +6,7 @@ class Monitor_CheckController /*extends Controller*/ {
 	public function __construct() {
 		$this->_messages = array();
 		$this->_streamContext = stream_context_create( array(
-			'http' => array( 'timeout' => 300 ),
-			'https' => array( 'timeout' => 300 )
+			'http' => array( 'timeout' => 300 )
 		));
 	}
 
