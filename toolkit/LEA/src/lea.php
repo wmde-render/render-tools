@@ -323,6 +323,7 @@ if ($id) {
 				"(asqm_id, title, lang, action_type, result, request_time) ".
 				"VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'lea', '" . $serializedResult . "', NOW())";
 		mysql_query( $sql );
+		mysql_close();
 
 		// preparing output
 		$intersection = count($arrResult['red']) + count($arrResult['yellow']) + count($arrResult['green']);
