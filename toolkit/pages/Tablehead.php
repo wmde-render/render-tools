@@ -76,7 +76,6 @@ if (isset($load_wikigini) && $load_wikigini) {
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/Corpex/js/jqplot/plugins/jqplot.pieRenderer.js"></script>
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/Corpex/js/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/Corpex/js/jqplot/plugins/jqplot.barRenderer.js"></script>
-<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/Corpex/js/corpex.js"></script>
 
 		
 
