@@ -118,6 +118,8 @@ var getQueryString = function() {
 			}
 		} else if (this.name == "lang") {
 			qryStr += "&" + this.name + "=" + $(this).find(":selected").val();
+		} else if (this.name == "query") {
+			qryStr += "&query=" + encodeURIComponent($(this).val());
 		} else if (this.name != "") {
 			qryStr += "&" + this.name + "=" + $(this).val();
 		}
