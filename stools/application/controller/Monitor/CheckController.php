@@ -24,7 +24,7 @@ class Monitor_CheckController /*extends Controller*/ {
 
 		$testRequest = @file_get_contents( 
 			TLG_SERVICE_URL .
-			"?action=query&format=json&chunked=true&lang=de&query=Astronomie&querydepth=2&i18n=de&flaws=Large",
+			"?action=query&format=json&chunked=true&lang=de&query=Astronomie&querydepth=2&i18n=de&flaws=Large&test=true",
 			false,
 			$this->_streamContext
 		);
@@ -51,7 +51,8 @@ class Monitor_CheckController /*extends Controller*/ {
 
 	public function asqmAction() {
 		$test = @file_get_contents(
-			"http://toolserver.org/~render/stools/asqm/query/json/id/297666/lang/de/asqmid/monitor",
+			ASQM_SERVICE_URL .
+			"/asqm/query/json/id/297666/lang/de/asqmid/monitor",
 			false,
 			$this->_streamContext
 		);
