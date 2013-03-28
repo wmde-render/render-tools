@@ -28,6 +28,15 @@ class Asqm_QueryController /*extends Controller*/ {
 	}
 	
 	public function newsAction() {
+		$req = SingletonFactory::getInstance( "Request" );
+		$pageTitle = $req->getVar( 'title' );
+		$lang = $req->getVar( 'lang' );
+		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
+		$result = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $pageTitle );
+		
+		SingletonFactory::getInstance( "Asqm_Model" )
+			->logRequest( $pageTitle, $lang, $asqmId, $actionType = "newsfinder-use", $result );
+
 		$view = new Asqm_NewsView("newsfeed_list");
 		echo $view->render();
 	}
