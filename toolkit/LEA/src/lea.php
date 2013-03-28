@@ -321,7 +321,7 @@ if ($id) {
 		$serializedResult = base64_encode( serialize( $arrResult ) );
 		$sql = "INSERT INTO asqm_request_log ".
 				"(asqm_id, title, lang, action_type, result, request_time) ".
-				"VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'lea', '" . $serializedResult . "', NOW())";
+				"VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'lea-usage', '" . $serializedResult . "', NOW())";
 		mysql_query( $sql );
 		mysql_close();
 
