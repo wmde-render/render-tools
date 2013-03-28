@@ -2,7 +2,10 @@
 class Asqm_QueryController /*extends Controller*/ {
 
 	public function __construct() {
-		
+		$asqmId = SingletonFactory::getInstance( "Request" )->getVar( 'asqmid' );
+		if ( isset( $asqmId ) && !empty( $asqmId ) ) {
+			$_SESSION['asqmId'] = $asqmId;
+		}
 	}
 	
 
