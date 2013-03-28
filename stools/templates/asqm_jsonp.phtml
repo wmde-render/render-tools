@@ -27,16 +27,16 @@
 		"factCoverage": {
 			"title": "<?php echo $this->translate( array( "groupCoverage", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "groupCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~" . $uName . "/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
+				"<?php echo $this->translate( array( "groupCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "groupCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
 			}
 		},
 		
 		"currentness": {
 			"title": "<?php echo $this->translate( array( "groupCurrentness", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~" . $uName . "/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"]
+				"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"]
 <?php if ( SingletonFactory::getInstance( 'ChangeDetector_Model' )->checkDetected( $this->getId(), $this->getLang() ) ): ?>,
-	"<?php echo $this->translate( array( "groupCurrentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "groupCurrentness", "cdHit" ) ); ?>", "http://toolserver.org/~" . $uName . "/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
+	"<?php echo $this->translate( array( "groupCurrentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "groupCurrentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
 <?php endif; ?>
 			}
 		},
@@ -45,7 +45,7 @@
 		"editorInteraction": {
 			"title": "<?php echo $this->translate( array( "groupEditorInteraction", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupEditorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://toolserver.org/~" . $uName . "/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
+				"<?php echo $this->translate( array( "groupEditorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
 			}
 		},
 <?php endif; ?>
