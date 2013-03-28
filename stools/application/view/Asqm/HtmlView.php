@@ -93,4 +93,13 @@ class Asqm_HtmlView extends View {
 		return SingletonFactory::getInstance( 'Asqm_Model' )
 			->getUniqueEditorCount( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ) );
 	}
+	
+	public function getUserInfoObject( $key ) {
+		$uInfo = posix_getpwuid(posix_getuid());
+		if ( is_array( $uInfo ) && array_key_exists( $key, $uInfo ) ) {
+			return $uInfo[$key];
+		}
+
+		return false;
+	}
 }
