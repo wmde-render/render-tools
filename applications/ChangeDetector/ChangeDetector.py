@@ -1,5 +1,5 @@
 #!/opt/ts/python/2.7/bin/python
-#$ -l h_rt=10:00:00
+#$ -l h_rt=15:00:00
 #$ -j y
 #$ -m ae
 #$ -m bae
@@ -80,6 +80,8 @@ import itertools
 import oursql
 import csv
 import threading
+
+import socket
 
 from datetime import date, timedelta
 
@@ -506,8 +508,8 @@ class PageAndRevision(DatabaseInterface):
               SELECT identifier, language, page_id, detected_by_mf,
                     detected_by_cta, detected_by_cts, detected_by_mdf
               FROM noticed_article
-              WHERE day = %(day)s""" % {'day':self.__day_to_check}
-        SQL_Cursors()['auxiliary'].execute(sql_command)
+              WHERE day = '%(day)s'""" % {'day':self.__day_to_check}
+	SQL_Cursors()['auxiliary'].execute(sql_command)
         self.__articles = SQL_Cursors()['auxiliary'].fetchall()
     
     def __fetch_revisions(self):
@@ -1159,7 +1161,7 @@ class ArticleMerger(MyObject):
               SELECT /* SLOW_OK */ page_title, page_id
               FROM page
               INNER JOIN langlinks on page.page_id = langlinks.ll_from
-              WHERE REPLACE(page_title,' ','_') IN %s""" % placeholders
+              WHERE page.page_namespace = 0 AND REPLACE(page_title,' ','_') IN %s""" % placeholders
               # By joining langlinks we should avoid to catch dead
               # entries in the page-table.
         SQL_Cursors()[language].execute(sql_statement, self.__list_of_all_titles[language])
@@ -2474,6 +2476,7 @@ def skipLanguageByReplicationLag():
             Settings()['languages'].remove(language)
 
 if __name__ == '__main__':
+    print "Change Detector starting on machine '" + socket.gethostname() + "'"
     try:
         day = Day(sys.argv[1])
     except IndexError:
