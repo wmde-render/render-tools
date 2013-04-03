@@ -82,10 +82,10 @@ class Asqm_HtmlView extends View {
 	
 	public function getNewsItems() {
 		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->getTitle() );
-		if ( $newsCount == -1 ) {
-			return $this->translate( array( "groupCurrentness", "noNews" ) );
-		} else {
+		if ( $newsCount != -1 ) {
 			return $newsCount . $this->translate( array( "groupCurrentness", "newsFound" ) );
+		} else {
+			return false;
 		}
 	}
 	

@@ -30,17 +30,22 @@
 				"<?php echo $this->translate( array( "groupCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "groupCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
 			}
 		},
-		
+<?php $newsCount = $this->getNewsItems(); ?>
+<?php $cdHit = SingletonFactory::getInstance( 'ChangeDetector_Model' )->checkDetected( $this->getId(), $this->getLang() ); ?>
+<?php if ( $newsCount || $cdHit ): ?>
 		"currentness": {
 			"title": "<?php echo $this->translate( array( "groupCurrentness", "title" ) ); ?>",
 			"items": {
+	<?php if ( $newsCount ): ?>,
 				"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"]
-<?php if ( SingletonFactory::getInstance( 'ChangeDetector_Model' )->checkDetected( $this->getId(), $this->getLang() ) ): ?>,
-	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
+	<?php endif; ?>,
+	<?php if ( $cdHit ): ?>,
+		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
 	"<?php echo $this->translate( array( "groupCurrentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "groupCurrentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
-<?php endif; ?>
+	<?php endif; ?>
 			}
 		},
+<?php endif; # $newsCount OR $cdHit ?>
 <?php $giniScore = SingletonFactory::getInstance( 'Asqm_Model' )->getGiniScore( $this->getId(), $this->getLang() ); ?>
 <?php if ( $giniScore ): ?>
 	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "wikigini-show", $giniScore ); ?>
