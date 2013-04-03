@@ -34,6 +34,9 @@ $strLang = array(
 	"newsfeedTableUrl" => "URL",
 	"newsfeedTableDate" => "Date",
 	
+	"asqmTabTitle" => "Info",
+	"asqmTooltip" => "Show statistics and further analysis for this article",
+	
 	# asqm output
 	"groupStats" => array(
 		"title" => "Statistics",
