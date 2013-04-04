@@ -13,6 +13,16 @@ class Request extends SingletonFactory {
 			$reqUri = $uriParts[0];
 			$requestUri = str_ireplace( BASE_PATH, '', $reqUri );
 			$requestUri = array_filter( explode( '/', $requestUri ) );
+			# TODO: hack
+			# TODO: hack
+			# TODO: hack
+			$uInfo = posix_getpwuid( posix_getuid() );
+			if ($reqUri == '/~' + $uInfo["name"] + '/stools') $reqUri .= '/';
+			$requestUri = str_ireplace( BASE_PATH, '', $reqUri );
+			$requestUri = array_filter( explode( '/', $requestUri ) );
+			# TODO: hack
+			# TODO: hack
+			# TODO: hack
 		} else {
 			$requestUri = array_keys( $_GET );
 		}
