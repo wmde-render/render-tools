@@ -11,7 +11,10 @@ $strLang = array(
 		Example: To generate the intersection of the categories \"Software\" and 
 		\"Newsreader\" while excluding articles within the category \"Windows-Software\" 
 		enter <em>\"Software; +Newsreader; -Windows-Software\"</em> into the
-		category field.",
+		category field.<br /><br />
+		Alternatively one can also check articles that have been registered on a 
+		watchlist. The syntax to do that is 'wl:Username,TOKEN' the token needs to
+		be defined in the Wikipedia user account settings first.",
 	"descDepth" => "Depth",
 	"descDepthDesc" => "Defines the recursion depth which is used to crawl the
 		categories. A category depth of '1' will find all pages directly within

@@ -11,7 +11,10 @@ $strLang = array(
 		Beispiel: Um die Schnittmenge aus Artikeln in den Kategorien \"Software\" 
 		und \"Newsreader\" zu bilden und dabei die Artikel in der Kategorie 
 		\"Windows-Software\" auszuschließen, wird in das Kategoriefeld <em>\"Software; 
-		+Newsreader; -Windows-Software\"</em> eingegeben.",
+		+Newsreader; -Windows-Software\"</em> eingegeben.<br /><br />
+		Alternativ können auch Artikel geprüft werden, die auf einer Beobachtungsliste 
+		hinterlegt sind. Die Syntax lautet 'wl:Benutzername,TOKEN', das Token muss
+		zunächst in den Wikipedia-Benutzereinstellungen definiert werden.",
 	"descDepth" => "Tiefe",
 	"descDepthDesc" => "Gibt die Rekursionstiefe an, mit der in der Kategoriestruktur 
 		gesucht werden soll. So findet Suchtiefe 1 alle Seiten, die direkt in der 
