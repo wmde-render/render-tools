@@ -22,7 +22,8 @@
 echo htmlentities("
 var asqmReq = false;
 if (wgNamespaceNumber == 0) {
-  $('<li id=\"ca-asqm\" style=\"position: relative;\"><span><a onclick=\"javascript:asqm()\" title=\"" . $this->translate("asqmTooltip") . "\">" . $this->translate("asqmTabTitle") . "</a></span>' + 
+  $('<li id=\"ca-asqm\" style=\"position: relative;\"><span><a onclick=\"javascript:asqm()\" 
+  title=\"" . $this->translate("asqmTooltip") . "\">" . $this->translate("asqmTabTitle") . "</a></span>' + 
   '<div id=\"asqmContainer\" style=\"visibility: hidden; position:absolute; right: 0; ' +
   'font-size: 0.8em; border: 1px solid silver; margin: -5px 0 0 -1px; padding: 10px; ' +
   'z-index: 1000; background: white;\"></div></li>').insertAfter(\"#ca-history\");
