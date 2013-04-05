@@ -11,9 +11,12 @@ define( 'APP_PATH', '' );
 define( 'TEMPLATE_PATH', '' );
 # relative path to index.php
 define( 'BASE_PATH', '' );
-
 # task list generator backend service url
 define( 'TLG_SERVICE_URL', '' );
+define( 'ASQM_SERVICE_URL', '' );
+
+# task list generator backend service url
+define( 'TLG_SERVICE_URL', false );
 
 # database names and server names
 $dbLinks = array(
