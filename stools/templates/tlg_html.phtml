@@ -73,12 +73,12 @@
 							<?php echo $this->translate( "descFormat" ); ?>
 						</label>
 						<select id="outputFormat" name="format">
-							<option value="html" <?php echo $_GET['format'] == "html" ? "checked" : ""; ?>>HTML</option>
-							<option value="wikitext" <?php echo $_GET['format'] == "wikitext" ? "checked" : ""; ?>>WikiText</option>
+							<option value="html" <?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'format' ) == "html" ? "checked" : ""; ?>>HTML</option>
+							<option value="wikitext" <?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'format' ) == "wikitext" ? "checked" : ""; ?>>WikiText</option>
 						</select>
 						<!--div class="clear"></div-->
 
-						<input type="checkbox" id="bymail" name="bymail" <?php echo $_GET['bymail'] == "on" ? "checked" : ""; ?> onclick="javascript:toggleAddressField();" value="on" />
+						<input type="checkbox" id="bymail" name="bymail" <?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'bymail' ) == "on" ? "checked" : ""; ?> onclick="javascript:toggleAddressField();" value="on" />
 						<label style="width: 100px;" for="bymail">
 							<?php echo $this->translate( "labelAddressCb" ); ?>
 						</label>
@@ -106,7 +106,7 @@
 	<?php endif; ?>
 	<?php foreach ($flaws as $name => $info): ?>
 		<?php $name = str_replace( ":", "-", $name); ?>
-						<input type="checkbox" class="<?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" style="margin-left: 18px;" <?php echo ( isset( $_GET['flaws'] ) && strstr( $_GET['flaws'], $name ) ) ? "checked" : ""; ?> />
+						<input type="checkbox" class="cbFilter <?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" style="margin-left: 18px;" <?php echo ( isset( $_GET['flaws'] ) && strstr( $_GET['flaws'], $name ) ) ? "checked" : ""; ?> />
 						<label class="cbLabel" title="<?php echo $info["description"]; ?>" for="<?php echo $name; ?>"><?php echo $info["label"]; ?></label><br />
 	<?php endforeach; ?>
 <?php endforeach; ?>

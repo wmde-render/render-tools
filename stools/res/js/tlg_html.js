@@ -89,49 +89,45 @@ $(document).ready(function() {
 });
 
 var getQueryString = function() {
-	var $inputs = $('form :input');
-	var qryStr = "";
-	var filters = [];
-	var filterCount = -1;
-	$inputs.each(function() {
-		if (this.name == "flaw") {
-			if ($(this).attr('checked')) {
-				filters[++filterCount] = $(this).val().replace("-", ":");
-			}
-		} else if (this.name == "format") {
-			if ($('#bymail').attr('checked')) {
-				qryStr += "&" + this.name + "=" + $(this).val();
-			} else {
-				outputFormat = $(this).find(":selected").val();
-			}
-		} else if (this.name == "bymail") {
-			if( $('#bymail').attr('checked') ) {
-				qryStr += "&bymail=on";
-			}
-		} else if (this.name == "include_hidden") {
-			if( $('#include_hidden').attr('checked') ) {
-				qryStr += "&include_hidden=on";
-			}
-		} else if (this.name == "mailto") {
-			if ($('#bymail').attr('checked')) {
-				qryStr += "&" + this.name + "=" + encodeURIComponent($(this).val());
-			}
-		} else if (this.name == "lang") {
-			qryStr += "&" + this.name + "=" + $(this).find(":selected").val();
-		} else if (this.name == "query") {
-			qryStr += "&query=" + encodeURIComponent($(this).val());
-		} else if (this.name != "") {
-			qryStr += "&" + this.name + "=" + $(this).val();
+	var params = {};
+	params.flaws = [];
+
+	var fields = $('form :input');
+	fields.each(function() {
+		switch( this.tagName ) {
+			case 'SELECT':
+				params[this.name] = $( this ).find(":selected").val();
+				break;
+			case 'INPUT':
+				switch( this.type ) {
+					case 'checkbox':
+						// ignore all unchecked and group checkboxes
+						if ( !$( this ).hasClass( 'cbGroup' ) && this.checked ) {
+							// filter checkboxes will be concatenated
+							if ( $( this ).hasClass( 'cbFilter' ) ) {
+								params.flaws.push( $( this ).val() );
+							} else {
+								params[this.name] = $( this ).val();
+							}
+						}
+						break;
+					default:
+						// ignore fields without value
+						if( $( this ).val() ) {
+							params[this.name] = $( this ).val();
+						}
+						break;
+				}
+				break;
 		}
 	});
 
-	if ( filters.length > 0 ) {
-		qryStr += "&flaws=" + filters.join("%20");
-	} else {
-		return false;
+	if ( params.flaws.length > 0 ) {
+		params.flaws = params.flaws.join(" ");
+		return $.param( params );
 	}
-	
-	return qryStr;
+
+	return false;
 }
 
 function markAsDone(eId, pageId, pageTitle, revision, filter) {
@@ -173,8 +169,11 @@ function queryTlg(qryStr) {
 	var respText = "";
 	var error = false;
 
-	xhr.open('POST', tlgServiceUrl + '?action=query&format=json&chunked=true' + qryStr, true);
-	xhr.send(null);
+	var reqParams = 'action=query&format=json&chunked=true' + qryStr;
+	xhr.open('POST', tlgServiceUrl, true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.setRequestHeader('Content-length', reqParams.length);
+	xhr.send(reqParams);
 
 	timer = window.setInterval(function() {
 		if (xhr.readyState == XMLHttpRequest.DONE) {
