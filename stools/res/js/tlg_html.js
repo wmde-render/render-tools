@@ -77,13 +77,7 @@ $(document).ready(function() {
 
 	$('#btnSearch').click(function() {
 		var qString = getQueryString();
-		// hack
-		// hack
-		// hack
-		if( !qString ) {
-		// hack
-		// hack
-		// hack
+		if( qString ) {
 			$('#statusDialog').dialog('open');
 			queryTlg(qString);
 		} else {
@@ -170,13 +164,7 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 }
 
 function queryTlg(params) {
-	// hack
-	// hack
-	// hack
 	outputFormat = 'html';
-	// hack
-	// hack
-	// hack
 	
 	$('#resultContainer').empty();
 	arrResults = [];
