@@ -164,8 +164,6 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 }
 
 function queryTlg(params) {
-	outputFormat = 'html';
-	
 	$('#resultContainer').empty();
 	arrResults = [];
 	var jqXHR = $.ajax({
