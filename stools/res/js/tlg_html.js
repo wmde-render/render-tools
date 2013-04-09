@@ -89,7 +89,7 @@ $(document).ready(function() {
 });
 
 var getQueryString = function() {
-	var params = { action: 'query', format: 'json', chunked: true };
+	var params = {};
 	params.flaws = [];
 
 	var fields = $('form :input');
@@ -126,6 +126,11 @@ var getQueryString = function() {
 		params.flaws = params.flaws.join(" ");
 		return $.param( params );
 	}
+	
+	// format is overwritten by field for output format, resetting to 'json'
+	params.action = 'query';
+	params.format = 'json';
+	params.chunked = true;
 
 	return false;
 }
