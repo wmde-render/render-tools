@@ -77,7 +77,13 @@ $(document).ready(function() {
 
 	$('#btnSearch').click(function() {
 		var qString = getQueryString();
-		if( qString ) {
+		// hack
+		// hack
+		// hack
+		if( !qString ) {
+		// hack
+		// hack
+		// hack
 			$('#statusDialog').dialog('open');
 			queryTlg(qString);
 		} else {
@@ -89,7 +95,7 @@ $(document).ready(function() {
 });
 
 var getQueryString = function() {
-	var params = {};
+	var params = { action: 'query', format: 'json', chunked: true };
 	params.flaws = [];
 
 	var fields = $('form :input');
@@ -163,96 +169,64 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 	req.send(null);
 }
 
-function queryTlg(qryStr) {
+function queryTlg(params) {
+	// hack
+	// hack
+	// hack
+	outputFormat = 'html';
+	// hack
+	// hack
+	// hack
+	
 	$('#resultContainer').empty();
 	arrResults = [];
-	var respText = "";
-	var error = false;
-
-	var reqParams = 'action=query&format=json&chunked=true' + qryStr;
-	xhr.open('POST', tlgServiceUrl, true);
-	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	xhr.setRequestHeader('Content-length', reqParams.length);
-	xhr.send(reqParams);
-
-	timer = window.setInterval(function() {
-		if (xhr.readyState == XMLHttpRequest.DONE) {
+	var jqXHR = $.ajax({
+		type: "POST",
+		url: tlgServiceUrl,
+		data: params,
+		progress: statusUpdate,
+		progressInterval: 250
+	});
+	
+	jqXHR.done( function( data ) {
 			$('#statusDialog').dialog('close');
-
-			var arrResponse = xhr.responseText.split("\n");
-			var lastStatusSet = false;
-
-			if (outputFormat == 'html') {
-				arrResults.push("<table><tr><th>" + tableHeadFlaw + "</th><th>" + tableHeadPage + "</th></tr>");
-			} else if(outputFormat == 'wikitext' || $('#address').val() != "") {
-				arrResults.push("<div>");
-			}
-
-			var arrLen = arrResponse.length;
-			for (i = 0; i < arrLen; i++) {
-				try {
-					var respObj = jQuery.parseJSON(arrResponse[i]);
-					if (respObj) {
-						if (respObj.status) {
-							lastStatus = respObj.status;
-
-							if ($('#address').val() != "") {
-								arrResults.push("<strong>" + reqSuccess + "</strong><br />" + reqSuccessMsg);
-							}
-						} else if (respObj.flaws) {
-							if (!lastStatusSet) {
-								lastStatusSet = true;
-								$('#status').text(lastStatus);
-							}
-
-							pushResultRow(respObj.flaws, respObj.page);
-						} else if (respObj.exception) {
-							error = true;
-							$( "#dlgError > #errMsg" ).html( "<pre>" + respObj.exception + "</pre>");
-						}
-					}
-				} catch (e) {
-					error = true;
-					$( "#dlgError > #errMsg" ).html( e.toString() );
-				}
-			}
-
-			if (outputFormat == 'html') {
-				arrResults.push("</table>");
-			} else if(outputFormat == 'wikitext' || $('#address').val() != "") {
-				arrResults.push("</div>");
-			}
-
-			if ( !error ) {
-				var container = $( "#resultContainer" );
-				container.html(arrResults.join(""));
-				$( "#resultContainer" ).toggleClass( "box-hidden", false );
-				$( "#resultLink" ).html( '<a href="?submit=true' + getQueryString() + '">' + descLinkToRequest + '</a>' );
-			} else {
-				$( "#dlgError" ).dialog( "open" );
-			}
-		} else {
-			newText = xhr.responseText.replace(respText, "");
-			if (newText != '') {
-				var arrResponse = newText.split("\n");
-				for (i = 0; i < arrResponse.length; i++) {
-					var respObj = jQuery.parseJSON(arrResponse[i]);
-					if (respObj) {
-						if (respObj.progress) {
-							setProgress(respObj.progress);
-						} else if (respObj.status) {
-							lastStatus = respObj.status;
-						} else {
-							break;
-						}
-					}
-				}
-				$('#status').text(lastStatus);
-			}
+			parseResponse( data );
 		}
-	}, 100);
+	);
 }
 
+$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+    if ( $.isFunction( options.progress ) ) {
+        var xhrFactory = options.xhr, interval, partialResponse = "";
+
+        options.xhr = function() {
+            var xhr = xhrFactory.apply( this, arguments );
+            interval = setInterval( function() {
+                var responseText;
+                try {
+                    responseText = xhr.responseText;
+                    if ( responseText && ( responseText.length > partialResponse.length ) ) {
+                        options.progress( responseText );
+                    }
+                } catch(e) {
+                    console.log(e);
+                }
+            }, options.progressInterval );
+
+            return xhr;
+        };
+
+		function stop() {
+            if ( interval ) {
+                clearInterval( interval );
+            }
+        }
+
+		// stop interval on 'done' and 'fail''
+		jqXHR.then( stop, stop );
+    }
+});
+    
 var lastFlaws = "";
 function pushResultRow(flaws, page) {
 	var row = "";
@@ -316,5 +290,73 @@ function toggleAddressField() {
 	} else {
 		$('#divAddress').css('visibility', 'hidden');
 		$('#address').val("");
+	}
+}
+
+function statusUpdate( data ) {
+	var arrResponse = data.split("\n");
+	for (i = 0; i < arrResponse.length; i++) {
+		var respObj = $.parseJSON(arrResponse[i]);
+		if (respObj) {
+			if (respObj.progress) {
+				setProgress(respObj.progress);
+			} else if (respObj.status) {
+				lastStatus = respObj.status;
+			} else {
+				break;
+			}
+		}
+	}
+	$('#status').text(lastStatus);
+}
+
+function parseResponse( data ) {
+	var arrResponse = data.split("\n");
+	var lastStatusSet = false;
+	var error = false;
+
+	if (outputFormat == 'html') {
+		arrResults.push("<table><tr><th>" + tableHeadFlaw + "</th><th>" + tableHeadPage + "</th></tr>");
+	} else if(outputFormat == 'wikitext' || $('#address').val() != "") {
+		arrResults.push("<div>");
+	}
+
+	var arrLen = arrResponse.length;
+	for (i = 0; i < arrLen; i++) {
+		try {
+			var respObj = $.parseJSON(arrResponse[i]);
+			if (respObj) {
+				if (respObj.status) {
+					lastStatus = respObj.status;
+
+					if ( $('#address').val() != "" ) {
+						arrResults.push("<strong>" + reqSuccess + "</strong><br />" + reqSuccessMsg);
+					}
+				} else if (respObj.flaws) {
+					pushResultRow(respObj.flaws, respObj.page);
+				} else if (respObj.exception) {
+					error = true;
+					$( "#dlgError > #errMsg" ).html( "<pre>" + respObj.exception + "</pre>");
+				}
+			}
+		} catch (e) {
+			error = true;
+			$( "#dlgError > #errMsg" ).html( e.toString() );
+		}
+	}
+
+	if (outputFormat == 'html') {
+		arrResults.push("</table>");
+	} else if(outputFormat == 'wikitext' || $('#address').val() != "") {
+		arrResults.push("</div>");
+	}
+
+	if ( !error ) {
+		var container = $( "#resultContainer" );
+		container.html(arrResults.join(""));
+		$( "#resultContainer" ).toggleClass( "box-hidden", false );
+		$( "#resultLink" ).html( '<a href="?submit=true' + getQueryString() + '">' + descLinkToRequest + '</a>' );
+	} else {
+		$( "#dlgError" ).dialog( "open" );
 	}
 }
