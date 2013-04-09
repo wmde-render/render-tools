@@ -122,16 +122,16 @@ var getQueryString = function() {
 		}
 	});
 
-	if ( params.flaws.length > 0 ) {
-		params.flaws = params.flaws.join(" ");
-		return $.param( params );
-	}
-	
 	// format is overwritten by field for output format, resetting to 'json'
 	params.action = 'query';
 	params.format = 'json';
 	params.chunked = true;
 
+	if ( params.flaws.length > 0 ) {
+		params.flaws = params.flaws.join(" ");
+		return $.param( params );
+	}
+	
 	return false;
 }
 
