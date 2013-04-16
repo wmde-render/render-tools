@@ -135,6 +135,7 @@ var getQueryString = function() {
 	return false;
 }
 
+/*
 function markAsDone(eId, pageId, pageTitle, revision, filter) {
 	$(eId).attr("src", basePath + "res/img/tlg-load.gif");
 	var req = new XMLHttpRequest();
@@ -167,6 +168,7 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 	}
 	req.send(null);
 }
+*/
 
 function queryTlg(params) {
 	$('#resultContainer').empty();
@@ -227,7 +229,7 @@ function pushResultRow(flaws, page) {
 	if (outputFormat == 'html') {
 		row = "<tr><td>";
 		$.each(flaws, function(index, flawObj) {
-			row += '<img src="' + basePath + 'res/img/bulb-' + (flawObj.hidden ? "hidden" : "show") + '.png" class="' + (flawObj.hidden ? "hidden" : "") + '" style="cursor: pointer; color: blue;" onclick="markAsDone(this, ' + page.page_id + ', \'' + page.page_title + '\', ' + page.page_latest + ', \'' + flawObj.name + '\')" title="' + (flawObj.hidden ? descUnhide : descHide) + '" />'
+			// row += '<img src="' + basePath + 'res/img/bulb-' + (flawObj.hidden ? "hidden" : "show") + '.png" class="' + (flawObj.hidden ? "hidden" : "") + '" style="cursor: pointer; color: blue;" onclick="markAsDone(this, ' + page.page_id + ', \'' + page.page_title + '\', ' + page.page_latest + ', \'' + flawObj.name + '\')" title="' + (flawObj.hidden ? descUnhide : descHide) + '" />'
 			row += "&nbsp;" + flawObj.name;
 			if( flawObj.infotext ) {
 				row += " (" + flawObj.infotext + ") " 
@@ -302,6 +304,7 @@ function statusUpdate( data ) {
 }
 
 function parseResponse( data ) {
+	outputFormat = $('#outputFormat').find(":selected").val();
 	var arrResponse = data.split("\n");
 	var lastStatusSet = false;
 	var error = false;
@@ -346,7 +349,7 @@ function parseResponse( data ) {
 		var container = $( "#resultContainer" );
 		container.html(arrResults.join(""));
 		$( "#resultContainer" ).toggleClass( "box-hidden", false );
-		$( "#resultLink" ).html( '<a href="?submit=true' + getQueryString() + '">' + descLinkToRequest + '</a>' );
+		$( "#resultLink" ).html( '<a href="?submit=true&' + getQueryString() + '">' + descLinkToRequest + '</a>' );
 	} else {
 		$( "#dlgError" ).dialog( "open" );
 	}
