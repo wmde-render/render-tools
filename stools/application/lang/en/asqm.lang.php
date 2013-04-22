@@ -49,7 +49,9 @@ $strLang = array(
 		"references" => "References",
 		"images" => "Media Files",
 		"visitorsToday" => "Visitors today",
-		"visitors30days" => "Last 30 days"
+		"visitors30days" => "Last 30 days",
+		"visitorsYesterday" => "Visitors yesterday",
+		"visitorsLastMonth" => "Visitors last month"
 	),
 	"groupCoverage" => array(
 		"title" => "Fact coverage",

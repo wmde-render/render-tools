@@ -51,7 +51,9 @@ $strLang = array(
 		"references" => "Einzelnachweise",
 		"images" => "Mediendateien",
 		"visitorsToday" => "Besucher heute",
-		"visitors30days" => "Letzte 30 Tage"
+		"visitors30days" => "Letzte 30 Tage",
+		"visitorsYesterday" => "Besucher gestern",
+		"visitorsLastMonth" => "Besucher im letzten Monat"
 	),
 	"groupCoverage" => array(
 		"title" => "Faktenabdeckung",

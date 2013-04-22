@@ -1,11 +1,6 @@
 <?php
 class WebService_StatsGrok extends WebService {
 
-	# constants
-	const MONTHLY = "monthly";
-	const DAILY = "daily";
-	const BOTH = "both";
-	
 	private $_accessCount = array( "monthly" => 0, "yesterday" => 0 );
 
 	public function __construct() { }
@@ -47,36 +42,32 @@ class WebService_StatsGrok extends WebService {
 		return false;
 	}
 	
-	public function getClassicStats( $type, $title, $lang = "en" ) {
-		$accessCount = array( "monthly" => 0, "daily" => 0 );
-		$date = date( "Ym" );
-		if ( $type === WebService_StatsGrok::DAILY ) {
-			$date = date("Ym", time() - 60 * 60 * 24);
-		}
+	public function getClassicStatsLastMonth( $title, $lang = "en" ) {
+		$date = date( "Ym", strtotime("-1 month") );
 		
-		$serviceUrl = "stats.grok.se/json/" . $lang . "/" . $date . "/" . $title;
+		$serviceUrl = "stats-classic.grok.se/json/" . $lang . "/" . $date . "/" . $title;
+		$this->init( $serviceUrl );
+		$this->sendRequest();
+
+		if( $this->getStatus() === WebService::STATUS_SUCCESS ) {
+			$response = $this->parseJsonResponse();
+			return $response["total_views"];
+		}
+
+		return false;
+	}
+
+	public function getClassicStatsYesterday( $title, $lang = "en" ) {
+		$date = date("Ym", time() - 60 * 60 * 24);
+		
+		$serviceUrl = "stats-classic.grok.se/json/" . $lang . "/" . $date . "/" . $title;
 		$this->init( $serviceUrl );
 		$this->sendRequest();
 
 		if( $this->getStatus() === WebService::STATUS_SUCCESS ) {
 			$response = $this->parseJsonResponse();
 
-			if( $type === WebService_StatsGrok::MONTHLY || $type === WebService_StatsGrok::BOTH ) {
-				foreach( $response["daily_views"] as $dailyViews ) {
-					$accessCount["monthly"] += $dailyViews;
-				}
-			}
-
-			if( $type === WebService_StatsGrok::DAILY || $type === WebService_StatsGrok::BOTH ) {
-				$yesterday = date( "Y-m-d", time() - 60 * 60 * 24 );
-				if( array_key_exists( $yesterday, $response["daily_views"] ) ) {
-					$accessCount["daily"] = $response["daily_views"][$yesterday];
-				} else {
-					$stats = $this->getClassicStats( WebService_StatsGrok::DAILY, $title, $lang );
-					$accessCount["daily"] = $stats["daily"];
-				}
-			}
-			return $accessCount;
+			return end( $response["daily_views"] );
 		}
 
 		return false;
