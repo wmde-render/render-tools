@@ -19,8 +19,9 @@
 				"<?php echo $this->translate( array( "groupStats", "totalEditors" ) ); ?>": "<?php echo $editorCount["loggedin"]; ?> (IP: <?php echo $editorCount["anonymous"]; ?>)",
 				"<?php echo $this->translate( array( "groupStats", "references" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getCurrentRevision(); ?>",
 				"<?php echo $this->translate( array( "groupStats", "images" ) ); ?>": "<?php echo $this->getImageCount(); ?>",
-				"<?php echo $this->translate( array( "groupStats", "visitorsToday" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'StatsGrok_Model' )->getTodayStats( $this->getTitle() ); ?>",
-				"<?php echo $this->translate( array( "groupStats", "visitors30days" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'StatsGrok_Model' )->getStats( $this->getTitle() ); ?>"
+<?php $stats = SingletonFactory::getInstance( "WebService_StatsGrok" )->getClassicStats( WebService_StatsGrok::BOTH, $this->getTitle(), $this->getLang() ); ?>
+				"<?php echo $this->translate( array( "groupStats", "visitorsYesterday" ) ); ?>": "<?php echo $stats["yesterday"]; ?>",
+				"<?php echo $this->translate( array( "groupStats", "visitorsLastMonth" ) ); ?>": "<?php echo  $stats["monthly"]; ?>"
 			}
 		},
 		
