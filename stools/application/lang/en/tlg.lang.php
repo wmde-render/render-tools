@@ -58,6 +58,7 @@ $strLang = array(
 	"tableHeadFlaw" => "Filter",
 	"tableHeadPage" => "Page Title",
 	"errNoFilter" => "No filter selected",
+	"errNoAddress" => "Results by email require a valid email address.",
 	"markedAsHidden" => "The revision will not be displayed in future requests.",
 	"unmarkedAsHidden" => "The revision will be displayed again in future requests.",
 	"descHide" => "Click to hide this result in future requests.",
