@@ -19,7 +19,8 @@ class Wikipedia_Categories extends Model {
 
 			$result = $statement->fetchAll();
 			foreach( $result as $row ) {
-				$response[] = array( "label" => $row["cat_title"], "value" => $row["cat_title"] );
+				$catTitle = str_replace( "_", " ", $row["cat_title"] );
+				$response[] = array( "label" => $catTitle, "value" => $catTitle );
 			}
 			return $response;
 		} else {
