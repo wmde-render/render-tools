@@ -85,7 +85,7 @@ $(document).ready(function() {
 			source: function(request, response) {
 				var lang = $( "#language" ).find( ":selected" ).val();
 				$.ajax({
-					url: "/~knissen/stools2/tlg/query/categories",
+					url: basePath + "tlg/query/categories",
 					dataType: "json",
 					data: {
 						lang: lang,
