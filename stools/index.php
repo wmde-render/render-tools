@@ -1,4 +1,3 @@
-#! /usr/bin/php
 <?php
 session_start();
 
@@ -13,7 +12,7 @@ if ( PHP_SAPI === 'cli' ) {
 }
 
 include( 'local-config.php' );
-ini_set( 'include_path', APP_PATH . ':' . APP_PATH . 'controller/:' . APP_PATH . 'model/:' . APP_PATH . 'view/');
+ini_set( 'include_path', APP_PATH . ':' . APP_PATH . 'controller/:' . APP_PATH . 'model/:' . APP_PATH . 'view/' );
 
 include( 'application/AutoLoader.php' );
 $autoLoader = new AutoLoader();

@@ -75,6 +75,35 @@ $(document).ready(function() {
 		value: 0
 	});
 
+	$('input.taggable').tagedit({
+		/*autocompleteURL: '/render/stools/tlg/query/categories',*/
+		animSpeed: 100,
+		breakKeyCodes: [ 10, 13 ],
+		additionalListClass: "field-taggable",
+		autocompleteOptions: {
+			minLength: 3,
+			source: function(request, response) {
+				var lang = $( "#language" ).find( ":selected" ).val();
+				$.ajax({
+					url: "/~knissen/stools2/tlg/query/categories",
+					dataType: "json",
+					data: {
+						lang: lang,
+						term: request.term
+					},
+					success: function( data ) {
+						response( $.map( data, function( item ) {
+							return {
+								label: item.value,
+								value: item.value
+							}
+						}));
+					}
+				});
+			}
+		}
+	});
+
 	$('#btnSearch').click(function() {
 		var qString = getQueryString();
 		if( qString ) {

@@ -148,3 +148,7 @@ form button {
 .fldHelp {
 	cursor: pointer;
 }
+
+.field-taggable {
+	width: 250px !important;
+}

@@ -1,14 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
 		<title>TLG - Task List Generator</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		
 		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
-		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/jquery-ui-1.8.23.custom.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/smoothness/jquery-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/smoothness/jquery-ui.theme.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/jquery.tagedit.css" />
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-1.8.0.min.js"></script>
-		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-ui-1.8.23.custom.min.js"></script>
-		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/XMLHttpRequest.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-ui-1.10.2.custom.min.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery.tagedit.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery.autoGrowInput.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/tlg_html.js"></script>
 		<script type="text/javascript">
 			var basePath = '<?php echo BASE_PATH; ?>';
@@ -52,7 +55,7 @@
 						<label class="fieldLabel" for="categories">
 							<?php echo $this->translate( "descCategories" ); ?>
 						</label>
-						<input type="text" id="categories" name="query" value="<?php echo isset( $_GET['query'] ) ? $_GET['query'] : ""; ?>" />
+						<input type="text" id="categories" class="taggable" name="query[]" value="" />
 						<img class="fldHelp" id="helpCategories" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
 
@@ -66,8 +69,8 @@
 						<!--input style="margin-left: 110px;" type="checkbox" id="include_hidden" name="include_hidden" value="true" <?php echo isset( $_GET['include_hidden'] ) ? "checked" : ""; ?> />
 						<label style="width: 100px;" for="include_hidden">
 							<?php echo $this->translate( "alsoShowHidden" ); ?>
-						</label-->
-						<div class="clear"></div>
+						</label>
+						<div class="clear"></div-->
 
 						<label class="fieldLabel" for="outputFormat">
 							<?php echo $this->translate( "descFormat" ); ?>
