@@ -117,6 +117,7 @@ $(document).ready(function() {
 var getQueryString = function() {
 	var params = {};
 	params.flaws = [];
+	params.query = [];
 
 	var fields = $('form :input');
 	fields.each(function() {
@@ -140,7 +141,11 @@ var getQueryString = function() {
 					default:
 						// ignore fields without value
 						if( $( this ).val() ) {
-							params[this.name] = $( this ).val();
+							if ( this.name === 'query' ) {
+								params.query.push( $( this ).val() );
+							} else {
+								params[this.name] = $( this ).val();
+							}
 						}
 						break;
 				}
@@ -155,6 +160,8 @@ var getQueryString = function() {
 	
 	var formResult = formCheck( params );
 	if ( formResult === true ) {
+		params.flaws = params.flaws.join(" ");
+		params.query = params.query.join(";");
 		return $.param( params );
 	} else {
 		$( "#dlgError > #errMsg" ).html( formResult );
@@ -173,13 +180,17 @@ var formCheck = function( params ) {
 	if ( params.flaws.length <= 0 ) {
 		return errNoFilter;
 	}
-	
+
+	if ( params.query.length <= 0 ) {
+		return errNoQuery;
+	}
+
 	if ( params.bymail ) {
 		if ( !validateAddress( $( "#address" ).val() ) ) {
 			return errNoAddress;
 		}
 	}
-	
+
 	return true;
 }
 
