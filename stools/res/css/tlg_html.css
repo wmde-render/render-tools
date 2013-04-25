@@ -85,7 +85,14 @@ div.tlg-header h1 {
 	padding-top: 10px;
 }
 
-form label.fieldLabel {
+form label.textLabel {
+	text-align: right;
+	padding: 8px 10px 0 0;
+	float: left;
+	width: 120px;
+}
+
+form label.selectLabel {
 	width: 120px;
 	float: left;
 	padding: 6px 10px 0 0;
@@ -99,7 +106,11 @@ form label.cbLabel {
 }
 
 form input[type="text"] {
-	width: 240px;
+	border: 1px solid #C6C6C6;
+	margin: 0;
+	overflow: auto;
+	padding: 5px;
+	width: 233px;
 }
 
 form input[type="checkbox"] {
@@ -150,5 +161,5 @@ form button {
 }
 
 .field-taggable {
-	width: 250px !important;
+	width: 233px !important;
 }

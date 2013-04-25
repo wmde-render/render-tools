@@ -76,7 +76,6 @@ $(document).ready(function() {
 	});
 
 	$('input.taggable').tagedit({
-		/*autocompleteURL: '/render/stools/tlg/query/categories',*/
 		animSpeed: 100,
 		breakKeyCodes: [ 10, 13 ],
 		additionalListClass: "field-taggable",
@@ -98,6 +97,12 @@ $(document).ready(function() {
 								value: item.value
 							}
 						}));
+					},
+					beforeSend: function() {
+						$( "#helpCategories" ).attr( "src", basePath + "res/img/tlg-load.gif" );
+					},
+					complete: function() {
+						$( "#helpCategories" ).attr( "src", basePath + "res/img/emblem-notice.png" );
 					}
 				});
 			}

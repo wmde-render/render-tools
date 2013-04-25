@@ -39,7 +39,7 @@
 					<div style="float: left; width: 50%;">
 						<div><?php echo $this->translate("tlgDesc", "common"); ?></div><br />
 						<h3 style="margin-top: 0;"><?php echo $this->translate( "descHeading" ); ?></h3>
-						<label class="fieldLabel" for="language">
+						<label class="selectLabel" for="language">
 							<?php echo $this->translate( "descLanguage" ); ?>
 						</label>
 						<select name="lang" id="language">
@@ -53,14 +53,16 @@
 						<img class="fldHelp" id="helpLanguage" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
 
-						<label class="fieldLabel" for="categories">
+						<label class="textLabel" for="categories">
 							<?php echo $this->translate( "descCategories" ); ?>
 						</label>
-						<input type="text" id="categories" class="taggable" name="query[]" value="" />
-						<img class="fldHelp" id="helpCategories" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
+						<div style="float: left; margin-right: 5px;">
+							<input type="text" id="categories" class="taggable" name="query[]" value="" />
+						</div>
+						<img class="fldHelp" id="helpCategories" style="padding-top: 5px;" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
 
-						<label class="fieldLabel" for="depth">
+						<label class="textLabel" for="depth">
 							<?php echo $this->translate( "descDepth" ); ?>
 						</label>
 						<input type="text" id="depth" name="querydepth" value="<?php echo isset( $_GET['querydepth'] ) ? htmlentities( $_GET['querydepth'] ) : "2"; ?>" />
@@ -73,7 +75,7 @@
 						</label>
 						<div class="clear"></div-->
 
-						<label class="fieldLabel" for="outputFormat">
+						<label class="selectLabel" for="outputFormat">
 							<?php echo $this->translate( "descFormat" ); ?>
 						</label>
 						<select id="outputFormat" name="format">
