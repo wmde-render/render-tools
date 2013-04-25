@@ -6,6 +6,13 @@ class Wikipedia_Categories extends Model {
 	public function getCategoryNames( $term ) {
 		$response = array();
 		if ( $term ) {
+			$prepend = "";
+			if ( $term[0] === "+" || $term[0] === "-" ) {
+				$prepend = $term[0];
+				$term = substr( $term, 1 );
+			}
+			$term = str_replace( " ", "_", $term );
+
 			$dbConn = SingletonFactory::getInstance( 'Database' )
 				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 		
@@ -19,7 +26,7 @@ class Wikipedia_Categories extends Model {
 
 			$result = $statement->fetchAll();
 			foreach( $result as $row ) {
-				$catTitle = str_replace( "_", " ", $row["cat_title"] );
+				$catTitle = $prepend . str_replace( "_", " ", $row["cat_title"] );
 				$response[] = array( "label" => $catTitle, "value" => $catTitle );
 			}
 			return $response;
