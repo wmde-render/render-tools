@@ -18,7 +18,7 @@ class Wikipedia_Categories extends Model {
 		
 			$sql = "SELECT cat_title, (cat_subcats + cat_pages) AS subcount ".
 					"FROM category ".
-					"WHERE cat_title LIKE ? ".
+					"WHERE LOWER( cat_title ) LIKE LOWER( ? ) ".
 					"ORDER BY subcount DESC ".
 					"LIMIT 10";
 			$statement = $dbConn->prepare( $sql );
