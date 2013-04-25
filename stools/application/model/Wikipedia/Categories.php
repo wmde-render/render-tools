@@ -4,6 +4,7 @@ class Wikipedia_Categories extends Model {
 	public function __construct() { }
 	
 	public function getCategoryNames( $term ) {
+		$term = urldecode( $term );
 		$response = array();
 		if ( $term ) {
 			$prepend = "";
@@ -18,11 +19,11 @@ class Wikipedia_Categories extends Model {
 		
 			$sql = "SELECT cat_title, (cat_subcats + cat_pages) AS subcount ".
 					"FROM category ".
-					"WHERE LOWER( cat_title ) LIKE LOWER( ? ) ".
+					"WHERE CONVERT(cat_title USING latin1) LIKE ? ".
 					"ORDER BY subcount DESC ".
 					"LIMIT 10";
 			$statement = $dbConn->prepare( $sql );
-			$statement->execute( array( $term . "%" ) );
+			$statement->execute( array( lcase( $term ) . "%" ) );
 
 			$result = $statement->fetchAll();
 			foreach( $result as $row ) {
