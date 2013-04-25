@@ -23,7 +23,7 @@ class Wikipedia_Categories extends Model {
 					"ORDER BY subcount DESC ".
 					"LIMIT 10";
 			$statement = $dbConn->prepare( $sql );
-			$statement->execute( array( lcase( $term ) . "%" ) );
+			$statement->execute( array( $term . "%" ) );
 
 			$result = $statement->fetchAll();
 			foreach( $result as $row ) {
