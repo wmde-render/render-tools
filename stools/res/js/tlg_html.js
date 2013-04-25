@@ -141,7 +141,7 @@ var getQueryString = function() {
 					default:
 						// ignore fields without value
 						if( $( this ).val() ) {
-							if ( this.name === 'query' ) {
+							if ( this.name === 'query[]' ) {
 								params.query.push( $( this ).val() );
 							} else {
 								params[this.name] = $( this ).val();

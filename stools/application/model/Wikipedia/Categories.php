@@ -16,10 +16,10 @@ class Wikipedia_Categories extends Model {
 			$dbConn = SingletonFactory::getInstance( 'Database' )
 				->getDbConnection( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) . 'wiki' );
 		
-			$sql = "SELECT * FROM category ".
+			$sql = "SELECT cat_title, (cat_subcats + cat_pages) AS subcount ".
+					"FROM category ".
 					"WHERE cat_title LIKE ? ".
-					"AND (cat_subcats > 0 OR cat_pages > 0) ".
-					"ORDER BY cat_title ".
+					"ORDER BY subcount DESC ".
 					"LIMIT 10";
 			$statement = $dbConn->prepare( $sql );
 			$statement->execute( array( $term . "%" ) );
