@@ -4,8 +4,8 @@ class Wikipedia_Categories extends Model {
 	public function __construct() { }
 	
 	public function getCategoryNames( $term ) {
-		$term = urldecode( $term );
 		$response = array();
+		$term = rawurldecode( $term );
 		if ( $term ) {
 			$prepend = "";
 			if ( $term[0] === "+" || $term[0] === "-" ) {
@@ -32,8 +32,7 @@ class Wikipedia_Categories extends Model {
 			}
 			return $response;
 		} else {
-			echo "term not provided";
-			die();
+			return array();
 		}
 	}
 }

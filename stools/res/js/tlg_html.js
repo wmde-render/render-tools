@@ -420,14 +420,14 @@ function parseResponse( data ) {
 
 	if ( !error ) {
 		var container = $( "#resultTable" );
-		container.html(arrResults.join(""));
+		$( "#resultInfo" ).html( msgResultCount.replace( '%COUNT%', resultCount ) + '<br /><a href="?submit=true&' + getQueryString() + '">' + descLinkToRequest + '</a>' );
+		$( "#resultContainer" ).toggleClass( "box-hidden", false );
 		if ( resultCount > 0 ) {
-			$( "#resultContainer" ).toggleClass( "box-hidden", false );
-			$( "#resultInfo" ).html( msgResultCount.replace( '%COUNT%', resultCount ) + '<br /><a href="?submit=true&' + getQueryString() + '">' + descLinkToRequest + '</a>' );
-			$( "html, body" ).animate({
-				scrollTop: $( "#resultContainer" ).offset().top
-			}, 1000);
+			container.html(arrResults.join(""));
 		}
+		$( "html, body" ).animate({
+			scrollTop: $( "#resultContainer" ).offset().top
+		}, 1000);
 	} else {
 		$( "#dlgError" ).dialog( "open" );
 	}
