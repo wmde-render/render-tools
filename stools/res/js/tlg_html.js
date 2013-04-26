@@ -9,6 +9,13 @@ $(document).ready(function() {
 		$( '.' + this.id ).attr( "checked", $( this ).attr( "checked" ) == "checked" ? "checked" : false );
 	});
 	
+	$( '.cbFilter' ).click( function() {
+		$( this ).parent().find( 'input.cbGroup' ).attr( "checked",
+			$( this ).parent().find( 'input.cbFilter' ).not( ':checked' ).length === 0 ?
+			"checked" : false
+		)
+	});
+	
 	// open dialog on info icon click
 	$( '.fldHelp' ).click( function() {
 		$( "#dlg-" + this.id ).dialog( "open" );
@@ -235,7 +242,7 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 */
 
 function queryTlg(params) {
-	$('#resultContainer').empty();
+	$('#resultTable').empty();
 	arrResults = [];
 	var jqXHR = $.ajax({
 		type: "POST",
@@ -369,6 +376,7 @@ function statusUpdate( data ) {
 
 function parseResponse( data ) {
 	outputFormat = $('#outputFormat').find(":selected").val();
+	var resultCount = 0;
 	var arrResponse = data.split("\n");
 	var lastStatusSet = false;
 	var error = false;
@@ -391,6 +399,7 @@ function parseResponse( data ) {
 						arrResults.push("<strong>" + reqSuccess + "</strong><br />" + reqSuccessMsg);
 					}
 				} else if (respObj.flaws) {
+					resultCount ++;
 					pushResultRow(respObj.flaws, respObj.page);
 				} else if (respObj.exception) {
 					error = true;
@@ -410,10 +419,15 @@ function parseResponse( data ) {
 	}
 
 	if ( !error ) {
-		var container = $( "#resultContainer" );
+		var container = $( "#resultTable" );
 		container.html(arrResults.join(""));
-		$( "#resultContainer" ).toggleClass( "box-hidden", false );
-		$( "#resultLink" ).html( '<a href="?submit=true&' + getQueryString() + '">' + descLinkToRequest + '</a>' );
+		if ( resultCount > 0 ) {
+			$( "#resultContainer" ).toggleClass( "box-hidden", false );
+			$( "#resultInfo" ).html( msgResultCount.replace( '%COUNT%', resultCount ) + '<br /><a href="?submit=true&' + getQueryString() + '">' + descLinkToRequest + '</a>' );
+			$( "html, body" ).animate({
+				scrollTop: $( "#resultContainer" ).offset().top
+			}, 1000);
+		}
 	} else {
 		$( "#dlgError" ).dialog( "open" );
 	}

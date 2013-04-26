@@ -65,4 +65,5 @@ $strLang = array(
 	"descUnhide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen wieder einzublenden.",
 	"alsoShowHidden" => "auch ausgeblendete Ergebnisse anzeigen",
 	"linkToRequest" => "Link zu dieser Anfrage",
+	"resultCount" => "Es wurden %COUNT% Artikel gefunden.",
 );

@@ -26,6 +26,7 @@
 			var descHide = '<?php echo $this->translate("descHide"); ?>';
 			var descUnhide = '<?php echo $this->translate("descUnhide"); ?>';
 			var descLinkToRequest = '<?php echo $this->translate("linkToRequest"); ?>';
+			var msgResultCount = '<?php echo $this->translate("resultCount"); ?>';
 			var tlgServiceUrl = '<?php echo TLG_SERVICE_URL; ?>';
 		</script>
 	</head>
@@ -105,24 +106,28 @@
 					<div style="margin-left: 60%">
 						<h3><?php echo $this->translate( "formHeading" ); ?></h3>
 <?php foreach ($this->getFlaws() as $group => $flaws): ?>
+						<div class="cbGroupContainer">
 	<?php if ( !empty( $group ) ): ?>
-						<h4><input type="checkbox" class="cbGroup" id="<?php echo $group; ?>" /><?php echo $group; ?></h4>
+							<h4><input type="checkbox" class="cbGroup" id="<?php echo $group; ?>" /><?php echo $group; ?></h4>
 	<?php else: ?>
-						<h4><?php echo $this->translate( "filterGeneral" ); ?></h4>
+							<h4><?php echo $this->translate( "filterGeneral" ); ?></h4>
 	<?php endif; ?>
 	<?php foreach ($flaws as $name => $info): ?>
 		<?php $name = str_replace( ":", "-", $name); ?>
-						<input type="checkbox" class="cbFilter <?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" style="margin-left: 18px;" <?php echo ( isset( $_GET['flaws'] ) && strstr( $_GET['flaws'], $name ) ) ? "checked" : ""; ?> />
-						<label class="cbLabel" title="<?php echo $info["description"]; ?>" for="<?php echo $name; ?>"><?php echo $info["label"]; ?></label><br />
+							<input type="checkbox" class="cbFilter <?php echo ( $group !== '' ) ? $group : 'general'; ?>" id="<?php echo $name; ?>" name="flaw" value="<?php echo $name; ?>" style="margin-left: 18px;" <?php echo ( isset( $_GET['flaws'] ) && strstr( $_GET['flaws'], $name ) ) ? "checked" : ""; ?> />
+							<label class="cbLabel" title="<?php echo $info["description"]; ?>" for="<?php echo $name; ?>"><?php echo $info["label"]; ?></label><br />
 	<?php endforeach; ?>
+						</div>
 <?php endforeach; ?>
 						<div class="clear"></div>
 					</div>
 				</div>
 				<input type="hidden" name="i18n" value="<?php echo $this->getLang(); ?>" />
 			</form>
-			<div id="resultLink"></div>
-			<div id="resultContainer" class="box-shadow box-hidden"></div>
+			<div id="resultContainer" class="box-shadow box-hidden">
+				<div id="resultInfo"></div>
+				<div id="resultTable"></div>
+			</div>
 <?php require( 'disclaimer.phtml' ); ?>
 		</div>
 		

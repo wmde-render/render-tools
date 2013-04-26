@@ -65,4 +65,5 @@ $strLang = array(
 	"descUnhide" => "Click to show this result in future requests.",
 	"alsoShowHidden" => "also show hidden results",
 	"linkToRequest" => "Link to this request",
+	"resultCount" => "%COUNT% articles were found.",
 );
