@@ -16,7 +16,7 @@
 <?php $revInfo = $this->getRevisionInfo( false ); ?>
 				"<?php echo $this->translate( array( "groupStats", "recentEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "groupStats", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
 <?php $editorCount = $this->getUniqueEditorCount(); ?>
-				"<?php echo $this->translate( array( "groupStats", "totalEditors" ) ); ?>": "<?php echo $editorCount["loggedin"]; ?> (IP: <?php echo $editorCount["anonymous"]; ?>)",
+				"<?php echo $this->translate( array( "groupStats", "totalEditors" ) ); ?>": "<?php echo $editorCount["loggedin"]; ?> (+IP: <?php echo $editorCount["anonymous"]; ?>)",
 				"<?php echo $this->translate( array( "groupStats", "references" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getCurrentRevision(); ?>",
 				"<?php echo $this->translate( array( "groupStats", "images" ) ); ?>": "<?php echo $this->getImageCount(); ?>",
 				"<?php echo $this->translate( array( "groupStats", "visitorsYesterday" ) ); ?>": "<?php echo SingletonFactory::getInstance( "WebService_StatsGrok" )->getClassicStatsYesterday( $this->getTitle(), $this->getLanguage() ); ?>",

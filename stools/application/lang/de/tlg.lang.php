@@ -1,17 +1,25 @@
 <?php
 $strLang = array(
 	"topHeading" => "Artikellisten-Generator",
+	"tlgDescription" => "Dieses Werkzeug ermöglicht die Suche in Wikipedia-Kategorien 
+		mit der Möglichkeit, die Suchtiefe zu wählen. Die 
+		<a href=\"https://de.wikipedia.org/wiki/Schnittmenge#Durchschnitt_.28Schnittmenge.2C_Schnitt.29\">
+		Schnittmenge</a> und die <a href=\"https://de.wikipedia.org/wiki/Differenzmenge#Differenz_und_Komplement\">
+		Differenz</a> (Ausschluss) kann zwischen Kategorien gebildet werden. 
+		Durch die Auswahl der Filter wird festgelegt, welche Artikel angezeigt 
+		werden sollen.",
 	"descHeading" => "Sprache, Kategorien und Suchtiefe",
 	"descLanguage" => "Sprache",
 	"descLanguageDesc" => "Kürzel der Sprachversion",
-	"descCategories" => "Kategorien",
-	"descCategoriesDesc" => "Eine mit Semikola getrennte Liste von Kategorienamen. 
+	"descCategories" => "Suchanfrage",
+	"descCategoriesMore" => "Kategorienamen trennen mit Enter- oder Tab-Taste.",
+	"descCategoriesDesc" => "Eine mit Enter getrennte Liste von Kategorienamen. 
 		Ein vorangestelltes Plus-Zeichen bildet eine Schnittmenge, ein Minus-Zeichen 
 		schließt Artikel der Kategorie aus.<br /><br />
 		Beispiel: Um die Schnittmenge aus Artikeln in den Kategorien \"Software\" 
 		und \"Newsreader\" zu bilden und dabei die Artikel in der Kategorie 
-		\"Windows-Software\" auszuschließen, wird in das Kategoriefeld <em>\"Software; 
-		+Newsreader; -Windows-Software\"</em> eingegeben.<br /><br />
+		\"Windows-Software\" auszuschließen, wird in das Kategoriefeld <em>\"Software 
+		+Newsreader -Windows-Software\"</em> eingegeben.<br /><br />
 		Alternativ können auch Artikel geprüft werden, die auf einer Beobachtungsliste 
 		hinterlegt sind. Die Syntax lautet 'wl:Benutzername,TOKEN', das Token muss
 		zunächst in den Wikipedia-Benutzereinstellungen definiert werden.",
