@@ -334,7 +334,7 @@ if ($id) {
 <div id="info">
 	<span>
 		<p>
-			<?php printf( $Info["langVersions1"], $reqLang, $reqTitle, str_replace( "_", " ", $reqTitle ), $langVersionCount - 1 ); ?>
+			<?php printf( $Info["langVersions1"], $reqLang, $reqTitle, str_replace( "_", " ", $reqTitle ), $langVersionCount ); ?>
 		</p>
 		<table id="resultSummary">
 			<tr class="underline">
