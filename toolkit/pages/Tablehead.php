@@ -288,7 +288,7 @@ if($lang == "de"){
 	 
 	 </td>
 	 <td id="Inhalt">
-		<div id="dialog-feedback" title="Feedback">
+		<div id="dialog-feedback" title="Feedback" style="display: none;">
 			<form name="feedbackForm" id="feedbackForm" method="post" action="/<?php echo $tsAccount; ?>/toolkit/pages/feedback.php">
 				<div style="width: 50%; float: left;">
 					<label for="name">Name</label>
