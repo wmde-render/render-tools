@@ -66,6 +66,7 @@ $(document).ready(function() {
 			}
 			window.clearTimeout(timer);
 			$( "#resultContainer" ).toggleClass( "box-hidden", true );
+			$( "#resultTable" ).toggleClass( "box-hidden", true );
 		}
 	});
 	
@@ -424,6 +425,7 @@ function parseResponse( data ) {
 		$( "#resultContainer" ).toggleClass( "box-hidden", false );
 		if ( resultCount > 0 ) {
 			container.html(arrResults.join(""));
+			$( "#resultTable" ).toggleClass( "box-hidden", false );
 		}
 		$( "html, body" ).animate({
 			scrollTop: $( "#resultContainer" ).offset().top
