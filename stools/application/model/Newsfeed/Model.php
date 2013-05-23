@@ -5,7 +5,7 @@ class Newsfeed_Model extends Model {
 	public function __construct() { }
 
 	public function getNewsCount( $title ) {
-		if ( $this->_count ) {
+		if ( !$this->_count ) {
 			$title = "http://en.wikipedia.org/wiki/" . urlencode( $title );
 			$url = "http://newsfeed.ijs.si/render/search?cu=" . urlencode( $title );
 			$result = @file_get_contents( $url );
