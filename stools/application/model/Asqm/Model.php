@@ -210,7 +210,7 @@ class Asqm_Model extends Model {
 
 	public function logRequest( $pageTitle, $lang, $asqmId = "none", $actionType = "asqm", $result = "" ) {
 		$asqmId = SingletonFactory::getInstance( 'Request' )->getVar( 'asqmid' );
-		if ( !isset( $asqmId ) || empty( $asqmId ) ) {
+		if ( ( !isset( $asqmId ) || empty( $asqmId ) ) && isset( $_SESSION['asqmId'] ) ) {
 			$asqmId = $_SESSION['asqmId'];
 		}
 
