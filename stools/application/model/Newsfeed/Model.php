@@ -1,20 +1,26 @@
 <?php
 class Newsfeed_Model extends Model {
+	private $_count;
 
 	public function __construct() { }
 
 	public function getNewsCount( $title ) {
-		$title = "http://en.wikipedia.org/wiki/" . urlencode( $title );
-		$url = "http://newsfeed.ijs.si/render/search?cu=" . urlencode( $title );
-		$result = @file_get_contents( $url );
-		if ( $result !== false ) {
-			$news = json_decode( $result );
+		if ( $this->_count ) {
+			$title = "http://en.wikipedia.org/wiki/" . urlencode( $title );
+			$url = "http://newsfeed.ijs.si/render/search?cu=" . urlencode( $title );
+			$result = @file_get_contents( $url );
+			if ( $result !== false ) {
+				$news = json_decode( $result );
 
-			if ( isset( $news->error ) ) {
-				return -1;
-			} elseif ( isset( $news->hits ) ) {
-				return $news->hits;
+				if ( isset( $news->error ) ) {
+					return -1;
+				} elseif ( isset( $news->hits ) ) {
+					$this->_count = $news->hits;
+					return $news->hits;
+				}
 			}
+		} else {
+			return $this->_count;
 		}
 		
 		return -1;
