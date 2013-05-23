@@ -36,10 +36,11 @@
 		"currentness": {
 			"title": "<?php echo $this->translate( array( "groupCurrentness", "title" ) ); ?>",
 			"items": {
-	<?php if ( $newsCount ): ?>,
-				"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"]
-	<?php endif; ?>,
-	<?php if ( $cdHit ): ?>,
+	<?php if ( $newsCount ): ?>
+		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "newsfeed-show", "" ); ?>
+		"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $this->getNewsItems(); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"],
+	<?php endif; ?>
+	<?php if ( $cdHit ): ?>
 		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
 	"<?php echo $this->translate( array( "groupCurrentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "groupCurrentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
 	<?php endif; ?>
