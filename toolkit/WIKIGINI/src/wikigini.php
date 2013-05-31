@@ -3,7 +3,10 @@ $ts_pw = posix_getpwuid(posix_getuid());
 
 require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/db.inc.php");
 ?>
-
+<script>
+var txtSwitchToRevisionMode = "<?php echo $txtSwitchRevision?>";
+var txtSwitchToTimeMode = "<?php echo $txtSwitchTime?>";
+</script>
 <div id="Ueberschrift" style="float: left; vertical-align: middle;">
 	<div id="Introduction">
 		<h2>
@@ -37,8 +40,8 @@ require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/db.inc.php");
 		</div>
 		<div id="wikigini_graph" style="min-width:400px; height:400px; margin:0 auto"></div>
 		<div style="padding:5px;">
-			<input id="mode_switch" type="button" name="mode_switch" value="Switch mode" style="border:1px black solid;">
-			<input id="batch_last" type="button" name="batch_last" value="&lt;&lt; 0-0" style="border:1px black solid;min-width:125px;">
-			<input id="batch_current" type="button" name="batch_current" value="0-0" style="border:1px black solid;min-width:125px;">
-			<input id="batch_next" type="button" name="batch_next" value="0-0 &gt;&gt;" style="border:1px black solid;min-width:125px;">
+			<input id="mode_switch" type="button" name="mode_switch" value="Switch mode" style="border:1px black solid; margin-right: 50px;">
+			<input id="batch_last" type="button" name="batch_last" value="&lt;&lt;" style="border:1px black solid;min-width:125px;">
+			<input id="batch_current" type="button" name="batch_current" value="0-0" style="border:1px black solid;min-width:125px; display: none;">
+			<input id="batch_next" type="button" name="batch_next" value="&gt;&gt;" style="border:1px black solid;min-width:125px;">
 		</div>

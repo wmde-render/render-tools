@@ -23,15 +23,15 @@ $(function() {
 	// Show buttons if amount of revisions is greater than the batch size
 	if ((batch_offset + batch_size + 1) < wikigini_data[mode].length) {
 		$('#batch_last').show();
-		$('#batch_current').show();
+		//$('#batch_current').show();
 		$('#batch_next').show();
 	}
 	
 	// Show correct mode switch buttons
 	if (mode == 'datetime') {
-		$('#mode_switch').val('Switch mode to revisions');
+		$('#mode_switch').val( txtSwitchToRevisionMode );
 	} else {
-		$('#mode_switch').val('Switch mode to time');
+		$('#mode_switch').val( txtSwitchToTimeMode );
 	}
 	
 	
@@ -125,11 +125,14 @@ $(function() {
 
 	var updateButtons = function() {
 		if (batch_offset - batch_size > 0) {
-			$('#batch_last').val('<< ' + (batch_offset - batch_size) + '-' + (batch_offset));
+			$('#batch_last').attr( "disabled", false );
+			$('#batch_last').attr( "title", (batch_offset - batch_size) + '-' + (batch_offset));
 		} else if(batch_offset > 0) {
-			$('#batch_last').val('<< 1-' + (batch_size + 1));
+			$('#batch_last').attr( "disabled", false );
+			$('#batch_last').attr( "title", '1-' + (batch_size + 1));
 		} else {
-			$('#batch_last').val('|-');
+			$('#batch_last').attr( "disabled", "disabled" );
+			$('#batch_last').attr( "title", "" );
 		}
 
 		if ((batch_offset + batch_size + 1) < wikigini_data[mode].length) {
@@ -139,11 +142,14 @@ $(function() {
 		}
 
 		if (batch_offset + 2 * batch_size + 2 < wikigini_data[mode].length) {
-			$('#batch_next').val((batch_offset + batch_size + 2) + '-' + (batch_offset + 2 * batch_size + 2) + ' >>');
+			$('#batch_next').attr( "title", (batch_offset + batch_size + 2) + '-' + (batch_offset + 2 * batch_size + 2));
+			$('#batch_next').attr( "disabled", false );
 		} else if (batch_offset + batch_size + 1 < wikigini_data[mode].length) {
-			$('#batch_next').val((wikigini_data[mode].length - batch_size) + '-' + wikigini_data[mode].length + ' >>');
+			$('#batch_next').attr( "title", (wikigini_data[mode].length - batch_size) + '-' + wikigini_data[mode].length);
+			$('#batch_next').attr( "disabled", false );
 		} else {
-			$('#batch_next').val('-|');
+			$('#batch_next').attr( "title", "" );
+			$('#batch_next').attr( "disabled", "disabled" );
 		}
 	}
 
