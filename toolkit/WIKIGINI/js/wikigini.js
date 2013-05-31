@@ -107,7 +107,7 @@ $(function() {
 		},
 
 		title : {
-			text : 'WIKIGINI - Article "' + page_title + '" in language "' + language_code + '"'
+			text : txtGraphHeader1 + ' "' + page_title + '" ' + txtGraphHeader2 + ' "' + language_code + '"'
 		},
 
 		series : [{

@@ -4,6 +4,8 @@ $ts_pw = posix_getpwuid(posix_getuid());
 require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/db.inc.php");
 ?>
 <script>
+var txtGraphHeader1 = "<?php echo $txtGraphHeader1; ?>";
+var txtGraphHeader2 = "<?php echo $txtGraphHeader2; ?>";
 var txtSwitchToRevisionMode = "<?php echo $txtSwitchRevision?>";
 var txtSwitchToTimeMode = "<?php echo $txtSwitchTime?>";
 </script>
