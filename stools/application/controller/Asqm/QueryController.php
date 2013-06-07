@@ -27,6 +27,16 @@ class Asqm_QueryController /*extends Controller*/ {
 		echo $view->render();
 	}
 	
+	public function articleMonitorAction() {
+		$view = new Asqm_JsonView( "" );
+		SingletonFactory::getInstance( 'Response' )
+				->setFullPage( false )
+				->setHeader('Content-type: application/json');
+		$model = SingletonFactory::getInstance( "Asqm_Json" );
+		$model->setView( $view );
+		echo $view->getJson();
+	}
+	
 	public function newsAction() {
 		$req = SingletonFactory::getInstance( "Request" );
 		$pageTitle = $req->getVar( 'title' );

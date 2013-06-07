@@ -113,4 +113,13 @@ class View {
 	public function getLang() {
 		return isset($this->_lang) ? $this->_lang : 'de';
 	}
+
+	public function getUserInfoObject( $key ) {
+		$uInfo = posix_getpwuid(posix_getuid());
+		if ( is_array( $uInfo ) && array_key_exists( $key, $uInfo ) ) {
+			return $uInfo[$key];
+		}
+
+		return false;
+	}
 }

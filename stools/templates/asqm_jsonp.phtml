@@ -4,30 +4,30 @@
 <?php echo $callback; ?>({
 	"asqmResponse": {
 		"general": {
-			"title": "<?php echo $this->translate( array( "groupStats", "title" ) ); ?>",
+			"title": "<?php echo $this->translate( array( "general", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupStats", "pageTitle" ) ); ?>": "<?php echo str_replace( '_', ' ', $this->getTitle() ); ?>",
+				"<?php echo $this->translate( array( "general", "pageTitle" ) ); ?>": "<?php echo str_replace( '_', ' ', $this->getTitle() ); ?>",
 <?php $articleStatus = SingletonFactory::getInstance( 'Api_Model' )->getFeaturedArticle( $this->getTitle() ); ?>
 <?php if ( $articleStatus ): ?>
-				"<?php echo $this->translate( array( "groupStats", "status" ) ); ?>": "<?php echo $articleStatus; ?>",
+				"<?php echo $this->translate( array( "general", "status" ) ); ?>": "<?php echo $articleStatus; ?>",
 <?php endif; ?>
 <?php $revInfo = $this->getRevisionInfo( true ); ?>
-				"<?php echo $this->translate( array( "groupStats", "firstEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "groupStats", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
+				"<?php echo $this->translate( array( "general", "firstEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "general", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
 <?php $revInfo = $this->getRevisionInfo( false ); ?>
-				"<?php echo $this->translate( array( "groupStats", "recentEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "groupStats", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
+				"<?php echo $this->translate( array( "general", "recentEdit" ) ); ?>": "<?php echo $this->getTimestamp( $revInfo[0]['rev_timestamp'] ); ?> (<?php echo $this->translate( array( "general", "editedBy" ) ); ?> <?php echo $this->getRevisionUserName(); ?>)",
 <?php $editorCount = $this->getUniqueEditorCount(); ?>
-				"<?php echo $this->translate( array( "groupStats", "totalEditors" ) ); ?>": "<?php echo $editorCount["loggedin"]; ?> (+IP: <?php echo $editorCount["anonymous"]; ?>)",
-				"<?php echo $this->translate( array( "groupStats", "references" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getCurrentRevision(); ?>",
-				"<?php echo $this->translate( array( "groupStats", "images" ) ); ?>": "<?php echo $this->getImageCount(); ?>",
-				"<?php echo $this->translate( array( "groupStats", "visitorsYesterday" ) ); ?>": "<?php echo SingletonFactory::getInstance( "WebService_StatsGrok" )->getClassicStatsYesterday( $this->getTitle(), $this->getLanguage() ); ?>",
-				"<?php echo $this->translate( array( "groupStats", "visitorsLastMonth" ) ); ?>": "<?php echo SingletonFactory::getInstance( "WebService_StatsGrok" )->getClassicStatsLastMonth( $this->getTitle(), $this->getLanguage() ); ?>"
+				"<?php echo $this->translate( array( "general", "totalEditors" ) ); ?>": "<?php echo $editorCount["loggedin"]; ?> (+IP: <?php echo $editorCount["anonymous"]; ?>)",
+				"<?php echo $this->translate( array( "general", "references" ) ); ?>": "<?php echo SingletonFactory::getInstance( 'Api_Model' )->getCurrentRevision(); ?>",
+				"<?php echo $this->translate( array( "general", "images" ) ); ?>": "<?php echo $this->getImageCount(); ?>",
+				"<?php echo $this->translate( array( "general", "visitorsYesterday" ) ); ?>": "<?php echo SingletonFactory::getInstance( "WebService_StatsGrok" )->getClassicStatsYesterday( $this->getTitle(), $this->getLanguage() ); ?>",
+				"<?php echo $this->translate( array( "general", "visitorsLastMonth" ) ); ?>": "<?php echo SingletonFactory::getInstance( "WebService_StatsGrok" )->getClassicStatsLastMonth( $this->getTitle(), $this->getLanguage() ); ?>"
 			}
 		},
 		
 		"factCoverage": {
-			"title": "<?php echo $this->translate( array( "groupCoverage", "title" ) ); ?>",
+			"title": "<?php echo $this->translate( array( "factCoverage", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "groupCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
+				"<?php echo $this->translate( array( "factCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "factCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
 			}
 		},
 <?php $newsCount = $this->getNewsItems(); ?>
@@ -70,17 +70,17 @@
 <?php $percent = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback5(); ?>
 <?php if ( !empty( $percent ) ): ?>
 	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft5-show", $percent ); ?>
-		"aft-v5": {
-			"title": "<?php echo $this->translate( array( "groupAftV5", "title" ) ); ?>",
+		"aft5": {
+			"title": "<?php echo $this->translate( array( "aft5", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupAftV5", "negRating" ) ); ?>": [ "<?php echo $percent; ?> %", "http://en.wikipedia.org/wiki/Special:ArticleFeedbackv5/<?php echo $this->getTitle(); ?>" ]
+				"<?php echo $this->translate( array( "aft5", "negRating" ) ); ?>": [ "<?php echo $percent; ?> %", "http://en.wikipedia.org/wiki/Special:ArticleFeedbackv5/<?php echo $this->getTitle(); ?>" ]
 			}
 		},
 <?php else: ?>
 <?php $ratings = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback(); ?>
 <?php if ( !empty( $ratings ) ): ?>
 	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft4-show", base64_encode( serialize( $ratings ) ) ); ?>
-		"aft-v4": {
+		"aft4": {
 			"title": "<?php echo $this->translate( array( "groupAftV4", "title" ) ); ?>",
 			"items": {
 				"<?php echo $this->translate( array( "groupAftV4", "trustworthy" ) ); ?>": "<?php echo number_format( $ratings[0], 1 ); ?>",

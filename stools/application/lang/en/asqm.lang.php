@@ -38,7 +38,7 @@ $strLang = array(
 	"asqmTooltip" => "Show statistics and further analysis for this article",
 	
 	# asqm output
-	"groupStats" => array(
+	"general" => array(
 		"title" => "Statistics",
 		"pageTitle" => "Page Title",
 		"status" => "Status",
@@ -53,21 +53,21 @@ $strLang = array(
 		"visitorsYesterday" => "Visitors yesterday",
 		"visitorsLastMonth" => "Visitors last month"
 	),
-	"groupCoverage" => array(
+	"factCoverage" => array(
 		"title" => "Fact coverage",
 		"lea" => "LEA (Link Extractor)",
 		"showAnalysis" => "Show Analysis",
 	),
-	"groupCurrentness" => array(
+	"currentness" => array(
 		"title" => "Currentness",
-		"titleNewsFinder" => "NewsFinder",
+		"titleNewsFinder" => "News Finder",
 		"noNews" => "No news articles found",
 		"newsFound" => " news articles found",
 		"showResults" => "Show Results",
 		"titleChangeDetector" => "Change Detector",
 		"cdHit" => "Detected as possibly outdated"
 	),
-	"groupEditorInteraction" => array(
+	"editorInteraction" => array(
 		"title" => "Editor Interaction",
 		"giniScore" => "WikiGini Score",
 	),

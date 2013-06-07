@@ -40,7 +40,7 @@ $strLang = array(
 	"asqmTooltip" => "Statistiken und weitere Analysen zu diesem Artikel anzeigen",
 	
 	# asqm output
-	"groupStats" => array(
+	"general" => array(
 		"title" => "Statistiken",
 		"pageTitle" => "Seitentitel",
 		"status" => "Status",
@@ -55,12 +55,12 @@ $strLang = array(
 		"visitorsYesterday" => "Besucher gestern",
 		"visitorsLastMonth" => "Besucher im letzten Monat"
 	),
-	"groupCoverage" => array(
+	"factCoverage" => array(
 		"title" => "Faktenabdeckung",
 		"lea" => "LEA (Link Extractor)",
 		"showAnalysis" => "Analyse anzeigen",
 	),
-	"groupCurrentness" => array(
+	"currentness" => array(
 		"title" => "Aktualität",
 		"titleNewsFinder" => "NewsFinder",
 		"noNews" => "Keine Nachrichtenartikel gefunden",
@@ -73,7 +73,7 @@ $strLang = array(
 		"neutrality" => "Neutralität",
 		"editorInteraction" => "Autoreninteraktion",
 */
-	"groupEditorInteraction" => array(
+	"editorInteraction" => array(
 		"title" => "Autoreninteraktion",
 		"giniScore" => "WikiGini-Score",
 	),
@@ -82,14 +82,14 @@ $strLang = array(
 		"wikibuch" => "Wikibu.ch",
 		"lookupAssessment" => "Bewertung ansehen",
 	),
-	"groupAftV4" => array(
+	"aft4" => array(
 		"title" => "Article Feedback Score",
 		"trustworthy" => "Vertrauenswürdig",
 		"objective" => "Objektiv",
 		"complete" => "Vollständig",
 		"wellWritten" => "Gut geschrieben",
 	),
-	"groupAftV5" => array(
+	"aft5" => array(
 		"title" => "Article Feedback Score",
 		"negRating" => "Negative Bewertungen",
 	),
