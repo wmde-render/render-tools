@@ -23,7 +23,7 @@ include( "inc/src/api_normalize_redirect.inc" );
 		</form>
 	</div>
 	<h2 onclick="toggleDescription()"><?php echo $Headline2; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
-	<div id="Description2" style="margin-left: 640px;">
+	<div id="Description2" class="displayNone" style="margin-left: 640px;">
 		<img src="/<?php echo $tsAccount; ?>/toolkit/img/lea-example-small.png" style="float: right; margin: 0 0 10px 20px; padding: 2px; border: 1px solid silver" />
 		<p id="Description2"><?php echo $leaLang["description2"]; ?></p>
 	</div>

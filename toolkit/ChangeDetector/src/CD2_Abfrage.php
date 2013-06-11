@@ -100,7 +100,7 @@ if( !file_exists( $check_yesterday_file ) ) {
 		<h2><?php echo $Headline; ?></h2>
 		<p id="Description"><?php echo $Description; ?></p>
 		<h2 onclick="toggleDescription()"><?php echo $Headline2; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
-		<p id="Description2" class=""><?php echo $Description2; ?></p>
+		<p id="Description2" class="displayNone"><?php echo $Description2; ?></p>
 	</div>
 
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>#result_table" method="get">
