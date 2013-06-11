@@ -11,19 +11,17 @@ $strLang = array(
 		Klicken auf diese Schalftfläce öffnet sich ein Extrafenster, in dem die 
 		Statistiken und Analysen zusammengefasst sind.",
 	"instHeading" => "Installation",
-	"instDesc" => "Das Gadget kann auf der Unterseite 'vector.js' der eigenen 
+	"instDesc" => "Das Helferlein kann auf der Unterseite 'vector.js' der eigenen 
 		Benutzerseite installiert werden. Ist das automatische Login in die 
 		Wikipedia aktiviert, kann folgender Link verwendet werden, um die Seite 
-		zur Skripteinbindung aufgerufen werden:
+		zur Skripteinbindung aufzurufen:
 		<a href=\"http://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js\" target=\"_blank\">
 			http://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js
 		</a>
 		<br />
 		Weitere Informationen zur Individualisierung der Benutzeroberfläche in der 
 		Wikipedia gibt es auf der 
-		<a href=\"http://de.wikipedia.org/wiki/Wikipedia:Technik/Skin\" target=\"_blank\">
-			Projektseite
-		</a>.<br />
+		<a href=\"http://de.wikipedia.org/wiki/Wikipedia:Technik/Skin\" target=\"_blank\">Projektseite</a>.<br /><br /><br />
 		Zur Benutzung wird folgender Code benötigt:",
 	"noticeHeading" => "Hinweis",
 	"notice" => "Zur Evaluation der Nutzung enthält der Code die Variable 

@@ -18,9 +18,7 @@ $strLang = array(
 		<br />
 		Further information on how to customize the user interface of the Wikipedia
 		is available on the 
-		<a href=\"http://de.wikipedia.org/wiki/Wikipedia:Technik/Skin\" target=\"_blank\">
-			Project Page
-		</a>.<br />
+		<a href=\"http://de.wikipedia.org/wiki/Wikipedia:Technik/Skin\" target=\"_blank\">Project Page</a>.<br /><br /><br />
 		To make use of the gadget the following code is required:",
 	"noticeHeading" => "Notice",
 	"notice" => "For evaluation purposes the code contains the variable 'asqmid'.
