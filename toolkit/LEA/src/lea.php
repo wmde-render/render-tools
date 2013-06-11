@@ -11,7 +11,7 @@ include( "inc/src/api_normalize_redirect.inc" );
 		<h2><?php echo $leaLang["headline"]; ?></h2>
 		<p id="Description"><?php echo $leaLang["description"]; ?></p>
 		<h2 onclick="toggleDescription()"><?php echo $leaLang["headline2"]; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
-		<p id="Description2" class="displayNone"><?php echo $leaLang["description2"]; ?></p>
+		<p id="Description2" class="displayNone"><img src="../img/lea-example-full.png" style="float: right;"><?php echo $leaLang["description2"]; ?></p>
 	</div>
 	<div class="formDiv" style="width: 580px; float: left;">
 		<?php echo $leaLang["form_text"]; ?>
