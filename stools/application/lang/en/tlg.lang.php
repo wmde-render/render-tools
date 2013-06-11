@@ -10,7 +10,7 @@ $strLang = array(
 	"descLanguage" => "Language",
 	"descLanguageDesc" => "Two character language code",
 	"descCategories" => "Search terms",
-	"descCategoriesMore" => "Separate category titles using with enter oder tab key.",
+	"descCategoriesMore" => "Separate category titles using enter or tab key.",
 	"descCategoriesDesc" => "A list of category names separated by semicolons. 
 		Prepending a plus sign generates an intersection, prefixing the minus sign 
 		excludes the elements of the category.<br /><br />

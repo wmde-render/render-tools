@@ -58,7 +58,8 @@
 							<?php echo $this->translate( "descCategories" ); ?>
 						</label>
 						<div style="float: left; margin-right: 5px;">
-							<input type="text" id="categories" class="taggable" name="query[]" value="" />
+<?php $query = SingletonFactory::getInstance( "Request" )->getVar( "query" ); ?>
+							<input type="text" id="categories" class="taggable" name="query[]" value="<?php echo $query; ?>" />
 						</div>
 						<img class="fldHelp" id="helpCategories" style="padding-top: 5px;" src="<?php echo BASE_PATH; ?>res/img/emblem-notice.png" />
 						<div class="clear"></div>
