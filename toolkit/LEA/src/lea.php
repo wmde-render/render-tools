@@ -10,6 +10,8 @@ include( "inc/src/api_normalize_redirect.inc" );
 	<div class="leaDescription">
 		<h2><?php echo $leaLang["headline"]; ?></h2>
 		<p id="Description"><?php echo $leaLang["description"]; ?></p>
+		<h2 onclick="toggleDescription()"><?php echo $leaLang["headline2"]; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
+		<p id="Description2" class="displayNone"><?php echo $leaLang["description2"]; ?></p>
 	</div>
 	<div class="formDiv" style="width: 580px; float: left;">
 		<?php echo $leaLang["form_text"]; ?>
@@ -21,11 +23,6 @@ include( "inc/src/api_normalize_redirect.inc" );
 			<span>.wikipedia.org</span>
 			<input name="submit" type="submit" value="<?php echo $leaLang["form_button"]; ?>" />
 		</form>
-	</div>
-	<h2 onclick="toggleDescription()"><?php echo $Headline2; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
-	<div id="Description2" class="displayNone" style="margin-left: 640px;">
-		<img src="/<?php echo $tsAccount; ?>/toolkit/img/lea-example-small.png" style="float: right; margin: 0 0 10px 20px; padding: 2px; border: 1px solid silver" />
-		<p id="Description2"><?php echo $leaLang["description2"]; ?></p>
 	</div>
 </div>
 
