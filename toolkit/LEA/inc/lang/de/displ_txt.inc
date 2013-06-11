@@ -1,23 +1,37 @@
 <?php
 $leaLang = array(
-	"headline" => "LEA - Link ExtrActor",
-	"description" => "LEA hilft dabei, fehlende Verweise in Wikipedia-
-		Artikeln zu finden. Das Tool vergleicht verschiedene Sprachversionen 
-		und zeigt fehlende Verweisabdeckung.<br />
-		Die Schnittmenge der Verweise aus den drei linkreichsten 
-		Sprachversionen wird mit denen der angefragten Sprachversion 
-		verglichen.<br /><br />
-		Im Beispiel auf der rechten Seite wurde der englischsprachige 
-		Artikel über die Stadt Flensburg angefragt. Der Artikel zum Stadtteil 
-		Mürwig ist in der englischsprachigen Wikipedia nicht vorhanden. 
-		Zum Begriff Venskabsby (Städtepartnerschaft) ist kein Verweis enthalten.",
+	"headline" => "Link Extractor (LEA)",
+	"description" => "Der Link Extractor geht von der Annahme aus, dass 
+		die Vollständigkeit eines Artikels über einen Abgleich der in 
+		verschiedenen Sprachversionen enthaltenen Links gemessen werden 
+		kann. Er gibt einen Überblick über die Begriffe, die nach seinen 
+		Berechnungen in einem Wikipedia-Artikel enthalten sein sollten. 
+		Damit gibt der Link Extractor Hinweise darauf, welche Informationen 
+		oder Verlinkungen in einem Artikel fehlen. Weiterhin zeigt er 
+		Artikel auf, die in einer Sprachversion nicht vorhanden sind, 
+		aber in anderen existieren.<br />
+		Der Link Extractor ist in den <a href=\"http://toolserver.org/~render/stools/asqm\">Artikelmonitor</a> eingebunden. Im 
+		Ergebnisfenster des Artikelmonitors findet sich ein Link zur 
+		entsprechenden Analyse.<br /><br />
+		<h2>Ergebnisdarstellung</h2>
+		Im Beispiel wurde der englischsprachige Artikel über die Stadt 
+		Flensburg untersucht. Der Artikel zum Stadtteil Mürwig ist in 
+		der englischsprachigen Wikipedia nicht vorhanden. Zum Begriff 
+		Venskabsby (Städtepartnerschaft) gibt es in der englischsprachigen 
+		Version einen Artikel, aber er ist nicht verlinkt. Für die 
+		Begriffe Angeln und Danfoss gibt es sowohl einen Artikel als 
+		ssauch einen Link.",
 	"more_info" => "Weitere Informationen",
 	"form_text" => "Bitte einen Artikeltitel und die gewünschte Wikipedia Sprachversion angeben:",
 	"form_title" => "Titel:",
 	"form_in" => "in",
 	"form_button" => "Übermitteln",
 );
+Link Extractor (LEA) 
 
+
+Beispiel 
+Im Beispiel wurde der englischsprachige Artikel über die Stadt Flensburg untersucht. Der Artikel zum Stadtteil Mürwig ist in der englischsprachigen Wikipedia nicht vorhanden. Zum Begriff Venskabsby (Städtepartnerschaft) gibt es in der englischsprachigen Version einen Artikel, aber er ist nicht verlinkt. Für die Begriffe Angeln und Danfoss gibt es sowohl einen Artikel als auch einen Link.
 $FormText = "Bitte einen Artikeltitel und die gewünschte Wikipedia-Sprachversion angeben:";
 $FormTitle = "Titel:";
 $FormIn = "in";

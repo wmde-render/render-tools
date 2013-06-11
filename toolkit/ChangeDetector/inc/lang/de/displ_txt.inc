@@ -1,13 +1,35 @@
 <?php
 $Headline = "Change Detector";
 $Description = "
-	Change Detector zeigt hohe Autorenaktivität in Wikipedia an einem bestimmten 
-	Tag an. Damit wird es möglich, vermutlich veraltete Artikel in bestimmten 
-	Sprachversionen zu identifizieren. Die Ergebnisse werden übersichtlich als 
-	Tabelle dargestellt. Sollten in nur einer oder zwei Sprachversionen keine 
-	Änderungen erfolgt sein, in allen anderen betrachteten Sprachversionen jedoch 
-	schon, so ist das ein Hinweis auf einen veralteten Artikeltext in den nicht 
-	veränderten Sprachversionen.
+	Der Change Detector untersucht die Aktualität von Wikipedia-Artikeln 
+	durch einen Vergleich der Autorenaktivität in verschiedenen 
+	Sprachversionen. Dabei sucht der Change Detector nach Artikeln, in 
+	denen an einem Tag in vielen Sprachen Veränderungen vorgenommen 
+	wurden. Ist dies der Fall, so ist das ein Hinweis darauf, dass der 
+	Artikel in den Sprachversionen, die nicht überarbeitet wurden, 
+	veraltet sein könnte. Der Change Detector weist auch auf Artikel hin, 
+	die in einer oder wenigen Sprache(n) fehlen, in anderen Sprachversionen 
+	aber existieren.
+	<br /><br />
+	Der Change Detector ist in den <a href=\"http://toolserver.org/~render/stools/tlg\">Artikellistengenerator</a> integriert, 
+	wodurch es möglich ist, das Suchergegbnis auf bestimmte Kategorien 
+	einzugrenzen.  Außerdem ist der Change Detector in den Artikelmonitor 
+	eingebunden. Dort findet sich ein Link zur entsprechenden Analyse.
+	<br /><br />
+	<h2>Ergebnisdarstellung</h2>
+	Das Ergebnis der Suche wird in einer Tabelle angezeigt. Jede Zeile 
+	der Tabelle bezieht sich auf einen Artikel, den der Change Detector 
+	entdeckt hat. In der ersten Spalte ist die gewählte Referenzsprache 
+	dargestellt. In den restlichen Spalten folgen die Sprachen der 
+	gewählten Sprachgruppe.
+	<br /><br />
+	Eine grüne Zelle mit der Beschriftung „changed“ bedeutet, dass in 
+	diesem Artikel am gewählten Tag im Vergleich zu den 50 Tagen zuvor 
+	besonders viele Änderungen entdeckt wurden. Der rote Schriftzug „no 
+	change“ bedeutet, dass an dem Artikel keine oder weniger Änderungen 
+	vorgenommen wurden, als in den 50 vorangegangenen Tagen. „No article“ 
+	bedeutet, dass in dieser Sprache kein Artikel gefunden wurde, obwohl 
+	in anderen Sprachversionen ein Artikel zu dem Begriff existiert.
 ";
 
 $MoreInfo = "Weitere Informationen";
