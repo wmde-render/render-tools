@@ -17,6 +17,12 @@ var txtSwitchToTimeMode = "<?php echo $txtSwitchTime?>";
 		<p id="Description">
 			<?php echo $Description; ?>
 		</p>
+		<h2>
+			<?php echo $Headline2; ?>
+		</h2>
+		<p id="Description2">
+			<?php echo $Description2; ?>
+		</p>
 <!-- 		<p>
 			<a href="info.php"><?php echo $MoreInfo; ?> </a>
 		</p> -->
