@@ -1,14 +1,15 @@
 <?php
 $strLang = array(
 	"dateFormat" => "d.m.Y H:i",
-	"asqmHeading" => "Qualitätsübersichtswerkzeug",
-	"asqmDesc" => " Der ASQM (Article Statistics and Quality Monitor) bietet 
-		einen schnellen Überblick über die Qualität und den Zustand eines 
-		Wikipedia-Artikels.<br />
-		<br />
-		Für den Zugriff auf die Artikelanalysen kann ein Gadget (Helferlein) 
-		installiert werden, das neben den gewohnten Links zum Editieren und zur 
-		Darstellung der Versionshistorie einen Link zur Analyse anzeigt. ",
+	"asqmHeading" => "Artikelmonitor",
+	"asqmDesc" => "Der Artikelmonitor bietet einen Überlick über statistische 
+		Daten und verschiedene Analysen zu einem Wikipedia-Artikel mit deren 
+		Hilfe die Qualität des Artikels eingeschätzt werden kann.
+		<br /><br />
+		Nach erfolgter Installation erscheint neben der Schaltfläche zur 
+		Versionshistorie eine weitere mit der Aufschrift Artikelmonitor. Durch 
+		Klicken auf diese Schalftfläce öffnet sich ein Extrafenster, in dem die 
+		Statistiken und Analysen zusammengefasst sind.",
 	"instHeading" => "Installation",
 	"instDesc" => "Das Gadget kann auf der Unterseite 'vector.js' der eigenen 
 		Benutzerseite installiert werden. Ist das automatische Login in die 

@@ -2,9 +2,9 @@
 $strLang = array(
 	"topHeading" => "Task List Generator",
 	"tlgDescription" => "This tool provides the ability to search Wikipedia 
-		categories with a given search depth. The <a href=\"https://en.wikipedia.org/wiki/Intersection_%28set_theory%29\">
-		intersection</a> and <a href=\"https://en.wikipedia.org/wiki/Union_%28set_theory%29\">
-		union</a> of categories can be created. The choice of filters decides 
+		categories with a given search depth. The <a href=\"http://en.wikipedia.org/wiki/Intersection_%28set_theory%29\">
+		intersection</a> and <a href=\"http://en.wikipedia.org/wiki/Intersection_%28set_theory%29\">
+		intersection</a> of categories can be created. The choice of filters decides 
 		which articles should be displayed.",
 	"descHeading" => "Language, Categories and Search Depth",
 	"descLanguage" => "Language",

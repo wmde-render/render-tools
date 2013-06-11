@@ -1,13 +1,16 @@
 <?php
 $strLang = array(
-	"topHeading" => "Artikellisten-Generator",
-	"tlgDescription" => "Dieses Werkzeug ermöglicht die Suche in Wikipedia-Kategorien 
-		mit der Möglichkeit, die Suchtiefe zu wählen. Die 
-		<a href=\"https://de.wikipedia.org/wiki/Schnittmenge#Durchschnitt_.28Schnittmenge.2C_Schnitt.29\">
-		Schnittmenge</a> und die <a href=\"https://de.wikipedia.org/wiki/Differenzmenge#Differenz_und_Komplement\">
-		Differenz</a> (Ausschluss) kann zwischen Kategorien gebildet werden. 
-		Durch die Auswahl der Filter wird festgelegt, welche Artikel angezeigt 
-		werden sollen.",
+	"topHeading" => "Artikellistengenerator",
+	"tlgDescription" => "Mithilfe des Artikellistengenerators können Artikellisten 
+		nach verschiedenen Kriterien zusammengestellt werden. In der Suchanfrage 
+		kann man einzelne Kategorien eingeben oder mehrere Kategorien so kombinieren, 
+		dass eine <a href=\"https://de.wikipedia.org/wiki/Schnittmenge#Durchschnitt_.28Schnittmenge.2C_Schnitt.29\">Schnittmenge</a> 
+		oder eine <a href=\"https://de.wikipedia.org/wiki/Differenzmenge#Differenz_und_Komplement\">Differenz</a> 
+		gebildet wird. Der Nutzer kann selbst bestimmen, bis zu welcher Suchtiefe 
+		die ausgewählten Kategorien durchsucht werden sollen. Auf der rechten Seite 
+		stehen verschiedene Filter zur Verfügung, anhand derer das Suchergebnis 
+		verfeinert werden kann. Es ist möglich mehrere Filter gleichzeitig 
+		auszuwählen. Das Suchergebnis wird in Form einer Liste angezeigt.",
 	"descHeading" => "Sprache, Kategorien und Suchtiefe",
 	"descLanguage" => "Sprache",
 	"descLanguageDesc" => "Kürzel der Sprachversion",
