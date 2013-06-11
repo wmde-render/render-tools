@@ -99,7 +99,8 @@ if( !file_exists( $check_yesterday_file ) ) {
 	<div id="Introduction">
 		<h2><?php echo $Headline; ?></h2>
 		<p id="Description"><?php echo $Description; ?></p>
-		<p><a href="info.php"><?php echo $MoreInfo; ?></a></p>
+		<h2 onclick="toggleDescription()"><?php echo $Headline2; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
+		<p id="Description2" class=""><?php echo $Description2; ?></p>
 	</div>
 
 	<form action="<?php echo $_SERVER['PHP_SELF']; ?>#result_table" method="get">
@@ -419,7 +420,7 @@ if( isset( $_GET["submit"] ) ) {
 	$serializedResult = base64_encode( serialize( $arrResult ) );
 	$sql = "INSERT INTO asqm_request_log ".
 			"(asqm_id, title, lang, action_type, result, request_time) ".
-			"VALUES ('" . $asqmId . "', '', '" . $reflang . "', 'changedetector', '', NOW())";
+			"VALUES ('" . $asqmId . "', '', '" . $reflang . "', 'cd-usage', '', NOW())";
 	mysql_query( $sql );
 	$mysqlError = mysql_error();
 	echo $mysqlError;

@@ -17,12 +17,8 @@ var txtSwitchToTimeMode = "<?php echo $txtSwitchTime?>";
 		<p id="Description">
 			<?php echo $Description; ?>
 		</p>
-		<h2>
-			<?php echo $Headline2; ?>
-		</h2>
-		<p id="Description2">
-			<?php echo $Description2; ?>
-		</p>
+		<h2 onclick="toggleDescription()"><?php echo $Headline2; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
+		<p id="Description2"><?php echo $Description2; ?></p>
 <!-- 		<p>
 			<a href="info.php"><?php echo $MoreInfo; ?> </a>
 		</p> -->

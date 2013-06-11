@@ -191,6 +191,10 @@ vertical-align: top;
 	background-color: #0047AB;
 }
 
+.displayNone {
+	display: none;
+}
+
 /* Hier ist der Bereich für den variablen Teil des Toolkits */
 
 div#Text td#Inhalt {
@@ -518,8 +522,6 @@ a#AdvancedSetting {
 
 /* Example of result output */
 .leaDescription {
-	width: 50%;
-	float: left;
 }
 
 /* LEA Piechart */

@@ -7,28 +7,25 @@ include( "inc/src/Languagecodes.inc" );
 include( "inc/src/api_normalize_redirect.inc" );
 ?>
 <div id="Ueberschrift">
-	<h2><?php echo $leaLang["headline"]; ?></h2>
 	<div class="leaDescription">
-		<p id="Description"><?php echo $leaLang["description"]; ?></p>
 		<h2><?php echo $leaLang["headline"]; ?></h2>
-		<p id="Description2"><?php echo $leaLang["description2"]; ?></p>
-		<p>
-			<a href="info.php"><?php echo $leaLang["more_info"]; ?></a>
-		</p>
-		<div class="formDiv">
-			<?php echo $leaLang["form_text"]; ?>
-			<form action="" method="post">
-				<span><?php echo $leaLang["form_title"]; ?></span>
-				<input name="title" size="20" value="<?php echo isset( $_REQUEST["title"] ) ? htmlspecialchars( $_REQUEST["title"], ENT_QUOTES, "UTF-8" ) : ""; ?>" />
-				<span><?php echo $leaLang["form_in"]; ?></span>
-				<input name="lg" size="2" maxlength="16" value="<?php echo isset( $_REQUEST["lg"] ) ? htmlspecialchars( $_REQUEST["lg"], ENT_QUOTES, "UTF-8" ) : ""; ?>" />
-				<span>.wikipedia.org</span>
-				<input name="submit" type="submit" value="<?php echo $leaLang["form_button"]; ?>" />
-			</form>
-		</div>
+		<p id="Description"><?php echo $leaLang["description"]; ?></p>
 	</div>
-	<div class="leaDescription">
-		<p class="image"><img src="/<?php echo $tsAccount; ?>/toolkit/img/lea-example-small.png" /></p>
+	<div class="formDiv" style="width: 580px; float: left;">
+		<?php echo $leaLang["form_text"]; ?>
+		<form action="" method="post">
+			<span><?php echo $leaLang["form_title"]; ?></span>
+			<input name="title" size="20" value="<?php echo isset( $_REQUEST["title"] ) ? htmlspecialchars( $_REQUEST["title"], ENT_QUOTES, "UTF-8" ) : ""; ?>" />
+			<span><?php echo $leaLang["form_in"]; ?></span>
+			<input name="lg" size="2" maxlength="16" value="<?php echo isset( $_REQUEST["lg"] ) ? htmlspecialchars( $_REQUEST["lg"], ENT_QUOTES, "UTF-8" ) : ""; ?>" />
+			<span>.wikipedia.org</span>
+			<input name="submit" type="submit" value="<?php echo $leaLang["form_button"]; ?>" />
+		</form>
+	</div>
+	<h2 onclick="toggleDescription()"><?php echo $Headline2; ?><img id="expandIcon" src="../img/expand-large-silver.png" style="width: 15px; height: 15px; padding-left: 10px;"></h2>
+	<div id="Description2" style="margin-left: 640px;">
+		<img src="/<?php echo $tsAccount; ?>/toolkit/img/lea-example-small.png" style="float: right; margin: 0 0 10px 20px; padding: 2px; border: 1px solid silver" />
+		<p id="Description2"><?php echo $leaLang["description2"]; ?></p>
 	</div>
 </div>
 

@@ -1,12 +1,11 @@
 <?php
 $Headline = "Change Detector";
-$Description = "
-	Der Change Detector untersucht die Aktualität von Wikipedia-Artikeln 
-	durch einen Vergleich der Autorenaktivität in verschiedenen 
-	Sprachversionen. Dabei sucht der Change Detector nach Artikeln, in 
-	denen an einem Tag in vielen Sprachen Veränderungen vorgenommen 
-	wurden. Ist dies der Fall, so ist das ein Hinweis darauf, dass der 
-	Artikel in den Sprachversionen, die nicht überarbeitet wurden, 
+$Description = "Der Change Detector untersucht die Aktualität von 
+	Wikipedia-Artikeln durch einen Vergleich der Autorenaktivität in 
+	verschiedenen Sprachversionen. Dabei sucht der Change Detector nach 
+	Artikeln, in denen an einem Tag in vielen Sprachen Veränderungen 
+	vorgenommen wurden. Ist dies der Fall, so ist das ein Hinweis darauf, 
+	dass der Artikel in den Sprachversionen, die nicht überarbeitet wurden, 
 	veraltet sein könnte. Der Change Detector weist auch auf Artikel hin, 
 	die in einer oder wenigen Sprache(n) fehlen, in anderen Sprachversionen 
 	aber existieren.
@@ -14,10 +13,9 @@ $Description = "
 	Der Change Detector ist in den <a href=\"http://toolserver.org/~render/stools/tlg\">Artikellistengenerator</a> integriert, 
 	wodurch es möglich ist, das Suchergegbnis auf bestimmte Kategorien 
 	einzugrenzen.  Außerdem ist der Change Detector in den Artikelmonitor 
-	eingebunden. Dort findet sich ein Link zur entsprechenden Analyse.
-	<br /><br />
-	<h2>Ergebnisdarstellung</h2>
-	Das Ergebnis der Suche wird in einer Tabelle angezeigt. Jede Zeile 
+	eingebunden. Dort findet sich ein Link zur entsprechenden Analyse.";
+$Headline2 = "<h2>Ergebnisdarstellung</h2>";
+$Description2 = "Das Ergebnis der Suche wird in einer Tabelle angezeigt. Jede Zeile 
 	der Tabelle bezieht sich auf einen Artikel, den der Change Detector 
 	entdeckt hat. In der ersten Spalte ist die gewählte Referenzsprache 
 	dargestellt. In den restlichen Spalten folgen die Sprachen der 
@@ -29,8 +27,7 @@ $Description = "
 	change“ bedeutet, dass an dem Artikel keine oder weniger Änderungen 
 	vorgenommen wurden, als in den 50 vorangegangenen Tagen. „No article“ 
 	bedeutet, dass in dieser Sprache kein Artikel gefunden wurde, obwohl 
-	in anderen Sprachversionen ein Artikel zu dem Begriff existiert.
-";
+	in anderen Sprachversionen ein Artikel zu dem Begriff existiert.";
 
 $MoreInfo = "Weitere Informationen";
 

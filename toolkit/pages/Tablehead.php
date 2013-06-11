@@ -47,6 +47,7 @@ $pathtoself = $_SERVER['PHP_SELF'];
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.js"></script>
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery.fixedtable.js"></script>
 <script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/jquery-ui-1.8.19.custom.min.js"></script>
+<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/js/common.js"></script>
 
 <!-- WIKIGINI START -->
 
@@ -193,11 +194,11 @@ src="/<?php echo $tsAccount;?>/toolkit/img/128px-Flag_of_Germany_(3-2_aspect_rat
  	
   <div id="Rahmen"><ul id="Navigation">
 
-    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a></li>
+    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">Link Extractor</a></li>
 
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a></li>
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">Newsfinder</a></li>
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/">WIKIGINI</a></li>
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">News Finder</a></li>
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/">WikiGini</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/">Wikipedia Map</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/Corpex/">Corpex</a></li>
   </ul><div></div></div>
@@ -262,11 +263,11 @@ if($lang == "de"){
  	
   <div id="Rahmen"><ul id="Navigation">
 
-    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">LEA</a></li>
+    <li id="First"><a href="/<?php echo $tsAccount; ?>/toolkit/LEA/">Link Extractor</a></li>
 
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/ChangeDetector/">Change Detector</a></li>
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">Newsfinder</a></li>
-    <li><a href="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/">WIKIGINI</a></li>
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/Newsfeed/">News Finder</a></li>
+    <li><a href="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/">WikiGini</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/WikiMap/">Wikipedia Map</a></li>
     <li><a href="/<?php echo $tsAccount; ?>/toolkit/Corpex/">Corpex</a></li>
   </ul><div></div></div>

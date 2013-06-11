@@ -1,6 +1,6 @@
 <?php
 $txtNewsfeed = array(
-	"headline" => "JSI Newsfeed",
+	"headline" => "News Finder",
 	"description" => "Here you can look for news related to a certain Wikipedia article using the <a href=\"http://newsfeed.ijs.si/\" target=\"_blank\">JSI newsfeed</a>. The sources for the news are mainly in English. It is still under development.",
 	"descTitle" => "Please enter an article title",
 	"labelTitle" => "Article Title:",

@@ -1,6 +1,9 @@
 <?php
 $Headline = "Change Detector";
-$Description = "Change Detector shows high editing activity in Wikipedia on a certain day and compares Wikipedias in different language versions. It enables the user to identify outdated articles in certain languages. The results are presented as a table. If a certain article was modified in almost every language version, but one or two languages were left out, you would be advised to have a closer look at the article. It could be outdated. ";
+$Description = "
+	Find articles in your language version that may need to be updated,
+	because there have been changes in other language versions recently.
+";
 
 $MoreInfo = "More Information";
 
