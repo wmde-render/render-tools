@@ -10,6 +10,8 @@ include( "inc/src/api_normalize_redirect.inc" );
 	<h2><?php echo $leaLang["headline"]; ?></h2>
 	<div class="leaDescription">
 		<p id="Description"><?php echo $leaLang["description"]; ?></p>
+		<h2><?php echo $leaLang["headline"]; ?></h2>
+		<p id="Description2"><?php echo $leaLang["description2"]; ?></p>
 		<p>
 			<a href="info.php"><?php echo $leaLang["more_info"]; ?></a>
 		</p>

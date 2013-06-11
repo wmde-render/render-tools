@@ -12,17 +12,17 @@ $leaLang = array(
 		aber in anderen existieren.<br />
 		Der Link Extractor ist in den <a href=\"http://toolserver.org/~render/stools/asqm\">Artikelmonitor</a> eingebunden. Im 
 		Ergebnisfenster des Artikelmonitors findet sich ein Link zur 
-		entsprechenden Analyse.<br /><br />
-		<h2>Ergebnisdarstellung</h2>
-		Im Beispiel wurde der englischsprachige Artikel über die Stadt 
-		Flensburg untersucht. Der Artikel zum Stadtteil Mürwig ist in 
-		der englischsprachigen Wikipedia nicht vorhanden. Zum Begriff 
-		Venskabsby (Städtepartnerschaft) gibt es in der englischsprachigen 
-		Version einen Artikel, aber er ist nicht verlinkt. Für die 
-		Begriffe Angeln und Danfoss gibt es sowohl einen Artikel als 
-		auch einen Link.",
+		entsprechenden Analyse.<br /><br />",
+	"headline2" => "Ergebnisdarstellung",
+	"description2" => "Im Beispiel wurde der englischsprachige Artikel 
+		über die Stadt Flensburg untersucht. Der Artikel zum Stadtteil 
+		Mürwig ist in der englischsprachigen Wikipedia nicht vorhanden. 
+		Zum Begriff Venskabsby (Städtepartnerschaft) gibt es in der 
+		englischsprachigen Version einen Artikel, aber er ist nicht 
+		verlinkt. Für die Begriffe Angeln und Danfoss gibt es sowohl 
+		einen Artikel als auch einen Link.",
 	"more_info" => "Weitere Informationen",
-	"form_text" => "Bitte einen Artikeltitel und die gewünschte Wikipedia Sprachversion angeben:",
+	"form_text" => "Bitte einen Artikeltitel und die gewünschte Wikipedia-Sprachversion angeben:",
 	"form_title" => "Titel:",
 	"form_in" => "in",
 	"form_button" => "Übermitteln",
