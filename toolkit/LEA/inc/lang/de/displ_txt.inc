@@ -20,18 +20,13 @@ $leaLang = array(
 		Venskabsby (Städtepartnerschaft) gibt es in der englischsprachigen 
 		Version einen Artikel, aber er ist nicht verlinkt. Für die 
 		Begriffe Angeln und Danfoss gibt es sowohl einen Artikel als 
-		ssauch einen Link.",
+		auch einen Link.",
 	"more_info" => "Weitere Informationen",
 	"form_text" => "Bitte einen Artikeltitel und die gewünschte Wikipedia Sprachversion angeben:",
 	"form_title" => "Titel:",
 	"form_in" => "in",
 	"form_button" => "Übermitteln",
 );
-Link Extractor (LEA) 
-
-
-Beispiel 
-Im Beispiel wurde der englischsprachige Artikel über die Stadt Flensburg untersucht. Der Artikel zum Stadtteil Mürwig ist in der englischsprachigen Wikipedia nicht vorhanden. Zum Begriff Venskabsby (Städtepartnerschaft) gibt es in der englischsprachigen Version einen Artikel, aber er ist nicht verlinkt. Für die Begriffe Angeln und Danfoss gibt es sowohl einen Artikel als auch einen Link.
 $FormText = "Bitte einen Artikeltitel und die gewünschte Wikipedia-Sprachversion angeben:";
 $FormTitle = "Titel:";
 $FormIn = "in";
