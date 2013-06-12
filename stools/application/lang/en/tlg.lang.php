@@ -1,6 +1,12 @@
 <?php
 $strLang = array(
 	"topHeading" => "Task List Generator",
+	"tlgDescription" => "With the Article List Generator you can search categories 
+		and compile article lists using different criteria. The query may consist 
+		of a single category, combine several categories or exclude one category 
+		from another. You can select the search level of the query and a set of 
+		filters allows you to further refine the result. The combination of 
+		filters is also possible. The result is presented as a list.",
 	"tlgDescription" => "This tool provides the ability to search Wikipedia 
 		categories with a given search depth. The <a href=\"http://en.wikipedia.org/wiki/Intersection_%28set_theory%29\">
 		intersection</a> and <a href=\"http://en.wikipedia.org/wiki/Complement_%28set_theory%29#Relative_complement\">

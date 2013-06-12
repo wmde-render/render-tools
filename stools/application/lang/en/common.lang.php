@@ -15,18 +15,21 @@ $strLang = array(
 		<a href=\"http://www.render-project.eu/\" target=\"_blank\">RENDER</a> Project by
 		<a href=\"http://www.wikimedia.de/\" target=\"_blank\">Wikimedia Deutschland e. V.</a><br />",
 	"developers" => "Development: Johannes Kroll (Backend), Kai Nissen (Frontend)",
-	"overviewHeading" => "Overview",
-	"overviewDesc" => "Here you can find the supporting tools developed during
-		the RENDER project:",
-	"asqmHeading" => "Article Statistics and Quality Monitor (ASQM)",
-	"asqmDesc" => "ASQM combines statistics and analysis on the article page in 
-		Wikipedia. To use this tool the installation of a gadget is necessary.",
+	"overviewHeading" => "",
+	"overviewDesc" => "",
+	"asqmHeading" => "Article Monitor",
+	"asqmDesc" => "The Article Monitor gives an overview of statistical data and 
+		a variety of analyses to a Wikipedia article. If you want to use the 
+		Article Monitor you have to install a gadget first. After doing this you 
+		can start the Article Monitor by clicking on the corresponding tab in the 
+		respective article.",
 	"asqmNotice" => "Instructions",
-	"asqmNotice2" => "for installing the ASQM gadget",
-	"tlgHeading" => "Task List Generator (TLG)",
-	"tlgDesc" => "The TLG provides the ability to search categories for 
-		certain flaws and display a list of pages containing the given 
-		type of flaw.",
+	"asqmNotice2" => "for installing the Article Monitor gadget",
+	"tlgHeading" => "Article List Generator",
+	"tlgDesc" => "Using the Article List Generator you can compile customized 
+		article lists. It is possible to search a single category, to combine 
+		several categories or to exclude categories. There is a set of filters 
+		available which allows for further refinement of the results.",
 	"tlgNotice" => "Try the ",
 	"tlgNotice2" => "Task List Generator",
 );

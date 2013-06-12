@@ -1,13 +1,14 @@
 <?php
 $strLang = array(
 	"dateFormat" => "Y-m-d H:i",
-	"asqmHeading" => "Article Statistics and Quality Monitor",
-	"asqmDesc" => "The ASQM (Article Statistics and Quality Monitor) offers a 
-		brief overview about the quality and the current status of any Wikipedia 
-		article<br />
-		<br />
-		For accessing the article analysis a gadget has to be installed. The gadget
-		will show up next to the links to edit a page and show the version history.",
+	"asqmHeading" => "Article Monitor",
+	"asqmDesc" => "The Article Monitor gives an overview of statistic data und 
+		various analysis for a Wikipedia article. You can use these to estimate 
+		the quality of an article.<br /><br />
+		After installing the gadget you will find a tab named \"Article Monitor\" 
+		besides the tab \"View history\". If you click on the tab, a popup window 
+		appears which displays the statistics and analysis referring to the current 
+		article",
 	"instHeading" => "Installation",
 	"instDesc" => "The gadget can be installed using the subpage 'vector.js' of 
 		a user's page. Having activated the automatic login to the Wikipedia, the 
