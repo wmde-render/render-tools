@@ -25,7 +25,7 @@ class Asqm_Json extends Model {
 		
 		$this->_result = new stdClass();
 		$this->_groups =  array(
-			"general" => array(
+			"statistics" => array(
 				"pageTitle",
 				"status",
 				"firstEdit",
@@ -36,17 +36,13 @@ class Asqm_Json extends Model {
 				"visitorsYesterday",
 				"visitorsLastMonth"
 			),
-			"factCoverage" => array(
-				"lea"
-			),
-			"currentness" => array(
+			"analyses" => array(
+				"lea",
 				"newsFinder",
-				"changeDetector"
-			),
-			"editorInteraction" => array(
+				"changeDetector",
 				"giniScore"
 			),
-			"other" => array(
+			"assessment" => array(
 				"wikibuch",
 				"aft5",
 				"aft4"
@@ -119,12 +115,15 @@ class Asqm_Json extends Model {
 	}
 	
 	private function _getRevisionInfo( $revInfo ) {
-		$retVal = "";
-		$retVal .= $this->_convertTimestamp( $revInfo['rev_timestamp'] );
-		$retVal .= " (";
-		$retVal .= $this->_view->translate( array( "general", "editedBy" ) ) . " ";
-		$retVal .= ($revInfo['rev_user'] === "0" ? "IP" : $revInfo['rev_user_text']);
-		$retVal .= ")";
+		$retVal = array( "multipart" );
+		$retVal[] = $this->_convertTimestamp( $revInfo['rev_timestamp'] );
+		$retVal[] = " (";
+		$retVal[] = $this->_view->translate( array( "general", "editedBy" ) ) . " ";
+		$retVal[] = array(
+			( $revInfo['rev_user'] === "0" ? "IP" : $revInfo['rev_user_text']),
+			( $revInfo['rev_user'] === "0" ? $this->_view->translate( array ( "general", "unregUsersPage" ) ) : "https://" . $this->_lang . ".wikipedia.org/wiki/User:" . $revInfo['rev_user_text'] )
+		);
+		$retVal[] = ")";
 		return $retVal;
 	}
 

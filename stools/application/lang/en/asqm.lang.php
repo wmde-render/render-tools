@@ -43,6 +43,7 @@ $strLang = array(
 		"firstEdit" => "Created",
 		"recentEdit" => "Recent Edit",
 		"editedBy" => "by",
+		"unregUsersPage" => "https://en.wikipedia.org/wiki/Wikipedia:User_access_levels#Unregistered_users",
 		"totalEditors" => "Editors",
 		"references" => "References",
 		"images" => "Media Files",
@@ -61,7 +62,6 @@ $strLang = array(
 		"titleNewsFinder" => "News Finder",
 		"noNews" => "No news articles found",
 		"newsFound" => " news articles found",
-		"showResults" => "Show Results",
 		"titleChangeDetector" => "Change Detector",
 		"cdHit" => "Detected as possibly outdated"
 	),

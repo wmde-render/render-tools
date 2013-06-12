@@ -39,6 +39,7 @@ $strLang = array(
 	"asqmTooltip" => "Statistiken und weitere Analysen zu diesem Artikel anzeigen",
 	
 	# asqm output
+	# old format - keep for now
 	"general" => array(
 		"title" => "Statistiken",
 		"pageTitle" => "Seitentitel",
@@ -46,6 +47,7 @@ $strLang = array(
 		"firstEdit" => "Angelegt am",
 		"recentEdit" => "Letzte Änderung",
 		"editedBy" => "von",
+		"unregUsersPage" => "https://de.wikipedia.org/wiki/Hilfe:Benutzer#Nicht_angemeldeter_Benutzer",
 		"totalEditors" => "Autoren",
 		"references" => "Einzelnachweise",
 		"images" => "Mediendateien",
@@ -64,7 +66,6 @@ $strLang = array(
 		"titleNewsFinder" => "NewsFinder",
 		"noNews" => "Keine Nachrichtenartikel gefunden",
 		"newsFound" => " Nachrichtenartikel gefunden",
-		"showResults" => "Ergebnisse anzeigen",
 		"titleChangeDetector" => "Change Detector",
 		"cdHit" => "Hohe Aktivität in anderen Sprachen",
 	),
@@ -76,7 +77,7 @@ $strLang = array(
 		"title" => "Autoreninteraktion",
 		"giniScore" => "WikiGini-Score",
 	),
-	"groupOther" => array(
+	"other" => array(
 		"title" => "Weitere Bewertungen",
 		"wikibuch" => "Wikibu.ch",
 		"lookupAssessment" => "Bewertung ansehen",
@@ -90,6 +91,53 @@ $strLang = array(
 	),
 	"aft5" => array(
 		"title" => "Article Feedback Score",
+		"negRating" => "Negative Bewertungen",
+	),
+	"statistics" => array(
+		"title" => "Statistiken",
+		"pageTitle" => "Seitentitel",
+		"status" => "Status",
+		"firstEdit" => "Angelegt am",
+		"recentEdit" => "Letzte Änderung",
+		"editedBy" => "von",
+		"totalEditors" => "Autoren",
+		"references" => "Einzelnachweise",
+		"images" => "Mediendateien",
+		"visitorsToday" => "Besucher heute",
+		"visitors30days" => "Letzte 30 Tage",
+		"visitorsYesterday" => "Besucher gestern",
+		"visitorsLastMonth" => "Besucher im letzten Monat"
+	),
+	"analyses" => array(
+		"title" => "Analysen",
+		# Link Extractor
+		"titleFactCoverage" => "Faktenabdeckung",
+		"lea" => "LEA (Link Extractor)",
+		"showAnalysis" => "Analyse anzeigen",
+		"titleCurrentness" => "Aktualität",
+		# News Finder
+		"titleNewsFinder" => "NewsFinder",
+		"noNews" => "Keine Nachrichtenartikel gefunden",
+		"newsFound" => " Nachrichtenartikel gefunden",
+		# Change Detector
+		"titleChangeDetector" => "Change Detector",
+		"cdHit" => "Hohe Aktivität in anderen Sprachen",
+		# WikiGini
+		"titleAuthors" => "Autoreninteraktion",
+		"giniScore" => "WikiGini-Score",
+	),
+	"assessment" => array(
+		"title" => "Artikelbewertungen",
+		"wikibuch" => "Wikibu.ch",
+		"lookupAssessment" => "Bewertung ansehen",
+		# aft 4
+		"aft4title" => "Article Feedback Score",
+		"trustworthy" => "Vertrauenswürdig",
+		"objective" => "Objektiv",
+		"complete" => "Vollständig",
+		"wellWritten" => "Gut geschrieben",
+		# aft 5
+		"aft5title" => "Article Feedback Score",
 		"negRating" => "Negative Bewertungen",
 	),
 );

@@ -34,7 +34,7 @@ class Asqm_QueryController /*extends Controller*/ {
 				->setHeader('Content-type: application/json');
 		$model = SingletonFactory::getInstance( "Asqm_Json" );
 		$model->setView( $view );
-		echo $view->getJson();
+		echo SingletonFactory::getInstance('Request')->getVar('callback') . "({\"asqmResponse\": " . $view->getJson() . "})";
 	}
 	
 	public function newsAction() {

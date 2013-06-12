@@ -3,6 +3,15 @@
 <?php $callback = SingletonFactory::getInstance('Request')->getVar('callback'); ?>
 <?php echo $callback; ?>({
 	"asqmResponse": {
+		"version": {
+			"title": "Versionsupdate",
+			"items": {
+				"version": [
+					"Link zur Seite",
+					"http://toolserver.org/~render/stools/asqm"
+				]
+			}
+		},
 		"general": {
 			"title": "<?php echo $this->translate( array( "general", "title" ) ); ?>",
 			"items": {
@@ -34,15 +43,15 @@
 <?php $cdHit = SingletonFactory::getInstance( 'ChangeDetector_Model' )->checkDetected( $this->getId(), $this->getLang() ); ?>
 <?php if ( $newsCount || $cdHit ): ?>
 		"currentness": {
-			"title": "<?php echo $this->translate( array( "groupCurrentness", "title" ) ); ?>",
+			"title": "<?php echo $this->translate( array( "currentness", "title" ) ); ?>",
 			"items": {
 	<?php if ( $newsCount ): ?>
 		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "newsfeed-show", $newsCount ); ?>
-		"<?php echo $this->translate( array( "groupCurrentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $newsCount . $this->translate( array( "groupCurrentness", "newsFound" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"],
+		"<?php echo $this->translate( array( "currentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $newsCount . $this->translate( array( "currentness", "newsFound" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"],
 	<?php endif; ?>
 	<?php if ( $cdHit ): ?>
 		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
-	"<?php echo $this->translate( array( "groupCurrentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "groupCurrentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
+	"<?php echo $this->translate( array( "currentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "currentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
 	<?php endif; ?>
 			}
 		},
@@ -51,18 +60,18 @@
 <?php if ( $giniScore ): ?>
 	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "wikigini-show", $giniScore ); ?>
 		"editorInteraction": {
-			"title": "<?php echo $this->translate( array( "groupEditorInteraction", "title" ) ); ?>",
+			"title": "<?php echo $this->translate( array( "editorInteraction", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupEditorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
+				"<?php echo $this->translate( array( "editorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
 			}
 		},
 <?php endif; ?>
 		
 <?php if ( SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ) == 'de' ): ?>
 		"other": {
-			"title": "<?php echo $this->translate( array( "groupOther", "title" ) ); ?>",
+			"title": "<?php echo $this->translate( array( "other", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupOther", "wikibuch" ) ); ?>": [ "<?php echo $this->translate( array( "groupOther", "lookupAssessment" ) ); ?>", "http://wikibu.ch/search.php?search=<?php echo $this->getTitle(); ?>" ]
+				"<?php echo $this->translate( array( "other", "wikibuch" ) ); ?>": [ "<?php echo $this->translate( array( "other", "lookupAssessment" ) ); ?>", "http://wikibu.ch/search.php?search=<?php echo $this->getTitle(); ?>" ]
 			}
 		},
 <?php endif; ?>
@@ -81,14 +90,14 @@
 <?php if ( !empty( $ratings ) ): ?>
 	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft4-show", base64_encode( serialize( $ratings ) ) ); ?>
 		"aft4": {
-			"title": "<?php echo $this->translate( array( "groupAftV4", "title" ) ); ?>",
+			"title": "<?php echo $this->translate( array( "aft4", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "groupAftV4", "trustworthy" ) ); ?>": "<?php echo number_format( $ratings[0], 1 ); ?>",
-				"<?php echo $this->translate( array( "groupAftV4", "objective" ) ); ?>": "<?php echo number_format( $ratings[1], 1 ); ?>",
-				"<?php echo $this->translate( array( "groupAftV4", "complete" ) ); ?>": "<?php echo number_format( $ratings[2], 1 ); ?>",
-				"<?php echo $this->translate( array( "groupAftV4", "wellWritten" ) ); ?>": "<?php echo number_format( $ratings[3], 1 ); ?>"
+				"<?php echo $this->translate( array( "aft4", "trustworthy" ) ); ?>": "<?php echo number_format( $ratings[0], 1 ); ?>",
+				"<?php echo $this->translate( array( "aft4", "objective" ) ); ?>": "<?php echo number_format( $ratings[1], 1 ); ?>",
+				"<?php echo $this->translate( array( "aft4", "complete" ) ); ?>": "<?php echo number_format( $ratings[2], 1 ); ?>",
+				"<?php echo $this->translate( array( "aft4", "wellWritten" ) ); ?>": "<?php echo number_format( $ratings[3], 1 ); ?>"
 			}
-		}
+		},
 <?php endif; # v4 is not available ?>
 <?php endif; # get v4, because v5 is not available ?>
 <?php #endif; # only english lang version ?>
