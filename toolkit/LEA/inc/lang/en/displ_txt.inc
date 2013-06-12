@@ -1,14 +1,23 @@
 <?php
 $leaLang = array(
-	"headline" => "LEA - Link ExtrActor",
-	"description" => "LEA helps discovering missing links in Wikipedia articles. 
-		It compares different language versions, and shows missing link coverage.<br />
-		The intersection of links from the three link-richest language 
-		versions is compared to the requested language version.<br /><br />
-		In this example the english article about 
-		the city of Flensburg was requested. An article about the city's 
-		district of Mørvig is not available yet. The article does not 
-		contain a link to the article about 'Twin towns and sister cities'.",
+	"headline" => "Link Extractor",
+	"description" => "The main idea of the Link Extractor is to measure 
+		the completeness of articles by comparing the links contained in 
+		different language versions. From its analysis the Link Extractor 
+		deduces which concepts should be covered by a Wikipedia article. 
+		By that, it indicates which information and links may be missing 
+		in an article. Moreover the Link Extractor shows articles that 
+		do not exist in a language version while in others they do.<br /><br />
+		You can access the Link Extractor from the display window of the 
+		<a href=\"http://toolserver.org/~render/stools/asqm\" target=\"_blank\">Article Monitor.</a>",
+	"headline2" => "Example",
+	"description2" => "The example shows the result for the English 
+		article about the city of Flensburg. For the district of \"Mørvig\" 
+		there is no article available in the English Wikipedia. The 
+		article about \"Venkabsby\" exists but it is not linked to the 
+		section \"Twin town and sister cities\" or the article about 
+		Flensburg at all. For the terms \"Angeln\" and \"Danfoss\" the 
+		article exists and is linked from the requested article.",
 	"form_text" => "Please enter an article title and choose a language version.",
 	"more_info" => "More Information",
 	"form_title" => "Title:",

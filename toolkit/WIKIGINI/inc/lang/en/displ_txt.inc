@@ -1,6 +1,23 @@
 <?php
 $Headline = "WIKIGINI";
-$Description = "WIKIGINI visualizes the inequality of authorship in a Wikipedia article: it accurately determines the authors of all the words in every revision of an article and calculates a so-called “Gini-Index” as a measure of inequality. It can thus show if the “ownership” of words in an article shifted from being quite equal (e.g. every editor wrote about the same amount of words) to being unequal (e.g. 2% of editors wrote 90% of the words).";
+$Description = "WikiGini visualizes the distribution of authorship in a 
+	Wikipedia article in the course of time.<br /><br />
+	For every revision of an article it determines the amount of words 
+	for each author and calculates the Gini Index as a measure of 
+	statistical dispersion. The result is displayed using a diagram. You 
+	can see if the authorship of an article is evenly distributed and 
+	how it changes in the course of time.";
+$Headline2 = "Example";
+$Description2 = "The example shows the diagram to the Wikipedia article 
+	about Barack Obama. The Gini Index may range between zero and one. A 
+	score of zero means perfect equality (each author owns the same 
+	amount of words). A score of one indicates maximal inequity (one 
+	single author wrote the whole article).<br /><br />
+	Using the buttons below the chart you can switch between the display 
+	of revision and date on the timeline and you can move back and forth. 
+	Moving the mouse over the diagram a popup window appears and shows 
+	details for the specific revision. You can zoom in an area of the 
+	diagram by selecting it with the mouse.";
 
 $MoreInfo = "More information";
 $txtGraphHeader1 = "WIKIGINI - Article ";
