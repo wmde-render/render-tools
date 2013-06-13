@@ -4,7 +4,7 @@ class ArticleMonitor_QueryController /*extends Controller*/ {
 	public function __construct() {
 		$articleMonitorId = SingletonFactory::getInstance( "Request" )->getVar( 'asqmid' );
 		if ( isset( $articleMonitorId ) && !empty( $articleMonitorId ) ) {
-			$_SESSION['asqmId'] = $asqmId;
+			$_SESSION['asqmId'] = $articleMonitorId;
 		}
 	}
 
