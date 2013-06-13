@@ -14,9 +14,9 @@ $leaLang = array(
 	"description2" => "The example shows the result for the English 
 		article about the city of Flensburg. For the district of \"Mørvig\" 
 		there is no article available in the English Wikipedia. The 
-		article about \"Venkabsby\" exists but it is not linked to the 
-		section \"Twin town and sister cities\" or the article about 
-		Flensburg at all. For the terms \"Angeln\" and \"Danfoss\" the 
+		article about \"Thirty Years' War\" exists but it is not linked 
+		from the article about Flensburg at all. 
+		For the terms \"Angeln\" and \"Danfoss\" the 
 		article exists and is linked from the requested article.",
 	"form_text" => "Please enter an article title and choose a language version.",
 	"more_info" => "More Information",

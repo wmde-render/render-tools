@@ -17,7 +17,7 @@ $leaLang = array(
 	"description2" => "Im Beispiel wurde der englischsprachige Artikel 
 		über die Stadt Flensburg untersucht. Der Artikel zum Stadtteil 
 		Mürwig ist in der englischsprachigen Wikipedia nicht vorhanden. 
-		Zum Begriff Venskabsby (Städtepartnerschaft) gibt es in der 
+		Zum Begriff \"Thirty Years' War\" (Dreißigjähriger Krieg) gibt es in der 
 		englischsprachigen Version einen Artikel, aber er ist nicht 
 		verlinkt. Für die Begriffe Angeln und Danfoss gibt es sowohl 
 		einen Artikel als auch einen Link.",
