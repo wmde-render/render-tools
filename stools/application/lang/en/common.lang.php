@@ -25,11 +25,11 @@ $strLang = array(
 		respective article.",
 	"articleMonitorNotice" => "Instructions",
 	"articleMonitorNotice2" => "for installing the Article Monitor gadget",
-	"tlgHeading" => "Article List Generator",
-	"tlgDesc" => "Using the Article List Generator you can compile customized 
+	"algHeading" => "Article List Generator",
+	"algDesc" => "Using the Article List Generator you can compile customized 
 		article lists. It is possible to search a single category, to combine 
 		several categories or to exclude categories. There is a set of filters 
 		available which allows for further refinement of the results.",
-	"tlgNotice" => "Try the ",
-	"tlgNotice2" => "Task List Generator",
+	"algNotice" => "Try the ",
+	"algNotice2" => "Task List Generator",
 );

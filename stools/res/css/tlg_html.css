@@ -54,7 +54,7 @@ h2 {
 	margin-left: 30px;
 }
 
-div.tlg-container {
+div.alg-container {
 	background-color: white;
 	margin: 20px auto;
 	width: 800px;
@@ -77,11 +77,11 @@ img.logoRight {
 	margin-right: 0px;
 }
 
-div.tlg-header {
+div.alg-header {
 	padding: 10px 20px 20px 20px;
 }
 
-div.tlg-header h1 {
+div.alg-header h1 {
 	padding-top: 10px;
 }
 

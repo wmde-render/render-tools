@@ -7,11 +7,11 @@ class Tlg_IndexController extends Controller {
 	
 
 	public function indexAction() {
-		if( TLG_FORCE_SSL ) {
+		if( ALG_FORCE_SSL ) {
 			$this->forceSecure();
 		}
 
-		$view = new Tlg_HtmlView("tlg_html");
+		$view = new Alg_HtmlView("alg_html");
 		echo $view->render();
 	}
 }

@@ -9,7 +9,7 @@ class Tlg_QueryController extends Controller {
 	public function htmlAction() {
 		$this->forceSecure();
 		
-		$view = new Tlg_HtmlView("tlg_html");
+		$view = new Alg_HtmlView("alg_html");
 		echo $view->render();
 	}
 	

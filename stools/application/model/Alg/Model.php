@@ -1,11 +1,11 @@
 <?php
 require_once( APP_PATH . 'gpClient.php' );
 
-class Tlg_Model extends Model {
+class Alg_Model extends Model {
 	private $_serviceUrl;
 	
 	public function __construct() {
-		$this->_serviceUrl = TLG_SERVICE_URL;
+		$this->_serviceUrl = ALG_SERVICE_URL;
 	}
 	
 	public function getFlawList() {

@@ -57,7 +57,7 @@ $(document).ready(function() {
 		width: 500,
 		height: 140,
 		open: function() {
-			$( "#tlgProgress" ).progressbar( "value" , 0 );
+			$( "#algProgress" ).progressbar( "value" , 0 );
 			$( "#status" ).text(" ");
 		},
 		beforeClose: function() {
@@ -79,7 +79,7 @@ $(document).ready(function() {
 		height: 140
 	});
 	
-	$( "#tlgProgress" ).progressbar({
+	$( "#algProgress" ).progressbar({
 		value: 0
 	});
 
@@ -92,7 +92,7 @@ $(document).ready(function() {
 			source: function(request, response) {
 				var lang = $( "#language" ).find( ":selected" ).val();
 				$.ajax({
-					url: basePath + "tlg/query/categories",
+					url: basePath + "alg/query/categories",
 					dataType: "json",
 					data: {
 						lang: lang,
@@ -107,7 +107,7 @@ $(document).ready(function() {
 						}));
 					},
 					beforeSend: function() {
-						$( "#helpCategories" ).attr( "src", basePath + "res/img/tlg-load.gif" );
+						$( "#helpCategories" ).attr( "src", basePath + "res/img/alg-load.gif" );
 					},
 					complete: function() {
 						$( "#helpCategories" ).attr( "src", basePath + "res/img/emblem-notice.png" );
@@ -121,7 +121,7 @@ $(document).ready(function() {
 		var qString = getQueryString();
 		if( qString ) {
 			$('#statusDialog').dialog('open');
-			queryTlg(qString);
+			queryAlg(qString);
 		}
 		return false;
 	});
@@ -242,12 +242,12 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 }
 */
 
-function queryTlg(params) {
+function queryAlg(params) {
 	$('#resultTable').empty();
 	arrResults = [];
 	var jqXHR = $.ajax({
 		type: "POST",
-		url: tlgServiceUrl,
+		url: algServiceUrl,
 		data: params,
 		progress: statusUpdate,
 		progressInterval: 250
@@ -344,7 +344,7 @@ function setProgress( progress ) {
 	progress = progress.split("/");
 	
 	if (progress.length == 2) {
-		$('#tlgProgress').progressbar("value", Math.round(progress[0] * 100 / progress[1]));
+		$('#algProgress').progressbar("value", Math.round(progress[0] * 100 / progress[1]));
 	}
 
 }

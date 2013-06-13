@@ -4,7 +4,7 @@
 		<title>RENDER | <?php echo $this->translate( "pageHeading", "common" ); ?> | <?php echo $this->translate( "topHeading" ); ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		
-		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/tlg_html.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/alg_html.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/smoothness/jquery-ui.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/smoothness/jquery.ui.theme.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo BASE_PATH; ?>res/css/jquery.tagedit.css" />
@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery-ui-1.10.2.custom.min.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery.tagedit.js"></script>
 		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/jquery.autoGrowInput.js"></script>
-		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/tlg_html.js"></script>
+		<script type="text/javascript" src="<?php echo BASE_PATH; ?>res/js/alg_html.js"></script>
 		<script type="text/javascript">
 			var basePath = '<?php echo BASE_PATH; ?>';
 			var reqSuccess = '<?php echo $this->translate("reqSuccess"); ?>';
@@ -27,24 +27,24 @@
 			var descUnhide = '<?php echo $this->translate("descUnhide"); ?>';
 			var descLinkToRequest = '<?php echo $this->translate("linkToRequest"); ?>';
 			var msgResultCount = '<?php echo $this->translate("resultCount"); ?>';
-			var tlgServiceUrl = '<?php echo TLG_SERVICE_URL; ?>';
+			var algServiceUrl = '<?php echo ALG_SERVICE_URL; ?>';
 		</script>
 	</head>
 
 	<body>
-		<div class="tlg-container box-shadow">
+		<div class="alg-container box-shadow">
 <?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
-			<form id="tlg-form" action="">
+			<form id="alg-form" action="">
 				<div>
 					<h2><?php echo $this->translate( "topHeading" ); ?></h2>
 					<div style="float: left; width: 50%;">
-						<div><?php echo $this->translate("tlgDescription"); ?></div><br /><br />
+						<div><?php echo $this->translate("algDescription"); ?></div><br /><br />
 						<h3 style="margin-top: 0;"><?php echo $this->translate( "descHeading" ); ?></h3>
 						<label class="selectLabel" for="language">
 							<?php echo $this->translate( "descLanguage" ); ?>
 						</label>
 						<select name="lang" id="language">
-<?php $graphs = SingletonFactory::getInstance( 'Tlg_Model' )->getGraphList(); ?>
+<?php $graphs = SingletonFactory::getInstance( 'Alg_Model' )->getGraphList(); ?>
 <?php if( is_array( $graphs ) ): ?>
 <?php foreach( $graphs as $graph ): ?>
 							<option value="<?php echo $graph; ?>" <?php echo ( isset( $_GET['lang'] ) && $_GET['lang'] == $graph ) ? "selected" : ""; ?>><?php echo $graph; ?></option>
@@ -136,7 +136,7 @@
 		<div id="statusDialog" title="<?php echo $this->translate( "statusTitle" ); ?>">
 			<p>
 				<span id="status"> </span>
-				<div id="tlgProgress"></div>
+				<div id="algProgress"></div>
 			</p>
 		</div>
 

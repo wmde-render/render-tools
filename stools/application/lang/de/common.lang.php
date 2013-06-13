@@ -27,12 +27,12 @@ $strLang = array(
 		entsprechenden Reiters im jeweiligen Artikel gestartet werden.",
 	"articleMonitorNotice" => "Hinweise",
 	"articleMonitorNotice2" => "zur Installation des Artikelmonitor-Helferleins",
-	"tlgHeading" => "Artikellistengenerator",
-	"tlgDesc" => "Mithilfe des Artikellistengenerators können individuelle 
+	"algHeading" => "Artikellistengenerator",
+	"algDesc" => "Mithilfe des Artikellistengenerators können individuelle 
 		Artikellisten zusammengestellt werden. Dabei können einzelne Kategorien 
 		durchsucht, mehrere Kategorien kombiniert oder auch Kategorien 
 		ausgeschlossen werden. Es stehen verschiedene Filter zur Einschränkung 
 		des Suchergebnisses zur Verfügung.",
-	"tlgNotice" => "zum",
-	"tlgNotice2" => "Artikellistengenerator",
+	"algNotice" => "zum",
+	"algNotice2" => "Artikellistengenerator",
 );

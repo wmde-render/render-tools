@@ -10,8 +10,8 @@ class Monitor_CheckController /*extends Controller*/ {
 		));
 	}
 
-	public function tlgAction() {
-		$graphs = SingletonFactory::getInstance( "Tlg_Model" )->getGraphList();
+	public function algAction() {
+		$graphs = SingletonFactory::getInstance( "Alg_Model" )->getGraphList();
 		if ( !in_array( "de", $graphs ) ) {
 			$this->_messages[] = "GraphServ: instance 'dewiki' not running\n";
 		}
@@ -23,7 +23,7 @@ class Monitor_CheckController /*extends Controller*/ {
 		}
 
 		$testRequest = @file_get_contents( 
-			TLG_SERVICE_URL .
+			ALG_SERVICE_URL .
 			"?action=query&format=json&chunked=true&lang=de&query=Astronomie&querydepth=2&i18n=de&flaws=Large&test=true",
 			false,
 			$this->_streamContext
@@ -35,15 +35,15 @@ class Monitor_CheckController /*extends Controller*/ {
 					if ( $line !== '' ) {
 						$resultRow = json_decode( $line );
 						if ( $resultRow === null ) {
-							$this->_messages[] = "TLG backend: json response could not be parsed\n";
+							$this->_messages[] = "ALG backend: json response could not be parsed\n";
 						}
 					}
 				}
 			} else {
-				$this->_messages[] = "TLG backend: response is not multiline\n";
+				$this->_messages[] = "ALG backend: response is not multiline\n";
 			}
 		} else {
-			$this->_messages[] = "TLG backend: no response\n";
+			$this->_messages[] = "ALG backend: no response\n";
 		}
 		
 		$this->_sendMessages();
