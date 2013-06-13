@@ -25,7 +25,7 @@ $strLang = array(
 	"notice" => "For evaluation purposes the code contains the variable 'asqmid'.
 		This value has a statistical intent and cannot be linked to  personal 
 		data such as the username.",
-	"newsfeedHeading" => "IJS Newsfeed",
+	"newsfeedHeading" => "News Finder",
 	"newsfeedDesc" => "The result shown here are retrieved from the newsfeed 
 		provided by the Institute Josef-Stefan in Ljubljana, Slovenia.<br />
 		The institute is participating the RENDER Project.",

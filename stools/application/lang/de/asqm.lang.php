@@ -27,7 +27,7 @@ $strLang = array(
 	"notice" => "Zur Evaluation der Nutzung enthält der Code die Variable 
 		'asqmid'. Der Wert dient lediglich statistischen Zwecken und lässt 
 		keinen Rückschluss auf persönliche Angaben wie Benutzernamen zu.",
-	"newsfeedHeading" => "IJS Newsfeed",
+	"newsfeedHeading" => "News Finder",
 	"newsfeedDesc" => "Die Ergebnisse, die hier angezeigt werden, stammen aus 
 		dem Newsfeed des Josef-Stefan-Instituts in Ljubljana, Slowenien.<br />
 		Das Institut ist ein Partner des RENDER-Projekts.",
