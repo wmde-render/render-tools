@@ -20,44 +20,61 @@
 				<div class="box-shadow" style="padding-left: 20px;">
 					<pre><code><?php
 echo htmlentities("
-var articleMonitorReq = false;
+var asqmReq = false;
+var closeButton = \"<img border=\\\"0\\\" onclick=\\\"$('#asqmContainer').css('visibility', 'hidden')\\\" \" + 
+  src=\\\"//upload.wikimedia.org/wikipedia/foundation/2/20/CloseWindow19x19.png\\\" \" + 
+  style=\\\"position:absolute; right: 10px; cursor: pointer\\\">\";
+ 
 if (wgNamespaceNumber == 0) {
-  $('<li id=\"ca-articleMonitor\" style=\"position: relative;\"><span><a onclick=\"javascript:articleMonitor()\" ' + 
+  $('<li id=\"ca-asqm\" style=\"position: relative;\"><span><a onclick=\"javascript:asqm()\" ' + 
   'title=\"" . $this->translate("articleMonitorTooltip") . "\">" . $this->translate("articleMonitorTabTitle") . "</a></span>' + 
-  '<div id=\"articleMonitorContainer\" style=\"visibility: hidden; position:absolute; right: 0; ' +
+  '<div id=\"asqmContainer\" style=\"visibility: hidden; position:absolute; right: 0; ' +
   'font-size: 0.8em; border: 1px solid silver; margin: -5px 0 0 -1px; padding: 10px; ' +
   'z-index: 1000; background: white;\"></div></li>').insertAfter(\"#ca-history\");
 }
  
-function articleMonitor() {
-  if ($('#articleMonitorContainer').css('visibility') == 'hidden') {
-    $('#articleMonitorContainer').css('visibility', 'visible');
-    if (!articleMonitorReq) {
-      $('#articleMonitorContainer').html('<img src=\"http://toolserver.org/~render/stools/res/img/load.gif\" style=\"padding: 20px;\" />');
+function asqm() {
+  if ($('#asqmContainer').css('visibility') == 'hidden') {
+    $('#asqmContainer').css('visibility', 'visible');
+    if (!asqmReq) {
+      $('#asqmContainer').html('<img src=\"http://toolserver.org/~render/stools/res/img/load.gif\" style=\"padding: 20px;\" />');
       $.getJSON(\"http://toolserver.org/~render/stools/articleMonitor/query/json/id/\" + 
-          wgArticleId + \"/lang/\" + wgPageContentLanguage + \"/asqmid/" . $this->getUniqueId() . "?callback=?\", function(data) {
+          wgArticleId + \"/lang/de/asqmid/" . $this->getUniqueId() . "?callback=?\", function(data) {
         var output = \"<table>\";
-        $.each(data.articleMonitorResponse, function(key, groupObj) {
-          output += \"<tr><td colspan='2' style='text-align: center; font-weight: bold;'>\" + groupObj.title + \"</td></tr>\";
+        $.each(data.asqmResponse, function(key, groupObj) {
+          output += \"<tr><td colspan='2' style='text-align: left; padding-top: 10px; font-weight: bold;'>\" + 
+            groupObj.title + \"</td></tr>\";
           $.each(groupObj.items, function(itemTitle, value) {
             var link = \"\";
             if ($.isArray(value)) {
-              link = value[1];
-              value = value[0];
+              if (value[0] === \"multipart\") {
+                var val = \"\";
+                $.each(value, function(index, part) {
+                  if (index === 0) return true;
+                  if ($.isArray(part)) {
+                    link = part[1];
+                    val += \"<a href='\" + link + \"' target='_blank' style='font-size: 1em; padding: 0; height: 1em;'>\" + 
+                      part[0] + \"</a>\";
+                  } else {
+                    val += part;
+                  }
+                });
+                value = val;
+              } else {
+                value = \"<a href='\" + value[1] + \"' target='_blank' style='font-size: 1em; padding: 0; height: 1em;'>\" + 
+                  value[0] + \"</a>\";
+              }
             }
-            if (link && link != \"\") {
-              value = \"<a href='\" + link + \"' target='_blank'>\" + value + \"</a>\";
-            }
-            output += \"<tr><td>\" + itemTitle + \"</td><td>\" + value.replace(\"|\", \"<br />\") + \"</td></tr>\";
+            output += \"<tr><td style='padding-right: 10px;'>\" + itemTitle + \"</td><td>\" + value.toString() + \"</td></tr>\";
           });
         });
         output += \"</table>\";
-        articleMonitorReq = true;
-        $('#articleMonitorContainer').html(output);
+        asqmReq = true;
+        $('#asqmContainer').html(closeButton + output);
       });
     }
   } else {
-    $('#articleMonitorContainer').css('visibility', 'hidden');
+    $('#asqmContainer').css('visibility', 'hidden');
   }
 }
 ");
