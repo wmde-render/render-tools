@@ -1,5 +1,5 @@
 <?php
-class Asqm_NewsView extends View {
+class ArticleMonitor_NewsView extends View {
 	
 	public function __construct( $templateName ) {
 		parent::__construct( $templateName );

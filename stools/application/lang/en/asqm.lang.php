@@ -1,8 +1,8 @@
 <?php
 $strLang = array(
 	"dateFormat" => "Y-m-d H:i",
-	"asqmHeading" => "Article Monitor",
-	"asqmDesc" => "The Article Monitor gives an overview of statistic data und 
+	"articleMonitorHeading" => "Article Monitor",
+	"articleMonitorDesc" => "The Article Monitor gives an overview of statistic data und 
 		various analysis for a Wikipedia article. You can use these to estimate 
 		the quality of an article.<br /><br />
 		After installing the gadget you will find a tab named \"Article Monitor\" 
@@ -33,10 +33,10 @@ $strLang = array(
 	"newsfeedTableUrl" => "URL",
 	"newsfeedTableDate" => "Date",
 	
-	"asqmTabTitle" => "Info",
-	"asqmTooltip" => "Show statistics and further analysis for this article",
+	"articleMonitorTabTitle" => "Info",
+	"articleMonitorTooltip" => "Show statistics and further analysis for this article",
 	
-	# asqm output
+	# articleMonitor output
 	"general" => array(
 		"title" => "Statistics",
 		"pageTitle" => "Page Title",
@@ -55,7 +55,7 @@ $strLang = array(
 	),
 	"factCoverage" => array(
 		"title" => "Fact coverage",
-		"lea" => "LEA (Link Extractor)",
+		"lea" => "Link Extractor",
 		"showAnalysis" => "Show Analysis",
 	),
 	"currentness" => array(
@@ -82,20 +82,65 @@ $strLang = array(
 		"newsFound" => " news articles found",
 	),
 */
-	"groupOther" => array(
+	"other" => array(
 		"title" => "Further Assessment",
 		"wikibuch" => "Wikibu.ch",
 		"lookupAssessment" => "Look up Assessment",
 	),
-	"groupAftV4" => array(
+	"aft4" => array(
 		"title" => "Article Feedback Score",
 		"trustworthy" => "Trustworthy",
 		"objective" => "Objective",
 		"complete" => "Complete",
 		"wellWritten" => "Well-written",
 	),
-	"groupAftV5" => array(
+	"aft5" => array(
 		"title" => "Article Feedback Score",
 		"negRating" => "Negative Ratings",
+	),
+	"statistics" => array(
+		"title" => "Statistics",
+		"pageTitle" => "Page Title",
+		"status" => "Status",
+		"firstEdit" => "Created",
+		"recentEdit" => "Recent Edit",
+		"editedBy" => "by",
+		"unregUsersPage" => "https://en.wikipedia.org/wiki/Wikipedia:User_access_levels#Unregistered_users",
+		"totalEditors" => "Editors",
+		"references" => "References",
+		"images" => "Media Files",
+		"visitorsToday" => "Visitors today",
+		"visitors30days" => "Last 30 days",
+		"visitorsYesterday" => "Visitors yesterday",
+		"visitorsLastMonth" => "Visitors last month",
+	),
+	"analysis" => array(
+		"title" => "Analysis",
+		# Link Extractor
+		"lea" => "Link Extractor",
+		"showAnalysis" => "Show analysis",
+		# News Finder
+		"titleNewsFinder" => "News Finder",
+		"noNews" => "No news articles found",
+		"newsFound" => " news articles found",
+		# Change Detector
+		"titleChangeDetector" => "Change Detector",
+		"cdHit" => "Detected as possibly outdated",
+		# WikiGini
+		"giniScore" => "WikiGini Score",
+	),
+	"assessment" => array(
+		"title" => "Assessments",
+		"wikibuch" => "Wikibu.ch",
+		"lookupAssessment" => "Lookup assessment",
+		# aft 4
+		"aft4title" => "Article Feedback Score",
+		"trustworthy" => "Trustworthy",
+		"objective" => "Objectivity",
+		"complete" => "Completeness",
+		"wellWritten" => "Well-written",
+		# aft 5
+		"aft5title" => "Article Feedback Score",
+		"negRating" => "negative ratings",
 	),
 );

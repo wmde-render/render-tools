@@ -55,13 +55,13 @@ td {
 	</head>
 
 	<body>
-<?php SingletonFactory::getInstance( 'Asqm_Model' )->logRequest(); ?>
+<?php SingletonFactory::getInstance( 'ArticleMonitor_Model' )->logRequest(); ?>
 		<div class="tlg-container box-shadow">
 <?php include( APP_PATH . "../templates/pageHeading.phtml" ); ?>
 			
 			<div>
 				<h2>Article Statistics and Quality Monitor</h2>
-				<table class="asqm-result" style="margin: 20px auto;">
+				<table class="articleMonitor-result" style="margin: 20px auto;">
 					<tbody>
 						<tr>
 							<th class="data-heading" colspan="2">Statistiken</th>

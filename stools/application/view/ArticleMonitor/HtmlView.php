@@ -1,5 +1,5 @@
 <?php
-class Asqm_HtmlView extends View {
+class ArticleMonitor_HtmlView extends View {
 	
 	private $_articleInfo = null;
 	private $_revisionInfo = null;
@@ -19,7 +19,7 @@ class Asqm_HtmlView extends View {
 	
 	public function getArticleInfo() {
 		if( !$this->_articleInfo ) {
-			$this->_articleInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+			$this->_articleInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 				->getArticle( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ) );
 		}
 		
@@ -27,7 +27,7 @@ class Asqm_HtmlView extends View {
 	}
 
 	public function getRevisionInfo( $first ) {
-		$this->_revisionInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+		$this->_revisionInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 			->getRevision( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ), $first );
 		
 		return $this->_revisionInfo;
@@ -38,14 +38,14 @@ class Asqm_HtmlView extends View {
 	}
 	
 	public function getLinkCount() {
-		$this->_linkInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+		$this->_linkInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 			->getLinkCount( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ) );
 		
 		return $this->_linkInfo;
 	}
 
 	public function getImageCount() {
-		$imageInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+		$imageInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 			->getImageCount( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ) );
 		$this->_imageInfo = $imageInfo[0][0];
 		
@@ -53,7 +53,7 @@ class Asqm_HtmlView extends View {
 	}
 
 	public function getRealImageCount() {
-		$this->_imageInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+		$this->_imageInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 			->getRealImageCount( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ) );
 		
 		return $this->_imageInfo;
@@ -90,7 +90,7 @@ class Asqm_HtmlView extends View {
 	}
 	
 	public function getUniqueEditorCount() {
-		return SingletonFactory::getInstance( 'Asqm_Model' )
+		return SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 			->getUniqueEditorCount( SingletonFactory::getInstance( 'Request' )->getVar( 'id' ) );
 	}
 	

@@ -13,7 +13,7 @@ define( 'TEMPLATE_PATH', '' );
 define( 'BASE_PATH', '' );
 # task list generator backend service url
 define( 'TLG_SERVICE_URL', '' );
-define( 'ASQM_SERVICE_URL', '' );
+define( 'ARTICLEMONITOR_SERVICE_URL', '' );
 
 # task list generator backend service url
 define( 'TLG_SERVICE_URL', false );

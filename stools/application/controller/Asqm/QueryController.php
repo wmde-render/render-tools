@@ -10,31 +10,21 @@ class Asqm_QueryController /*extends Controller*/ {
 	
 
 	public function htmlAction() {
-		$view = new Asqm_HtmlView("asqm_html");
+		$view = new ArticleMonitor_HtmlView("articleMonitor_html");
 		echo $view->render();
 	}
 
 	public function htmlNewAction() {
-		$view = new Asqm_HtmlView("asqm_html_new");
+		$view = new ArticleMonitor_HtmlView("articleMonitor_html_new");
 		echo $view->render();
 	}
 
 	public function jsonAction() {
-		$view = new Asqm_HtmlView("asqm_jsonp");
+		$view = new ArticleMonitor_HtmlView("articleMonitor_jsonp");
 		SingletonFactory::getInstance( 'Response' )
 				->setFullPage( false )
 				->setHeader('Content-type: application/json');
 		echo $view->render();
-	}
-	
-	public function articleMonitorAction() {
-		$view = new Asqm_JsonView( "" );
-		SingletonFactory::getInstance( 'Response' )
-				->setFullPage( false )
-				->setHeader('Content-type: application/json');
-		$model = SingletonFactory::getInstance( "Asqm_Json" );
-		$model->setView( $view );
-		echo SingletonFactory::getInstance('Request')->getVar('callback') . "({\"asqmResponse\": " . $view->getJson() . "})";
 	}
 	
 	public function newsAction() {
@@ -44,10 +34,10 @@ class Asqm_QueryController /*extends Controller*/ {
 		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
 		$result = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $pageTitle );
 		
-		SingletonFactory::getInstance( "Asqm_Model" )
+		SingletonFactory::getInstance( "ArticleMonitor_Model" )
 			->logRequest( $pageTitle, $lang, $asqmId, $actionType = "newsfinder-use", $result );
 
-		$view = new Asqm_NewsView("newsfeed_list");
+		$view = new ArticleMonitor_NewsView("newsfeed_list");
 		echo $view->render();
 	}
 }

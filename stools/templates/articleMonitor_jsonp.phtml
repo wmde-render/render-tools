@@ -1,5 +1,5 @@
 <?php $uName = $this->getUserInfoObject( "name" ); ?>
-<?php SingletonFactory::getInstance( 'Asqm_Model' )->logRequest( $this->getTitle(), $this->getLanguage() ); ?>
+<?php SingletonFactory::getInstance( 'ArticleMonitor_Model' )->logRequest( $this->getTitle(), $this->getLanguage() ); ?>
 <?php $callback = SingletonFactory::getInstance('Request')->getVar('callback'); ?>
 <?php echo $callback; ?>({
 	"asqmResponse": {
@@ -8,7 +8,7 @@
 			"items": {
 				"version": [
 					"Link zur Seite",
-					"http://toolserver.org/~render/stools/asqm"
+					"http://toolserver.org/~render/stools/articleMonitor"
 				]
 			}
 		},
@@ -46,19 +46,19 @@
 			"title": "<?php echo $this->translate( array( "currentness", "title" ) ); ?>",
 			"items": {
 	<?php if ( $newsCount ): ?>
-		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "newsfeed-show", $newsCount ); ?>
-		"<?php echo $this->translate( array( "currentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $newsCount . $this->translate( array( "currentness", "newsFound" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/asqm/query/news/title/<?php echo $this->getTitle(); ?>"],
+		<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "newsfeed-show", $newsCount ); ?>
+		"<?php echo $this->translate( array( "currentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $newsCount . $this->translate( array( "currentness", "newsFound" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/articleMonitor/query/news/title/<?php echo $this->getTitle(); ?>"],
 	<?php endif; ?>
 	<?php if ( $cdHit ): ?>
-		<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
+		<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
 	"<?php echo $this->translate( array( "currentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "currentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
 	<?php endif; ?>
 			}
 		},
 <?php endif; # $newsCount OR $cdHit ?>
-<?php $giniScore = SingletonFactory::getInstance( 'Asqm_Model' )->getGiniScore( $this->getId(), $this->getLang() ); ?>
+<?php $giniScore = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getGiniScore( $this->getId(), $this->getLang() ); ?>
 <?php if ( $giniScore ): ?>
-	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "wikigini-show", $giniScore ); ?>
+	<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "wikigini-show", $giniScore ); ?>
 		"editorInteraction": {
 			"title": "<?php echo $this->translate( array( "editorInteraction", "title" ) ); ?>",
 			"items": {
@@ -78,7 +78,7 @@
 <?php #if ( $this->_lang /*SingletonFactory::getInstance( 'Request' )->getVar( 'lang' )*/ == 'en' ): ?>
 <?php $percent = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback5(); ?>
 <?php if ( !empty( $percent ) ): ?>
-	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft5-show", $percent ); ?>
+	<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft5-show", $percent ); ?>
 		"aft5": {
 			"title": "<?php echo $this->translate( array( "aft5", "title" ) ); ?>",
 			"items": {
@@ -88,7 +88,7 @@
 <?php else: ?>
 <?php $ratings = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback(); ?>
 <?php if ( !empty( $ratings ) ): ?>
-	<?php SingletonFactory::getInstance( "Asqm_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft4-show", base64_encode( serialize( $ratings ) ) ); ?>
+	<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "aft4-show", base64_encode( serialize( $ratings ) ) ); ?>
 		"aft4": {
 			"title": "<?php echo $this->translate( array( "aft4", "title" ) ); ?>",
 			"items": {

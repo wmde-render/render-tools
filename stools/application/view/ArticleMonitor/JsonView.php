@@ -1,5 +1,5 @@
 <?php
-class Asqm_JsonView extends View {
+class ArticleMonitor_JsonView extends View {
 	
 	public function __construct( $templateName ) {
 		parent::__construct( $templateName );
@@ -10,7 +10,7 @@ class Asqm_JsonView extends View {
 		$callback = SingletonFactory::getInstance('Request')->getVar('callback');
 		
 		# collect results
-		$model = SingletonFactory::getInstance( "Asqm_Json" );
+		$model = SingletonFactory::getInstance( "ArticleMonitor_Json" );
 		$model->setView( $this );
 		$result = $model->getResults();
 

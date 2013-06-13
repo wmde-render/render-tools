@@ -1,5 +1,5 @@
 <?php
-class Asqm_Model extends Model {
+class ArticleMonitor_Model extends Model {
 
 	public function __construct() { }
 	

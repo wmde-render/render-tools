@@ -1,5 +1,5 @@
 <?php
-class Asqm_IndexController /*extends Controller*/ {
+class ArticleMonitor_IndexController /*extends Controller*/ {
 
 	public function __construct() {
 		

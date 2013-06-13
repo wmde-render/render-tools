@@ -1,5 +1,5 @@
 <?php
-class Asqm_OverView extends View {
+class ArticleMonitor_OverView extends View {
 	
 	public function __construct( $templateName ) {
 		parent::__construct( $templateName );

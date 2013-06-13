@@ -1,11 +1,11 @@
 <?php
-class Asqm_Json extends Model {
+class ArticleMonitor_Json extends Model {
 
 	private $_view;
 
 	private $_id;
 	private $_lang;
-	private $_asqmId;
+	private $_articleMonitorId;
 
 	private $_result;
 	private $_groups;
@@ -16,10 +16,10 @@ class Asqm_Json extends Model {
 		# get article id, language and widget id from request
 		$this->_id = SingletonFactory::getInstance( 'Request' )->getVar( 'id' );
 		$this->_lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' );
-		$this->_asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
+		$this->_articleMonitorId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
 
 		# retrieve article info
-		$articleInfo = SingletonFactory::getInstance( 'Asqm_Model' )
+		$articleInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )
 				->getArticle( $this->_id );
 		$this->_articleInfo = $articleInfo[0];
 		
@@ -36,7 +36,7 @@ class Asqm_Json extends Model {
 				"visitorsYesterday",
 				"visitorsLastMonth"
 			),
-			"analyses" => array(
+			"analysis" => array(
 				"lea",
 				"newsFinder",
 				"changeDetector",
@@ -61,8 +61,8 @@ class Asqm_Json extends Model {
 	}
 
 	private function _createResult() {
-		SingletonFactory::getInstance( "Asqm_Model" )->logRequest(
-			$this->_getPageTitle(), $this->_lang, $this->_asqmId, "articleMonitor-show", "" );
+		SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
+			$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "articleMonitor-show", "" );
 
 		foreach( $this->_groups as $group => $items ) {
 			$this->_result->$group = new stdClass();
@@ -105,12 +105,12 @@ class Asqm_Json extends Model {
 	}
 
 	private function _getFirstEdit() {
-		$revInfo = SingletonFactory::getInstance( 'Asqm_Model' )->getRevision( $this->_id , true /* get first revision */ );
+		$revInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getRevision( $this->_id , true /* get first revision */ );
 		return $this->_getRevisionInfo( $revInfo[0] );
 	}
 
 	private function _getRecentEdit() {
-		$revInfo = SingletonFactory::getInstance( 'Asqm_Model' )->getRevision( $this->_id , false /* get last revision */ );
+		$revInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getRevision( $this->_id , false /* get last revision */ );
 		return $this->_getRevisionInfo( $revInfo[0] );
 	}
 	
@@ -128,7 +128,7 @@ class Asqm_Json extends Model {
 	}
 
 	private function _getTotalEditors() {
-		$eCount = SingletonFactory::getInstance( 'Asqm_Model' )->getUniqueEditorCount( $this->_id );
+		$eCount = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getUniqueEditorCount( $this->_id );
 		return $eCount["loggedin"] . " (+IP: " . $eCount["anonymous"] . ")";
 	}
 
@@ -137,7 +137,7 @@ class Asqm_Json extends Model {
 	}
 
 	private function _getImages() {
-		$imageInfo = SingletonFactory::getInstance( 'Asqm_Model' )->getImageCount( $this->_id );
+		$imageInfo = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getImageCount( $this->_id );
 		$this->_imageInfo = $imageInfo[0][0];
 		
 		return $this->_imageInfo;
@@ -164,8 +164,8 @@ class Asqm_Json extends Model {
 	private function _getNewsFinder() {
 		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->_getPageTitle() );
 		if ( $newsCount > 0 ) {
-			SingletonFactory::getInstance( "Asqm_Model" )->logRequest(
-				$this->_getPageTitle(), $this->_lang, $this->_asqmId, "newsfinder-show", $newsCount );
+			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
+				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "newsfinder-show", $newsCount );
 			return $newsCount . $this->_view->translate( array( "currentness", "newsFound" ) );
 		}
 
@@ -175,8 +175,8 @@ class Asqm_Json extends Model {
 	private function _getChangeDetector() {
 		if ( SingletonFactory::getInstance( 'ChangeDetector_Model' )
 				->checkDetected( $this->_id, $this->_lang ) ) {
-			SingletonFactory::getInstance( "Asqm_Model" )->logRequest(
-				$this->_getPageTitle(), $this->_lang, $this->_asqmId, "cd-show", "" );
+			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
+				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "cd-show", "" );
 
 			$title = $this->_view->translate( array( "currentness", "cdHit" ) );
 			$link = "http://toolserver.org/~" . $this->_view->getUserInfoObject( "name" ) .
@@ -192,10 +192,10 @@ class Asqm_Json extends Model {
 	}
 
 	private function _getGiniScore() {
-		$score = SingletonFactory::getInstance( 'Asqm_Model' )->getGiniScore( $this->_id, $this->_lang );
+		$score = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getGiniScore( $this->_id, $this->_lang );
 		if ( $score ) {
-			SingletonFactory::getInstance( "Asqm_Model" )->logRequest(
-				$this->_getPageTitle(), $this->_lang, $this->_asqmId, "wikigini-show", $score );
+			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
+				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
 
 			$link = "http://toolserver.org/~" . $this->_view->getUserInfoObject( "name" ) .
 					"/toolkit/WIKIGINI/?language_code=" . $this->_lang .
@@ -219,8 +219,8 @@ class Asqm_Json extends Model {
 	private function _getAft5() {
 		$percent = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback5();
 		if ( !empty( $percent ) ) {
-			SingletonFactory::getInstance( "Asqm_Model" )->logRequest( 
-					$this->_getPageTitle(), $this->_lang, $this->_asqmId, "aft5-show", $percent );
+			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( 
+					$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "aft5-show", $percent );
 
 			$title = $this->_view->translate( array( "aft5", "negRating" ) );
 			$link = "http://en.wikipedia.org/wiki/Special:ArticleFeedbackv5/" . $this->_getPageTitle();

@@ -49,10 +49,10 @@ class Monitor_CheckController /*extends Controller*/ {
 		$this->_sendMessages();
 	}
 
-	public function asqmAction() {
+	public function articleMonitorAction() {
 		$test = @file_get_contents(
-			ASQM_SERVICE_URL .
-			"/asqm/query/json/id/297666/lang/de/asqmid/monitor",
+			ARTICLEMONITOR_SERVICE_URL .
+			"/articleMonitor/query/json/id/297666/lang/de/asqmid/monitor",
 			false,
 			$this->_streamContext
 		);

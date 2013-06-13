@@ -17,14 +17,14 @@ $strLang = array(
 	"developers" => "Development: Johannes Kroll (Backend), Kai Nissen (Frontend)",
 	"overviewHeading" => "",
 	"overviewDesc" => "",
-	"asqmHeading" => "Article Monitor",
-	"asqmDesc" => "The Article Monitor gives an overview of statistical data and 
-		a variety of analyses to a Wikipedia article. If you want to use the 
+	"articleMonitorHeading" => "Article Monitor",
+	"articleMonitorDesc" => "The Article Monitor gives an overview of statistical data and 
+		a variety of analysis to a Wikipedia article. If you want to use the 
 		Article Monitor you have to install a gadget first. After doing this you 
 		can start the Article Monitor by clicking on the corresponding tab in the 
 		respective article.",
-	"asqmNotice" => "Instructions",
-	"asqmNotice2" => "for installing the Article Monitor gadget",
+	"articleMonitorNotice" => "Instructions",
+	"articleMonitorNotice2" => "for installing the Article Monitor gadget",
 	"tlgHeading" => "Article List Generator",
 	"tlgDesc" => "Using the Article List Generator you can compile customized 
 		article lists. It is possible to search a single category, to combine 

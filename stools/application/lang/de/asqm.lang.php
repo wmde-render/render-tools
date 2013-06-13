@@ -1,8 +1,8 @@
 <?php
 $strLang = array(
 	"dateFormat" => "d.m.Y H:i",
-	"asqmHeading" => "Artikelmonitor",
-	"asqmDesc" => "Der Artikelmonitor bietet einen Überlick über statistische 
+	"articleMonitorHeading" => "Artikelmonitor",
+	"articleMonitorDesc" => "Der Artikelmonitor bietet einen Überlick über statistische 
 		Daten und verschiedene Analysen zu einem Wikipedia-Artikel mit deren 
 		Hilfe die Qualität des Artikels eingeschätzt werden kann.
 		<br /><br />
@@ -35,10 +35,10 @@ $strLang = array(
 	"newsfeedTableUrl" => "URL",
 	"newsfeedTableDate" => "Datum",
 	
-	"asqmTabTitle" => "Info",
-	"asqmTooltip" => "Statistiken und weitere Analysen zu diesem Artikel anzeigen",
+	"articleMonitorTabTitle" => "Info",
+	"articleMonitorTooltip" => "Statistiken und weitere Analysen zu diesem Artikel anzeigen",
 	
-	# asqm output
+	# articleMonitor output
 	# old format - keep for now
 	"general" => array(
 		"title" => "Statistiken",
@@ -108,13 +108,11 @@ $strLang = array(
 		"visitorsYesterday" => "Besucher gestern",
 		"visitorsLastMonth" => "Besucher im letzten Monat"
 	),
-	"analyses" => array(
+	"analysis" => array(
 		"title" => "Analysen",
 		# Link Extractor
-		"titleFactCoverage" => "Faktenabdeckung",
-		"lea" => "LEA (Link Extractor)",
+		"lea" => "Link Extractor",
 		"showAnalysis" => "Analyse anzeigen",
-		"titleCurrentness" => "Aktualität",
 		# News Finder
 		"titleNewsFinder" => "NewsFinder",
 		"noNews" => "Keine Nachrichtenartikel gefunden",
@@ -123,11 +121,10 @@ $strLang = array(
 		"titleChangeDetector" => "Change Detector",
 		"cdHit" => "Hohe Aktivität in anderen Sprachen",
 		# WikiGini
-		"titleAuthors" => "Autoreninteraktion",
-		"giniScore" => "WikiGini-Score",
+		"giniScore" => "WikiGini-Wert",
 	),
 	"assessment" => array(
-		"title" => "Artikelbewertungen",
+		"title" => "Bewertungen",
 		"wikibuch" => "Wikibu.ch",
 		"lookupAssessment" => "Bewertung ansehen",
 		# aft 4

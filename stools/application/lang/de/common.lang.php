@@ -19,14 +19,14 @@ $strLang = array(
 	"overviewHeading" => "",
 	"overviewDesc" => "Hier findest du die im Rahmen des RENDER-Projekts entwickelten
 		Unterstützungswerkzeuge für Wikipedia:",
-	"asqmHeading" => "Artikelmonitor",
-	"asqmDesc" => "Der Artikelmonitor stellt statistische Daten und verschiedene 
+	"articleMonitorHeading" => "Artikelmonitor",
+	"articleMonitorDesc" => "Der Artikelmonitor stellt statistische Daten und verschiedene 
 		Analysen zu einem Wikipedia-Artikel übersichtlich in einem Fenster 
 		zusammen. Zur Benutzung dieses Werkzeugs muss ein Helferlein installiert 
 		werden. Danach kann der Artikelmonitor direkt durch Klicken des 
 		entsprechenden Reiters im jeweiligen Artikel gestartet werden.",
-	"asqmNotice" => "Hinweise",
-	"asqmNotice2" => "zur Installation des ASQM-Gadgets",
+	"articleMonitorNotice" => "Hinweise",
+	"articleMonitorNotice2" => "zur Installation des Artikelmonitor-Helferleins",
 	"tlgHeading" => "Artikellistengenerator",
 	"tlgDesc" => "Mithilfe des Artikellistengenerators können individuelle 
 		Artikellisten zusammengestellt werden. Dabei können einzelne Kategorien 
