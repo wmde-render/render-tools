@@ -115,7 +115,7 @@ class MyObject(object):
         if int(MyObject.__DebugLevel) >= int(debug_level) \
               and int(debug_level) > 0:
             sys.stdout.write("[%s] [%s] " % (time.strftime("%H:%M:%S", time.localtime(time.time())), threading.currentThread().getName()) )
-            print message
+            print "%.640s" % message
             sys.stdout.flush()
 
 class MyOursqlException(Exception):
@@ -1933,10 +1933,26 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
             super(MyOursqlCursor, self).execute(
                   operation, plain_query=True)
         else:
-            super(MyOursqlCursor, self).execute(operation, parameters)
+            hammer= 0
+            done= False
+            while not done:
+                try:
+                    super(MyOursqlCursor, self).execute(operation, parameters)
+                except oursql.ProgrammingError as ex:
+                    if ex.errno!=1615: # 'Prepared statement needs to be re-prepared'
+                        raise
+                    hammer+= 1
+                    if hammer>=10:
+                        self._explain(1, "retried sql statement '%.20s' for %d times, giving up\n" % (operation, hammer))
+                        raise
+                    time.sleep(0.5)
+                else:
+                    done= True
+            if hammer:
+                self._explain(1, "sql statement '%.20s' went through after hitting it with a lead pipe for %d times\n" % (operation, hammer))
     
     def executemany(self, operation, parameters=None):
-        self._explain(2, "executemany: %s" % operation)
+        self._explain(2, "executemany: %.80s" % operation)
         super(MyOursqlCursor, self).executemany(operation, parameters)
     
     def fetchall(self):
