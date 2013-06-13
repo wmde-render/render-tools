@@ -1,4 +1,4 @@
-#!/opt/ts/python/2.7/bin/python
+#!/usr/bin/python2.7
 #$ -l h_rt=15:00:00
 #$ -j y
 #$ -m ae
