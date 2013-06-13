@@ -38,6 +38,9 @@ $strLang = array(
 	"articleMonitorTabTitle" => "Info",
 	"articleMonitorTooltip" => "Statistiken und weitere Analysen zu diesem Artikel anzeigen",
 	
+	"newVersion" => "Neue Version verfügbar",
+	"linkToNewVersion" => "Installationshinweise",
+	
 	# articleMonitor output
 	# old format - keep for now
 	"general" => array(
