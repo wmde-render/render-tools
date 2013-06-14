@@ -10,8 +10,8 @@
 			<td>
 				<div id="EU">
 					RENDER is funded by 
-					<img width="55px" src="/~RENDER/toolkit/img/eu.jpg"/>
-					<img width="55px" src="/~RENDER/toolkit/img/FP7.png"/>
+					<img width="55px" src="img/eu.jpg"/>
+					<img width="55px" src="img/FP7.png"/>
 				</div>
 				<p>
 					All data used on this page  originate from the Wikipedia 
@@ -57,8 +57,8 @@
 			<td>
 				<div id="EU">
 					RENDER wird gefördert durch 
-					<img width="55px" src="/~RENDER/toolkit/img/eu.jpg" />
-					<img width="55px" src="/~RENDER/toolkit/img/FP7.png" />
+					<img width="55px" src="../img/eu.jpg" />
+					<img width="55px" src="../img/FP7.png" />
 				</div>
 				<p>
 					Die auf dieser Seite verwendeten Daten entstammen dem 
