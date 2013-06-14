@@ -2476,7 +2476,7 @@ class XMLDisplay(ChangeDisplay):
         changes.appendChild(overview)
         next = doc.createElement('navigation')
         next.setAttribute('name', 'next')
-        next.appendChild(doc.createTextNode("%s.xml" % tomorrow))
+        next.appendChild(doc.createTextNode("%s.xml" % tomorrow)) 
         changes.appendChild(next)
         #algorithm_list = doc.createElement('algorithmlist')
         #for short, long in algorithms.iteritems():
