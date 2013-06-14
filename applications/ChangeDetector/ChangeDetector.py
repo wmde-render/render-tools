@@ -55,7 +55,7 @@ Requirements:
 
   - python's oursql module
 
-  - the file ~/.my.cnf containing data necessery to establish
+  - the file ~/replica.my.cnf containing data necessery to establish
     a mysql connection.
 
   - the table toolserver.sql containing a list of the servers of
@@ -2087,7 +2087,7 @@ class Toolserver_SQL_Cursors(dict, MyObject):
     
     def _create_auxiliary_cursor(self):
         auxiliary_connection = oursql.connect(
-              read_default_file='~/.my.cnf',
+              read_default_file='~/replica.my.cnf',
               use_unicode=False
               )
         Toolserver_SQL_Cursors._auxiliary_cursor = MyOursqlCursor(auxiliary_connection)
@@ -2108,7 +2108,7 @@ class Toolserver_SQL_Cursors(dict, MyObject):
             self._explain(1, 'Create connection to sql-s%s' % server)
             connection = oursql.connect(
                   host="sql-s%d" % server,
-                  read_default_file="~/.my.cnf",
+                  read_default_file="~/replica.my.cnf",
                   charset=None,
                   use_unicode=False)
             cursor = MyOursqlCursor(connection)
@@ -2171,7 +2171,7 @@ class LabsDB_SQL_Cursors(dict, MyObject):
             self._explain(1, "creating cursor for %s/%s." % (host_name, database_name))
             connection= oursql.connect(
                   host= host_name,
-                  read_default_file= "~/.my.cnf",
+                  read_default_file= "~/replica.my.cnf",
                   charset= None,
                   use_unicode= False)
             cursor= MyOursqlCursor(connection)
@@ -2183,7 +2183,7 @@ class LabsDB_SQL_Cursors(dict, MyObject):
     
     def _create_auxiliary_cursor(self):
         auxiliary_connection = oursql.connect(
-              read_default_file='~/.my.cnf',
+              read_default_file='~/replica.my.cnf',
               host='tools-db',
               use_unicode=False
               )
