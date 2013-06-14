@@ -1,4 +1,4 @@
-#!/opt/ts/python/2.7/bin/python
+#!/usr/bin/python2.7
 #$ -l h_rt=15:00:00
 #$ -j y
 #$ -m ae
@@ -919,7 +919,7 @@ class EditCountDifference(MyObject):
         sql_statement = """
               UPDATE edit_count AS today, edit_count AS yesterday
               SET today.difference = CONVERT(
-                  today.edits - yesterday.edits, SIGNED)
+                  CAST(today.edits AS SIGNED) - CAST(yesterday.edits AS SIGNED), SIGNED)
               WHERE today.page_id = yesterday.page_id
               AND today.language = yesterday.language
               AND today.day = '%(day)s'
@@ -2136,6 +2136,83 @@ class Toolserver_SQL_Cursors(dict, MyObject):
                   database_name)
 
 
+class LabsDB_SQL_Cursors(dict, MyObject):
+    """Provides a dictionary where the language keys determined in the
+    ini-file point to oursql-cursors. With the special key 'auxiliary'
+    the auxiliary database can be accessed.
+    """
+    
+    _server_names = None
+    _cursors = {}
+    _auxiliary_cursor = None
+    
+    def __init__(self):
+        if LabsDB_SQL_Cursors._auxiliary_cursor is None: 
+            self._create_auxiliary_cursor()
+    
+    def __missing__(self, key):
+        if key == 'auxiliary':
+            return LabsDB_SQL_Cursors._auxiliary_cursor
+        else:
+            return self._get_language_cursor(key)
+    
+    def keys(self):
+        keys = ['auxiliary']
+        for database_name in LabsDB_SQL_Cursors._server_names.keys():
+            keys.append(database_name[:-6])
+        return keys
+    
+    # tool labs specific
+    def _get_language_cursor(self, language):
+        database_name= "%swiki_p" % language
+        host_name= "%swiki.labsdb" % language
+        
+        if not database_name in LabsDB_SQL_Cursors._cursors: 
+            self._explain(1, "creating cursor for %s/%s." % (host_name, database_name))
+            connection= oursql.connect(
+                  host= host_name,
+                  read_default_file= "~/.my.cnf",
+                  charset= None,
+                  use_unicode= False)
+            cursor= MyOursqlCursor(connection)
+            LabsDB_SQL_Cursors._cursors[database_name]= cursor
+            self._direct_cursor(cursor, database_name)
+            
+        return LabsDB_SQL_Cursors._cursors[database_name]
+    
+    
+    def _create_auxiliary_cursor(self):
+        auxiliary_connection = oursql.connect(
+              read_default_file='~/.my.cnf',
+              host='tools-db',
+              use_unicode=False
+              )
+        LabsDB_SQL_Cursors._auxiliary_cursor= MyOursqlCursor(auxiliary_connection)
+        self._direct_auxiliary_cursor()
+        #LabsDB_SQL_Cursors._auxiliary_cursor = oursql.Cursor(auxiliary_connection)
+    
+    def _direct_auxiliary_cursor(self):
+        database = Settings()['database']
+        try:
+            self._direct_cursor(LabsDB_SQL_Cursors._auxiliary_cursor, database)
+        except MyOursqlException:
+            LabsDB_SQL_Cursors._auxiliary_cursor.execute("""
+                  CREATE DATABASE %s""" % database)
+            LabsDB_SQL_Cursors._auxiliary_cursor.execute("""
+                  USE %s""" % database)
+        
+    def _direct_cursor(self, cursor, database_name):
+        sql_command = """
+              USE %s""" % database_name
+        try:
+            cursor.execute(sql_command)
+        except oursql.ProgrammingError:
+            raise MyOursqlException("""
+                  You try to access a Wikipedia with language code `%s'.
+                  There is no such language version.""" % 
+                  database_name)
+
+
 class Toolserver_Settings(dict):
     """This class provides access to variables that are needed
     everywhere in the program. When it is called first, it is
@@ -2501,7 +2578,7 @@ if __name__ == '__main__':
     #global SQL_Cursors
     #Settings = Settings()
     Settings = Toolserver_Settings
-    SQL_Cursors = Toolserver_SQL_Cursors
+    SQL_Cursors = LabsDB_SQL_Cursors
     skipLanguageByReplicationLag()
     
     #NoticedArticle(day)
