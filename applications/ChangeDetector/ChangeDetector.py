@@ -2184,7 +2184,7 @@ class LabsDB_SQL_Cursors(dict, MyObject):
     def _create_auxiliary_cursor(self):
         auxiliary_connection = oursql.connect(
               read_default_file='~/replica.my.cnf',
-              host='tools-db',
+	      ost='tools-db',
               use_unicode=False
               )
         LabsDB_SQL_Cursors._auxiliary_cursor= MyOursqlCursor(auxiliary_connection)
