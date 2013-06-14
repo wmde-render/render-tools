@@ -413,12 +413,12 @@ if( isset( $_GET["submit"] ) ) {
 	$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
 
 	$userInfo = posix_getpwuid( posix_getuid() );
-	$dbCred = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
-	mysql_connect( 'sql.toolserver.org', $dbCred['user'], $dbCred['password'] );
-	mysql_select_db( 'u_knissen_asqm_u' );
+	$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
+	mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
+	mysql_select_db( 'p50380g50454__request_logs' );
 
 	$serializedResult = base64_encode( serialize( $arrResult ) );
-	$sql = "INSERT INTO asqm_request_log ".
+	$sql = "INSERT INTO request_log ".
 			"(asqm_id, title, lang, action_type, result, request_time) ".
 			"VALUES ('" . $asqmId . "', '', '" . $reflang . "', 'cd-usage', '', NOW())";
 	mysql_query( $sql );

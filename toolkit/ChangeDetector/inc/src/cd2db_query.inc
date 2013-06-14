@@ -12,7 +12,7 @@
  **/
 
 function query_change_db( $date, $LangGroup, $cut = TRUE , 
-		$No_Filter, $database_name ='p_render_change_detector_p' ) {
+		$No_Filter, $database_name ='p50380g50454__change_detector' ) {
 
 	// Only usual
 	$Query_filter = "AND only_usual = 0 ";
@@ -34,8 +34,8 @@ function query_change_db( $date, $LangGroup, $cut = TRUE ,
 
 	// Open database
 	$ts_pw = posix_getpwuid( posix_getuid() );
-	$ts_mycnf = parse_ini_file( $ts_pw['dir'] . "/.my.cnf" );
-	$db = mysql_connect( 'sql.toolserver.org', $ts_mycnf['user'], $ts_mycnf['password'] );
+	$ts_mycnf = parse_ini_file( $ts_pw['dir'] . "/replica.my.cnf" );
+	$db = mysql_connect( 'tools-db', $ts_mycnf['user'], $ts_mycnf['password'] );
 
 	if( !$db ) {
 		die( 'Connection error (db-sql): ' . mysql_error() );
@@ -112,7 +112,7 @@ function query_change_db( $date, $LangGroup, $cut = TRUE ,
 	// Adding titles for Unchanged articles
 	foreach( $LangGroup as $k => $language ) {
 		$LangVers_wiki = $language . "wiki_p";
-		$LangVers_wiki_db = $language . "wiki-p.rrdb.toolserver.org";
+		$LangVers_wiki_db = $language . "wiki.labsdb";
 
 		// Datenbank oeffnen
 		$db2 = mysql_connect( $LangVers_wiki_db, $ts_mycnf['user'], $ts_mycnf['password'] );

@@ -33,10 +33,21 @@ include( "inc/src/api_normalize_redirect.inc" );
 if( isset( $_REQUEST["submit"] ) ) {
 $dbLink = array();
 $dbError = "";
-include( "dbArray.php" );
+
+function getDbLink( $lang ) {
+	global $dbLink;
+	$ts_pwd = posix_getpwuid( posix_getuid() );
+        $ts_mycnf = parse_ini_file( $ts_pwd['dir'] . "/replica.my.cnf" );
+
+	if ( !array_key_exists( $lang, $dbLink ) ) {
+		$dbLink[$lang] = @mysql_connect( $lang . "wiki.labsdb", $ts_mycnf['user'], $ts_mycnf['password'] );
+		@mysql_select_db( $lang . "wiki_p", $dbLink[$lang] );
+	}
+	return $dbLink[$lang];
+}
 
 function createDatabaseLinks() {
-	global $dbLink, $dbError;
+	/*global $dbLink, $dbError;
 	
 	$ts_pwd = posix_getpwuid( posix_getuid() );
 	$ts_mycnf = parse_ini_file( $ts_pwd['dir'] . "/.my.cnf" );
@@ -48,7 +59,7 @@ function createDatabaseLinks() {
 			$dbError = "sql-s" . $i;
 			return false;
 		}
-	}
+	}*/
 	
 	return true;
 }
@@ -77,12 +88,12 @@ function getPageId( &$title, $lang ) {
 	global $dbArray, $dbLink;
 	
 	$sql = "SELECT page_id, page_is_redirect FROM page WHERE page_namespace = 0 AND page_title = '" . mysql_escape_string( $title ) . "'";
-	$result = mysql_query( $sql, $dbLink[$dbArray[$lang . "wiki_p"]] );
+	$result = mysql_query( $sql, getDbLink($lang) );
 	
 	if ( $result ) {
 		$row = mysql_fetch_assoc( $result );
 		if ( $row['page_is_redirect'] > 0 ) {
-			$title = resolveRedirection( $title, $dbLink[$dbArray[$lang . "wiki_p"]] );
+			$title = resolveRedirection( $title, getDbLink($lang) );
 			$pageId = getPageId( $title, $lang );
 		} else {
 			$pageId = $row['page_id'];
@@ -104,7 +115,7 @@ function getPageLinks( $pageId, $lang ) {
 		AND page.page_namespace = 0
 		WHERE pl_from = " . $pageId . " 
 		AND pl_namespace = 0";
-	$result = mysql_query( $sql, $dbLink[$dbArray[$lang . "wiki_p"]] );
+	$result = mysql_query( $sql, getDbLink($lang) );
 
 	$links = array();
 	while ( $row = mysql_fetch_assoc( $result ) ) {
@@ -123,7 +134,7 @@ function getPageLinksByTitle( $title, $lang ) {
 		LEFT JOIN pagelinks AS pl ON pl.pl_from = p1.page_id 
 		LEFT JOIN page AS p2 ON pl.pl_title = p2.page_title AND p2.page_namespace = 0
 		WHERE p1.page_title = '".$title."' AND p1.page_namespace = 0";
-	$result = mysql_query( $sql, $dbLink[$dbArray[$lang . "wiki_p"]] );
+	$result = mysql_query( $sql, getDbLink($lang) );
 
 	$links = array();
 	while ( $row = mysql_fetch_assoc( $result ) ) {
@@ -182,7 +193,7 @@ $startTotal = getTime();
 
 $tries = 0;
 $maxTries = 10;
-while( !createDatabaseLinks() && $tries < $maxTries) {
+/*while( !createDatabaseLinks() && $tries < $maxTries) {
 	sleep(1);
 	$tries ++;
 	
@@ -196,10 +207,10 @@ while( !createDatabaseLinks() && $tries < $maxTries) {
 		<?php
 		exit();
 	}
-}
+}*/
 
 // get page id
-mysql_select_db( $reqLang . "wiki_p", $dbLink[$dbArray[$reqLang . "wiki_p"]] );
+#mysql_select_db( $reqLang . "wiki_p", getDbLink($reqLang) );
 $id = getPageId( $reqTitle, $reqLang );
 if ($id) {
 	// get links on requested page
@@ -207,7 +218,7 @@ if ($id) {
 
 	// get all language links
 	$sql = "SELECT ll_lang, ll_title FROM langlinks WHERE ll_from = " . $id;
-	$result = mysql_query( $sql, $dbLink[$dbArray[$reqLang . "wiki_p"]] );
+	$result = mysql_query( $sql, getDbLink($reqLang) );
 
 	$langVersionCount = 0;
 	// get all page links from other languages to determine the three link richest
@@ -216,18 +227,18 @@ if ($id) {
 		$linkedLang = $row['ll_lang'];
 		$linkedTitle = normalizeTitle( $row['ll_title'] );
 
-		if ( !array_key_exists( $linkedLang . "wiki_p", $dbArray ) ) {
+		if ( !getDbLink( $linkedLang ) ) {
 			continue;
 		}
 		$languages[$linkedLang] = array();
 
-		mysql_select_db( $linkedLang . "wiki_p", $dbLink[$dbArray[$linkedLang . "wiki_p"]] );
+		#mysql_select_db( $linkedLang . "wiki_p", getDbLink($linkedLang) );
 		$linkedId = getPageId( $linkedTitle, $linkedLang );
 		if ( !$linkedId ) {
 			continue;
 		}
 
-		mysql_select_db( $linkedLang . "wiki_p", $dbLink[$dbArray[$linkedLang . "wiki_p"]] );
+		#mysql_select_db( $linkedLang . "wiki_p", getDbLink($linkedLang) );
 		$languages[$linkedLang] = getPageLinks( $linkedId, $linkedLang );
 		$titles[$linkedLang] = $linkedTitle;
 	}
@@ -253,9 +264,9 @@ if ($id) {
 		);
 
 		$checkedPages = array();
-		mysql_select_db( $reqLang . "wiki_p", $dbLink[$dbArray[$reqLang . "wiki_p"]] );
+		mysql_select_db( $reqLang . "wiki_p", getDbLink($reqLang) );
 		foreach( $languages as $lang => $links ) {
-			mysql_select_db( $lang . "wiki_p", $dbLink[$dbArray[$lang . "wiki_p"]] );
+			mysql_select_db( $lang . "wiki_p", getDbLink($lang) );
 			foreach( $links as $link ) {
 				$lang = str_replace( "-", "_", $lang );
 
@@ -265,7 +276,7 @@ if ($id) {
 				$checkedPages[] = $linkId;
 
 				$sql = "SELECT * FROM langlinks WHERE ll_from = " . $linkId . " AND ll_lang IN ('" . implode( "','", array_keys( $langResults ) ) . "')";
-				$result = mysql_query( $sql, $dbLink[$dbArray[$lang . "wiki_p"]] );
+				$result = mysql_query( $sql, getDbLink($lang) );
 
 				$reqLangExists = false;
 				$linkResult = array();
@@ -313,9 +324,9 @@ if ($id) {
 		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
 		
 		$userInfo = posix_getpwuid( posix_getuid() );
-		$dbCred = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
-		mysql_connect( 'sql.toolserver.org', $dbCred['user'], $dbCred['password'] );
-		mysql_select_db( 'u_knissen_asqm_u' );
+		$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
+		mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
+		mysql_select_db( 'p50380g50454__request_log' );
 
 		$serializedResult = base64_encode( serialize( $arrResult ) );
 		$sql = "INSERT INTO asqm_request_log ".

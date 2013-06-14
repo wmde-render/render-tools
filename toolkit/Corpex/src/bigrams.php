@@ -1,5 +1,6 @@
 <?php 
-$path_data = "/mnt/user-store/render/corpex/data";
+$path_data = "/data/project/render-tests/datasets/corpex/data";
+// $path_data = "/mnt/user-store/render/corpex/data";
 // $path_data = "/home/fekepp/projects/corpex/data";
 
 
