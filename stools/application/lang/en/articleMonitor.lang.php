@@ -33,7 +33,7 @@ $strLang = array(
 	"newsfeedTableUrl" => "URL",
 	"newsfeedTableDate" => "Date",
 	
-	"articleMonitorTabTitle" => "Info",
+	"articleMonitorTabTitle" => "Article Monitor",
 	"articleMonitorTooltip" => "Show statistics and further analysis for this article",
 	
 	# articleMonitor output
