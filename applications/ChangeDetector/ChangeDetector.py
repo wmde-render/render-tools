@@ -1067,7 +1067,7 @@ class ArticleMerger(MyObject):
               SELECT ll_lang, ll_from, ll_title
               FROM langlinks
               WHERE ll_lang IN (%s)
-              AND ll_from in (%s)""" % \
+              AND ll_from IN (%s)""" % \
                     (self.__string_of_all_languages, self.__latest_ids)
         SQL_Cursors()[language].execute(sql_command)
         for other_language, id, title in SQL_Cursors()[language]:
@@ -1154,17 +1154,31 @@ class ArticleMerger(MyObject):
             self.__list_of_all_titles[language] = [title.replace(' ', '_')]
     
     def __find_ids_in_language(self, language):
-        placeholders = '(' + \
-              "?, "*(len(self.__list_of_all_titles[language]) - 1 ) + \
-              "?)"
+        #~ placeholders = '(' + \
+              #~ "?, "*(len(self.__list_of_all_titles[language]) - 1 ) + \
+              #~ "?)"
+        #~ sql_statement = """
+              #~ SELECT /* SLOW_OK */ page_title, page_id
+              #~ FROM page
+              #~ INNER JOIN langlinks on page.page_id = langlinks.ll_from
+              #~ WHERE page.page_namespace = 0 AND REPLACE(page_title,' ','_') IN %s""" % placeholders
+              #~ # By joining langlinks we should avoid to catch dead
+              #~ # entries in the page-table.
+        #~ SQL_Cursors()[language].execute(sql_statement, self.__list_of_all_titles[language])
+        
+        titles= []
+        for title in self.__list_of_all_titles[language]:
+            titles+= title.replace(' ', '_')
+        title_placeholders= ' OR '.join('page_title=?'*len(titles))
         sql_statement = """
               SELECT /* SLOW_OK */ page_title, page_id
               FROM page
               INNER JOIN langlinks on page.page_id = langlinks.ll_from
-              WHERE page.page_namespace = 0 AND REPLACE(page_title,' ','_') IN %s""" % placeholders
+              WHERE page.page_namespace = 0 AND (%s)""" % title_placeholders
               # By joining langlinks we should avoid to catch dead
               # entries in the page-table.
-        SQL_Cursors()[language].execute(sql_statement, self.__list_of_all_titles[language])
+        SQL_Cursors()[language].execute(sql_statement, titles)
+
         ids = {}
         for page_title, page_id in SQL_Cursors()[language]:
             title = page_title.replace(' ', '_')
@@ -1926,9 +1940,11 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
     def execute(self, operation, parameters=None):
         if operation.rfind('INSERT') == -1:
             self._explain(2, operation)
+            if(parameters and len(parameters)): self._explain(2, '%d parameters' % len(parameters))
         else:
             self._explain(3, operation)
             self._explain(3, parameters)
+            if(parameters and len(parameters)): self._explain(3, '%d parameters' % len(parameters))
         if parameters is None:
             super(MyOursqlCursor, self).execute(
                   operation, plain_query=True)
@@ -2159,7 +2175,7 @@ class LabsDB_SQL_Cursors(dict, MyObject):
     def keys(self):
         keys = ['auxiliary']
         for database_name in LabsDB_SQL_Cursors._server_names.keys():
-            keys.append(database_name[:-6])
+            keys.append(database_name[:-6]) 
         return keys
     
     # tool labs specific
