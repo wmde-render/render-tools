@@ -2175,7 +2175,7 @@ class LabsDB_SQL_Cursors(dict, MyObject):
     def keys(self):
         keys = ['auxiliary']
         for database_name in LabsDB_SQL_Cursors._server_names.keys():
-            keys.append(database_name[:-6])
+            keys.append(database_name[:-6]) 
         return keys
     
     # tool labs specific
