@@ -114,11 +114,11 @@ $strLang = array(
 		"lea" => "Link Extractor",
 		"showAnalysis" => "Analyse anzeigen",
 		# News Finder
-		"titleNewsFinder" => "NewsFinder",
+		"newsFinder" => "News Finder",
 		"noNews" => "Keine Nachrichtenartikel gefunden",
 		"newsFound" => " Nachrichtenartikel gefunden",
 		# Change Detector
-		"titleChangeDetector" => "Change Detector",
+		"changeDetector" => "Change Detector",
 		"cdHit" => "Hohe Aktivität in anderen Sprachen",
 		# WikiGini
 		"giniScore" => "WikiGini-Wert",

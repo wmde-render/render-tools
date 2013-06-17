@@ -214,8 +214,8 @@ class ArticleMonitor_Model extends Model {
 			$asqmId = $_SESSION['asqmId'];
 		}
 
-		$dbConn = SingletonFactory::getInstance( 'Database' )->getDbConnection( 'asqmRequestLog' );
-		$sql = "INSERT INTO asqm_request_log ".
+		$dbConn = SingletonFactory::getInstance( 'Database' )->getDbConnection( 'articleMonitorRequestLog' );
+		$sql = "INSERT INTO request_log ".
 				"(asqm_id, title, lang, action_type, result, request_time) ".
 				"VALUES (?, ?, ?, ?, ?, NOW())";
 		try {

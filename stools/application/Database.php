@@ -41,7 +41,7 @@ class Database extends SingletonFactory {
 
 	private function _getUserCredentials() {
 		$userInfo = posix_getpwuid( posix_getuid() );
-		$dbConf = parse_ini_file( $userInfo['dir'] . "/.my.cnf" );
+		$dbConf = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
 		return $dbConf;
 	}
 	

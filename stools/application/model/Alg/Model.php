@@ -5,11 +5,11 @@ class Alg_Model extends Model {
 	private $_serviceUrl;
 	
 	public function __construct() {
-		$this->_serviceUrl = ALG_SERVICE_URL;
+		$this->_serviceUrl = ALG_SERVICE_URL_INTERNAL;
 	}
 	
 	public function getFlawList() {
-		$url = $this->_serviceUrl;
+		$url = ALG_SERVICE_URL_INTERNAL . "/tlgwsgi.py";
 		$url .= "?action=listflaws&i18n=" . $_SESSION['uilang'];
 		$result = @file_get_contents( $url );
 		
@@ -36,13 +36,15 @@ class Alg_Model extends Model {
 			$connInfo = $this->_getConnectionInfo();
 			$gp = gpConnection::new_client_connection( 
 					null, 
-					$connInfo["graphserv-host"] . ".toolserver.org", 
+					$connInfo["graphserv-host"], 
 					$connInfo["graphserv-port"] );
 			$gp->connect();
 			$runningGraphs = $gp->capture_list_graphs();
 			if ( is_array( $runningGraphs ) ) {
 				foreach( $runningGraphs as $graph ) {
-					$result[] = str_replace( "wiki", "", $graph[0] );
+					if ( preg_match( "/wiki$/", $graph[0] ) ) {
+						$result[] = str_replace( "wiki", "", $graph[0] );
+					}
 				}
 			}
 			return $result;
@@ -53,11 +55,11 @@ class Alg_Model extends Model {
 	
 	private function _getConnectionInfo() {
 		$defaultConnInfo = array(
-			"graphserv-host" => "ortelius",
+			"graphserv-host" => "sylvester",
 			"graphserv-port" => 6666
 		);
 		
-		$result = @file_get_contents( "http://toolserver.org/~jkroll/tlgbe/tlgrc" );
+		$result = @file_get_contents( ALG_SERVICE_URL_INTERNAL . "/tlgrc" );
 		if ( !$result ) {
 			return $defaultConnInfo;
 		}
@@ -66,7 +68,6 @@ class Alg_Model extends Model {
 		if ( !$connInfo ) {
 			return $defaultConnInfo;
 		}
-
 		return $connInfo;
 	}
 }

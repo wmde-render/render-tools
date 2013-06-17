@@ -120,11 +120,11 @@ $strLang = array(
 		"lea" => "Link Extractor",
 		"showAnalysis" => "Show analysis",
 		# News Finder
-		"titleNewsFinder" => "News Finder",
+		"newsFinder" => "News Finder",
 		"noNews" => "No news articles found",
 		"newsFound" => " news articles found",
 		# Change Detector
-		"titleChangeDetector" => "Change Detector",
+		"changeDetector" => "Change Detector",
 		"cdHit" => "Detected as possibly outdated",
 		# WikiGini
 		"giniScore" => "WikiGini Score",

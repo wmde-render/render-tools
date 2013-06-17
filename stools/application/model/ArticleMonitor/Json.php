@@ -155,18 +155,22 @@ class ArticleMonitor_Json extends Model {
 
 	private function _getLea() {
 		$title = $this->_view->translate( array( "factCoverage", "showAnalysis" ) );
-		$link = "http://toolserver.org/~" . $this->_view->getUserInfoObject( "name" ) .
-				"/toolkit/LEA/index.php?submit=1&title=" . $this->_getPageTitle() .
-				"&lg=" . $this->_lang . "&lang=" . $this->_lang;
+		$link = "http://tools.wmflabs.org/render-tests/toolkit/LEA/index.php" .
+			"?submit=1&title=" . $this->_getPageTitle() .
+			"&lg=" . $this->_lang . "&lang=" . $this->_lang;
 		return array( $title, $link );
 	}
 
 	private function _getNewsFinder() {
+		$link = "";
 		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->_getPageTitle() );
 		if ( $newsCount > 0 ) {
+			$link = "http://tools.wmflabs.org/render-tests/test/stools/articleMonitor/query/news/title/" .
+				$this->_getPageTitle() . "/lang/" . $this->_lang;
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "newsfinder-show", $newsCount );
-			return $newsCount . $this->_view->translate( array( "currentness", "newsFound" ) );
+			$text = $newsCount . $this->_view->translate( array( "currentness", "newsFound" ) );
+			return array( $text, $link );
 		}
 
 		return null;
@@ -179,12 +183,12 @@ class ArticleMonitor_Json extends Model {
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "cd-show", "" );
 
 			$title = $this->_view->translate( array( "currentness", "cdHit" ) );
-			$link = "http://toolserver.org/~" . $this->_view->getUserInfoObject( "name" ) .
-					"/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change" .
-					"&filterMU=on&filterNB=on&filterOM=on&day=".
-					date( "Ymd", time() - ( 86400 * 2 ) ) .
-					"&Langgroup=EU&Reflang=" . $this->_lang .
-					"&submit=%C3%9Cbermitteln#result_table";
+			$link = "http://tools.wmflabs.org/render-tests/toolkit/ChangeDetector/index.php" .
+				"?Cuthalf=on&Sorting=No_change" .
+				"&filterMU=on&filterNB=on&filterOM=on&day=".
+				date( "Ymd", time() - ( 86400 * 2 ) ) .
+				"&Langgroup=EU&Reflang=" . $this->_lang .
+				"&submit=%C3%9Cbermitteln#result_table";
 			return array( $title, $link );
 		}
 
@@ -197,8 +201,8 @@ class ArticleMonitor_Json extends Model {
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
 
-			$link = "http://toolserver.org/~" . $this->_view->getUserInfoObject( "name" ) .
-					"/toolkit/WIKIGINI/?language_code=" . $this->_lang .
+			$link = "http://tools.wmflabs.org/render-tests/toolkit/WIKIGINI/" .
+					"?language_code=" . $this->_lang .
 					"&page_id=" . $this->_id;
 			return array( $score, $link );
 		}

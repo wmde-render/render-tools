@@ -326,10 +326,10 @@ if ($id) {
 		$userInfo = posix_getpwuid( posix_getuid() );
 		$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
 		mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
-		mysql_select_db( 'p50380g50454__request_log' );
+		mysql_select_db( 'p50380g50454__request_logs' );
 
 		$serializedResult = base64_encode( serialize( $arrResult ) );
-		$sql = "INSERT INTO asqm_request_log ".
+		$sql = "INSERT INTO request_log ".
 				"(asqm_id, title, lang, action_type, result, request_time) ".
 				"VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'lea-usage', '" . $serializedResult . "', NOW())";
 		mysql_query( $sql );
