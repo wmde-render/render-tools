@@ -1169,15 +1169,18 @@ class ArticleMerger(MyObject):
         titles= []
         for title in self.__list_of_all_titles[language]:
             titles+= title.replace(' ', '_')
-        title_placeholders= ' OR '.join('page_title=?'*len(titles))
+        title_placeholders= ' OR '.join(["page_title='%s'"]*len(titles))
         sql_statement = """
               SELECT /* SLOW_OK */ page_title, page_id
               FROM page
               INNER JOIN langlinks on page.page_id = langlinks.ll_from
-              WHERE page.page_namespace = 0 AND (%s)""" % title_placeholders
+              WHERE page.page_namespace = 0 AND (""" + title_placeholders + ')'
               # By joining langlinks we should avoid to catch dead
               # entries in the page-table.
-        SQL_Cursors()[language].execute(sql_statement, titles)
+        self._explain(3, sql_statement)
+        # parameterized version breaks -- too many parameters
+        # todo: split
+        SQL_Cursors()[language].execute(sql_statement % titles)
 
         ids = {}
         for page_title, page_id in SQL_Cursors()[language]:
