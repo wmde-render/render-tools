@@ -85,7 +85,7 @@ function sortByElementCount( $a, $b ) {
 }
 
 function getPageId( &$title, $lang ) {
-	global $dbArray, $dbLink;
+	global $dbLink;
 	
 	$sql = "SELECT page_id, page_is_redirect FROM page WHERE page_namespace = 0 AND page_title = '" . mysql_escape_string( $title ) . "'";
 	$result = mysql_query( $sql, getDbLink($lang) );
@@ -106,7 +106,7 @@ function getPageId( &$title, $lang ) {
 }
 
 function getPageLinks( $pageId, $lang ) {
-	global $dbArray, $dbLink;
+	global $dbLink;
 	
 	$sql = "SELECT pl_title, page_id
 		FROM pagelinks
@@ -128,7 +128,7 @@ function getPageLinks( $pageId, $lang ) {
 }
 
 function getPageLinksByTitle( $title, $lang ) {
-	global $dbArray, $dbLink;
+	global $dbLink;
 	
 	$sql = "SELECT p2.page_title FROM page AS p1 
 		LEFT JOIN pagelinks AS pl ON pl.pl_from = p1.page_id 

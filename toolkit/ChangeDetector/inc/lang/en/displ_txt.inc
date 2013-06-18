@@ -12,10 +12,10 @@ $Description = "The aim of the Change Detector is finding Wikipedia
 	versions.<br />
 	<br />
 	The Change Detector is incorporated into the 
-	<a href=\"http://toolserver.org/~render/stools/tlg\" target=\"_blank\">Article List Generator</a>. 
+	<a href=\"/render/stools/alg\" target=\"_blank\">Article List Generator</a>. 
 	It is therefore possible to limit the search result to specific 
 	categories. You can also access the Change Detector from the display 
-	window of the <a href=\"http://toolserver.org/~render/stools/asqm\" target=\"_blank\">Article Monitor.</a>.";
+	window of the <a href=\"/render/stools/articleMonitor\" target=\"_blank\">Article Monitor.</a>.";
 $Headline2 = "Results";
 $Description2 = "The results are illustrated in the form of a table. 
 	Each row refers to an article spotted by the Change Detector. The 

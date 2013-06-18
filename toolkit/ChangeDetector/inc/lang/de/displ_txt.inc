@@ -10,7 +10,7 @@ $Description = "Der Change Detector untersucht die Aktualität von
 	die in einer oder wenigen Sprache(n) fehlen, in anderen Sprachversionen 
 	aber existieren.
 	<br /><br />
-	Der Change Detector ist in den <a href=\"http://toolserver.org/~render/stools/tlg\">Artikellistengenerator</a> integriert, 
+	Der Change Detector ist in den <a href=\"/render/stools/tlg\">Artikellistengenerator</a> integriert, 
 	wodurch es möglich ist, das Suchergegbnis auf bestimmte Kategorien 
 	einzugrenzen.  Außerdem ist der Change Detector in den Artikelmonitor 
 	eingebunden. Dort findet sich ein Link zur entsprechenden Analyse.";

@@ -10,7 +10,7 @@ $leaLang = array(
 		oder Verlinkungen in einem Artikel fehlen. Weiterhin zeigt er 
 		Artikel auf, die in einer Sprachversion nicht vorhanden sind, 
 		aber in anderen existieren.<br />
-		Der Link Extractor ist in den <a href=\"http://toolserver.org/~render/stools/asqm\">Artikelmonitor</a> eingebunden. Im 
+		Der Link Extractor ist in den <a href=\"/render/stools/articleMonitor\">Artikelmonitor</a> eingebunden. Im 
 		Ergebnisfenster des Artikelmonitors findet sich ein Link zur 
 		entsprechenden Analyse.<br /><br />",
 	"headline2" => "Ergebnisdarstellung",

@@ -13,7 +13,7 @@ $leaLang = array(
 		<br />
 		The Link Extractor is incorporated in the Article Monitor. The 
 		respective analysis can be accessed via a link in the results 
-		window of the <a href=\"http://toolserver.org/~render/stools/asqm\" target=\"_blank\">Article Monitor.</a>",
+		window of the <a href=\"/render/stools/articleMonitor\" target=\"_blank\">Article Monitor.</a>",
 	"headline2" => "Example",
 	"description2" => "In this example, the English Wikipedia article 
 		about the city of Flensburg has been analyzed. The article about 

@@ -39,7 +39,8 @@ $strLang = array(
 	"articleMonitorTooltip" => "Statistiken und weitere Analysen zu diesem Artikel anzeigen",
 	
 	"newVersion" => "Neue Version verfügbar",
-	"linkToNewVersion" => "Installationshinweise",
+	"descUpdate" => "Installationshinweise",
+	"linkUpdate" => "http://tools.wmflabs.org/render/stools/articleMonitor",
 	
 	# articleMonitor output
 	# old format - keep for now
