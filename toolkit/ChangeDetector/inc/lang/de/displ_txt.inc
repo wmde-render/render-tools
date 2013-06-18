@@ -14,7 +14,7 @@ $Description = "Der Change Detector untersucht die Aktualität von
 	wodurch es möglich ist, das Suchergegbnis auf bestimmte Kategorien 
 	einzugrenzen.  Außerdem ist der Change Detector in den Artikelmonitor 
 	eingebunden. Dort findet sich ein Link zur entsprechenden Analyse.";
-$Headline2 = "<h2>Ergebnisdarstellung</h2>";
+$Headline2 = "Ergebnisdarstellung";
 $Description2 = "Das Ergebnis der Suche wird in einer Tabelle angezeigt. Jede Zeile 
 	der Tabelle bezieht sich auf einen Artikel, den der Change Detector 
 	entdeckt hat. In der ersten Spalte ist die gewählte Referenzsprache 
