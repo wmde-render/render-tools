@@ -2,13 +2,14 @@
 $strLang = array(
 	"dateFormat" => "Y-m-d H:i",
 	"articleMonitorHeading" => "Article Monitor",
-	"articleMonitorDesc" => "The Article Monitor gives an overview of statistic data und 
-		various analysis for a Wikipedia article. You can use these to estimate 
-		the quality of an article.<br /><br />
-		After installing the gadget you will find a tab named \"Article Monitor\" 
-		besides the tab \"View history\". If you click on the tab, a popup window 
-		appears which displays the statistics and analysis referring to the current 
-		article",
+	"articleMonitorDesc" => "The Article Monitor gives an overview of 
+		statistical data und various analyses for a Wikipedia article. 
+		You can use these to estimate the quality of an article.<br />
+		<br />
+		After installing the gadget you will find a tab called \"Article 
+		Monitor\" next to the tab \"View history\". If you click on the 
+		tab, a popup window appears which displays the statistics and 
+		analyses for the respective article.",
 	"instHeading" => "Installation",
 	"instDesc" => "The gadget can be installed using the subpage 'vector.js' of 
 		a user's page. Having activated the automatic login to the Wikipedia, the 
