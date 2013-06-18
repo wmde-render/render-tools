@@ -321,12 +321,12 @@ if ($id) {
 		closeDbLinks();
 
 		// log request
-		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
+		#$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
 		
 		$userInfo = posix_getpwuid( posix_getuid() );
 		$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
 		mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
-		mysql_select_db( 'p50380g50454__request_logs' );
+		mysql_select_db( $dbCred['user'] . '__request_logs' );
 
 		$serializedResult = base64_encode( serialize( $arrResult ) );
 		$sql = "INSERT INTO request_log ".
@@ -400,7 +400,7 @@ if ($id) {
 		</table>
 		<p>
 			<?php echo $analysisLink1; ?> 
-			<a href="http://<?php echo $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?submit=1&title=" . htmlspecialchars( $_REQUEST['title'] ) . "&lg=" . htmlspecialchars( $reqLang ) . "&lang=" . $_SESSION['lang']; ?>">
+			<a href="http://<?php echo $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?submit=1&title=" . htmlspecialchars( $_REQUEST['title'] ) . "&lg=" . htmlspecialchars( $reqLang ) . "&lang=" /*. $_SESSION['lang']*/; ?>">
 				<?php echo $analysisLink2; ?>
 			</a>
 		</p>
