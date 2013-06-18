@@ -321,7 +321,7 @@ if ($id) {
 		closeDbLinks();
 
 		// log request
-		#$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
+		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
 		
 		$userInfo = posix_getpwuid( posix_getuid() );
 		$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
