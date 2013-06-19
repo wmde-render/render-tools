@@ -1143,7 +1143,7 @@ class ArticleMerger(MyObject):
     
     def __create_list_of_all_titles(self):
         self.__list_of_all_titles = {}
-        for article in self.__sorted_articles:
+        for article in self.__sorted_articles: 
             for language, title in article.title.iteritems():
                 self.__append_to_list_of_all_titles(language, title)
     
