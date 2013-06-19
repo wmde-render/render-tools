@@ -23,15 +23,15 @@ if (isset($_GET['mode']) && ($_GET['mode'] == 'datetime' || $_GET['mode'] == 're
 
 //echo 'language_code=' . $language_code . ', page_id=' . $page_id . '<br />';
 
-if ($language_code != '' && page_id != ''){
+/*if ($language_code != '' && page_id != ''){
 $query = 'SELECT title FROM pages WHERE language_code="' . $language_code . '" AND id="' . $page_id . '"';
 $res = $mysqli->query($query);
 if ($res->num_rows == 1) {
 	$row = $res->fetch_assoc();
-	$page_title = $row['title'];
+	$page_title = $row['title'];*/
 	$load_graph = true;
-}
-}
+/*}
+}*/
 
 //echo 'language_code=' . $language_code . ', page_id=' . $page_id . ', page_title=' . $page_title . '<br />';
 
