@@ -6,9 +6,9 @@ $strLang = array(
 		Daten und verschiedene Analysen zu einem Wikipedia-Artikel mit deren 
 		Hilfe die Qualität des Artikels eingeschätzt werden kann.
 		<br /><br />
-		Nach erfolgter Installation erscheint neben der Schaltfläche zur 
-		Versionshistorie eine weitere mit der Aufschrift Artikelmonitor. Durch 
-		Klicken auf diese Schalftfläce öffnet sich ein Extrafenster, in dem die 
+		Nach erfolgter Installation erscheint neben dem Reiter zur 
+		\"Versionsgeschichte\" eine weitere mit der Aufschrift \"Artikelmonitor\". Durch 
+		Klicken auf diesen Reiter öffnet sich ein Extrafenster, in dem die 
 		Statistiken und Analysen zusammengefasst sind.",
 	"instHeading" => "Installation",
 	"instDesc" => "Das Helferlein kann auf der Unterseite 'vector.js' der eigenen 
