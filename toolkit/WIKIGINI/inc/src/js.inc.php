@@ -47,6 +47,7 @@ if ($res->num_rows == 1) {
 if ($load_graph) {
 ?>
 		<script>
+			var wikigini_data = [];
 <?php
 	echo "\t\t\tmode = '" . $mode . "';\n";
 	echo "\t\t\tlanguage_code = '" . $language_code . "';\n";
