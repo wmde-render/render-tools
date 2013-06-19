@@ -1,28 +1,34 @@
 <?php
 $Headline = "Change Detector";
-$Description = "The aim of the Change Detector is to find articles that 
-	may need to be updated by comparing editing activity in different 
-	language versions. The Change Detector searches for articles with 
-	high editing activity in most of the language versions on a certain 
-	day. This may be an indication, that the articles in the unedited 
-	language versions are outdated and need revision. Moreover the Change 
-	Detector shows articles which may be missing in few language versions 
-	while they exist in most of the other languages.<br /><br />
-	The Change Detector is incorporated into the <a href=\"http://toolserver.org/~render/stools/tlg\" target=\"_blank\">Article List Generator</a>, 
-	so it is possible to limit the result to specified categories. You 
-	can also access the Change Detector from the display window of the 
-	<a href=\"http://toolserver.org/~render/stools/asqm\" target=\"_blank\">Article Monitor.</a>";
+$Description = "The aim of the Change Detector is finding Wikipedia 
+	articles that may need to be updated. This is achieved by comparing 
+	editing activity in different language versions. The Change Detector 
+	searches for articles with high editing activity in most of the 
+	language versions on a certain day. This may be an indication that 
+	the respective articles in the unedited language versions are 
+	outdated and in need of revision. Moreover, the Change Detector 
+	shows articles which may be missing in one or a few language 
+	versions even though they exist in most of the other language 
+	versions.<br />
+	<br />
+	The Change Detector is incorporated into the 
+	<a href=\"/render/stools/alg\" target=\"_blank\">Article List Generator</a>. 
+	It is therefore possible to limit the search result to specific 
+	categories. You can also access the Change Detector from the display 
+	window of the <a href=\"/render/stools/articleMonitor\" target=\"_blank\">Article Monitor.</a>.";
 $Headline2 = "Results";
-$Description2 = "The results are presented as a table. Each row refers 
-	to an article discovered by the Change Detector. The columns show 
-	the state of the specified article for each language version headed 
-	by the reference language. <br /><br />
-	A green cell with the label \"changed\" means that in this article 
-	and language there have been more changes than the last 50 days. The 
-	label \"no change\" means there were less changes than the last 50 
-	days. Cells with the label \"no article\" indicate that there is no 
-	article in this language, though there are articles in other 
-	languages.";
+$Description2 = "The results are illustrated in the form of a table. 
+	Each row refers to an article spotted by the Change Detector. The 
+	first row shows the selected reference language. The remaining 
+	columns show the languages of the selected language family. <br />
+	<br />
+	A green cell labelled \"changed\" means that this article had been 
+	changed more often on the selected day than in the previous fifty 
+	days. The red label \"no change\" means that this article had not 
+	been updated at all or less compared to the last fifty days. Cells 
+	labelled \"no article\" indicate that there is no article in this 
+	language version even though articles in other language versions 
+	exist.";
 
 $MoreInfo = "More Information";
 

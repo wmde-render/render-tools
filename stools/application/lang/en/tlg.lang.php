@@ -1,13 +1,16 @@
 <?php
 $strLang = array(
 	"topHeading" => "Article List Generator",
-	"algDescription" => "With the Article List Generator you can search categories 
-		and compile article lists using different criteria. The query may consist 
-		of a single category, the <a href=\"http://en.wikipedia.org/wiki/Intersection_%28set_theory%29\">intersection</a> of several categories and the 
-		<a href=\"http://en.wikipedia.org/wiki/Complement_%28set_theory%29#Relative_complement\">difference</a> of categories. You can select the search level of the query 
-		and a set of filters allows you to further refine the result. The 
-		combination of filters is also possible. The result is presented as a 
-		list.",
+	"algDescription" => "The Article List Generator makes it possible 
+		to search categories and compile article lists using different 
+		criteria. The query may consist of a one or more categories, the 
+		<a href=\"http://en.wikipedia.org/wiki/Intersection_%28set_theory%29\">intersection</a> 
+		or the <a href=\"http://en.wikipedia.org/wiki/Complement_%28set_theory%29#Relative_complement\">difference</a> 
+		of categories. 
+		The user is able to determine the depth of the search and a set 
+		of filters shown on the righthand side allows further refinement 
+		of the result. The combination of these filters is also possible. 
+		The result is displayed in the form of a list.",
 	"descHeading" => "Language, Categories and Search Depth",
 	"descLanguage" => "Language",
 	"descLanguageDesc" => "Two character language code",

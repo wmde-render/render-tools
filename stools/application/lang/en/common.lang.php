@@ -18,18 +18,19 @@ $strLang = array(
 	"overviewHeading" => "",
 	"overviewDesc" => "",
 	"articleMonitorHeading" => "Article Monitor",
-	"articleMonitorDesc" => "The Article Monitor gives an overview of statistical data and 
-		a variety of analysis to a Wikipedia article. If you want to use the 
-		Article Monitor you have to install a gadget first. After doing this you 
-		can start the Article Monitor by clicking on the corresponding tab in the 
-		respective article.",
+	"articleMonitorDesc" => "The Article Monitor gives an overview of 
+		statistical data and a variety of analyses for a Wikipedia article. 
+		If you want to use the Article Monitor you need to install a gadget 
+		first. After doing so, it is possible to use the Article Monitor 
+		by clicking on the respective tab in the article.",
 	"articleMonitorNotice" => "Instructions",
 	"articleMonitorNotice2" => "for installing the Article Monitor gadget",
 	"algHeading" => "Article List Generator",
-	"algDesc" => "Using the Article List Generator you can compile customized 
-		article lists. It is possible to search a single category, to combine 
-		several categories or to exclude categories. There is a set of filters 
-		available which allows for further refinement of the results.",
+	"algDesc" => "The Article List Generator allows you to compile 
+	customized article lists. It is possible to search through a single 
+	category, to combine several categories or to exclude categories from 
+	a search. A set of filters is available for further refinement of the 
+	results.",
 	"algNotice" => "Try the ",
 	"algNotice2" => "Task List Generator",
 );

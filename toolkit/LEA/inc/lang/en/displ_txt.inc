@@ -3,21 +3,24 @@ $leaLang = array(
 	"headline" => "Link Extractor",
 	"description" => "The main idea of the Link Extractor is to measure 
 		the completeness of articles by comparing the links contained in 
-		different language versions. From its analysis the Link Extractor 
-		deduces which concepts should be covered by a Wikipedia article. 
-		By that, it indicates which information and links may be missing 
-		in an article. Moreover the Link Extractor shows articles that 
-		do not exist in a language version while in others they do.<br /><br />
-		You can access the Link Extractor from the display window of the 
-		<a href=\"http://toolserver.org/~render/stools/asqm\" target=\"_blank\">Article Monitor.</a>",
+		different language versions of that article. Based on this 
+		analysis the Link Extractor deduces which concepts and terms 
+		should be covered by this Wikipedia article. In doing so, it 
+		indicates which information and links may be missing in the 
+		article. Moreover, the Link Extractor lists Wikipedia articles 
+		that do not exist in a certain language version even though they 
+		exist in others.<br /> 
+		<br />
+		The Link Extractor is incorporated in the Article Monitor. The 
+		respective analysis can be accessed via a link in the results 
+		window of the <a href=\"/render/stools/articleMonitor\" target=\"_blank\">Article Monitor.</a>",
 	"headline2" => "Example",
-	"description2" => "The example shows the result for the English 
-		article about the city of Flensburg. For the district of \"Mørvig\" 
-		there is no article available in the English Wikipedia. The 
-		article about \"Thirty Years' War\" exists but it is not linked 
-		from the article about Flensburg at all. 
-		For the terms \"Angeln\" and \"Danfoss\" the 
-		article exists and is linked from the requested article.",
+	"description2" => "In this example, the English Wikipedia article 
+		about the city of Flensburg has been analyzed. The article about 
+		the district of \"Mürwik\" does not exist in the English Wikipedia. 
+		In addition, the term \"Thirty Years' War\" has its own article in the 
+		English Wikipedia but it is not from the article about Flensburg. 
+		There are articles and links for both terms \"Anglos\" and \"Danfoss.\"",
 	"form_text" => "Please enter an article title and choose a language version.",
 	"more_info" => "More Information",
 	"form_title" => "Title:",

@@ -85,7 +85,7 @@ function sortByElementCount( $a, $b ) {
 }
 
 function getPageId( &$title, $lang ) {
-	global $dbArray, $dbLink;
+	global $dbLink;
 	
 	$sql = "SELECT page_id, page_is_redirect FROM page WHERE page_namespace = 0 AND page_title = '" . mysql_escape_string( $title ) . "'";
 	$result = mysql_query( $sql, getDbLink($lang) );
@@ -106,7 +106,7 @@ function getPageId( &$title, $lang ) {
 }
 
 function getPageLinks( $pageId, $lang ) {
-	global $dbArray, $dbLink;
+	global $dbLink;
 	
 	$sql = "SELECT pl_title, page_id
 		FROM pagelinks
@@ -128,7 +128,7 @@ function getPageLinks( $pageId, $lang ) {
 }
 
 function getPageLinksByTitle( $title, $lang ) {
-	global $dbArray, $dbLink;
+	global $dbLink;
 	
 	$sql = "SELECT p2.page_title FROM page AS p1 
 		LEFT JOIN pagelinks AS pl ON pl.pl_from = p1.page_id 
@@ -265,18 +265,18 @@ if ($id) {
 
 		$checkedPages = array();
 		mysql_select_db( $reqLang . "wiki_p", getDbLink($reqLang) );
-		foreach( $languages as $lang => $links ) {
-			mysql_select_db( $lang . "wiki_p", getDbLink($lang) );
+		foreach( $languages as $language => $links ) {
+			mysql_select_db( $language . "wiki_p", getDbLink($language) );
 			foreach( $links as $link ) {
-				$lang = str_replace( "-", "_", $lang );
+				$language = str_replace( "-", "_", $language );
 
-				$linkId = getPageId( $link, $lang );
+				$linkId = getPageId( $link, $language );
 
 				if ( in_array( $linkId, $checkedPages ) ) continue;
 				$checkedPages[] = $linkId;
 
 				$sql = "SELECT * FROM langlinks WHERE ll_from = " . $linkId . " AND ll_lang IN ('" . implode( "','", array_keys( $langResults ) ) . "')";
-				$result = mysql_query( $sql, getDbLink($lang) );
+				$result = mysql_query( $sql, getDbLink($language) );
 
 				$reqLangExists = false;
 				$linkResult = array();
@@ -285,7 +285,7 @@ if ($id) {
 				foreach ( array_keys( $languages ) as $key ) {
 					$linkResult[$key] = null;
 				}
-				$linkResult[$lang] = normalizeTitle( $link );
+				$linkResult[$language] = normalizeTitle( $link );
 
 				while ( $row = mysql_fetch_assoc( $result ) ) {
 					if ( $row['ll_lang'] === $reqLang ) {
@@ -321,7 +321,7 @@ if ($id) {
 		closeDbLinks();
 
 		// log request
-		#$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
+		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
 		
 		$userInfo = posix_getpwuid( posix_getuid() );
 		$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
@@ -435,12 +435,12 @@ if ($id) {
 	<?php foreach ( $arrResult as $color => $pages ): ?>
 		<?php foreach ( $pages as $count => $links ): ?>
 				<tr id="tabellenzeile">
-			<?php foreach ( $links as $lang => $title ): ?>
-					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background-color: <?php echo $lang == $reqLang ? $color : "none"; ?>; text-align: center;">
-				<?php if ( $lang == $reqLang && $color == 'red' ): ?>
+			<?php foreach ( $links as $language => $title ): ?>
+					<td style="height: 50px; padding: 3px; padding-left: 6px; padding-right: 6px; background-color: <?php echo $language == $reqLang ? $color : "none"; ?>; text-align: center;">
+				<?php if ( $language == $reqLang && $color == 'red' ): ?>
 						-
 				<?php else: ?>
-						<a <?php echo ($color == 'green' && $lang == $reqLang) ? "style=\"color: white;\"" : ""; ?> href="http://<?php echo $lang; ?>.wikipedia.org/wiki/<?php echo removeSlashes($title); ?>" target="_blank">
+						<a <?php echo ($color == 'green' && $language == $reqLang) ? "style=\"color: white;\"" : ""; ?> href="http://<?php echo $language; ?>.wikipedia.org/wiki/<?php echo removeSlashes($title); ?>" target="_blank">
 							<?php echo unnormalize( $title ); ?>
 						</a>
 				<?php endif; ?>
