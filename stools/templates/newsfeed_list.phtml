@@ -17,7 +17,10 @@
 				<p><?php echo $this->translate( "newsfeedDesc" ); ?></p>
 				<div id="resultContainer" class="box-shadow">
 <?php $title = SingletonFactory::getInstance( 'Request' )->getVar( 'title' ); ?>
+<?php $lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>
+<?php $page = SingletonFactory::getInstance( 'Request' )->getVar( 'page' ); ?>
 <?php $items = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsArticles( $title ); ?>
+<?php $itemCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getItemCount(); ?>
 <?php if ( is_array( $items ) ): ?>
 					<table>
 						<tr>
@@ -33,6 +36,18 @@
 						</tr>
 	<?php endforeach; ?>
 					</table>
+					<div>
+	<?php if ( $page > 0 ): ?>
+						<p style="float: left;"><a href="<?php echo BASE_PATH; ?>articleMonitor/query/news/title/Berlin/lang/de/page/<?php echo ($page - 1); ?>">Zurück</a></p>
+	<?php else: ?>
+						<p style="float: left;"><span style="color: silver;">Zurück</span></p>
+	<?php endif; ?>
+	<?php if ( ceil( $itemCount / 10 ) > $page ): ?>
+						<p style="float: right;"><a href="<?php echo BASE_PATH; ?>articleMonitor/query/news/title/<?php echo $title; ?>/lang/<?php echo $lang; ?>/page/<?php echo ($page + 1); ?>">Vor</a></p>
+	<?php else: ?>
+						<p style="float: right;"><span style="color: silver;">Vor</span></p>
+	<?php endif; ?>
+					</div>
 <?php else: ?>
 					<span style="margin-left: 10px;">Keine Artikel gefunden.</span>
 <?php endif; ?>
