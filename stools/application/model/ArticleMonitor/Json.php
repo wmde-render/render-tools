@@ -154,7 +154,7 @@ class ArticleMonitor_Json extends Model {
 	}
 
 	private function _getLea() {
-		$title = $this->_view->translate( array( "factCoverage", "showAnalysis" ) );
+		$title = $this->_view->translate( array( "analysis", "showAnalysis" ) );
 		$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 			"/toolkit/LEA/index.php" .
 			"?submit=1&title=" . $this->_getPageTitle() .
@@ -171,7 +171,7 @@ class ArticleMonitor_Json extends Model {
 				$this->_getPageTitle() . "/lang/" . $this->_lang;
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "newsfinder-show", $newsCount );
-			$text = $newsCount . $this->_view->translate( array( "currentness", "newsFound" ) );
+			$text = $newsCount . $this->_view->translate( array( "analysis", "newsFound" ) );
 			return array( $text, $link );
 		}
 
@@ -184,7 +184,7 @@ class ArticleMonitor_Json extends Model {
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "cd-show", "" );
 
-			$title = $this->_view->translate( array( "currentness", "cdHit" ) );
+			$title = $this->_view->translate( array( "analysis", "cdHit" ) );
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 			"/toolkit/ChangeDetector/index.php" .
 				"?Cuthalf=on&Sorting=No_change" .
@@ -228,7 +228,7 @@ class ArticleMonitor_Json extends Model {
 
 	private function _getWikibuch() {
 		if ( $this->_lang === "de" ) {
-			$title = $this->_view->translate( array( "other", "lookupAssessment" ) );
+			$title = $this->_view->translate( array( "assessment", "lookupAssessment" ) );
 			$link = "http://wikibu.ch/search.php?search=" . $this->_getPageTitle();
 			return array( $title, $link );
 		}
