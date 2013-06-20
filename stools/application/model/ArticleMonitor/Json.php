@@ -199,15 +199,26 @@ class ArticleMonitor_Json extends Model {
 	}
 
 	private function _getGiniScore() {
-		$score = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getGiniScore( $this->_id, $this->_lang );
+		$lang = SingletonFactory::getInstance('Request')->getVar('lang');
+		$url = "http://wikiauth.fekepp.net/api.php" .
+			"?format=json&action=gini&language=" . $lang .
+			"&pageid=" . $id . "&mode=timestamp&dir=desc&round=2";
+		$gini = file_get_contents( $url );
+		$jsonResult = json_decode( $gini );
+		if ( $jsonResult === false ) {
+			$score = $this->_view->translate( array( "", $gini ) );
+		} else {
+			$score = $jsonResult[0][1];
+		}
+
 		if ( $score ) {
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
 
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
-			"/toolkit/WIKIGINI/" .
-					"?language_code=" . $this->_lang .
-					"&page_id=" . $this->_id;
+				"/toolkit/WIKIGINI/" .
+				"?language_code=" . $this->_lang .
+				"&page_id=" . $this->_id;
 			return array( $score, $link );
 		}
 		
