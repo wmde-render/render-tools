@@ -199,6 +199,7 @@ class ArticleMonitor_Json extends Model {
 	}
 
 	private function _getGiniScore() {
+		$id = SingletonFactory::getInstance('Request')->getVar('id');
 		$lang = SingletonFactory::getInstance('Request')->getVar('lang');
 		$url = "http://wikiauth.fekepp.net/api.php" .
 			"?format=json&action=gini&language=" . $lang .
