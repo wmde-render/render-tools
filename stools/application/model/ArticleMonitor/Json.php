@@ -207,20 +207,20 @@ class ArticleMonitor_Json extends Model {
 		$gini = file_get_contents( $url );
 		$jsonResult = json_decode( $gini );
 		if ( $jsonResult === false ) {
-			$score = $this->_view->translate( array( "", $gini ) );
+			return $this->_view->translate( array( "analysis", "giniScoreProcessing" ) );
 		} else {
 			$score = $jsonResult[0][1];
-		}
-
-		if ( $score ) {
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
-
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 				"/toolkit/WIKIGINI/" .
 				"?language_code=" . $this->_lang .
 				"&page_id=" . $this->_id;
-			return array( $score, $link );
+
+			$retVal = array( "multipart" );
+			$retVal[] = $this->_view->translate( array( "analysis", "giniDesc" ) ) . " ";
+			$retVal[] = array( $score, $link );
+			return $retVal;
 		}
 		
 		return null;

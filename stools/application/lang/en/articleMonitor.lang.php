@@ -118,17 +118,19 @@ $strLang = array(
 	"analysis" => array(
 		"title" => "Analysis",
 		# Link Extractor
-		"lea" => "Link Extractor",
-		"showAnalysis" => "Show analysis",
+		"lea" => "Link comparison",
+		"showAnalysis" => "Compare links with Link Extractor",
 		# News Finder
-		"newsFinder" => "News Finder",
-		"noNews" => "No news articles found",
-		"newsFound" => " news articles found",
+		"newsFinder" => "News articles",
+		"noNews" => "No articles in News Finder",
+		"newsFound" => " articles in News Finder",
 		# Change Detector
-		"changeDetector" => "Change Detector",
+		"changeDetector" => "Edits in other languages",
 		"cdHit" => "Detected as possibly outdated",
 		# WikiGini
-		"giniScore" => "WikiGini Score",
+		"giniScore" => "Authorship distribution",
+		"giniDesc" => "WikiGini Score",
+		"giniScoreProcessing" => "WikiGini scores are being processed",
 	),
 	"assessment" => array(
 		"title" => "Assessments",

@@ -111,17 +111,19 @@ $strLang = array(
 	"analysis" => array(
 		"title" => "Analysen",
 		# Link Extractor
-		"lea" => "Link Extractor",
-		"showAnalysis" => "Analyse anzeigen",
+		"lea" => "Linkvergleich",
+		"showAnalysis" => "Verweise mit dem Link Extractor prüfen",
 		# News Finder
-		"newsFinder" => "News Finder",
-		"noNews" => "Keine Nachrichtenartikel gefunden",
-		"newsFound" => " Nachrichtenartikel gefunden",
+		"titleNewsFinder" => "Nachrichtenartikel",
+		"noNews" => "Keine Artikel im News Finder",
+		"newsFound" => " Artikel im News Finder",
 		# Change Detector
-		"changeDetector" => "Change Detector",
-		"cdHit" => "Hohe Aktivität in anderen Sprachen",
+		"titleChangeDetector" => "Bearbeitungen in anderen Sprachen",
+		"cdHit" => "Ergebnis des Change Detector",
 		# WikiGini
-		"giniScore" => "WikiGini-Wert",
+		"giniScore" => "Autorenverteilung",
+		"giniDesc" => "WikiGini-Wert",
+		"giniScoreProcessing" => "WikiGini-Werte werden gerade berechnet",
 	),
 	"assessment" => array(
 		"title" => "Bewertungen",
