@@ -206,7 +206,7 @@ class ArticleMonitor_Json extends Model {
 			"&pageid=" . $id . "&mode=timestamp&dir=desc&round=2";
 		$gini = file_get_contents( $url );
 		$jsonResult = json_decode( $gini );
-		if ( $jsonResult === false ) {
+		if ( $jsonResult === false || $jsonResult === null ) {
 			return $this->_view->translate( array( "analysis", "giniScoreProcessing" ) );
 		} else {
 			$score = $jsonResult[0][1];
