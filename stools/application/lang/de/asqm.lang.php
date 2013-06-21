@@ -7,7 +7,7 @@ $strLang = array(
 		Hilfe die Qualität des Artikels eingeschätzt werden kann.
 		<br /><br />
 		Nach erfolgter Installation erscheint neben dem Reiter zur 
-		\"Versionsgeschichte\" eine weitere mit der Aufschrift \"Artikelmonitor\". Durch 
+		\"Versionsgeschichte\" ein weiterer mit der Aufschrift \"Artikelmonitor\". Durch 
 		Klicken auf diesen Reiter öffnet sich ein Extrafenster, in dem die 
 		Statistiken und Analysen zusammengefasst sind.",
 	"instHeading" => "Installation",
