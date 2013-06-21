@@ -1,5 +1,5 @@
 <?php
-$ts_pw = posix_getpwuid(posix_getuidred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
+$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
 mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
 mysql_select_db( $dbCred['user'] . '__request_logs' );
 
@@ -9,8 +9,9 @@ $sql = "INSERT INTO request_log ".
 mysql_query( $sql );
 mysql_close();
 
+$ts_pw = posix_getpwuid(posix_getuid());
+
 require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/db.inc.php");
-$userInfo = posix_getpwuid( posix_getuid() );
 ?>
 <script>
 var txtGraphHeader1 = "<?php echo $txtGraphHeader1; ?>";
