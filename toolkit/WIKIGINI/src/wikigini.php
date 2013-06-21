@@ -1,7 +1,16 @@
 <?php
-$ts_pw = posix_getpwuid(posix_getuid());
+$ts_pw = posix_getpwuid(posix_getuidred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
+mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
+mysql_select_db( $dbCred['user'] . '__request_logs' );
+
+$sql = "INSERT INTO request_log ".
+        "(asqm_id, title, lang, action_type, result, request_time) ".
+        "VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'wikigini-usage', '', NOW())";
+mysql_query( $sql );
+mysql_close();
 
 require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/db.inc.php");
+$userInfo = posix_getpwuid( posix_getuid() );
 ?>
 <script>
 var txtGraphHeader1 = "<?php echo $txtGraphHeader1; ?>";
