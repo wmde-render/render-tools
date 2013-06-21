@@ -5,6 +5,8 @@ $dbCred = parse_ini_file( $ts_pw['dir'] . "/replica.my.cnf" );
 mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
 mysql_select_db( $dbCred['user'] . '__request_logs' );
 
+$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "";
+
 $sql = "INSERT INTO request_log ".
         "(asqm_id, title, lang, action_type, result, request_time) ".
         "VALUES ('" . $asqmId . "', '" . $_GET['page_id'] . "', '" . $_GET['language_code'] . "', 'wikigini-usage', '', NOW())";
