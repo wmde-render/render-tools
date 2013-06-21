@@ -1,5 +1,7 @@
 <?php
-$dbCred = parse_ini_file( $userInfo['dir'] . "/replica.my.cnf" );
+$ts_pw = posix_getpwuid(posix_getuid());
+
+$dbCred = parse_ini_file( $ts_pw['dir'] . "/replica.my.cnf" );
 mysql_connect( 'tools-db', $dbCred['user'], $dbCred['password'] );
 mysql_select_db( $dbCred['user'] . '__request_logs' );
 
@@ -8,8 +10,6 @@ $sql = "INSERT INTO request_log ".
         "VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'wikigini-usage', '', NOW())";
 mysql_query( $sql );
 mysql_close();
-
-$ts_pw = posix_getpwuid(posix_getuid());
 
 require($ts_pw['dir'] . "/public_html/toolkit/WIKIGINI/inc/src/db.inc.php");
 ?>
