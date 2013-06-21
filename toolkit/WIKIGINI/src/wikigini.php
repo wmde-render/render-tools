@@ -7,7 +7,7 @@ mysql_select_db( $dbCred['user'] . '__request_logs' );
 
 $sql = "INSERT INTO request_log ".
         "(asqm_id, title, lang, action_type, result, request_time) ".
-        "VALUES ('" . $asqmId . "', '" . $reqTitle . "', '" . $reqLang . "', 'wikigini-usage', '', NOW())";
+        "VALUES ('" . $asqmId . "', '" . $_GET['page_id'] . "', '" . $_GET['language_code'] . "', 'wikigini-usage', '', NOW())";
 mysql_query( $sql );
 mysql_close();
 
