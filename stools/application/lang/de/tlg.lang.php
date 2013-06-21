@@ -24,7 +24,7 @@ $strLang = array(
 		\"Windows-Software\" auszuschließen, wird in das Kategoriefeld <em>\"Software 
 		+Newsreader -Windows-Software\"</em> eingegeben.<br /><br />
 		Alternativ können auch Artikel geprüft werden, die auf einer Beobachtungsliste 
-		hinterlegt sind. Die Syntax lautet 'wl:Benutzername,TOKEN', das Token muss
+		hinterlegt sind. Die Syntax lautet 'wl#Benutzername,TOKEN', das Token muss
 		zunächst in den Wikipedia-Benutzereinstellungen definiert werden.",
 	"descDepth" => "Tiefe",
 	"descDepthDesc" => "Gibt die Rekursionstiefe an, mit der in der Kategoriestruktur 

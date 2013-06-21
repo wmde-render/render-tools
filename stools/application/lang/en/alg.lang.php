@@ -24,7 +24,7 @@ $strLang = array(
 		enter <em>\"Software; +Newsreader; -Windows-Software\"</em> into the
 		category field.<br /><br />
 		Alternatively one can also check articles that have been registered on a 
-		watchlist. The syntax to do that is 'wl:Username,TOKEN' the token needs to
+		watchlist. The syntax to do that is 'wl#Username,TOKEN' the token needs to
 		be defined in the Wikipedia user account settings first.",
 	"descDepth" => "Depth",
 	"descDepthDesc" => "Defines the recursion depth which is used to crawl the
