@@ -25,7 +25,9 @@ $strLang = array(
 		category field.<br /><br />
 		Alternatively one can also check articles that have been registered on a 
 		watchlist. The syntax to do that is 'wl#Username,TOKEN' the token needs to
-		be defined in the Wikipedia user account settings first.",
+		be defined in the Wikipedia user account settings first. If you aren't already
+		using a <a href=\"https://tools.wmflabs.org/render/stools/alg\">secure connection</a>, 
+		we advise you to use it, since your token will be sent to the server.",
 	"descDepth" => "Depth",
 	"descDepthDesc" => "Defines the recursion depth which is used to crawl the
 		categories. A category depth of '1' will find all pages directly within

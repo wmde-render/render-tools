@@ -25,7 +25,9 @@ $strLang = array(
 		+Newsreader -Windows-Software\"</em> eingegeben.<br /><br />
 		Alternativ können auch Artikel geprüft werden, die auf einer Beobachtungsliste 
 		hinterlegt sind. Die Syntax lautet 'wl#Benutzername,TOKEN', das Token muss
-		zunächst in den Wikipedia-Benutzereinstellungen definiert werden.",
+		zunächst in den Wikipedia-Benutzereinstellungen definiert werden. Wenn du nicht
+		bereits eine <a href=\"https://tools.wmflabs.org/render/stools/alg\">sichere Verbindung</a> 
+		verwendest, solltest du dies tun, weil dein Token an der Server übertragen wird.",
 	"descDepth" => "Tiefe",
 	"descDepthDesc" => "Gibt die Rekursionstiefe an, mit der in der Kategoriestruktur 
 		gesucht werden soll. So findet Suchtiefe 1 alle Seiten, die direkt in der 
