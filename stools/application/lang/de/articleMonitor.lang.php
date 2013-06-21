@@ -114,11 +114,11 @@ $strLang = array(
 		"lea" => "Linkvergleich",
 		"showAnalysis" => "Verweise mit dem Link Extractor prüfen",
 		# News Finder
-		"titleNewsFinder" => "Nachrichtenartikel",
+		"newsFinder" => "Nachrichtenartikel",
 		"noNews" => "Keine Artikel im News Finder",
 		"newsFound" => " Artikel im News Finder",
 		# Change Detector
-		"titleChangeDetector" => "Bearbeitungen in anderen Sprachen",
+		"changeDetector" => "Bearbeitungen in anderen Sprachen",
 		"cdHit" => "Ergebnis des Change Detector",
 		# WikiGini
 		"giniScore" => "Autorenverteilung",
