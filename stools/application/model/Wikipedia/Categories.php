@@ -19,6 +19,7 @@ class Wikipedia_Categories extends Model {
 		
 			$sql = "SELECT cat_title, (cat_subcats + cat_pages) AS subcount ".
 					"FROM category ".
+					"INNER JOIN page ON page_title = cat_title AND page_namespace = 14 "
 					"WHERE CONVERT(cat_title USING latin1) LIKE ? ".
 					"ORDER BY subcount DESC ".
 					"LIMIT 10";
