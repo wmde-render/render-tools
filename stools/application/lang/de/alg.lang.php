@@ -71,6 +71,7 @@ $strLang = array(
 	"tableHeadFlaw" => "Filter",
 	"tableHeadPage" => "Seitentitel",
 	"errNoFilter" => "Kein Filter ausgewählt",
+	"errNoQuery" => "Kein Suchstring angegeben",
 	"errNoAddress" => "Für Ergebnisse per E-Mail muss eine gültige E-Mail-Adresse angegeben werden.",
 	"markedAsHidden" => "Die Artikelrevision wird bei künftigen Anfragen nicht mehr angezeigt.",
 	"unmarkedAsHidden" => "Die Artikelrevision wird bei künftigen Anfragen wieder angezeigt.",
