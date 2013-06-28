@@ -55,7 +55,7 @@ $(document).ready(function() {
 		modal: true,
 		resizable: false,
 		width: 500,
-		height: 140,
+		height: 200,
 		open: function() {
 			$( "#algProgress" ).progressbar( "value" , 0 );
 			$( "#status" ).text(" ");
@@ -76,7 +76,7 @@ $(document).ready(function() {
 		modal: true,
 		resizable: false,
 		width: 500,
-		height: 200
+		height: 140
 	});
 	
 	$( "#algProgress" ).progressbar({
