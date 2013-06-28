@@ -76,7 +76,7 @@ $(document).ready(function() {
 		modal: true,
 		resizable: false,
 		width: 500,
-		height: 140
+		height: 200
 	});
 	
 	$( "#algProgress" ).progressbar({
@@ -244,6 +244,8 @@ function markAsDone(eId, pageId, pageTitle, revision, filter) {
 
 function queryAlg(params) {
 	$('#resultTable').empty();
+	$('#status').text(msgGeneralStatus);
+	msgGeneralStatus
 	arrResults = [];
 	var jqXHR = $.ajax({
 		type: "POST",

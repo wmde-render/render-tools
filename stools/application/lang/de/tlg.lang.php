@@ -78,6 +78,7 @@ $strLang = array(
 	"descHide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen auszublenden",
 	"descUnhide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen wieder einzublenden.",
 	"alsoShowHidden" => "auch ausgeblendete Ergebnisse anzeigen",
+	"msgGeneralStatus" => "Bitte warten... Die Ausführung kann abhängig von den übergebenen Parametern bis zu mehreren Minuten dauern."
 	"linkToRequest" => "Link zu dieser Anfrage",
 	"resultCount" => "Es wurden %COUNT% Artikel gefunden.",
 );

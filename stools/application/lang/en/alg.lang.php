@@ -78,6 +78,7 @@ $strLang = array(
 	"descHide" => "Click to hide this result in future requests.",
 	"descUnhide" => "Click to show this result in future requests.",
 	"alsoShowHidden" => "also show hidden results",
+	"msgGeneralStatus" => "Please wait... Depending on the given parameters the execution can take a while."
 	"linkToRequest" => "Link to this request",
 	"resultCount" => "%COUNT% articles were found.",
 );
