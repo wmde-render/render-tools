@@ -83,9 +83,6 @@ class ArticleMonitor_Json extends Model {
 			foreach( $groupProperties->items as $itemName => $itemValue ) {
 				if( $itemValue === null || !isset( $itemValue ) || empty( $itemValue ) ) {
 					unset( $this->_result->$groupName->items->$itemName );
-				} else {
-					$this->_result->$groupName->items->$itemName = 
-						htmlspecialchars( $this->_result->$groupName->items->$itemName );
 				}
 			}
 
