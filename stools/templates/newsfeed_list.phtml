@@ -19,7 +19,9 @@
 <?php $title = SingletonFactory::getInstance( 'Request' )->getVar( 'title' ); ?>
 <?php $lang = SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>
 <?php $page = SingletonFactory::getInstance( 'Request' )->getVar( 'page' ); ?>
-<?php $items = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsArticles( $title ); ?>
+<?php $nfModel = SingletonFactory::getInstance( 'Newsfeed_Model' ); ?>
+<?php $nfModel->setArticleTitle( $title, $lang ); ?>
+<?php $items = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsArticles( $page ); ?>
 <?php $itemCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getItemCount(); ?>
 <?php if ( is_array( $items ) ): ?>
 					<table>

@@ -159,7 +159,9 @@ td {
 						<tr>
 							<td class="data-label">Aktualität</td>
 							<td class="data-value data-todo">
-								<?php $newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->getTitle() ); ?>
+								<?php $nfModel = SingletonFactory::getInstance( 'Newsfeed_Model' ); ?>
+								<?php $nfModel->setArticleTitle( $this->getTitle() ); ?>
+								<?php $newsCount = $nfModel->getNewsCount(); ?>
 								<?php if ( $newsCount == -1 ): ?>
 								<?php echo "Keine Nachrichtenartikel gefunden"; ?>
 								<?php else: ?>

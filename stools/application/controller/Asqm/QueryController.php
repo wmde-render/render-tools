@@ -31,11 +31,14 @@ class Asqm_QueryController /*extends Controller*/ {
 		$req = SingletonFactory::getInstance( "Request" );
 		$pageTitle = $req->getVar( 'title' );
 		$lang = $req->getVar( 'lang' );
-		$asqmId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
-		$result = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $pageTitle );
+		$articleMonitorId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
+
+		$nfModel = SingletonFactory::getInstance( 'Newsfeed_Model' );
+		$nfModel->setArticleTitle( $pageTitle, $lang );
+		$result = $nfModel->getNewsCount();
 		
 		SingletonFactory::getInstance( "ArticleMonitor_Model" )
-			->logRequest( $pageTitle, $lang, $asqmId, $actionType = "newsfinder-use", $result );
+			->logRequest( $pageTitle, $lang, $articleMonitorId, $actionType = "newsfinder-use", $result );
 
 		$view = new ArticleMonitor_NewsView("newsfeed_list");
 		echo $view->render();

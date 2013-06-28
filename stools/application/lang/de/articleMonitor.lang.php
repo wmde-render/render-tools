@@ -15,8 +15,8 @@ $strLang = array(
 		Benutzerseite installiert werden. Ist das automatische Login in die 
 		Wikipedia aktiviert, kann folgender Link verwendet werden, um die Seite 
 		zur Skripteinbindung aufzurufen:
-		<a href=\"http://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js\" target=\"_blank\">
-			http://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js
+		<a href=\"https://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js\" target=\"_blank\">
+			https://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js
 		</a>
 		<br />
 		Weitere Informationen zur Individualisierung der Benutzeroberfläche in der 
