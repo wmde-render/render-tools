@@ -697,7 +697,8 @@ class ChangedArticle(DatabaseInterface):
     # testing --
     # returns number of updated articles
     def __write_articles_test(self, algorithm):
-        use_start_transaction= 1    # if true, use START TRANSACTION instead of executemany()
+        use_start_transaction= False    # if true, use START TRANSACTION instead of executemany() (dangerous because of autoreconnect...)
+        profiling= False                # if true, write some profiling stuff
         
         self._filter_management.set_algorithm(algorithm)
         parameters = self._filter_management.get_articles()
@@ -715,7 +716,8 @@ class ChangedArticle(DatabaseInterface):
                'algorithm':algorithm}
         self._explain(2, sql_statement)
         
-        cur.execute("SET PROFILING=1")
+        if profiling:
+            cur.execute("SET PROFILING=1")
 
         if use_start_transaction:
             self._explain(1, "    using START TRANSACTION")
@@ -727,34 +729,35 @@ class ChangedArticle(DatabaseInterface):
             self._explain(1, "    using executemany()")
             cur.executemany(sql_statement, parameters)
         
-        cur.execute("SET PROFILING=0")
-        
-        # get profiling information and write to "tmp.csv"
-        cur.execute("""
-              SELECT 
-              query_id, 
-              seq, 
-              state, 
-              duration, 
-              cpu_user, 
-              cpu_system,
-              CONTEXT_VOLUNTARY,
-              CONTEXT_INVOLUNTARY,
-              BLOCK_OPS_IN,
-              BLOCK_OPS_OUT,
-              MESSAGES_SENT,
-              MESSAGES_RECEIVED,
-              PAGE_FAULTS_MAJOR,
-              PAGE_FAULTS_MINOR,
-              SWAPS,
-              SOURCE_FUNCTION,
-              SOURCE_FILE,
-              SOURCE_LINE
-              FROM INFORMATION_SCHEMA.PROFILING ORDER BY query_id""")
-        profresult= cur.fetchall()
-        writer= csv.writer(open("sql-profiling-lastrun.csv", "wb"))
-        for row in profresult:
-            writer.writerow(row)
+        if profiling:
+            cur.execute("SET PROFILING=0")
+            
+            # get profiling information and write to "tmp.csv"
+            cur.execute("""
+                  SELECT 
+                  query_id, 
+                  seq, 
+                  state, 
+                  duration, 
+                  cpu_user, 
+                  cpu_system,
+                  CONTEXT_VOLUNTARY,
+                  CONTEXT_INVOLUNTARY,
+                  BLOCK_OPS_IN,
+                  BLOCK_OPS_OUT,
+                  MESSAGES_SENT,
+                  MESSAGES_RECEIVED,
+                  PAGE_FAULTS_MAJOR,
+                  PAGE_FAULTS_MINOR,
+                  SWAPS,
+                  SOURCE_FUNCTION,
+                  SOURCE_FILE,
+                  SOURCE_LINE
+                  FROM INFORMATION_SCHEMA.PROFILING ORDER BY query_id""")
+            profresult= cur.fetchall()
+            writer= csv.writer(open("sql-profiling-lastrun.csv", "wb"))
+            for row in profresult:
+                writer.writerow(row)
 
         return len(parameters)
     
@@ -1154,6 +1157,10 @@ class ArticleMerger(MyObject):
             self.__list_of_all_titles[language] = [title.replace(' ', '_')]
     
     def __find_ids_in_language(self, language):
+        
+        # -- snip --
+        
+
         #~ placeholders = '(' + \
               #~ "?, "*(len(self.__list_of_all_titles[language]) - 1 ) + \
               #~ "?)"
@@ -1168,24 +1175,29 @@ class ArticleMerger(MyObject):
         
         titles= []
         for title in self.__list_of_all_titles[language]:
-            titles+= title.replace(' ', '_')
-        title_placeholders= ' OR '.join(["page_title='%s'"]*len(titles))
+            titles.append(title.replace(' ', '_'))
+        title_placeholders= ' OR '.join(["page_title=?"]*len(titles))
         sql_statement = """
               SELECT /* SLOW_OK */ page_title, page_id
               FROM page
-              INNER JOIN langlinks on page.page_id = langlinks.ll_from
-              WHERE page.page_namespace = 0 AND (""" + title_placeholders + ')'
+              WHERE 
+              page_id IN (SELECT DISTINCT ll_from FROM langlinks)
+              AND page.page_namespace = 0 
+              AND page.page_is_redirect = 0 
+              AND (""" + title_placeholders + ')'
+              #~ INNER JOIN langlinks on page.page_id = langlinks.ll_from   # XXXXXXXXXXXXXX todo: why/what/???
               # By joining langlinks we should avoid to catch dead
               # entries in the page-table.
-        self._explain(3, sql_statement)
-        # parameterized version breaks -- too many parameters
-        # todo: split
-        SQL_Cursors()[language].execute(sql_statement % titles)
+        self._explain(1, sql_statement)
+        SQL_Cursors()[language].execute(sql_statement, titles)
 
         ids = {}
         for page_title, page_id in SQL_Cursors()[language]:
             title = page_title.replace(' ', '_')
             ids[title] = page_id
+        
+        # -- snip --
+        
         for article in self.__sorted_articles:
             if language in article.title:
                 #print article.title
@@ -1958,13 +1970,17 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
                 try:
                     super(MyOursqlCursor, self).execute(operation, parameters)
                 except oursql.ProgrammingError as ex:
-                    if ex.errno!=1615: # 'Prepared statement needs to be re-prepared'
+                    if ex.errno==1046:      # 'No database selected' error happens after auto-reconnect
+                        self._explain(1, 'autoreconnect: selecting database %s' % self.dbname)
+                        super(MyOursqlCursor, self).execute('USE %s' % self.dbname, plain_query=True)   # self.dbname is set by _direct_cursor
+                    elif ex.errno==1615:    # 'Prepared statement needs to be re-prepared'
+                        hammer+= 1
+                        if hammer>=10:
+                            self._explain(1, "retried sql statement '%.20s' for %d times, giving up\n" % (operation, hammer))
+                            raise
+                        time.sleep(0.5)
+                    else:
                         raise
-                    hammer+= 1
-                    if hammer>=10:
-                        self._explain(1, "retried sql statement '%.20s' for %d times, giving up\n" % (operation, hammer))
-                        raise
-                    time.sleep(0.5)
                 else:
                     done= True
             if hammer:
@@ -1972,7 +1988,15 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
     
     def executemany(self, operation, parameters=None):
         self._explain(2, "executemany: %.80s" % operation)
-        super(MyOursqlCursor, self).executemany(operation, parameters)
+        try:
+            super(MyOursqlCursor, self).executemany(operation, parameters)
+        except oursql.ProgrammingError as ex:
+            if ex.errno==1046:      # 'No database selected' error happens after auto-reconnect
+                self._explain(1, 'autoreconnect: selecting database %s' % self.dbname)
+                super(MyOursqlCursor, self).execute('USE %s' % self.dbname, plain_query=True)   # self.dbname is set by _direct_cursor
+            else:
+                raise
+
     
     def fetchall(self):
         results = super(MyOursqlCursor, self).fetchall()
@@ -2107,7 +2131,9 @@ class Toolserver_SQL_Cursors(dict, MyObject):
     def _create_auxiliary_cursor(self):
         auxiliary_connection = oursql.connect(
               read_default_file='~/replica.my.cnf',
-              use_unicode=False
+              use_unicode=False,
+              autoreconnect=True,
+              autoping=True
               )
         Toolserver_SQL_Cursors._auxiliary_cursor = MyOursqlCursor(auxiliary_connection)
         #Toolserver_SQL_Cursors._auxiliary_cursor = oursql.Cursor(auxiliary_connection)
@@ -2129,7 +2155,9 @@ class Toolserver_SQL_Cursors(dict, MyObject):
                   host="sql-s%d" % server,
                   read_default_file="~/replica.my.cnf",
                   charset=None,
-                  use_unicode=False)
+                  use_unicode=False,
+                  autoreconnect=True,
+                  autoping=True)
             cursor = MyOursqlCursor(connection)
             Toolserver_SQL_Cursors._cursors[server] = cursor
     
@@ -2192,7 +2220,9 @@ class LabsDB_SQL_Cursors(dict, MyObject):
                   host= host_name,
                   read_default_file= "~/replica.my.cnf",
                   charset= None,
-                  use_unicode= False)
+                  use_unicode= False,
+                  autoreconnect=True,
+                  autoping=True)
             cursor= MyOursqlCursor(connection)
             LabsDB_SQL_Cursors._cursors[database_name]= cursor
             self._direct_cursor(cursor, database_name)
@@ -2204,7 +2234,9 @@ class LabsDB_SQL_Cursors(dict, MyObject):
         auxiliary_connection = oursql.connect(
               read_default_file='~/replica.my.cnf',
               host='tools-db',
-              use_unicode=False
+              use_unicode=False,
+              autoreconnect=True,
+              autoping=True
               )
         LabsDB_SQL_Cursors._auxiliary_cursor= MyOursqlCursor(auxiliary_connection)
         self._direct_auxiliary_cursor()
@@ -2225,6 +2257,7 @@ class LabsDB_SQL_Cursors(dict, MyObject):
               USE %s""" % database_name
         try:
             cursor.execute(sql_command)
+            cursor.dbname= database_name
         except oursql.ProgrammingError:
             raise MyOursqlException("""
                   You try to access a Wikipedia with language code `%s'.
