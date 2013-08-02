@@ -23,10 +23,13 @@ class ArticleMonitor_QueryController /*extends Controller*/ {
 		$pageTitle = $req->getVar( 'title' );
 		$lang = $req->getVar( 'lang' );
 		$articleMonitorId = ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none";
-		$result = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $pageTitle );
+
+		$nfModel = SingletonFactory::getInstance( 'Newsfeed_Model' );
+		$nfModel->setArticleTitle( $pageTitle, $lang );
+		$result = $nfModel->getNewsCount();
 		
-		SingletonFactory::getInstance( "ArticleMonitor_Model" )
-			->logRequest( $pageTitle, $lang, $articleMonitorId, $actionType = "newsfinder-use", $result );
+		/*SingletonFactory::getInstance( "ArticleMonitor_Model" )
+			->logRequest( $pageTitle, $lang, $articleMonitorId, $actionType = "newsfinder-use", $result );*/
 
 		$view = new ArticleMonitor_NewsView("newsfeed_list");
 		echo $view->render();

@@ -24,8 +24,10 @@ $strLang = array(
 		enter <em>\"Software; +Newsreader; -Windows-Software\"</em> into the
 		category field.<br /><br />
 		Alternatively one can also check articles that have been registered on a 
-		watchlist. The syntax to do that is 'wl:Username,TOKEN' the token needs to
-		be defined in the Wikipedia user account settings first.",
+		watchlist. The syntax to do that is 'wl#Username,TOKEN' the token needs to
+		be defined in the Wikipedia user account settings first. If you aren't already
+		using a <a href=\"https://tools.wmflabs.org/render/stools/alg\">secure connection</a>, 
+		we advise you to use it, since your token will be sent to the server.",
 	"descDepth" => "Depth",
 	"descDepthDesc" => "Defines the recursion depth which is used to crawl the
 		categories. A category depth of '1' will find all pages directly within
@@ -69,12 +71,14 @@ $strLang = array(
 	"tableHeadFlaw" => "Filter",
 	"tableHeadPage" => "Page Title",
 	"errNoFilter" => "No filter selected",
+	"errNoQuery" => "No query string provided",
 	"errNoAddress" => "Results by email require a valid email address.",
 	"markedAsHidden" => "The revision will not be displayed in future requests.",
 	"unmarkedAsHidden" => "The revision will be displayed again in future requests.",
 	"descHide" => "Click to hide this result in future requests.",
 	"descUnhide" => "Click to show this result in future requests.",
 	"alsoShowHidden" => "also show hidden results",
+	"msgGeneralStatus" => "Please wait... Depending on the given parameters the execution can take a while.",
 	"linkToRequest" => "Link to this request",
 	"resultCount" => "%COUNT% articles were found.",
 );

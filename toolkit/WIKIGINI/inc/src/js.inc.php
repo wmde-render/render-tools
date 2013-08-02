@@ -23,15 +23,15 @@ if (isset($_GET['mode']) && ($_GET['mode'] == 'datetime' || $_GET['mode'] == 're
 
 //echo 'language_code=' . $language_code . ', page_id=' . $page_id . '<br />';
 
-if ($language_code != '' && page_id != ''){
+/*if ($language_code != '' && page_id != ''){
 $query = 'SELECT title FROM pages WHERE language_code="' . $language_code . '" AND id="' . $page_id . '"';
 $res = $mysqli->query($query);
 if ($res->num_rows == 1) {
 	$row = $res->fetch_assoc();
-	$page_title = $row['title'];
+	$page_title = $row['title'];*/
 	$load_graph = true;
-}
-}
+/*}
+}*/
 
 //echo 'language_code=' . $language_code . ', page_id=' . $page_id . ', page_title=' . $page_title . '<br />';
 
@@ -47,82 +47,12 @@ if ($res->num_rows == 1) {
 if ($load_graph) {
 ?>
 		<script>
+			var wikigini_data = [['datetime'], ['revisions'], ['info']];
 <?php
 	echo "\t\t\tmode = '" . $mode . "';\n";
 	echo "\t\t\tlanguage_code = '" . $language_code . "';\n";
 	echo "\t\t\tpage_id = '" . $page_id . "';\n";
-	echo "\t\t\tpage_title = '" . $page_title . "';\n";
-
-	echo "\t\t\twikigini_data = [['datetime'], ['revisions'], ['info']];\n";
-
-	$query = "SELECT
-id,
-unix_timestamp(datetime) * 1000 AS datetime,
-ROUND(gini_index, 12) AS gini
-FROM revisions WHERE method_id=1 AND language_code=\"" . $language_code . "\" AND page_id=" . $page_id . " ORDER BY datetime ASC";
-
-	$res = $mysqli->query($query);
-
-	$counter = 0;
-	$res->data_seek(0);
-	echo "\t\t\twikigini_data['datetime'] = [\n\t\t\t\t";
-	while ($row = $res->fetch_assoc()) {
-		echo "[" . $row["datetime"] . "," . $row["gini"] . "]" . ($counter < $res->num_rows - 1 ? "," : "");
-		$counter++;
-	}
-	echo "\n\t\t\t];\n";
-
-	$counter = 0;
-	$res->data_seek(0);
-	echo "\t\t\twikigini_data['datetime_info'] = [\n\t\t\t\t";
-	while ($row = $res->fetch_assoc()) {
-		echo "[" . $row["datetime"] . "]" . ($counter < $res->num_rows - 1 ? "," : "");
-		$counter++;
-	}
-	echo "\n\t\t\t];\n";
-
-	$query = "SELECT
-id,
-unix_timestamp(datetime) * 1000 AS datetime,
-ROUND(gini_index, 12) AS gini
-FROM revisions WHERE method_id=1 AND language_code=\"" . $language_code . "\" AND page_id=" . $page_id . " ORDER BY id ASC";
-
-	$res = $mysqli->query($query);
-
-	$counter = 0;
-	$res->data_seek(0);
-	echo "\t\t\twikigini_data['revisions'] = [\n\t\t\t\t";
-	while ($row = $res->fetch_assoc()) {
-		echo "[" . $row["id"] . "," . $row["gini"] . "]" . ($counter < $res->num_rows - 1 ? "," : "");
-		$counter++;
-	}
-	echo "\n\t\t\t];\n";
-
-	$counter = 0;
-	$res->data_seek(0);
-	echo "\t\t\t";
-	while ($row = $res->fetch_assoc()) {
-	//echo "\t\t\twikigini_data['datetime_info'] = [[" . $row["datetime"] . "];";
-	echo "wikigini_data['datetime_info'][" . $row["datetime"] . "] = [" . $row["id"] . ", " . $row["gini"] . "];";
-	}
-
-	$counter = 0;
-	$res->data_seek(0);
-	echo "\t\t\twikigini_data['revisions_info'] = [\n\t\t\t\t";
-	while ($row = $res->fetch_assoc()) {
-		echo "[" . $row["id"] . "]" . ($counter < $res->num_rows - 1 ? "," : "");
-		$counter++;
-	}
-	echo "\n\t\t\t];\n";
-
-	$counter = 0;
-	$res->data_seek(0);
-	echo "\t\t\t";
-	while ($row = $res->fetch_assoc()) {
-	//echo "\t\t\twikigini_data['datetime_info'] = [[" . $row["datetime"] . "];";
-	echo "wikigini_data['revisions_info'][" . $row["id"] . "] = [" . $row["datetime"] . ", " . $row["gini"] . "];";
-	}
-echo "\n";
+	echo file_get_contents('http://wikigini.fekepp.net/data.php?language=' . $language_code . '&pageid=' . $page_id);
 ?>
 		</script>
 		<script type="text/javascript" src="/<?php echo $tsAccount; ?>/toolkit/WIKIGINI/js/highcharts.js"></script>

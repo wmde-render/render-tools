@@ -24,8 +24,10 @@ $strLang = array(
 		\"Windows-Software\" auszuschließen, wird in das Kategoriefeld <em>\"Software 
 		+Newsreader -Windows-Software\"</em> eingegeben.<br /><br />
 		Alternativ können auch Artikel geprüft werden, die auf einer Beobachtungsliste 
-		hinterlegt sind. Die Syntax lautet 'wl:Benutzername,TOKEN', das Token muss
-		zunächst in den Wikipedia-Benutzereinstellungen definiert werden.",
+		hinterlegt sind. Die Syntax lautet 'wl#Benutzername,TOKEN', das Token muss
+		zunächst in den Wikipedia-Benutzereinstellungen definiert werden. Wenn du nicht
+                bereits eine <a href=\"https://tools.wmflabs.org/render/stools/alg\">sichere Verbindung</a> 
+                verwendest, solltest du dies tun, weil dein Token an der Server übertragen wird.",
 	"descDepth" => "Tiefe",
 	"descDepthDesc" => "Gibt die Rekursionstiefe an, mit der in der Kategoriestruktur 
 		gesucht werden soll. So findet Suchtiefe 1 alle Seiten, die direkt in der 
@@ -69,12 +71,14 @@ $strLang = array(
 	"tableHeadFlaw" => "Filter",
 	"tableHeadPage" => "Seitentitel",
 	"errNoFilter" => "Kein Filter ausgewählt",
+	"errNoQuery" => "Kein Suchstring angegeben",
 	"errNoAddress" => "Für Ergebnisse per E-Mail muss eine gültige E-Mail-Adresse angegeben werden.",
 	"markedAsHidden" => "Die Artikelrevision wird bei künftigen Anfragen nicht mehr angezeigt.",
 	"unmarkedAsHidden" => "Die Artikelrevision wird bei künftigen Anfragen wieder angezeigt.",
 	"descHide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen auszublenden",
 	"descUnhide" => "Klicken, um dieses Filterergebnis bei künftigen Anfragen wieder einzublenden.",
 	"alsoShowHidden" => "auch ausgeblendete Ergebnisse anzeigen",
+	"msgGeneralStatus" => "Bitte warten... Die Ausführung kann abhängig von den übergebenen Parametern eine Weile dauern.",
 	"linkToRequest" => "Link zu dieser Anfrage",
 	"resultCount" => "Es wurden %COUNT% Artikel gefunden.",
 );

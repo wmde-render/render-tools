@@ -7,8 +7,8 @@
 			"title": "Versionsupdate",
 			"items": {
 				"<?php echo $this->translate( "newVersion" ); ?>": [
-					"<?php echo $this->translate( "descOfNewVersion" ); ?>",
-					"<?php echo $this->translate( "linkToNewVersion" ); ?>"
+					"<?php echo $this->translate( "descUpdate" ); ?>",
+					"<?php echo $this->translate( "linkUpdate" ); ?>"
 				]
 			}
 		},
@@ -36,7 +36,7 @@
 		"factCoverage": {
 			"title": "<?php echo $this->translate( array( "factCoverage", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "factCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "factCoverage", "showAnalysis" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
+				"<?php echo $this->translate( array( "factCoverage", "lea" ) ); ?>": [ "<?php echo $this->translate( array( "factCoverage", "showAnalysis" ) ); ?>", "http://tools.wmflabs.org/<?php echo str_replace( "local-","", $uName ); ?>/toolkit/LEA/index.php?submit=1&title=<?php echo $this->getTitle(); ?>&lg=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>&lang=<?php echo SingletonFactory::getInstance( 'Request' )->getVar( 'lang' ); ?>" ]
 			}
 		},
 <?php $newsCount = $this->getNewsItems(); ?>
@@ -47,11 +47,11 @@
 			"items": {
 	<?php if ( $newsCount ): ?>
 		<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "newsfeed-show", $newsCount ); ?>
-		"<?php echo $this->translate( array( "currentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $newsCount . $this->translate( array( "currentness", "newsFound" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/stools/articleMonitor/query/news/title/<?php echo $this->getTitle(); ?>"],
+		"<?php echo $this->translate( array( "currentness", "titleNewsFinder" ) ); ?>": [ "<?php echo $newsCount . $this->translate( array( "currentness", "newsFound" ) ); ?>", "http://tools.wmflabs.org/<?php echo str_replace( "local-", "", $uName ); ?>/stools/articleMonitor/query/news/title/<?php echo $this->getTitle(); ?>"],
 	<?php endif; ?>
 	<?php if ( $cdHit ): ?>
 		<?php SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( $this->getTitle(), $this->getLang(), ( isset( $_SESSION['asqmId'] ) && !empty( $_SESSION['asqmId'] ) ) ? $_SESSION['asqmId'] : "none", "cd-show", "" ); ?>
-	"<?php echo $this->translate( array( "currentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "currentness", "cdHit" ) ); ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
+	"<?php echo $this->translate( array( "currentness", "titleChangeDetector" ) ); ?>": [ "<?php echo $this->translate( array( "currentness", "cdHit" ) ); ?>", "http://tools.wmflabs.org/<?php echo str_replace( "local-", "", $uName ); ?>/toolkit/ChangeDetector/index.php?Cuthalf=on&Sorting=No_change&filterMU=on&filterNB=on&filterOM=on&day=<?php echo date( "Ymd", time() - ( 86400 * 2 ) ); ?>&Langgroup=EU&Reflang=<?php echo $this->getLang() ;?>&submit=%C3%9Cbermitteln#result_table" ]
 	<?php endif; ?>
 			}
 		},
@@ -62,7 +62,7 @@
 		"editorInteraction": {
 			"title": "<?php echo $this->translate( array( "editorInteraction", "title" ) ); ?>",
 			"items": {
-				"<?php echo $this->translate( array( "editorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://toolserver.org/~<?php echo $uName;?>/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
+				"<?php echo $this->translate( array( "editorInteraction", "giniScore" ) ); ?>": [ "<?php echo $giniScore; ?>", "http://tools.wmflabs.org/<?php echo str_replace( "local-", "", $uName ); ?>/toolkit/WIKIGINI/?language_code=<?php echo $this->getLang(); ?>&page_id=<?php echo $this->getId(); ?>" ]
 			}
 		},
 <?php endif; ?>

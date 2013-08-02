@@ -6,17 +6,17 @@ $strLang = array(
 		Daten und verschiedene Analysen zu einem Wikipedia-Artikel mit deren 
 		Hilfe die Qualität des Artikels eingeschätzt werden kann.
 		<br /><br />
-		Nach erfolgter Installation erscheint neben der Schaltfläche zur 
-		Versionshistorie eine weitere mit der Aufschrift Artikelmonitor. Durch 
-		Klicken auf diese Schalftfläce öffnet sich ein Extrafenster, in dem die 
+		Nach erfolgter Installation erscheint neben dem Reiter zur 
+		\"Versionsgeschichte\" ein weiterer mit der Aufschrift \"Artikelmonitor\". Durch 
+		Klicken auf diesen Reiter öffnet sich ein Extrafenster, in dem die 
 		Statistiken und Analysen zusammengefasst sind.",
 	"instHeading" => "Installation",
 	"instDesc" => "Das Helferlein kann auf der Unterseite 'vector.js' der eigenen 
 		Benutzerseite installiert werden. Ist das automatische Login in die 
 		Wikipedia aktiviert, kann folgender Link verwendet werden, um die Seite 
 		zur Skripteinbindung aufzurufen:
-		<a href=\"http://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js\" target=\"_blank\">
-			http://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js
+		<a href=\"https://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js\" target=\"_blank\">
+			https://de.wikipedia.org/wiki/Spezial:Meine Benutzerseite/common.js
 		</a>
 		<br />
 		Weitere Informationen zur Individualisierung der Benutzeroberfläche in der 
@@ -115,17 +115,19 @@ $strLang = array(
 	"analysis" => array(
 		"title" => "Analysen",
 		# Link Extractor
-		"lea" => "Link Extractor",
-		"showAnalysis" => "Analyse anzeigen",
+		"lea" => "Linkvergleich",
+		"showAnalysis" => "Verweise mit dem Link Extractor prüfen",
 		# News Finder
-		"titleNewsFinder" => "NewsFinder",
-		"noNews" => "Keine Nachrichtenartikel gefunden",
-		"newsFound" => " Nachrichtenartikel gefunden",
+		"newsFinder" => "Nachrichtenartikel",
+		"noNews" => "Keine Artikel im News Finder",
+		"newsFound" => " Artikel im News Finder",
 		# Change Detector
-		"titleChangeDetector" => "Change Detector",
-		"cdHit" => "Hohe Aktivität in anderen Sprachen",
+		"changeDetector" => "Bearbeitungen in anderen Sprachen",
+		"cdHit" => "Ergebnis des Change Detector",
 		# WikiGini
-		"giniScore" => "WikiGini-Wert",
+		"giniScore" => "Autorenverteilung",
+		"giniDesc" => "WikiGini-Wert",
+		"giniScoreProcessing" => "WikiGini-Werte werden gerade berechnet",
 	),
 	"assessment" => array(
 		"title" => "Bewertungen",

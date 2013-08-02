@@ -19,7 +19,7 @@ $strLang = array(
 	"overviewDesc" => "",
 	"articleMonitorHeading" => "Article Monitor",
 	"articleMonitorDesc" => "The Article Monitor gives an overview of 
-		statistical data and a variety of analyses for a Wikipedia article. 
+		statistical data and a variety of analysis for a Wikipedia article. 
 		If you want to use the Article Monitor you need to install a gadget 
 		first. After doing so, it is possible to use the Article Monitor 
 		by clicking on the respective tab in the article.",

@@ -62,7 +62,7 @@ class ArticleMonitor_Json extends Model {
 
 	private function _createResult() {
 		SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
-			$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "articleMonitor-show", "" );
+			$this->_articleInfo['page_title'], $this->_lang, $this->_articleMonitorId, "articleMonitor-show", "" );
 
 		foreach( $this->_groups as $group => $items ) {
 			$this->_result->$group = new stdClass();
@@ -96,12 +96,12 @@ class ArticleMonitor_Json extends Model {
 	}
 	
 	private function _getPageTitle() {
-		return $this->_articleInfo['page_title'];
+		return htmlspecialchars( $this->_articleInfo['page_title'], ENT_QUOTES );
 	}
-	
+
 	private function _getStatus() {
-		return SingletonFactory::getInstance( 'Api_Model' )
-				->getFeaturedArticle( $this->_articleInfo['page_title'] );
+		return htmlspecialchars( SingletonFactory::getInstance( 'Api_Model' )
+				->getFeaturedArticle( $this->_articleInfo['page_title'] ), ENT_QUOTES );
 	}
 
 	private function _getFirstEdit() {
@@ -120,8 +120,8 @@ class ArticleMonitor_Json extends Model {
 		$retVal[] = " (";
 		$retVal[] = $this->_view->translate( array( "general", "editedBy" ) ) . " ";
 		$retVal[] = array(
-			( $revInfo['rev_user'] === "0" ? "IP" : $revInfo['rev_user_text']),
-			( $revInfo['rev_user'] === "0" ? $this->_view->translate( array ( "general", "unregUsersPage" ) ) : "https://" . $this->_lang . ".wikipedia.org/wiki/User:" . $revInfo['rev_user_text'] )
+			( $revInfo['rev_user'] === "0" ? "IP" : htmlspecialchars( $revInfo['rev_user_text'], ENT_QUOTES) ),
+			( $revInfo['rev_user'] === "0" ? $this->_view->translate( array ( "general", "unregUsersPage" ) ) : "https://" . $this->_lang . ".wikipedia.org/wiki/User:" . urlencode( $revInfo['rev_user_text'] ) )
 		);
 		$retVal[] = ")";
 		return $retVal;
@@ -145,33 +145,33 @@ class ArticleMonitor_Json extends Model {
 
 	private function _getVisitorsYesterday() {
 		return SingletonFactory::getInstance( "WebService_StatsGrok" )
-				->getClassicStatsYesterday( $this->_getPageTitle(), $this->_lang );
+				->getClassicStatsYesterday( $this->_articleInfo['page_title'], $this->_lang );
 	}
 
 	private function _getVisitorsLastMonth() {
 		return SingletonFactory::getInstance( "WebService_StatsGrok" )
-				->getClassicStatsLastMonth( $this->_getPageTitle(), $this->_lang );
+				->getClassicStatsLastMonth( $this->_articleInfo['page_title'], $this->_lang );
 	}
 
 	private function _getLea() {
-		$title = $this->_view->translate( array( "factCoverage", "showAnalysis" ) );
+		$title = $this->_view->translate( array( "analysis", "showAnalysis" ) );
 		$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 			"/toolkit/LEA/index.php" .
-			"?submit=1&title=" . $this->_getPageTitle() .
+			"?submit=1&title=" . urlencode( $this->_articleInfo['page_title'] ) .
 			"&lg=" . $this->_lang . "&lang=" . $this->_lang;
 		return array( $title, $link );
 	}
 
 	private function _getNewsFinder() {
 		$link = "";
-		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->_getPageTitle() );
+		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->_articleInfo['page_title'] );
 		if ( $newsCount > 0 ) {
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 			"/stools/articleMonitor/query/news/title/" .
-				$this->_getPageTitle() . "/lang/" . $this->_lang;
+				urlencode( $this->_articleInfo['page_title'] ) . "/lang/" . $this->_lang;
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
-				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "newsfinder-show", $newsCount );
-			$text = $newsCount . $this->_view->translate( array( "currentness", "newsFound" ) );
+				$this->_articleInfo['page_title'], $this->_lang, $this->_articleMonitorId, "newsfinder-show", $newsCount );
+			$text = $newsCount . $this->_view->translate( array( "analysis", "newsFound" ) );
 			return array( $text, $link );
 		}
 
@@ -182,9 +182,9 @@ class ArticleMonitor_Json extends Model {
 		if ( SingletonFactory::getInstance( 'ChangeDetector_Model' )
 				->checkDetected( $this->_id, $this->_lang ) ) {
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
-				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "cd-show", "" );
+				$this->_articleInfo['page_title'], $this->_lang, $this->_articleMonitorId, "cd-show", "" );
 
-			$title = $this->_view->translate( array( "currentness", "cdHit" ) );
+			$title = $this->_view->translate( array( "analysis", "cdHit" ) );
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 			"/toolkit/ChangeDetector/index.php" .
 				"?Cuthalf=on&Sorting=No_change" .
@@ -199,16 +199,28 @@ class ArticleMonitor_Json extends Model {
 	}
 
 	private function _getGiniScore() {
-		$score = SingletonFactory::getInstance( 'ArticleMonitor_Model' )->getGiniScore( $this->_id, $this->_lang );
-		if ( $score ) {
+		$id = SingletonFactory::getInstance('Request')->getVar('id');
+		$lang = SingletonFactory::getInstance('Request')->getVar('lang');
+		$url = "http://wikiauth.fekepp.net/api.php" .
+			"?format=json&action=gini&language=" . $lang .
+			"&pageid=" . $id . "&mode=timestamp&dir=desc&round=2";
+		$gini = @file_get_contents( $url );
+		$jsonResult = json_decode( $gini );
+		if ( $jsonResult === false || $jsonResult === null ) {
+			return $this->_view->translate( array( "analysis", "giniScoreProcessing" ) );
+		} else {
+			$score = $jsonResult[0][1];
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
-				$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
-
+				$this->_articleInfo['page_title'], $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
-			"/toolkit/WIKIGINI/" .
-					"?language_code=" . $this->_lang .
-					"&page_id=" . $this->_id;
-			return array( $score, $link );
+				"/toolkit/WIKIGINI/" .
+				"?language_code=" . $this->_lang .
+				"&page_id=" . $this->_id;
+
+			$retVal = array( "multipart" );
+			$retVal[] = $this->_view->translate( array( "analysis", "giniDesc" ) ) . " ";
+			$retVal[] = array( $score, $link );
+			return $retVal;
 		}
 		
 		return null;
@@ -216,8 +228,8 @@ class ArticleMonitor_Json extends Model {
 
 	private function _getWikibuch() {
 		if ( $this->_lang === "de" ) {
-			$title = $this->_view->translate( array( "other", "lookupAssessment" ) );
-			$link = "http://wikibu.ch/search.php?search=" . $this->_getPageTitle();
+			$title = $this->_view->translate( array( "assessment", "lookupAssessment" ) );
+			$link = "http://wikibu.ch/search.php?search=" . urlencode( $this->_articleInfo['page_title'] );
 			return array( $title, $link );
 		}
 		
@@ -228,10 +240,10 @@ class ArticleMonitor_Json extends Model {
 		$percent = SingletonFactory::getInstance( 'Api_Model' )->getArticleFeedback5();
 		if ( !empty( $percent ) ) {
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest( 
-					$this->_getPageTitle(), $this->_lang, $this->_articleMonitorId, "aft5-show", $percent );
+				$this->_articleInfo['page_title'], $this->_lang, $this->_articleMonitorId, "aft5-show", $percent );
 
 			$title = $this->_view->translate( array( "aft5", "negRating" ) );
-			$link = "http://en.wikipedia.org/wiki/Special:ArticleFeedbackv5/" . $this->_getPageTitle();
+			$link = "http://en.wikipedia.org/wiki/Special:ArticleFeedbackv5/" . urlencode( $this->_articleInfo['page_title'] );
 			return array( $title, $link );
 		}
 

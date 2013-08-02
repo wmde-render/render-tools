@@ -37,8 +37,8 @@ function asqm() {
   if ($('#asqmContainer').css('visibility') == 'hidden') {
     $('#asqmContainer').css('visibility', 'visible');
     if (!asqmReq) {
-      $('#asqmContainer').html('<img src=\"http://tools.wmflabs.org/" . str_replace( "local-", "", $this->getUserInfoObject( "name" ) ) . "/stools/res/img/load.gif\" style=\"padding: 20px;\" />');
-      $.getJSON(\"http://tools.wmflabs.org/" . str_replace( "local-", "", $this->getUserInfoObject( "name" ) ) . "/stools/articleMonitor/query/json/id/\" + 
+      $('#asqmContainer').html('<img src=\"//tools.wmflabs.org/" . str_replace( "local-", "", $this->getUserInfoObject( "name" ) ) . "/stools/res/img/load.gif\" style=\"padding: 20px;\" />');
+      $.getJSON(\"//tools.wmflabs.org/" . str_replace( "local-", "", $this->getUserInfoObject( "name" ) ) . "/stools/articleMonitor/query/json/id/\" + 
           wgArticleId + \"/lang/\" + wgContentLanguage + \"/asqmid/" . $this->getUniqueId() . "?callback=?\", function(data) {
         var output = \"<table>\";
         $.each(data.asqmResponse, function(key, groupObj) {

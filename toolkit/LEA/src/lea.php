@@ -400,7 +400,7 @@ if ($id) {
 		</table>
 		<p>
 			<?php echo $analysisLink1; ?> 
-			<a href="http://<?php echo $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?submit=1&title=" . htmlspecialchars( $_REQUEST['title'] ) . "&lg=" . htmlspecialchars( $reqLang ) . "&lang=" /*. $_SESSION['lang']*/; ?>">
+			<a href="http://<?php echo $_SERVER["SERVER_NAME"] . $_SERVER["SCRIPT_NAME"] . "?submit=1&title=" . htmlspecialchars( $_REQUEST['title'] ) . "&lg=" . htmlspecialchars( $reqLang ) . "&lang=" . $_SESSION['lang']; ?>">
 				<?php echo $analysisLink2; ?>
 			</a>
 		</p>

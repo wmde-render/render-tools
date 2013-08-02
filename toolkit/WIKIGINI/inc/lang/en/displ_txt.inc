@@ -28,7 +28,7 @@ $Description2 = "The example shows the graph for the Wikipedia article
 	over the graph, a popup window appears and shows details for a 
 	specific revision/a specific date. You can zoom in on the graph by 
 	selecting an area with the mouse.";
-s$MoreInfo = "More information";
+$MoreInfo = "More information";
 $txtGraphHeader1 = "WIKIGINI - Article ";
 $txtGraphHeader2 = " in language ";
 $txtSwitchRevision = "Switch to revisions mode";
