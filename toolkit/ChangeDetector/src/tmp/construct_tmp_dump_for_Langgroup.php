@@ -84,7 +84,7 @@ foreach( $CutHalv as $k => $CutHlf ) {
 			}
 
 			$file_name = "tmp_" . $day . $LangGroupname . "1" . $CutHlf . "2" . $MU . "3" . $NB . "4" . $OM . ".dump";
-			$db_result = query_change_db( $day, $LangGroup, $Cuthalf, $No_Filter, 'p_render_change_detector_p' );
+			$db_result = query_change_db( $day, $LangGroup, $Cuthalf, $No_Filter, 'p50380g50613__change_detector' );
 
 			$uniqueID = uniqid( "tmp" ) . ".tmp";
 			file_put_contents( $uniqueID , serialize( $db_result ) );
