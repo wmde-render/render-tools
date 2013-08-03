@@ -255,7 +255,7 @@ if( isset( $_GET["submit"] ) ) {
 	if( file_exists( "src/tmp/" . $file_name ) && filesize( "src/tmp/" . $file_name ) > 8 ) {
 		$db_result = unserialize( file_get_contents( "src/tmp/" . $file_name ) );
 	} else {
-		$db_result = query_change_db( $Date, $LangGroup, $Cuthalf, $No_Filter, 'p_render_change_detector_p' );
+		$db_result = query_change_db( $Date, $LangGroup, $Cuthalf, $No_Filter, 'p50380g50613__change_detector' );
 		$uniqueID = uniqid( "tmp" ) . ".tmp";
 		file_put_contents( "src/tmp/" . $uniqueID, serialize( $db_result ) );
 		rename( "src/tmp/" . $uniqueID, "src/tmp/" . $file_name );
