@@ -1414,8 +1414,30 @@ class RevisionFetcher(MyObject):
               {'language':self.__language,
                'day':self.__last_day,
                'identifier':self.__identifier}
-        SQL_Cursors()['auxiliary'].executemany(
-              sql_command, self.__revision)
+
+                #~ ('rev_id', 'int(8) unsigned NOT NULL default 0'),
+                #~ ('rev_page', 'int(8) unsigned NOT NULL default 0'),
+                #~ ('rev_text_id', 'int(8) unsigned NOT NULL default 0'),
+                #~ ('rev_comment', 'varbinary(400) NOT NULL'),
+                #~ ('rev_user', 'int(5) unsigned NOT NULL default 0'),
+                #~ ('rev_user_text', "varbinary(255) NOT NULL default ''"),
+                #~ ('rev_timestamp', "binary(14) NOT NULL default ''"),
+                #~ ('rev_minor_edit', 'tinyint(1) unsigned NOT NULL default 0'),
+                #~ ('rev_deleted', 'tinyint unsigned NOT NULL default 0'),
+                #~ ('rev_len', 'int(8) unsigned default NULL'),
+                #~ ('rev_parent_id', 'int(8) unsigned default NULL'))}
+        def isnull(val):
+            return (int(val)==0 or val==None or val=='')
+        for r in self.__revision:
+            for i in range(9):
+                if isnull(r[i]):
+                    self._explain(1, "field %d in revision is null (%s), skipping" % (i, str(r[i])))
+                    self.__revision.remove(r)
+                    self._explain(1, "%s removed" % str(r))
+                    break
+        if len(self.__revision):
+            SQL_Cursors()['auxiliary'].executemany(
+                  sql_command, self.__revision)
 
 class FilterManagement(MyObject):
     """This class constructs a query."""
@@ -1955,11 +1977,11 @@ class MyOursqlCursor(oursql.Cursor, MyObject):
     def execute(self, operation, parameters=None):
         if operation.rfind('INSERT') == -1:
             self._explain(2, operation)
-            if(parameters and len(parameters)): self._explain(2, '%d parameters' % len(parameters))
+            if(parameters and len(parameters)): self._explain(2, 'execute(): %d parameters' % len(parameters))
         else:
             self._explain(3, operation)
             self._explain(3, parameters)
-            if(parameters and len(parameters)): self._explain(3, '%d parameters' % len(parameters))
+            if(parameters and len(parameters)): self._explain(3, 'execute(): %d parameters' % len(parameters))
         if parameters is None:
             super(MyOursqlCursor, self).execute(
                   operation, plain_query=True)
