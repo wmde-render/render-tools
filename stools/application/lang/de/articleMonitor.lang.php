@@ -96,7 +96,7 @@ $strLang = array(
 	"notice" => array(
 		"title" => "Hinweis",
 		"questionnaire" => "Umfrage",
-		"questionnaireText1" => "Bitte unterstütze uns<br /> mit deiner Teilnahme an unserer ",
+		"questionnaireText1" => "Bitte unterstütze uns mit deiner<br /> Teilnahme an unserer ",
 		"questionnaireLinkText" => "Umfrage",
 		"questionnaireText2" => ".",
 		"questionnaireLink" => "https://docs.google.com/spreadsheet/viewform?formkey=dDJLN2RsalFvQWx1REhoakluS0tIU3c6MA"

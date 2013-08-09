@@ -100,7 +100,7 @@ $strLang = array(
 		"negRating" => "Negative Ratings",
 	),
 	"notice" => array(
-		"title" => "Hinweis",
+		"title" => "Notice",
 		"questionnaire" => "Survey",
 		"questionnaireText1" => "Please support us<br /> by taking our ",
 		"questionnaireLinkText" => "survey",
