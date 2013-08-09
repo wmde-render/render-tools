@@ -26,7 +26,7 @@ class ArticleMonitor_Json extends Model {
 		$this->_result = new stdClass();
 		$this->_groups =  array(
 			"statistics" => array(
-				"questionnaireLink",
+				"questionnaire",
 				"pageTitle",
 				"status",
 				"firstEdit",
@@ -257,7 +257,7 @@ class ArticleMonitor_Json extends Model {
 		
 	}
 
-	private function _getQuestionnaireLink() {
+	private function _getQuestionnaire() {
 		$retVal = array( "multipart" );
 		$retVal[] = $this->_view->translate( array( "statistics", "questionnaireText1" ) ) . " ";
 		$retVal[] = array(
