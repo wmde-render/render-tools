@@ -93,6 +93,14 @@ $strLang = array(
 		"title" => "Article Feedback Score",
 		"negRating" => "Negative Bewertungen",
 	),
+	"notice" => array(
+		"title" => "Hinweis",
+		"questionnaire" => "Umfrage",
+		"questionnaireText1" => "Bitte nimm an unserer ",
+		"questionnaireLinkText" => "Umfrage",
+		"questionnaireText2" => " teil.",
+		"questionnaireLink" => "https://docs.google.com/spreadsheet/viewform?formkey=dDJLN2RsalFvQWx1REhoakluS0tIU3c6MA"
+	),
 	"statistics" => array(
 		"title" => "Statistiken",
 		"pageTitle" => "Seitentitel",
@@ -107,11 +115,6 @@ $strLang = array(
 		"visitors30days" => "Letzte 30 Tage",
 		"visitorsYesterday" => "Besucher gestern",
 		"visitorsLastMonth" => "Besucher im letzten Monat",
-		"questionnaire" => "Umfrage",
-		"questionnaireText1" => "Bitte nimm an unserer ",
-		"questionnaireLinkText" => "Umfrage",
-		"questionnaireText2" => " teil.",
-		"questionnaireLink" => "https://docs.google.com/spreadsheet/viewform?formkey=dDJLN2RsalFvQWx1REhoakluS0tIU3c6MA"
 	),
 	"analysis" => array(
 		"title" => "Analysen",
