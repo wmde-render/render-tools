@@ -39,7 +39,7 @@ class ArticleMonitor_Json extends Model {
 			),
 			"analysis" => array(
 				"lea",
-				"newsFinder",
+				/*"newsFinder",*/
 				"changeDetector",
 				"giniScore"
 			),
