@@ -259,12 +259,12 @@ class ArticleMonitor_Json extends Model {
 
 	private function _getQuestionnaireLink() {
 		$retVal = array( "multipart" );
-		$retVal[] = $this->_view->translate( array( "general", "questionnaireText1" ) ) . " ";
+		$retVal[] = $this->_view->translate( array( "statistics", "questionnaireText1" ) ) . " ";
 		$retVal[] = array(
-			$this->_view->translate( array( "general", "questionnaireLinkText" ) ),
-			$this->_view->translate( array( "general", "questionnaireLink" ) )
+			$this->_view->translate( array( "statistics", "questionnaireLinkText" ) ),
+			$this->_view->translate( array( "statistics", "questionnaireLink" ) )
 		);
-		$retVal[] = " " . $this->_view->translate( array( "general", "questionnaireText2" ) );
+		$retVal[] = " " . $this->_view->translate( array( "statistics", "questionnaireText2" ) );
 		return $retVal;
 	}
 
