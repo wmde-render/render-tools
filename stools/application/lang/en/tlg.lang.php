@@ -81,4 +81,5 @@ $strLang = array(
 	"msgGeneralStatus" => "Please wait... Depending on the given parameters the execution can take a while.",
 	"linkToRequest" => "Link to this request",
 	"resultCount" => "%COUNT% articles were found.",
+	"algQuestionnaireLink" => "Please take our <a href=\"https://docs.google.com/spreadsheet/viewform?formkey=dE5rcmhFcDVpOEtnVDZ1alBDM2pqM0E6MA\" target=\"_blank\">survey</a>.",
 );
