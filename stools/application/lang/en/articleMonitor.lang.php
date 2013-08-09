@@ -102,7 +102,7 @@ $strLang = array(
 	"notice" => array(
 		"title" => "Hinweis",
 		"questionnaire" => "Survey",
-		"questionnaireText1" => "Please take our ",
+		"questionnaireText1" => "Please support us<br /> by taking our ",
 		"questionnaireLinkText" => "survey",
 		"questionnaireText2" => ".",
 		"questionnaireLink" => "https://docs.google.com/spreadsheet/viewform?formkey=dEdqNEZtUzZqT0l1SFdpeEZ4NHFRc1E6MA"
