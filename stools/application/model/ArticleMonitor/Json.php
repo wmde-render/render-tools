@@ -26,6 +26,7 @@ class ArticleMonitor_Json extends Model {
 		$this->_result = new stdClass();
 		$this->_groups =  array(
 			"statistics" => array(
+				"questionnaireLink",
 				"pageTitle",
 				"status",
 				"firstEdit",
@@ -164,7 +165,9 @@ class ArticleMonitor_Json extends Model {
 
 	private function _getNewsFinder() {
 		$link = "";
-		$newsCount = SingletonFactory::getInstance( 'Newsfeed_Model' )->getNewsCount( $this->_articleInfo['page_title'] );
+		$nfModel = SingletonFactory::getInstance( 'Newsfeed_Model' );
+		$nfModel->setArticleTitle( $this->_articleInfo['page_title'], $this->_lang );
+		$newsCount = $nfModel->getNewsCount();
 		if ( $newsCount > 0 ) {
 			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
 			"/stools/articleMonitor/query/news/title/" .
@@ -252,6 +255,17 @@ class ArticleMonitor_Json extends Model {
 	
 	private function _getAft4() {
 		
+	}
+
+	private function _getQuestionnaireLink() {
+		$retVal = array( "multipart" );
+		$retVal[] = $this->_view->translate( array( "general", "questionnaireText1" ) ) . " ";
+		$retVal[] = array(
+			$this->_view->translate( array( "general", "questionnaireLinkText" ) ),
+			$this->_view->translate( array( "general", "questionnaireLink" ) )
+		);
+		$retVal[] = " " . $this->_view->translate( array( "general", "questionnaireText2" ) );
+		return $retVal;
 	}
 
 	private function _convertTimestamp( $wikiTimestamp ) {

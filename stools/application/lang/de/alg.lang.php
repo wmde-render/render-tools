@@ -81,4 +81,5 @@ $strLang = array(
 	"msgGeneralStatus" => "Bitte warten... Die Ausführung kann abhängig von den übergebenen Parametern eine Weile dauern.",
 	"linkToRequest" => "Link zu dieser Anfrage",
 	"resultCount" => "Es wurden %COUNT% Artikel gefunden.",
+	"algQuestionnaireLink" => "Bitte nimm an unserer <a href=\"https://docs.google.com/a/wikimedia.de/spreadsheet/viewform?formkey=dEdmc3E1S0VNUEFBNXNBbHJjUTA2M0E6MA\" target=\"_blank\">Umfrage</a> teil.",
 );

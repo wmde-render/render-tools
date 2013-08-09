@@ -54,7 +54,7 @@ $strLang = array(
 		"visitorsToday" => "Besucher heute",
 		"visitors30days" => "Letzte 30 Tage",
 		"visitorsYesterday" => "Besucher gestern",
-		"visitorsLastMonth" => "Besucher im letzten Monat"
+		"visitorsLastMonth" => "Besucher im letzten Monat",
 	),
 	"factCoverage" => array(
 		"title" => "Faktenabdeckung",
@@ -106,7 +106,12 @@ $strLang = array(
 		"visitorsToday" => "Besucher heute",
 		"visitors30days" => "Letzte 30 Tage",
 		"visitorsYesterday" => "Besucher gestern",
-		"visitorsLastMonth" => "Besucher im letzten Monat"
+		"visitorsLastMonth" => "Besucher im letzten Monat",
+		"questionnaire" => "Umfrage",
+		"questionnaireText1" => "Bitte nimm an unserer ",
+		"questionnaireLinkText" => "Umfrage",
+		"questionnaireText2" => " teil.",
+		"questionnaireLink" => "https://docs.google.com/spreadsheet/viewform?formkey=dDJLN2RsalFvQWx1REhoakluS0tIU3c6MA"
 	),
 	"analysis" => array(
 		"title" => "Analysen",
