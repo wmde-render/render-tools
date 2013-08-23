@@ -57,7 +57,7 @@ function sortByElementCount( $a, $b ) {
 function getPageId( &$title, $lang ) {
         global $dbLink;
 
-        $sql = "SELECT page_id, page_is_redirect FROM page WHERE page_namespace = 0 AND page_title = '" . mysql_escape_$
+        $sql = "SELECT page_id, page_is_redirect FROM page WHERE page_namespace = 0 AND page_title = '" . mysql_escape_string( $title ) . "'";
         $result = mysql_query( $sql, getDbLink($lang) );
 
         if ( $result ) {
