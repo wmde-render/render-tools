@@ -231,7 +231,7 @@ if ($id) {
 
                                         $reqLangExists = true;
                                 } elseif ( array_key_exists( $row['ll_lang'], $langResults ) ) {
-                                        if ( in_array( str_replace( " ", "_", $row['ll_title'] ), $languages[$row['ll_l$
+                                        if ( in_array( str_replace( " ", "_", $row['ll_title'] ), $languages[$row['ll_lang']] ) ) {
                                                 $linkResult[$row['ll_lang']] = normalizeTitle( $row['ll_title'] );
                                         }
                                 }
