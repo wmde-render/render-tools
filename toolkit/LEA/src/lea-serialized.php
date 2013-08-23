@@ -10,6 +10,7 @@ include( "../inc/src/api_normalize_redirect.inc" );
 $paramTitle = $_GET['title'];
 $paramLang = $_GET['lang'];
 $languages = array();
+$dbLink = array();
 
 $arrParamLanguages = explode( "|", $_GET['languages'] );
 foreach( $arrParamLanguages as $pLang ) {
