@@ -25,9 +25,6 @@ class ArticleMonitor_Json extends Model {
 		
 		$this->_result = new stdClass();
 		$this->_groups =  array(
-			"notice" => array(
-				"questionnaire",
-			),
 			"statistics" => array(
 				"pageTitle",
 				"status",
@@ -266,7 +263,7 @@ class ArticleMonitor_Json extends Model {
 			$this->_view->translate( array( "notice", "questionnaireLinkText" ) ),
 			$this->_view->translate( array( "notice", "questionnaireLink" ) )
 		);
-		$retVal[] = " " . $this->_view->translate( array( "notice", "questionnaireText2" ) );
+		$retVal[] = $this->_view->translate( array( "notice", "questionnaireText2" ) );
 		return $retVal;
 	}
 
