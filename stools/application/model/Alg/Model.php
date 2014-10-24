@@ -11,7 +11,11 @@ class Alg_Model extends Model {
 	public function getFlawList() {
 		$url = ALG_SERVICE_URL_INTERNAL . "/tlgwsgi.py";
 		$url .= "?action=listflaws&i18n=" . $_SESSION['uilang'];
-		$result = @file_get_contents( $url );
+
+		$options  = array( 'http' => array( 'user_agent' => 'RENDER Article List Generator' ) );
+		$context  = stream_context_create( $options );
+
+		$result = @file_get_contents( $url, false, $context );
 		
 		if ( $result ) {
 			$arrJson = json_decode( $result, true );
