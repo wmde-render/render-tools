@@ -208,16 +208,16 @@ class ArticleMonitor_Json extends Model {
 			"&pageid=" . $id . "&mode=timestamp&dir=desc&round=2";
 		$gini = @file_get_contents( $url );
 		$jsonResult = json_decode( $gini );
+		$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
+			"/toolkit/WIKIGINI/" .
+			"?language_code=" . $this->_lang .
+			"&page_id=" . $this->_id;
 		if ( $jsonResult === false || $jsonResult === null ) {
-			return $this->_view->translate( array( "analysis", "giniScoreProcessing" ) );
+			return array( $this->_view->translate( array( "analysis", "giniScoreProcessing" ) ), $link );
 		} else {
 			$score = $jsonResult[0][1];
 			SingletonFactory::getInstance( "ArticleMonitor_Model" )->logRequest(
 				$this->_articleInfo['page_title'], $this->_lang, $this->_articleMonitorId, "wikigini-show", $score );
-			$link = "http://tools.wmflabs.org/" . str_replace( "local-", "", $this->_view->getUserInfoObject( "name" ) ) .
-				"/toolkit/WIKIGINI/" .
-				"?language_code=" . $this->_lang .
-				"&page_id=" . $this->_id;
 
 			$retVal = array( "multipart" );
 			$retVal[] = $this->_view->translate( array( "analysis", "giniDesc" ) ) . " ";
